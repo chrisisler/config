@@ -3,6 +3,7 @@
 # This file creates functions to be used in ~/.bashrc
 
 # TODO: Symbol for unknown git status: ↕
+# TODO: Rewrite in python for faster execution?
 
 function gitBracketL()
 {
