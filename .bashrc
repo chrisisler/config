@@ -105,6 +105,7 @@ alias rmf="rm -frv"
 alias rm="rm -rv"
 alias mv="mv -iv"
 alias whatis="whatis -vl"
+alias tree="tree -I *node_modules*"
 
 
 # edit config files
@@ -112,9 +113,10 @@ alias brc="vim ~/.bashrc"
 alias sbrc="source ~/.bashrc && clear"
 alias vrc="vim ~/.vimrc"
 alias tmuxconf="vim ~/.tmux.conf"
+alias tmuxline="vim ~/.tmux/tmuxline.conf"
 alias rangerrc="vim ~/.config/ranger/rc.conf"
 alias bugnrc="vim ${chrisDir}/AppData/Roaming/bug.n/Config.ini"
-alias gitparse="vim ${codeDir}/Sh/git-status-parse.sh"
+alias parse="cd ${codeDir}/Shell/Status/ && ${lslaVar}"
 
 
 # start an application
@@ -131,7 +133,7 @@ alias firefox="cygstart ${x86Directory}/Mozilla\ Firefox/firefox.exe $@"
 alias vivaldi="cygstart ${x86Directory}/Vivaldi/Application/vivaldi.exe $@"
 alias deluge="cygstart ${x86Directory}/Deluge/deluge.exe $@"
 alias u1603="cygstart ${mainDir}/Secure/Bin/Ultrareach-Proxy/u1603.exe"
-alias nmap="cygstart ${x86Directory}/Nmap/nmap.exe"
+alias nmap="${x86Directory}/Nmap/nmap.exe"
 alias wireshark="cygstart ${cDriveDir}/Program\ Files/Wireshark/Wireshark.exe"
 alias vmware="cygstart ${x86Directory}/VMWare/VMWare\ Workstation/vmware.exe"
 alias vm="${cDriveDir}/Program\ Files/Oracle/VirtualBox/VirtualBox.exe --startvm \"d597cc7b-d26e-4d81-902c-a66a46729e64\" &"
@@ -141,45 +143,50 @@ alias reaper="cygstart ${cDriveDir}/Program\ Files/REAPER\ \(x64\)/reaper.exe"
 # programming
 alias gs="git status"
 alias gsp="git status --porcelain"
-alias tmuxinit="tmux attach -t Main || tmux new -s Main"
+
+alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
+alias tmuxmain="tmux attach -t Main || tmux new -s Main"
+alias tmuxmusic="tmux attach -t Music || tmux new -s Music"
+alias tmuxed="tmux attach -t ErxiDesk || tmux new -s ErxiDesk"
 
 
 # scripts
-alias jsmail='node "`cygpath -w ${codeDir}/JS/Mail/js-mail.js`"' "$@"
+alias jsmail='node "`cygpath -w ${codeDir}/JS/Nodemailer/Mail/js-mail.js`"' "$@"
 alias jstext=' node "`cygpath -w ${codeDir}/JS/Text/index.js`"'
 alias foodlog='node "`cygpath -w ${codeDir}/JS/FoodLog/food-log.js`"'
-alias clean="${chrisDir}/Desktop/Main/Code/Sh/clean.sh"
+alias clean="${chrisDir}/Desktop/Main/Code/Shell/Bin/clean.sh"
 alias tg="${codeDir}/CSharp/TypeGroup/Version2.exe $@"
 alias weather="curl wttr.in/boston"
 alias stoprs="jsmail islerryan@gmail.com 'STOP PLAYING RS' 'STOP STOP STOP STOP STOP'"
+alias updateconfig="${codeDir}/Git/config/update.sh"
 
 
 # utilities (in the terminal)
 alias cmdfetch="${codeDir}/Bin/fetch/cmdfetch.lua --logo windows7 --lefty --color blue"
 alias ranger="${codeDir}/Bin/ranger-1.7.2/scripts/ranger"
 alias bugn="cygstart ${codeDir}/Bin/bug.n-8.4.0/bugn.exe"
-alias pandora="cd ~; ${codeDir}/Bin/pianobarfly/pianobarfly.exe"
+alias pandora="cd ~ && ${codeDir}/Bin/pianobarfly/pianobarfly.exe | tee ~/.config/pianobarfly/custom-out"
 alias torrent="rtorrent -d /cygdrive/c/Users/Christopher/Downloads -s /cygdrive/c/Users/Christopher/Downloads"
 alias pdf='node "`cygpath -w ${codeDir}/JS/Bin/pdf/index.js`"' "$@"
 
 
 # everything else
-alias remake="die explorer.exe && start explorer.exe &> /dev/null"
+alias remake="die explorer && start explorer &> /dev/null"
 alias hibernate="shutdown --force --suspend $@"
-alias killvm="die vboxsvc.exe && die virtualbox.exe"
+alias killvm="die vboxsvc && die virtualbox"
 alias xit="exit"
 alias eixt="exit"
 alias cpi="rsync -vrthP"
 alias setup="cygstart ${codeDir}/Bin/setup-*.exe"
-alias killleague="die 'LolClient.exe'; die 'Lolpatcher.exe'; die 'LolClient.exe'; die 'League of Legends.exe'"
+alias killleague="die 'LolClient'; die 'Lolpatcher'; die 'LolClient'; die 'League of Legends'"
 alias sniptool="cygstart ${cDriveDir}/WINDOWS/system32/SnippingTool.exe"
 alias cpan="control panel"
-alias spamrandom="cat /dev/urandom | tr -cd '01' | fold -w ${COLUMNS}"
+alias spamrandom="cat /dev/urandom | tr -cd '01'"
 
 
 # commands
 alias tm="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }'"
-alias tm5="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | head -50"
+alias tm5="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | head -40"
 alias path='echo "${PATH}" | tr ":" "\n" | sort'
 
 
@@ -189,21 +196,20 @@ alias path='echo "${PATH}" | tr ":" "\n" | sort'
 # START FUNCTION ALIASES ------------------------------------------------------
 
 
-
 function killvmware() {
-    die "vmware.exe"
-    die "vmware-tray.exe"
-    die "vmware-unity-helper.exe"
-    die "vmnat.exe"
-    die "vmnetdhcp.exe"
-    die "vmware-authd.exe"
-    die "vmware-hostd.exe"
-    die "vmware-usbarbitrator64.exe"
+    die "vmware"
+    die "vmware-tray"
+    die "vmware-unity-helper"
+    die "vmnat"
+    die "vmnetdhcp"
+    die "vmware-authd"
+    die "vmware-hostd"
+    die "vmware-usbarbitrator64"
 }
 export -f killvmware
 
 function die() {
-    taskkill /f /im "$@"
+    taskkill /f /im "$@.exe"
 }
 export -f die
 
@@ -253,11 +259,11 @@ normal="\[\e[1;36m\]"
 white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-source "${codeDir}/Sh/git-status-parse.sh"
+source "${codeDir}/Shell/Status/git_status.sh"
 
 export PS1="\
 \n\
-${darkGrey}¤${colEnd}\
+${white}¤${colEnd}\
  ${blue}${_currentDirectory}${colEnd}\
 ${yellow}\$(gitBracketL)${colEnd}\
 ${cyan}\$(gitBranch)${colEnd}\

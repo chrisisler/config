@@ -1,3 +1,9 @@
+#!/bin/bash
+
+# This file creates functions to be used in ~/.bashrc
+
+# TODO: Symbol for unknown git status: ↕
+
 function gitBracketL()
 {
     # If current working directory is not a git repo, dont do anything.
@@ -62,8 +68,8 @@ function gitUnaddedChanges()
     local unaddedChanges=""
     if [[ ! "${gitStatus}" == "" ]]; then
         local numAdded=$(echo -n "${gitStatus}" | grep -E '^\?\? ' | wc -l) # +N
-        local numModified=$(echo -n "${gitStatus}" | grep -E '^ M ' | wc -l) # ~N
-        local numDeleted=$(echo -n "${gitStatus}" | grep -E '^ D ' | wc -l) # -N
+        local numModified=$(echo -n "${gitStatus}" | grep -E '^( |M)M' | wc -l) # ~N
+        local numDeleted=$(echo -n "${gitStatus}" | grep -E '^( |D)D' | wc -l) # -N
         if [[ "${numModified}" -ne 0 || "${numDeleted}" -ne 0 || "${numAdded}" -ne 0 ]]; then
             unaddedChanges+=" +${numAdded} ~${numModified} -${numDeleted} !"
         fi
@@ -85,12 +91,12 @@ function gitAddedChanges()
     local addedChanges=""
     if [[ ! "${gitStatus}" == "" ]]; then
         # Notice the whitespace difference in the grep.
-        local numAdded=$(echo -n "${gitStatus}" | grep -E '^A ' | wc -l) # +N
-        local numDeleted=$(echo -n "${gitStatus}" | grep -E '^D ' | wc -l) # -N
+        local numAdded=$(echo -n "${gitStatus}" | grep -E '^A(A| )' | wc -l) # +N
+        local numDeleted=$(echo -n "${gitStatus}" | grep -E '^D(D| )' | wc -l) # -N
 
-        local numModified=$(echo -n "${gitStatus}" | grep -E '^M ' | wc -l) # ~N
-        local numRenamed=$(echo -n "${gitStatus}" | grep -E '^R ' | wc -l)
-        local numCopied=$(echo -n "${gitStatus}" | grep -E '^C ' | wc -l)
+        local numModified=$(echo -n "${gitStatus}" | grep -E '^M(M| )' | wc -l) # ~N
+        local numRenamed=$(echo -n "${gitStatus}" | grep -E '^R(R| )' | wc -l)
+        local numCopied=$(echo -n "${gitStatus}" | grep -E '^C(C| )' | wc -l)
         numModified=$(( ${numModified} + ${numRenamed} + ${numCopied} ))
 
         if [[ "${numModified}" -ne 0 || "${numDeleted}" -ne 0 || "${numAdded}" -ne 0 ]]; then

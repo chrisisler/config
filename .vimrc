@@ -41,6 +41,7 @@ set noswapfile
 set showmode
 set virtualedit=block
 set encoding=utf-8
+set backupcopy=yes
 
 " https://robots.thoughtbot.com/vim-you-complete-me
 set complete=.,b,u,]
@@ -64,8 +65,7 @@ call plug#begin('~/.vim/plugged')
 " Language
 Plug 'othree/javascript-libraries-syntax.vim' " library-based js syntax highlighting
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
-Plug 'othree/es.next.syntax.vim'              " trying it out vs yajs
-Plug 'jeroenbourgois/vim-actionscript'        " actionscript syntax definitions
+Plug 'mxw/vim-jsx'                            " React JSX syntax highlighting and indenting
 Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
 Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
 
@@ -79,9 +79,7 @@ Plug 'bling/vim-airline'                " vim status bar
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
 
 " Integrations
-Plug 'edkolev/tmuxline.vim' " tmux status bar
 Plug 'tpope/vim-commentary' " sane (un)commenting
-Plug 'tpope/vim-fugitive'   " best vim+git integration/wrapper eveeer
 
 " Commands
 Plug 'terryma/vim-multiple-cursors' " sublime-like multi cursors
@@ -95,7 +93,7 @@ Plug 'jiangmiao/auto-pairs' " auto-match all brackets
 Plug 'ervandew/supertab'    " hit <tab> for autocomplete
 Plug 'sirver/ultisnips'     " snippets
 Plug 'mattn/emmet-vim'      " makes html easier
-Plug 'shougo/neocomplete.vim' " completion framework
+" Plug 'shougo/neocomplete.vim' " completion framework
 
 " Other
 Plug 'godlygeek/tabular' " text alignment
@@ -106,9 +104,13 @@ call plug#end()
 " Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:neocomplete#enable_at_startup=1
-let g:neocomplete#enable_smart_case=1
-let g:neocomplete#sources#syntax#min_keyword_length=3
+let g:ctrlp_custom_ignore='node_modules'
+
+let g:jsx_ext_required=0
+
+" let g:neocomplete#enable_at_startup=1
+" let g:neocomplete#enable_smart_case=1
+" let g:neocomplete#sources#syntax#min_keyword_length=3
 autocmd filetype javascript setlocal omnifunc=jspc#omni
 
 let g:user_emmet_mode='a' " enable emmet functionality in all modes
@@ -150,7 +152,7 @@ let g:syntastic_stl_format="%E{[%e Errors]} %W{[%w Warnings]}"
 let g:syntastic_check_on_wq=1
 
 " Which javascript libraries to provide syntax highlighting for.
-let g:used_javascript_libs='jquery, underscore, ramda'
+let g:used_javascript_libs='react, ramda'
 
 " Mode=0 is asynchronous mode. Trim=1 trims empty lines in quickfix window.
 let g:asyncrun_mode=1
@@ -223,14 +225,20 @@ inoremap <Leader>l <C-x><C-l>
 " Fast mapping to call tabular.
 nnoremap <Leader>t :Tab /
 
+" Toggle syntax-checks on save (active/passive).
+nnoremap <Leader>x :SyntasticToggleMode<CR>
+
+" Remove trailing whitespace
+nnoremap <Leader>nows<CR> :%s/\s\+$//e<CR>:nohlsearch<CR>:w<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Open nerdtree.
-nnoremap \| :TagbarToggle<CR>
 " Open tagbar.
-nnoremap \ :NERDTreeToggle<CR>
+nnoremap <silent> \| :TagbarToggle<CR>
+" Open nerdtree.
+nnoremap <silent> \ :NERDTreeTabsToggle<CR>
 
 " Next window.
 nnoremap [ <C-w>w
@@ -264,6 +272,7 @@ noremap k gk
 " Avoid pressing escape. Avoid pressing <C-[>
 inoremap ;; <ESC>l
 vnoremap ;; <ESC>l
+snoremap ;; <ESC>l
 
 " Best mapping ever.
 noremap ; :
@@ -290,12 +299,18 @@ nnoremap D 2jzz
 " Copy and paste from (actual) clipboard.
 noremap <C-c> "*y
 noremap <C-v> "*p
+" noremap <C-a> ggVG
 
 " (Experimental) Auto-indent pasted code (see `:h =`).
 nnoremap P P==
 nnoremap p p==
 vnoremap P P=
 vnoremap p p=
+
+inoremap <F5> <ESC>:NeoCompleteDisable<CR>
+nnoremap <F5> :NeoCompleteDisable<CR>
+inoremap <F6> <ESC>:NeoCompleteEnable<CR>
+nnoremap <F6> :NeoCompleteEnable<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Compile and Run - Mappings
@@ -325,20 +340,6 @@ nnoremap <Leader>rb<CR> :w<CR>:AsyncRun ruby %:p<CR>:copen<CR>:wincmd k<CR>
 " C
 nnoremap <Leader>c1<CR> :w<CR>:AsyncRun gcc %<CR>:copen<CR>:wincmd k<CR>
 nnoremap <Leader>c2<CR> :w<CR>:AsyncRun ./a.exe<CR>:wincmd k<CR>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tmuxline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:tmuxline_preset = {
-    \'a' : ["%b %e"],
-    \'b' : ["%a"],
-    \'c' : ["%I:%M %p"],
-    \'x' : ["#S", "#(tmux list-windows | wc -l)W"],
-    \'y' : ["#(tmux list-sessions | wc -l)S"],
-    \'z' : ["#(wmic path Win32_Battery Get BatteryStatus 2>/dev/null | grep -q 1 && echo '↓' || echo '↑')#(wmic path Win32_Battery Get EstimatedChargeRemaining /format:list 2>/dev/null | grep '[^[:blank:]]' | cut -d= -f2)%%"]}
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
