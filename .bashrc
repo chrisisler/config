@@ -80,7 +80,7 @@ alias appdata="cd ${chrisDir}/AppData && ${lslaVar}"
 alias pictures="cd ${chrisDir}/Pictures && ${lslaVar}"
 alias otw="cd ${mainDir}/Secure/OverTheWire/ && ${lslaVar}"
 alias cs="cd ${codeDir}/Academic/CS310 && ${lslaVar}"
-alias startup="cd ${chrisDir}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup"
+alias startup="cd ${chrisDir}/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup"
 alias test="cd ${codeDir}/Test && vim"
 alias safe="cd /tmp/safe"
 alias cd..="cd .."
@@ -117,6 +117,7 @@ alias tmuxline="vim ~/.tmux/tmuxline.conf"
 alias rangerrc="vim ~/.config/ranger/rc.conf"
 alias bugnrc="vim ${chrisDir}/AppData/Roaming/bug.n/Config.ini"
 alias parse="cd ${codeDir}/Shell/Status/ && ${lslaVar}"
+alias bugndoc="vim ${codeDir}/Bin/bug.n-8.4.0/doc/Default_hotkeys.md"
 
 
 # start an application
@@ -147,7 +148,7 @@ alias gsp="git status --porcelain"
 alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
 alias tmuxmain="tmux attach -t Main || tmux new -s Main"
 alias tmuxmusic="tmux attach -t Music || tmux new -s Music"
-alias tmuxed="tmux attach -t ErxiDesk || tmux new -s ErxiDesk"
+alias tmuxed="ed;tmux attach -t ErxiDesk || tmux new -s ErxiDesk"
 
 
 # scripts
@@ -186,7 +187,7 @@ alias spamrandom="cat /dev/urandom | tr -cd '01'"
 
 # commands
 alias tm="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }'"
-alias tm5="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | head -40"
+alias tm5="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | head -n $(( $LINES - 2 ))"
 alias path='echo "${PATH}" | tr ":" "\n" | sort'
 
 
@@ -276,8 +277,11 @@ ${white}${_promptChar}${colEnd} "
 
 # export PS1="\
 # \n\
-# ${cyan}¤${colEnd}\
+# ${white}¤${colEnd}\
 #  ${blue}${_currentDirectory}${colEnd}\
 # \n\
 # ${white}${_promptChar}${colEnd} "
+
+
+# export PS1="\n${white}${_promptChar}${colEnd} "
 

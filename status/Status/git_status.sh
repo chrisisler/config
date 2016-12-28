@@ -9,7 +9,7 @@ function gitBracketL()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
-    if [[ "${isGitRepo}" == "false" ]]; then return -1; fi
+    if [[ "${isGitRepo}" == "false" ]]; then exit -1; fi
 
     echo -n " ["
 }
@@ -18,7 +18,7 @@ function gitBracketR()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
-    if [[ "${isGitRepo}" == "false" ]]; then return -1; fi
+    if [[ "${isGitRepo}" == "false" ]]; then exit -1; fi
 
     echo -n "]"
 }
@@ -27,7 +27,7 @@ function gitBranch()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
-    if [[ "${isGitRepo}" == "false" ]]; then return -1; fi
+    if [[ "${isGitRepo}" == "false" ]]; then exit -1; fi
 
     local branchInfo=$(git branch)
     local branchName=$(echo -n "${branchInfo}"| grep '*' | awk '{ print $2 }')
@@ -38,13 +38,13 @@ function gitBranchAheadOrBehindOfMaster()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
-    if [[ "${isGitRepo}" == "false" ]]; then return -1; fi
+    if [[ "${isGitRepo}" == "false" ]]; then exit -1; fi
 
     local branchName=$(git branch -v)
 
     # if [[ $(git name-rev --name-only HEAD) != "master" ]]; then
     if [[ $(echo -n "${branchName}" | grep '*' | awk '{ print $2 }') != "master" ]]; then
-        return -1;
+        exit -1;
     fi
 
     local ahead=$(echo -n "${branchName}" | grep -Eqi "\[ahead [0-9]+\]" && echo -n " ↑" || echo -n "")
@@ -62,7 +62,7 @@ function gitUnaddedChanges()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
-    if [[ "${isGitRepo}" == "false" ]]; then return -1; fi
+    if [[ "${isGitRepo}" == "false" ]]; then exit -1; fi
 
     local gitStatus=$(git status --porcelain)
 
@@ -85,7 +85,7 @@ function gitAddedChanges()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
-    if [[ "${isGitRepo}" == "false" ]]; then return -1; fi
+    if [[ "${isGitRepo}" == "false" ]]; then exit -1; fi
 
     local gitStatus=$(git status --porcelain)
 

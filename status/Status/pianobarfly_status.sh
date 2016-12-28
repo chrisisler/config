@@ -4,12 +4,13 @@
 
 pandoraIsRunning="$(tasklist | grep -i "pianobarfly" >/dev/null && echo "true" || echo "false")"
 
+# If not playing anything, dont echo anything.
 if [[ "${pandoraIsRunning}" == "false" ]]; then
-    # If not playing anything, dont echo anything.
     exit -1
 fi
 
 pandoraOutput="$(cat ~/.config/pianobarfly/custom-out)"
+pianobarflyConfigFileData="$(cat ~/.config/pianobarfly/state)"
 
 parsePandoraOutput()
 {
@@ -28,16 +29,26 @@ parsePandoraOutput()
     station="$(echo -n "${_pandoraOutput}" | grep -E "^.* Station [^(id)]" | sed -e "s/^.* Station //g" -e "s/\" .*$//g" | tr -d "\"" | tail -1)"
 }
 
+
+getVolume()
+{
+    local _configData="$1"
+    volume="$(echo -n "${_configData}" | grep -i "volume" | sed -e "s/^volume = //g")"
+}
+
 main()
 {
-    parsePandoraOutput "$pandoraOutput"
+    parsePandoraOutput "${pandoraOutput}"
+    getVolume "${pianobarflyConfigFileData}"
     # echo -n "${station}"
     # echo -n "${song}"
     # echo -n "${artist}"
     # echo -n "${album}"
     # echo -n "${currentPositionInfo}"
-    echo "Pandora | ${station} → ${artist} - ${song} [${currentPositionInfo}] ♫"
+
+    echo -n "${station} : ${artist} - ${song} [${currentPositionInfo}] "
 }
 
+# Invoke main() function.
 main
 

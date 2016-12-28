@@ -71,7 +71,7 @@ if [[ "${cmusIsRunning}" == "true" ]]; then
     isRepeat="$(getDataFromCmus "${cmusData}" "set repeat")"
     if [[ "${isRepeat}" == "true" ]]; then musicInfoDisplay+="R "; fi
 
-    musicInfoDisplay+="${musicSymbol}"
+    # musicInfoDisplay+="${musicSymbol}"
     echo "${musicInfoDisplay}"
 else
     echo ""

@@ -80,6 +80,7 @@ Plug 'airblade/vim-gitgutter'           " git diff in gutter
 
 " Integrations
 Plug 'tpope/vim-commentary' " sane (un)commenting
+Plug 'tpope/vim-fugitive'   " git wrapper (also shows git branch in airline bar)
 
 " Commands
 Plug 'terryma/vim-multiple-cursors' " sublime-like multi cursors
@@ -93,7 +94,9 @@ Plug 'jiangmiao/auto-pairs' " auto-match all brackets
 Plug 'ervandew/supertab'    " hit <tab> for autocomplete
 Plug 'sirver/ultisnips'     " snippets
 Plug 'mattn/emmet-vim'      " makes html easier
-" Plug 'shougo/neocomplete.vim' " completion framework
+Plug 'shougo/neocomplete.vim' " completion framework
+
+" Code display
 
 " Other
 Plug 'godlygeek/tabular' " text alignment
@@ -108,9 +111,9 @@ let g:ctrlp_custom_ignore='node_modules'
 
 let g:jsx_ext_required=0
 
-" let g:neocomplete#enable_at_startup=1
-" let g:neocomplete#enable_smart_case=1
-" let g:neocomplete#sources#syntax#min_keyword_length=3
+let g:neocomplete#enable_at_startup=1
+let g:neocomplete#enable_smart_case=1
+let g:neocomplete#sources#syntax#min_keyword_length=4
 autocmd filetype javascript setlocal omnifunc=jspc#omni
 
 let g:user_emmet_mode='a' " enable emmet functionality in all modes
@@ -118,7 +121,7 @@ let g:user_emmet_install_global=0 " enable emmet for just html/css
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-j>' " remap the default (emmet) leader from <C-y> to <C-j>
 
-let g:loaded_matchparen=0
+let g:loaded_matchparen=1
 
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
@@ -139,6 +142,8 @@ let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline_detect_iminsert=1
 let g:airline_skip_empty_sections=0
+let g:airline#extensions#branch#enabled=1
+let g:airline#extensions#branch#format=1
 
 " Add syntastic warnings and errors to statusline.
 set statusline+=%#warningmsg#
@@ -152,7 +157,7 @@ let g:syntastic_stl_format="%E{[%e Errors]} %W{[%w Warnings]}"
 let g:syntastic_check_on_wq=1
 
 " Which javascript libraries to provide syntax highlighting for.
-let g:used_javascript_libs='react, ramda'
+let g:used_javascript_libs='react, ramda, underscore'
 
 " Mode=0 is asynchronous mode. Trim=1 trims empty lines in quickfix window.
 let g:asyncrun_mode=1
@@ -307,11 +312,6 @@ nnoremap p p==
 vnoremap P P=
 vnoremap p p=
 
-inoremap <F5> <ESC>:NeoCompleteDisable<CR>
-nnoremap <F5> :NeoCompleteDisable<CR>
-inoremap <F6> <ESC>:NeoCompleteEnable<CR>
-nnoremap <F6> :NeoCompleteEnable<CR>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Compile and Run - Mappings
 "
@@ -347,7 +347,7 @@ nnoremap <Leader>c2<CR> :w<CR>:AsyncRun ./a.exe<CR>:wincmd k<CR>
 
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
 " Set quickfix window default to 5 lines.
-au FileType qf call AdjustWindowHeight(10, 20)
+au FileType qf call AdjustWindowHeight(5, 20)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
