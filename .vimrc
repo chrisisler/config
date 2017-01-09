@@ -1,8 +1,8 @@
+set nocompatible " must be first line
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETtings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set nocompatible " must be first line
 
 " General.
 filetype plugin indent on " automatically detect file types
@@ -10,10 +10,9 @@ set tabstop=4 softtabstop=0 shiftwidth=4
 set showcmd
 set autoindent
 set smartindent
-set nocp
 set noerrorbells
 set novisualbell
-set smarttab                   " no tabs
+set smarttab
 set expandtab                  " tabs are spaces now
 set visualbell t_vb=           " no beeping
 set bs=2                       " allow backspacing over everything in insert mode
@@ -33,9 +32,13 @@ set modeline                   " ???
 set modelines=5                " ???
 set smartcase                  " smart (sometimes case-sensitive) search matching
 set formatoptions+=j           " delete comment character when Joining comments
+set undofile                   " save undo's after file closes
+set undodir=~/.vim/undo        " where to save undo histories
+set undolevels=1000            " how many undos
+set undoreload=10000           " num of lines to save for undo
+set ignorecase
 set ff=unix
 set fileformat=unix
-set ignorecase
 set incsearch
 set noswapfile
 set showmode
@@ -68,19 +71,19 @@ Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'mxw/vim-jsx'                            " React JSX syntax highlighting and indenting
 Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
 Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
+Plug 'cakebaker/scss-syntax.vim'              " syntax for sassy css
+Plug 'elzr/vim-json'                          " bettern JSON highlighting
 
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
 Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
-Plug 'jistr/vim-nerdtree-tabs'          " make nerdtree less stupid
-Plug 'majutsushi/tagbar'                " UML-like namespace/class diagram
 Plug 'bling/vim-airline'                " vim status bar
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
+" Plug 'majutsushi/tagbar'                " UML-like namespace/class diagram
 
 " Integrations
 Plug 'tpope/vim-commentary' " sane (un)commenting
-Plug 'tpope/vim-fugitive'   " git wrapper (also shows git branch in airline bar)
 
 " Commands
 Plug 'terryma/vim-multiple-cursors' " sublime-like multi cursors
@@ -93,10 +96,8 @@ Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
 Plug 'jiangmiao/auto-pairs' " auto-match all brackets
 Plug 'ervandew/supertab'    " hit <tab> for autocomplete
 Plug 'sirver/ultisnips'     " snippets
-Plug 'mattn/emmet-vim'      " makes html easier
 Plug 'shougo/neocomplete.vim' " completion framework
-
-" Code display
+" Plug 'mattn/emmet-vim'      " makes html easier
 
 " Other
 Plug 'godlygeek/tabular' " text alignment
@@ -111,15 +112,15 @@ let g:ctrlp_custom_ignore='node_modules'
 
 let g:jsx_ext_required=0
 
-let g:neocomplete#enable_at_startup=1
+let g:neocomplete#enable_at_startup=0
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#sources#syntax#min_keyword_length=4
 autocmd filetype javascript setlocal omnifunc=jspc#omni
 
-let g:user_emmet_mode='a' " enable emmet functionality in all modes
-let g:user_emmet_install_global=0 " enable emmet for just html/css
-autocmd FileType html,css EmmetInstall
-let g:user_emmet_leader_key='<C-j>' " remap the default (emmet) leader from <C-y> to <C-j>
+" let g:user_emmet_mode='a' " enable emmet functionality in all modes
+" let g:user_emmet_install_global=0 " enable emmet for just html/css
+" autocmd FileType html,css EmmetInstall
+" let g:user_emmet_leader_key='<C-j>' " remap the default (emmet) leader from <C-y> to <C-j>
 
 let g:loaded_matchparen=1
 
@@ -141,7 +142,7 @@ let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline_detect_iminsert=1
-let g:airline_skip_empty_sections=0
+let g:airline_skip_empty_sections=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#format=1
 
@@ -149,12 +150,14 @@ let g:airline#extensions#branch#format=1
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+let g:syntastic_stl_format="%E{[%e Errors]} %W{[%w Warnings]}"
 let g:syntastic_mode_map = { "mode": "passive" }
 let g:syntastic_always_populate_loc_list=1
-let g:syntastic_auto_loc_list=1
 let g:syntastic_enable_highlighting=1
-let g:syntastic_stl_format="%E{[%e Errors]} %W{[%w Warnings]}"
-let g:syntastic_check_on_wq=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+let g:syntastic_auto_jump=1
 
 " Which javascript libraries to provide syntax highlighting for.
 let g:used_javascript_libs='react, ramda, underscore'
@@ -201,18 +204,19 @@ nnoremap <Leader>r :set cc=
 " Things being highlighted after searching once is annoying.
 nnoremap <Leader>noh /@@<CR>:nohlsearch<CR>
 
-" Make syntastic and quickfix windows go away.
+" Make location and quickfix windows go away.
 nnoremap <Leader>w :lcl<CR>:ccl<CR>
 
 " Mappings for saving and sourcing .vimrc.
 nnoremap <Leader>5<CR> :w<CR>:so %<CR>
 
 " Replace variable name with variable definition and delete variable.
+" Hovered var must be first use of var - could be improved by using marks.
 " Example (with cursor hovering N in 'names' on line 2):
-"       1. var names = people.filter(person => person.name);
+"       1. var names = people.map(person => person.name);
 "       2. doStuff(names, otherVar);
 "      Turns into:
-"          doStuff(people.filter(person => person.name), otherVar);
+"          doStuff(people.map(person => person.name), otherVar);
 nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
 
 " Fat array function snippet after typing function arguments.
@@ -220,9 +224,9 @@ nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
 imap <Leader>{ <Space>=><CR>{<CR>;<ESC>jA;<ESC>kS
 
 " Copy the currently hovered word and console.log it on the next line.
-nnoremap <Leader>cl "xyiwoconsole.log(<ESC>"xpA);<ESC>
+nnoremap <Leader>cl<CR> "xyiwoconsole.log(<ESC>"xpA);<ESC>
 " Same as above, except: console.log('variable is:', variable);
-nnoremap <Leader>clv "xyiwoconsole.log('<ESC>"xpa<Space>is:',<Space><ESC>"xpa);<ESC>
+nnoremap <Leader>clv<CR> "xyiwoconsole.log('<ESC>"xpa<Space>is:',<Space><ESC>"xpa);<ESC>
 
 " Make <C-x><C-l> (whole-line auto-completion) easier to type.
 inoremap <Leader>l <C-x><C-l>
@@ -240,10 +244,14 @@ nnoremap <Leader>nows<CR> :%s/\s\+$//e<CR>:nohlsearch<CR>:w<CR>
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+noremap <F5> :NeoCompleteDisable<CR>
+noremap <F6> :NeoCompleteEnable<CR>
+
 " Open tagbar.
-nnoremap <silent> \| :TagbarToggle<CR>
+" nnoremap <silent> \| :TagbarToggle<CR>
+
 " Open nerdtree.
-nnoremap <silent> \ :NERDTreeTabsToggle<CR>
+nnoremap <silent> \ :NERDTreeToggle<CR>
 
 " Next window.
 nnoremap [ <C-w>w

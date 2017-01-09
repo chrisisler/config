@@ -46,7 +46,8 @@ main()
     # echo -n "${album}"
     # echo -n "${currentPositionInfo}"
 
-    echo -n "${station} : ${artist} - ${song} [${currentPositionInfo}] "
+    # echo -n "${station} : ${artist} - ${song} [${currentPositionInfo}] "
+    echo -n "${artist} - ${song} [${currentPositionInfo}] "
 }
 
 # Invoke main() function.

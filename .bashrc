@@ -79,9 +79,11 @@ alias downloads="cd ${downloadsDir} && ${lslaVar}"
 alias appdata="cd ${chrisDir}/AppData && ${lslaVar}"
 alias pictures="cd ${chrisDir}/Pictures && ${lslaVar}"
 alias otw="cd ${mainDir}/Secure/OverTheWire/ && ${lslaVar}"
+alias sec="cd ${mainDir}/Secure && ${lslaVar}"
 alias cs="cd ${codeDir}/Academic/CS310 && ${lslaVar}"
 alias startup="cd ${chrisDir}/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup"
 alias test="cd ${codeDir}/Test && vim"
+alias ramda="cd ${codeDir}/JS/Ramda-Trial && vim ./index.js"
 alias safe="cd /tmp/safe"
 alias cd..="cd .."
 alias ..="cd .."
@@ -130,6 +132,7 @@ alias itunes="cygstart ${cDriveDir}/Program\ Files/iTunes/iTunes.exe"
 alias algorithms="cygstart ${mainDir}/Academic/Textbooks/2016-Fall/Data-Structures-and-Algorithms-4thEd.pdf"
 alias linear="cygstart ${mainDir}/Academic/Textbooks/2016-Fall/Linear-Algebra-4thEdition.pdf"
 alias chrome="cygstart ${x86Directory}/Google/Chrome/Application/chrome.exe $@"
+alias tor="cygstart ${mainDir}/Secure/Tor\ Browser/Browser/firefox.exe $@"
 alias firefox="cygstart ${x86Directory}/Mozilla\ Firefox/firefox.exe $@"
 alias vivaldi="cygstart ${x86Directory}/Vivaldi/Application/vivaldi.exe $@"
 alias deluge="cygstart ${x86Directory}/Deluge/deluge.exe $@"
@@ -144,11 +147,12 @@ alias reaper="cygstart ${cDriveDir}/Program\ Files/REAPER\ \(x64\)/reaper.exe"
 # programming
 alias gs="git status"
 alias gsp="git status --porcelain"
+alias p="more package.json | jq --tab"
 
 alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
 alias tmuxmain="tmux attach -t Main || tmux new -s Main"
 alias tmuxmusic="tmux attach -t Music || tmux new -s Music"
-alias tmuxed="ed;tmux attach -t ErxiDesk || tmux new -s ErxiDesk"
+alias tmuxed="cd ${codeDir}/Git/ErxiDesk && ${lslaVar}; tmux attach -t ErxiDesk || tmux new -s ErxiDesk"
 
 
 # scripts
@@ -169,6 +173,8 @@ alias bugn="cygstart ${codeDir}/Bin/bug.n-8.4.0/bugn.exe"
 alias pandora="cd ~ && ${codeDir}/Bin/pianobarfly/pianobarfly.exe | tee ~/.config/pianobarfly/custom-out"
 alias torrent="rtorrent -d /cygdrive/c/Users/Christopher/Downloads -s /cygdrive/c/Users/Christopher/Downloads"
 alias pdf='node "`cygpath -w ${codeDir}/JS/Bin/pdf/index.js`"' "$@"
+alias r='ranger'
+alias progress='pv'
 
 
 # everything else
@@ -183,11 +189,17 @@ alias killleague="die 'LolClient'; die 'Lolpatcher'; die 'LolClient'; die 'Leagu
 alias sniptool="cygstart ${cDriveDir}/WINDOWS/system32/SnippingTool.exe"
 alias cpan="control panel"
 alias spamrandom="cat /dev/urandom | tr -cd '01'"
+alias spamlights='yes "$(seq 16 231)" | while read i; do printf "\x1b[48;5;${i}m\n"; sleep .02; done'
+
+
+# Games
+alias tetris='ctris'
+alias typespeed='typespeed'
 
 
 # commands
 alias tm="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }'"
-alias tm5="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | head -n $(( $LINES - 2 ))"
+alias tm5="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | head -35"
 alias path='echo "${PATH}" | tr ":" "\n" | sort'
 
 
@@ -217,9 +229,7 @@ export -f die
 function ip() {
     externalIP=`curl -s "http://whatismijnip.nl" | cut -d " " -f 5`
     if [[ "${externalIP}" != "" ]]; then
-        echo "<${externalIP}> " # Spacing and brackets for $PS1
-    else
-        echo ""
+        echo -n "${externalIP}"
     fi
 }
 export -f ip
@@ -260,28 +270,27 @@ normal="\[\e[1;36m\]"
 white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-source "${codeDir}/Shell/Status/git_status.sh"
-
-export PS1="\
-\n\
-${white}¤${colEnd}\
- ${blue}${_currentDirectory}${colEnd}\
-${yellow}\$(gitBracketL)${colEnd}\
-${cyan}\$(gitBranch)${colEnd}\
-${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-${blue}\$(gitAddedChanges)${colEnd}\
-${red}\$(gitUnaddedChanges)${colEnd}\
-${yellow}\$(gitBracketR)${colEnd}\
-\n\
-${white}${_promptChar}${colEnd} "
+source "${codeDir}/Shell/Status/git_status_multi.sh"
 
 # export PS1="\
 # \n\
 # ${white}¤${colEnd}\
 #  ${blue}${_currentDirectory}${colEnd}\
+# ${yellow}\$(gitBracketL)${colEnd}\
+# ${cyan}\$(gitBranch)${colEnd}\
+# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+# ${blue}\$(gitAddedChanges)${colEnd}\
+# ${red}\$(gitUnaddedChanges)${colEnd}\
+# ${yellow}\$(gitBracketR)${colEnd}\
 # \n\
 # ${white}${_promptChar}${colEnd} "
 
+export PS1="\
+\n\
+${white}¤${colEnd}\
+ ${blue}${_currentDirectory}${colEnd}\
+\n\
+${white}${_promptChar}${colEnd} "
 
 # export PS1="\n${white}${_promptChar}${colEnd} "
 

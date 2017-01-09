@@ -6,10 +6,10 @@ snippet clv
 	console.log('$1 is:', $1);
 # Create a function variable
 snippet fn
-	const ${1:functionName} = function($2)
+	function $1($2)
 	{
 		$3
-	};
+	}
 # If statement
 snippet if
 	if ($1)
@@ -26,10 +26,6 @@ snippet trycatch
 	{
 		$2
 	}
-	finally
-	{
-		$3
-	}
 # Constant variable assignment
 snippet c
 	const $1 = $2;
@@ -42,3 +38,9 @@ snippet for
 	{
 		$4
 	}
+# module.exports
+snippet me
+	module.exports = $1;
+# Object.assign
+snippet oa
+	Object.assign({}, $1);
