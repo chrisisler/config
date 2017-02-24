@@ -50,6 +50,10 @@ set backupcopy=yes
 set complete=.,b,u,]
 set wildmode=longest,list:longest
 set completeopt=menu,preview
+" Display all matching files when we tab-complete
+set wildmenu
+" Search down into sub-directories. Provides tab-completion.
+set path+=**
 
 " Visual.
 set number      " show line numbers
@@ -69,10 +73,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'othree/javascript-libraries-syntax.vim' " library-based js syntax highlighting
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'mxw/vim-jsx'                            " React JSX syntax highlighting and indenting
-Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
+" Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
 Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
 Plug 'cakebaker/scss-syntax.vim'              " syntax for sassy css
-Plug 'elzr/vim-json'                          " bettern JSON highlighting
+" Plug 'elzr/vim-json'                          " bettern JSON highlighting
 
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
@@ -97,7 +101,7 @@ Plug 'jiangmiao/auto-pairs' " auto-match all brackets
 Plug 'ervandew/supertab'    " hit <tab> for autocomplete
 Plug 'sirver/ultisnips'     " snippets
 Plug 'shougo/neocomplete.vim' " completion framework
-" Plug 'mattn/emmet-vim'      " makes html easier
+Plug 'mattn/emmet-vim'      " makes html easier
 
 " Other
 Plug 'godlygeek/tabular' " text alignment
@@ -117,10 +121,10 @@ let g:neocomplete#enable_smart_case=1
 let g:neocomplete#sources#syntax#min_keyword_length=4
 autocmd filetype javascript setlocal omnifunc=jspc#omni
 
-" let g:user_emmet_mode='a' " enable emmet functionality in all modes
-" let g:user_emmet_install_global=0 " enable emmet for just html/css
-" autocmd FileType html,css EmmetInstall
-" let g:user_emmet_leader_key='<C-j>' " remap the default (emmet) leader from <C-y> to <C-j>
+let g:user_emmet_mode='a' " enable emmet functionality in all modes
+let g:user_emmet_install_global=0 " enable emmet for just html/css
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_leader_key='<C-j>' " remap the default (emmet) leader from <C-y> to <C-j>
 
 let g:loaded_matchparen=1
 
@@ -147,17 +151,17 @@ let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#format=1
 
 " Add syntastic warnings and errors to statusline.
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_stl_format="%E{[%e Errors]} %W{[%w Warnings]}"
-let g:syntastic_mode_map = { "mode": "passive" }
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_enable_highlighting=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
-let g:syntastic_auto_jump=1
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_stl_format="%E{[%e Errors]} %W{[%w Warnings]}"
+" let g:syntastic_mode_map = { "mode": "passive" }
+" let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_enable_highlighting=1
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_check_on_open=0
+" let g:syntastic_check_on_wq=0
+" let g:syntastic_auto_jump=1
 
 " Which javascript libraries to provide syntax highlighting for.
 let g:used_javascript_libs='react, ramda, underscore'
@@ -240,6 +244,12 @@ nnoremap <Leader>x :SyntasticToggleMode<CR>
 " Remove trailing whitespace
 nnoremap <Leader>nows<CR> :%s/\s\+$//e<CR>:nohlsearch<CR>:w<CR>
 
+" Change tab length
+nnoremap <Leader>t2 :set tabstop=2<CR>:set shiftwidth=2<CR>
+nnoremap <Leader>t4 :set tabstop=4<CR>:set shiftwidth=4<CR>
+
+inoremap <Leader>> <ESC>j>>kS
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -269,7 +279,8 @@ nnoremap Q <nop>
 nnoremap K <nop>
 
 " Tmux uses C-k
-noremap <C-k> <C-u>
+noremap <C-k> <nop>
+inoremap <C-u> <C-k>
 
 " Make Y behave like C and D.
 nnoremap Y y$
@@ -355,10 +366,9 @@ nnoremap <Leader>c2<CR> :w<CR>:AsyncRun ./a.exe<CR>:wincmd k<CR>
 
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
 " Set quickfix window default to 5 lines.
-au FileType qf call AdjustWindowHeight(5, 20)
+au FileType qf call AdjustWindowHeight(3, 15)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
 
 scriptencoding utf8
-

@@ -34,13 +34,16 @@ snippet l
 	let $1 = $2;
 # C-style for loop
 snippet for
-	for (let ${1:i} = ${2:0}; i < ${3:array.length}; i++)
+	for (let ${1:i} = ${2:0}; ${1:i} < $3; ${1:i}++)
 	{
 		$4
 	}
 # module.exports
 snippet me
-	module.exports = $1;
+	module.exports = $1
 # Object.assign
 snippet oa
-	Object.assign({}, $1);
+	Object.assign({}, $1)
+# R.tap(console.log)
+snippet rtcl
+	R.tap(console.log)

@@ -27,6 +27,8 @@ parsePandoraOutput()
     currentPositionInfo="$(echo -n "${_pandoraOutput}" | tail -1 | sed -e "s/\r/\n/g" -e "s/^.* -//g" -e "s/   \*.*$//g" -e "s/^0//g" | sed -e "s/\/0/\//g")"
 
     station="$(echo -n "${_pandoraOutput}" | grep -E "^.* Station [^(id)]" | sed -e "s/^.* Station //g" -e "s/\" .*$//g" | tr -d "\"" | tail -1)"
+
+    songIsThumbsUp="$(echo -n "${songAlbumArtistInfo}" | grep -q "[+]" &>/dev/null && echo " ♡" || echo "")"
 }
 
 
@@ -47,7 +49,8 @@ main()
     # echo -n "${currentPositionInfo}"
 
     # echo -n "${station} : ${artist} - ${song} [${currentPositionInfo}] "
-    echo -n "${artist} - ${song} [${currentPositionInfo}] "
+    # echo -n "${artist} - ${song}${songIsThumbsUp} ${currentPositionInfo} "
+    echo -n "${artist} - ${song}${songIsThumbsUp} "
 }
 
 # Invoke main() function.

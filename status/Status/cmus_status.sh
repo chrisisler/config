@@ -72,7 +72,9 @@ if [[ "${cmusIsRunning}" == "true" ]]; then
     if [[ "${isRepeat}" == "true" ]]; then musicInfoDisplay+="R "; fi
 
     # musicInfoDisplay+="${musicSymbol}"
-    echo "${musicInfoDisplay}"
+    # echo "${musicInfoDisplay}"
+    # echo -n "'${songTitle}' by '${artistName}' on '${albumName}' [${songPositionFormatted}/${songDurationFormatted}] "
+    echo -n "${artistName} - ${songTitle} ${songPositionFormatted}/${songDurationFormatted} "
 else
     echo ""
 fi

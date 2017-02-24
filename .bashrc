@@ -46,6 +46,7 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 export TERM="screen-256color"
 export EDITOR="vim"
 
+# solarized dark color scheme by default
 source "${HOME}/mintty-colors-solarized/sol.dark"
 
 
@@ -96,10 +97,11 @@ alias ......="cd ../../../../.."
 # daily terminal use
 alias c="clear"
 alias l="${lslaVar}"
+alias la="ls -1aFh --color --sort=extension --group-directories-first"
 alias cl="clear && ${lslaVar}"
+alias lc="clear && ${lslaVar}"
 alias dir="explorer ."
 alias start="cygstart"
-alias get="apt-cyg install"
 alias remove="apt-cyg remove"
 alias md="mkdir -pv"
 alias rmi="rm -irv"
@@ -124,8 +126,7 @@ alias bugndoc="vim ${codeDir}/Bin/bug.n-8.4.0/doc/Default_hotkeys.md"
 
 # start an application
 alias league="${cDriveDir}/Riot\ Games/League\ of\ Legends/lol.launcher.exe"
-alias vlc="${x86Directory}/VideoLAN/VLC/vlc &>/dev/null &"
-alias notes="StikyNot.exe"
+alias vlc="${x86Directory}/VideoLAN/VLC/vlc $@"
 alias taskmngr="${cDriveDir}/Windows/System32/Taskmgr.exe"
 alias st="cygstart ${x86Directory}/Sublime\ Text\ 3/sublime_text.exe $@"
 alias itunes="cygstart ${cDriveDir}/Program\ Files/iTunes/iTunes.exe"
@@ -147,7 +148,8 @@ alias reaper="cygstart ${cDriveDir}/Program\ Files/REAPER\ \(x64\)/reaper.exe"
 # programming
 alias gs="git status"
 alias gsp="git status --porcelain"
-alias p="more package.json | jq --tab"
+alias p="clear; more package.json | jq --tab"
+alias ns="npm start"
 
 alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
 alias tmuxmain="tmux attach -t Main || tmux new -s Main"
@@ -157,24 +159,30 @@ alias tmuxed="cd ${codeDir}/Git/ErxiDesk && ${lslaVar}; tmux attach -t ErxiDesk 
 
 # scripts
 alias jsmail='node "`cygpath -w ${codeDir}/JS/Nodemailer/Mail/js-mail.js`"' "$@"
-alias jstext=' node "`cygpath -w ${codeDir}/JS/Text/index.js`"'
 alias foodlog='node "`cygpath -w ${codeDir}/JS/FoodLog/food-log.js`"'
 alias clean="${chrisDir}/Desktop/Main/Code/Shell/Bin/clean.sh"
+alias add-clean='echo "die '$@' 2>/dev/null" >> ${codeDir}/Shell/Bin/clean.sh'
 alias tg="${codeDir}/CSharp/TypeGroup/Version2.exe $@"
 alias weather="curl wttr.in/boston"
 alias stoprs="jsmail islerryan@gmail.com 'STOP PLAYING RS' 'STOP STOP STOP STOP STOP'"
 alias updateconfig="${codeDir}/Git/config/update.sh"
+alias cmus-control="start ${codeDir}/AutoHotKey/Cmus-Integration/cmus-control.ahk"
+alias dark-mode="${codeDir}/Shell/Bin/dark-mode.sh"
+alias light-mode="${codeDir}/Shell/Bin/light-mode.sh"
 
 
 # utilities (in the terminal)
-alias cmdfetch="${codeDir}/Bin/fetch/cmdfetch.lua --logo windows7 --lefty --color blue"
+alias cmdfetch2="${codeDir}/Bin/fetch/cmdfetch.lua --logo windows7 --lefty --color blue"
+alias cmdfetch="${codeDir}/Bin/fetch/cmdfetch.lua"
+alias fetch="${codeDir}/Shell/Bin/erxi-fetch.sh"
 alias ranger="${codeDir}/Bin/ranger-1.7.2/scripts/ranger"
 alias bugn="cygstart ${codeDir}/Bin/bug.n-8.4.0/bugn.exe"
 alias pandora="cd ~ && ${codeDir}/Bin/pianobarfly/pianobarfly.exe | tee ~/.config/pianobarfly/custom-out"
 alias torrent="rtorrent -d /cygdrive/c/Users/Christopher/Downloads -s /cygdrive/c/Users/Christopher/Downloads"
-alias pdf='node "`cygpath -w ${codeDir}/JS/Bin/pdf/index.js`"' "$@"
+alias pdf='node "`cygpath -w ${codeDir}/JS/Bin/pdf/index.js`"' "$@" # yay for quotes working properly.
 alias r='ranger'
 alias progress='pv'
+alias ampv="mpv $@ &>/dev/null &"
 
 
 # everything else
@@ -183,13 +191,20 @@ alias hibernate="shutdown --force --suspend $@"
 alias killvm="die vboxsvc && die virtualbox"
 alias xit="exit"
 alias eixt="exit"
+alias q="exit"
 alias cpi="rsync -vrthP"
 alias setup="cygstart ${codeDir}/Bin/setup-*.exe"
-alias killleague="die 'LolClient'; die 'Lolpatcher'; die 'LolClient'; die 'League of Legends'"
+alias noleague="die 'LolClient'; die 'Lolpatcher'; die 'LolClient'; die 'League of Legends'"
+alias notor="die 'tor'; die'firefox'"
 alias sniptool="cygstart ${cDriveDir}/WINDOWS/system32/SnippingTool.exe"
 alias cpan="control panel"
 alias spamrandom="cat /dev/urandom | tr -cd '01'"
 alias spamlights='yes "$(seq 16 231)" | while read i; do printf "\x1b[48;5;${i}m\n"; sleep .02; done'
+alias weecred="more ${mainDir}/Random/Bin/weechat-cred.txt"
+alias weedoc="vivaldi http://weechat.org/files/doc/stable/weechat_user.en.html"
+alias pipesx="${codeDir}/Bin/pipesX/pipesX.sh"
+alias pipes="${codeDir}/Bin/pipes/pipes.sh"
+alias mpv="mpv --loop=inf $@ &>/dev/null"
 
 
 # Games
@@ -208,6 +223,22 @@ alias path='echo "${PATH}" | tr ":" "\n" | sort'
 
 # START FUNCTION ALIASES ------------------------------------------------------
 
+function get() {
+    local pkg="$1"
+
+    apt-cyg install "${pkg}" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "${pkg}-dev" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "${pkg}-devel" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "lib${pkg}" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "lib${pkg}-dev" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "lib${pkg}-devel" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "${pkg}lib" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "${pkg}lib-dev" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "${pkg}lib-devel" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "${pkg}-lib" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "${pkg}-lib-dev" | grep -ve 'Unable to locate package' -ve 'Installing'
+    apt-cyg install "${pkg}-lib-devel" | grep -ve 'Unable to locate package' -ve 'Installing'
+}
 
 function killvmware() {
     die "vmware"
@@ -270,8 +301,7 @@ normal="\[\e[1;36m\]"
 white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-source "${codeDir}/Shell/Status/git_status_multi.sh"
-
+# source "${codeDir}/Shell/Status/git_status_multi.sh"
 # export PS1="\
 # \n\
 # ${white}¤${colEnd}\
@@ -285,12 +315,12 @@ source "${codeDir}/Shell/Status/git_status_multi.sh"
 # \n\
 # ${white}${_promptChar}${colEnd} "
 
-export PS1="\
-\n\
-${white}¤${colEnd}\
- ${blue}${_currentDirectory}${colEnd}\
-\n\
-${white}${_promptChar}${colEnd} "
+# export PS1="\
+# \n\
+# ${white}¤${colEnd}\
+#  ${blue}${_currentDirectory}${colEnd}\
+# \n\
+# ${white}${_promptChar}${colEnd} "
 
-# export PS1="\n${white}${_promptChar}${colEnd} "
+export PS1="\n${red} ›>${colEnd} "
 
