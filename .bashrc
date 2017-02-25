@@ -213,8 +213,8 @@ alias typespeed='typespeed'
 
 
 # commands
-alias tm="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }'"
-alias tm5="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | head -35"
+alias tm="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | grep -vie 'gawk.exe' -vie 'grep.exe' -vie 'sort.exe' -vie 'head.exe'"
+alias tm5="tm | head -35"
 alias path='echo "${PATH}" | tr ":" "\n" | sort'
 
 
@@ -222,6 +222,47 @@ alias path='echo "${PATH}" | tr ":" "\n" | sort'
 
 
 # START FUNCTION ALIASES ------------------------------------------------------
+
+# Get total used RAM in GigaBytes (specifically, the public working set)
+function usedram() {
+    usedRam=$(( $(tasklist /nh | tr -d ',K' | awk '{print $5}' | awk '{sum+=$1} END {print sum}') / 1000 ))
+    echo "${usedRam:0:1}.${usedRam:1:1} G"
+}
+
+# use this one
+function ix() {
+    local opts
+    local OPTIND
+
+    [ -f "$HOME/.netrc" ] && opts='-n'
+
+    while getopts ":hd:i:n:" x; do
+        case $x in
+            h) echo "ix [-d ID] [-i ID] [-n N] [options]"; return ;;
+            d) $echo curl $opts -X DELETE ix.io/$OPTARG; return ;;
+            i) opts="$opts -X PUT"; local id="$OPTARG" ;;
+            n) opts="$opts -F read:1=$OPTARG" ;;
+        esac
+    done
+
+    shift $(($OPTIND - 1))
+
+    [ -t 0 ] && {
+        local filename="$1"
+        shift
+        [ "$filename" ] && {
+            curl $opts -F f:1=@"$filename" $* ix.io/$id
+            return
+        }
+        echo "^C to cancel, ^D to send."
+    }
+    curl $opts -F f:1='<-' $* ix.io/$id
+}
+
+# dont use sprunge, because sprunges last forever, us ix() instead
+function sprunge() {
+    more -- "$@" | command curl -sF 'sprunge=<-' http://sprunge.us;
+}
 
 function get() {
     local pkg="$1"
@@ -322,5 +363,5 @@ colEnd="\[\e[0m\]"
 # \n\
 # ${white}${_promptChar}${colEnd} "
 
-export PS1="\n${red} ›>${colEnd} "
+export PS1="\n${white}¤${red}›>${colEnd} "
 
