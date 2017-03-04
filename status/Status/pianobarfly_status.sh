@@ -14,7 +14,7 @@ pianobarflyConfigFileData="$(cat ~/.config/pianobarfly/state)"
 
 removeParenthesis()
 {
-    echo -n "${1}" | sed -e "s/(.*)//g" -e "s/\[.*\]//g"
+    echo -n "${1}" | sed -e "s/ (.*)//g" -e "s/\[.*\]//g"
 }
 
 parsePandoraOutput()

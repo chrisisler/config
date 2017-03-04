@@ -41,7 +41,6 @@ set ff=unix
 set fileformat=unix
 set incsearch
 set noswapfile
-set showmode
 set virtualedit=block
 set encoding=utf-8
 set backupcopy=yes
@@ -61,7 +60,7 @@ set cursorline  " highlight current line
 set hlsearch    " search highlighting
 set matchtime=2 " number of seconds to show matching bracket for
 set ttyfast     " assume fast terminal
-set noshowmode
+set noshowmode  " do not show current vim mode
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins (vim-plug)
@@ -73,7 +72,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'othree/javascript-libraries-syntax.vim' " library-based js syntax highlighting
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'mxw/vim-jsx'                            " React JSX syntax highlighting and indenting
-" Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
+Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
 Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
 Plug 'cakebaker/scss-syntax.vim'              " syntax for sassy css
 " Plug 'elzr/vim-json'                          " bettern JSON highlighting
@@ -151,17 +150,19 @@ let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#format=1
 
 " Add syntastic warnings and errors to statusline.
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_stl_format="%E{[%e Errors]} %W{[%w Warnings]}"
-" let g:syntastic_mode_map = { "mode": "passive" }
-" let g:syntastic_always_populate_loc_list=1
-" let g:syntastic_enable_highlighting=1
-" let g:syntastic_auto_loc_list=1
-" let g:syntastic_check_on_open=0
-" let g:syntastic_check_on_wq=0
-" let g:syntastic_auto_jump=1
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_stl_format="%E{[%e Errors]} %W{[%w Warnings]}"
+let g:syntastic_mode_map = { "mode": "passive" }
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_enable_highlighting=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=0
+let g:syntastic_check_on_wq=0
+let g:syntastic_auto_jump=1
+let g:syntastic_javascript_checkers=['eslint']
+let g:syntastic_javascript_eslint_exe='npm run lint --'
 
 " Which javascript libraries to provide syntax highlighting for.
 let g:used_javascript_libs='react, ramda, underscore'
@@ -206,7 +207,8 @@ nnoremap <Leader>q<CR> :bdelete %<CR>
 nnoremap <Leader>r :set cc=
 
 " Things being highlighted after searching once is annoying.
-nnoremap <Leader>noh /@@<CR>:nohlsearch<CR>
+nnoremap <Leader>noh :nohlsearch<CR>
+" nnoremap <Leader>noh /@@<CR>:nohlsearch<CR>
 
 " Make location and quickfix windows go away.
 nnoremap <Leader>w :lcl<CR>:ccl<CR>
@@ -330,6 +332,9 @@ nnoremap P P==
 nnoremap p p==
 vnoremap P P=
 vnoremap p p=
+
+" assign tab to `
+nnoremap ` <TAB>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Compile and Run - Mappings
