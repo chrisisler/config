@@ -131,8 +131,7 @@ alias vlc="${x86Directory}/VideoLAN/VLC/vlc $@"
 alias taskmngr="${cDriveDir}/Windows/System32/Taskmgr.exe"
 alias st="cygstart ${x86Directory}/Sublime\ Text\ 3/sublime_text.exe $@"
 alias itunes="cygstart ${cDriveDir}/Program\ Files/iTunes/iTunes.exe"
-alias algorithms="cygstart ${mainDir}/Academic/Textbooks/2016-Fall/Data-Structures-and-Algorithms-4thEd.pdf"
-alias linear="cygstart ${mainDir}/Academic/Textbooks/2016-Fall/Linear-Algebra-4thEdition.pdf"
+alias stats="cygstart ${mainDir}/Academic/Statistics-Textbook.pdf"
 alias chrome="cygstart ${x86Directory}/Google/Chrome/Application/chrome.exe $@"
 alias tor="cygstart ${mainDir}/Secure/Tor\ Browser/Browser/firefox.exe $@"
 alias firefox="cygstart ${x86Directory}/Mozilla\ Firefox/firefox.exe $@"
@@ -151,6 +150,7 @@ alias gs="git status"
 alias gsp="git status --porcelain"
 alias p="clear; more package.json | jq --tab"
 alias ns="npm start"
+alias codetime="sleep 25m && die mintty &"
 
 alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
 alias tmuxmain="tmux attach -t Main || tmux new -s Main"
@@ -184,6 +184,7 @@ alias pdf='node "`cygpath -w ${codeDir}/JS/Bin/pdf/index.js`"' "$@" # yay for qu
 alias r='ranger'
 alias progress='pv'
 alias ampv="mpv $@ &>/dev/null &"
+alias cmus-control="start ${codeDir}/AutoHotKey/Cmus-Integration/control.ahk"
 
 
 # everything else
@@ -365,4 +366,3 @@ colEnd="\[\e[0m\]"
 # ${white}${_promptChar}${colEnd} "
 
 export PS1="\n${white}¤${red}›>${colEnd} "
-

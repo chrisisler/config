@@ -83,6 +83,7 @@ Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
+Plug 'tomasr/molokai'                   " monokai color scheme
 " Plug 'majutsushi/tagbar'                " UML-like namespace/class diagram
 
 " Integrations
