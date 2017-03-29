@@ -60,6 +60,7 @@ export downloadsDir="${chrisDir}/Downloads"
 export desktopDir="${chrisDir}/Desktop"
 export mainDir="${desktopDir}/Main"
 export codeDir="${mainDir}/Code"
+export musicDir="${chrisDir}/Music/Bin"
 
 x86Directory="${cDriveDir}/Program\ Files\ \(x86\)"
 
@@ -162,12 +163,12 @@ alias tmuxed="cd ${codeDir}/Git/ErxiDesk && ${lslaVar}; tmux attach -t ErxiDesk 
 alias jsmail='node "`cygpath -w ${codeDir}/JS/Nodemailer/Mail/js-mail.js`"' "$@"
 alias foodlog='node "`cygpath -w ${codeDir}/JS/FoodLog/food-log.js`"'
 alias clean="${chrisDir}/Desktop/Main/Code/Shell/Bin/clean.sh"
-alias add-clean='echo "die '$@' 2>/dev/null" >> ${codeDir}/Shell/Bin/clean.sh'
+# alias add-clean='echo "die '$1' 2>/dev/null" >> ${codeDir}/Shell/Bin/clean.sh'
 alias tg="${codeDir}/CSharp/TypeGroup/Version2.exe $@"
 alias weather="curl wttr.in/boston"
 alias stoprs="jsmail islerryan@gmail.com 'STOP PLAYING RS' 'STOP STOP STOP STOP STOP'"
 alias updateconfig="${codeDir}/Git/config/update.sh"
-alias cmus-control="start ${codeDir}/AutoHotKey/Cmus-Integration/cmus-control.ahk"
+alias cmus-control="start ${codeDir}/AutoHotKey/Cmus-Integration/control.ahk"
 alias dark-mode="${codeDir}/Shell/Bin/dark-mode.sh"
 alias light-mode="${codeDir}/Shell/Bin/light-mode.sh"
 

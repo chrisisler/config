@@ -74,8 +74,8 @@ if [[ "${cmusIsRunning}" == "true" ]]; then
     # musicInfoDisplay+="${musicSymbol}"
     # echo "${musicInfoDisplay}"
     # echo -n "'${songTitle}' by '${artistName}' on '${albumName}' [${songPositionFormatted}/${songDurationFormatted}] "
-    # echo -n "${artistName} - ${songTitle} ${songPositionFormatted}/${songDurationFormatted} "
-    echo -n "${artistName} - ${songTitle} "
+    echo -n "${artistName} - ${songTitle} ${songPositionFormatted}/${songDurationFormatted} "
+    # echo -n "${artistName} - ${songTitle} "
 else
     echo ""
 fi
