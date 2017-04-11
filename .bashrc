@@ -191,6 +191,7 @@ alias cmus-control="start ${codeDir}/AutoHotKey/Cmus-Integration/control.ahk"
 # everything else
 alias remake="die explorer && start explorer &> /dev/null"
 alias hibernate="shutdown --force --suspend $@"
+alias hib="hibernate $@"
 alias killvm="die vboxsvc && die virtualbox"
 alias xit="exit"
 alias eixt="exit"
@@ -366,4 +367,5 @@ colEnd="\[\e[0m\]"
 # \n\
 # ${white}${_promptChar}${colEnd} "
 
-export PS1="\n${white}¤${red}›>${colEnd} "
+# export PS1="\n${white}¤${red}›>${colEnd} "
+export PS1="\n${red} >${colEnd} "
