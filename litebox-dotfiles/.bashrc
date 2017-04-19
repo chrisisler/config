@@ -87,7 +87,7 @@ alias mainbox="cd /Volumes/Users/Christopher/Desktop/Main"
 alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias mpv="mpv --loop=inf $@ &>/dev/null"
 alias eject="diskutil unmount $@"
-alias chips="cd ~/Main/Code/chips %% ${lslaVar}"
+alias chips="cd ~/Main/Code/Git/chips && ${lslaVar}"
 alias btc="curl -sSL https://coinbase.com/api/v1/prices/historical | head -n 1 | sed \"s|^.*,|$|\" | sed \"s|\(\.[0-9]$\)|\10|\""
 
 # END ALIASES -----------------------------------------------------------------

@@ -67,6 +67,7 @@ call plug#begin('~/.vim/plugged')
 
 " Language
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
+Plug 'othree/jspc.vim'                        " parameter auto-completion
 Plug 'othree/javascript-libraries-syntax.vim' " exactly what is sounds like
 Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
 Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
@@ -110,7 +111,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
             \ 'default' : '',
-            \ 'javascript' : $HOME.'/Main/Code/Bin/js-words.txt'
+            \ 'javascript' : '~/Main/Code/JS/Dictionary/js-all.txt'
             \ }
 
 " Enable heavy omni completion.
