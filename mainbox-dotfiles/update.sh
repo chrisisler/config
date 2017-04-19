@@ -1,7 +1,14 @@
+#!/usr/bin/env bash
 # This script copies .*rc and other config files to this directory.
 
 _codeDir="/cygdrive/c/Users/Christopher/Desktop/Main/Code"
 confDir="${_codeDir}/Git/config"
+
+# if [[ "$(uname)" == "Darwin" ]]; then
+#     _codeDir="/Volumes/Users/Christopher/Desktop/Main/Code"
+#     confDir="${_codeDir}/Git/config"
+#     # TODO: Make Windows ~ available from litebox
+# fi
 
 cp ~/.tmux/tmuxline.conf ${confDir}
 cp ~/.tmux.conf ${confDir}

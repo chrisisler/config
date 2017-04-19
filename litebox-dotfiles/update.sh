@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # This script copies dotfiles to this repo/dir.
 
 dotfilesDir="$(pwd)"
