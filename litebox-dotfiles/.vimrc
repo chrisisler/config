@@ -59,6 +59,10 @@ set timeoutlen=500
 set ttimeoutlen=500
 set lazyredraw
 
+" Make :Q and :W work like :q and :w
+command! W w
+command! Q q
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins (vim-plug)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -69,8 +73,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'othree/jspc.vim'                        " parameter auto-completion
 Plug 'othree/javascript-libraries-syntax.vim' " exactly what is sounds like
-Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
+" Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
 Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
+Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
 
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
@@ -82,24 +87,36 @@ Plug 'airblade/vim-gitgutter'           " git diff in gutter
 " Integrations
 Plug 'tpope/vim-commentary' " sane (un)commenting
 Plug 'tpope/vim-fugitive'   " git integration
+Plug 'w0rp/ale'             " async linter
 
 " Commands
 Plug 'terryma/vim-multiple-cursors' " sublime-like multi cursors
 Plug 'ctrlpvim/ctrlp.vim'           " fuzzy finder
-Plug 'skywind3000/asyncrun.vim'     " run terminal commands and show in quickfix
+Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
 Plug 'tpope/vim-surround'           " manipulating characters that surround text objects
 Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
 
 " Completion
-Plug 'jiangmiao/auto-pairs'   " auto-match all brackets
+Plug 'jiangmiao/auto-pairs'   " auto-match all brackets, parenthesis, quotes, etc.
 Plug 'ervandew/supertab'      " hit <tab> for autocomplete
-Plug 'shougo/neocomplete.vim' " code-completion framework
+Plug 'shougo/neocomplete.vim' " code-completion
+
+" Other
+Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:ale_sign_column_always=1
+let g:airline_section_error='%{ale#statusline#Status()}'
+let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
+let g:ale_linters={
+\   'javascript': ['eslint'],
+\}
 
 let g:ctrlp_custom_ignore='node_modules'
 
@@ -130,6 +147,8 @@ let g:loaded_matchparen=0
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
 
+let g:jsx_ext_required=0
+
 " Syntax and colorscheme.
 syntax on
 if !exists("g:syntax_on")
@@ -149,17 +168,17 @@ let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#format=1
 
 " Add syntastic warnings and errors to statusline.
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_mode_map = { "mode": "passive" }
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_stl_format = "%E{[%e Errors]} %W{[%w Warnings]}"
-let g:syntastic_check_on_wq = 1
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = 'npm run lint --'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_mode_map = { "mode": "passive" }
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_enable_highlighting = 1
+" let g:syntastic_stl_format = "%E{[%e Errors]} %W{[%w Warnings]}"
+" let g:syntastic_check_on_wq = 1
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 " Mode=0 is asynchronous mode. Trim=1 trims empty lines in quickfix window.
 let g:asyncrun_mode=1
@@ -180,6 +199,15 @@ let g:mapleader=","
 let maplocalleader=","
 let g:maplocalleader=","
 
+" Linter mappings
+nnoremap <Leader>n :ALEPreviousWrap<CR>kj
+nnoremap <Leader>p :ALENextWrap<CR>kj
+nnoremap <Leader>x :ALEToggle<CR>kj
+
+" Toggle syntax-checks on save (active/passive).
+" nnoremap <Leader>x :SyntasticToggleMode<CR>
+
+
 " Horizontal and vertical resizing like my tmux key-bindings.
 nnoremap <silent> <Leader>H :vertical res -4<CR>
 nnoremap <silent> <Leader>J :res -4<CR>
@@ -193,7 +221,7 @@ nnoremap <silent> <Leader>k :wincmd k<CR>
 nnoremap <silent> <Leader>l :wincmd l<CR>
 
 " Run syntax checker.
-nnoremap <Leader>s<CR> :w<CR>:SyntasticCheck<CR>
+" nnoremap <Leader>s<CR> :w<CR>:SyntasticCheck<CR>
 
 " Delete current buffer.
 nnoremap <Leader>q<CR> :bdelete %<CR>
@@ -204,7 +232,7 @@ nnoremap <Leader>r :set cc=
 " Things being highlighted after searching once is annoying.
 " nnoremap <Leader>noh :nohlsearch<CR>
 
-" Make syntastic and quickfix windows go away.
+" Make local(?) and quickfix windows go away.
 nnoremap <Leader>w :lcl<CR>:ccl<CR>
 
 " Mappings for saving and sourcing .vimrc.
@@ -236,9 +264,6 @@ inoremap <Leader>l <C-x><C-l>
 
 " Fast mapping to call tabular.
 nnoremap <Leader>t :Tab /
-
-" Toggle syntax-checks on save (active/passive).
-nnoremap <Leader>x :SyntasticToggleMode<CR>
 
 " Remove trailing whitespace
 nnoremap <Leader>nows<CR> :%s/\s\+$//e<CR>:nohlsearch<CR>:w<CR>
