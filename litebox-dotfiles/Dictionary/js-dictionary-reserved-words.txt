@@ -3,6 +3,7 @@ __filename
 path
 abstract
 arguments
+async
 await
 boolean
 break

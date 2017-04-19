@@ -31,6 +31,8 @@ codeDir="${mainDir}/Code"
 
 alias gs="git status"
 alias q="exit"
+alias t="tmuxall"
+alias v="vim"
 alias clock="tty-clock -Sc"
 alias rcconf="vim ~/.config/ranger/rc.conf"
 alias safe="cd /tmp/safe"
@@ -52,6 +54,7 @@ alias get="brew install"
 alias remove="brew uninstall"
 alias r="ranger"
 alias c="clear"
+alias lsla="ls -la"
 alias l="${lslaVar}"
 alias cl="clear && ${lslaVar}"
 alias lc="clear && ${lslaVar}"
@@ -86,7 +89,8 @@ alias dir="open ."
 alias pdf="node ${codeDir}Bin/pdf/index.js"
 alias mainbox="cd /Volumes/Users/Christopher/Desktop/Main"
 alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
-alias mpv="mpv --loop=inf $@ &>/dev/null"
+alias mpv="\\mpv --loop=inf $@ &>/dev/null"
+alias mpvfit="\\mpv --loop=inf --autofit-smaller=800x800 --autofit-larger=800x00 $@ &>/dev/null"
 alias eject="diskutil unmount $@"
 alias chips="cd ~/Main/Code/Git/chips && ${lslaVar}"
 alias btc="curl -sSL https://coinbase.com/api/v1/prices/historical | head -n 1 | sed \"s|^.*,|$|\" | sed \"s|\(\.[0-9]$\)|\10|\""
@@ -143,12 +147,26 @@ normal="\[\e[1;36m\]"
 white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
+source "${HOME}/Main/Code/Status/git.sh"
 export PS1="\
 \n\
-${cyan}¤${colEnd}\
+${white}¤${colEnd}\
  ${blue}${_currentDirectory}${colEnd}\
+${yellow}\$(gitBracketL)${colEnd}\
+${cyan}\$(gitBranch)${colEnd}\
+${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+${blue}\$(gitAddedChanges)${colEnd}\
+${red}\$(gitUnaddedChanges)${colEnd}\
+${yellow}\$(gitBracketR)${colEnd}\
 \n\
-${cyan}${_promptChar}${colEnd} "
+${white}${_promptChar}${colEnd} "
+
+# export PS1="\
+# \n\
+# ${cyan}¤${colEnd}\
+#  ${blue}${_currentDirectory}${colEnd}\
+# \n\
+# ${cyan}${_promptChar}${colEnd} "
 
 # export PS1="\n${white}${_promptChar}${colEnd} "
 

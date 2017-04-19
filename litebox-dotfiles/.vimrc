@@ -76,6 +76,7 @@ Plug 'othree/javascript-libraries-syntax.vim' " exactly what is sounds like
 " Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
 Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
+Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
@@ -110,6 +111,14 @@ call plug#end()
 " Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:user_emmet_mode='a' " enable emmet in all vim modes
+let g:user_emmet_install_global=0 " enable emmet for just html/css
+autocmd FileType html,css EmmetInstall
+let g:user_emmet_leader_key='<C-j>' " remap the default emmet leader from <C-y> to <C-j>
+
+" let g:ale_sign_error='⨉⨉'
+" let g:ale_sign_warning='⚠⚠'
+let g:ale_open_list=1
 let g:ale_sign_column_always=1
 let g:airline_section_error='%{ale#statusline#Status()}'
 let g:ale_echo_msg_format = '[%linter%] %s'
@@ -200,13 +209,14 @@ let maplocalleader=","
 let g:maplocalleader=","
 
 " Linter mappings
-nnoremap <Leader>n :ALEPreviousWrap<CR>kj
-nnoremap <Leader>p :ALENextWrap<CR>kj
+nnoremap <Leader>p :ALEPreviousWrap<CR>kj
+nnoremap <Leader>n :ALENextWrap<CR>kj
 nnoremap <Leader>x :ALEToggle<CR>kj
 
-" Toggle syntax-checks on save (active/passive).
+" Toggle syntastic checks on save (active/passive).
 " nnoremap <Leader>x :SyntasticToggleMode<CR>
-
+" Run syntastic
+" nnoremap <Leader>s<CR> :w<CR>:SyntasticCheck<CR>
 
 " Horizontal and vertical resizing like my tmux key-bindings.
 nnoremap <silent> <Leader>H :vertical res -4<CR>
@@ -219,9 +229,6 @@ nnoremap <silent> <Leader>h :wincmd h<CR>
 nnoremap <silent> <Leader>j :wincmd j<CR>
 nnoremap <silent> <Leader>k :wincmd k<CR>
 nnoremap <silent> <Leader>l :wincmd l<CR>
-
-" Run syntax checker.
-" nnoremap <Leader>s<CR> :w<CR>:SyntasticCheck<CR>
 
 " Delete current buffer.
 nnoremap <Leader>q<CR> :bdelete %<CR>
@@ -256,7 +263,7 @@ nnoremap <Leader>cl "xyiwoconsole.log(<ESC>"xpA);<ESC>
 " Same as above, except: console.log('variable is:', variable);
 nnoremap <Leader>clv "xyiwoconsole.log('<ESC>"xpa<Space>is:',<Space><ESC>"xpa);<ESC>
 
-" echo a variable for shell scripts.
+" echo a cursor-hovered variable for shell scripts.
 nnoremap <Leader>en "xyiwoecho -n "${}"hh"xp
 
 " Make <C-x><C-l> (whole-line auto-completion) easier to type.
@@ -273,7 +280,7 @@ nnoremap <Leader>t2 :set shiftwidth=2<CR>:set tabstop=2<CR>
 nnoremap <Leader>t4 :set shiftwidth=4<CR>:set tabstop=4<CR>
 
 " switch to last open buffer
-nnoremap <leader><leader> :b#<CR>
+nnoremap <leader>b :b#<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings for Mathematical Symbols
@@ -351,7 +358,7 @@ nnoremap <silent> \ :NERDTreeToggle<CR>
 nnoremap [ <C-w>w
 
 " Not highlighting things happens pretty often.
-nnoremap <space> :nohlsearch<CR>
+nnoremap <silent> <space> :nohlsearch<CR>
 
 " keep cursor where it is when joining lines.
 nnoremap J mzJ`z
