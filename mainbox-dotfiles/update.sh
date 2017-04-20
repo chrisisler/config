@@ -24,3 +24,7 @@ cp -r ${_codeDir}/Shell/Status/ ./status
 cp ~/.config/ranger/rc.conf .
 cp ~/.config/cmus/solarized.theme .
 
+git add "$(basename "${0}")"
+git add ./*
+git add ./.{bashrc,inputrc,tmux.conf,vimrc}
+git commit -m "$(date "+%Y-%m-%d %H:%M")"
