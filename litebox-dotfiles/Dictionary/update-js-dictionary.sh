@@ -33,6 +33,15 @@ addRamdaFunctions() {
     done
 }
 
+# Scrapes Array methods from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+# addArrayMethodsFromMDN() {
+    # TODO
+# }
+
+# addNodeJSModules() {
+    # TODO
+# }
+
 clearFinalDictionary
 concatenateJavaScriptDictionaries
 addChipsFunctions

@@ -48,7 +48,8 @@ alias test="vim ${codeDir}/JS/Test.js"
 alias main="cd ${mainDir} && ${lslaVar}"
 alias acad="cd ${academDir} && ${lslaVar}"
 alias code="cd ${codeDir} && ${lslaVar}"
-alias conf="cd ~/.config && ${lslaVar}"
+alias config="cd ${codeDir}/Git/config && ${lslaVar}"
+alias conf="cd ~/Main/Code/Git/config/ && ${lslaVar}"
 alias parse="cd ${codeDir}/Status"
 alias get="brew install"
 alias remove="brew uninstall"
@@ -94,6 +95,7 @@ alias mpvfit="\\mpv --loop=inf --autofit-smaller=800x800 --autofit-larger=800x00
 alias eject="diskutil unmount $@"
 alias chips="cd ~/Main/Code/Git/chips && ${lslaVar}"
 alias btc="curl -sSL https://coinbase.com/api/v1/prices/historical | head -n 1 | sed \"s|^.*,|$|\" | sed \"s|\(\.[0-9]$\)|\10|\""
+alias thesaurus="node ~/Main/Code/JS/Bin/thesaurus.js $@"
 
 # END ALIASES -----------------------------------------------------------------
 
