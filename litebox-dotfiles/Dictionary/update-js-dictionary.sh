@@ -1,20 +1,25 @@
 #!/usr/bin/env bash
 
-# This script concatenates various javascript words from many places into ./js-all.txt
+set -e
 
-finalDictionaryFileName="./js-all.txt"
+# This script concatenates various javascript words from many places into the final dictionary
 
-# Clear the content of ./js-all.txt
+# Dynamically grab the full path to the final dictionary filename from ~/.vimrc
+finalDictionaryFile="$(cat ~/.vimrc | grep "'javascript' :" | awk '{ print $4 }' | tr -d "'")"
+
+# Clear the content of the final dictionary if it exists.
 clearFinalDictionary() {
-    rm -v "${finalDictionaryFileName}"
-    touch "${finalDictionaryFileName}"
-    chmod 644 "${finalDictionaryFileName}" 2>/dev/null
+    if [ -f "${1}" ]; then
+        rm -v "${1}"
+        touch "${1}"
+        chmod 644 "${1}" 2>/dev/null
+    fi
 }
 
-# This function concatenates all js-dictionary-*.txt files into ./js-all.txt
+# This function concatenates all js-dictionary-*.txt files into the final dictionary
 concatenateJavaScriptDictionaries() {
     for jsDict in $(find . -name "js-dictionary-*.txt"); do
-        cat "${jsDict}" >> "${finalDictionaryFileName}"
+        cat "${jsDict}" >> "${1}"
     done
 }
 
@@ -22,15 +27,19 @@ concatenateJavaScriptDictionaries() {
 addChipsFunctions() {
     local chipsIndexJS="${HOME}/Main/Code/Git/chips/index.js"
     local fns="$(more "${chipsIndexJS}" | grep "require" | sed 's/:.*$//g' | tr -d ' ')"
-    echo "${fns}" >> "${finalDictionaryFileName}"
+    echo "${fns}" >> "${1}"
 }
 
 # Scrapes function names from `ls` from Ramda library.
 addRamdaFunctions() {
     local ramdaFunctionFilenames="${HOME}/Main/Code/JS/Ramda/Test/node_modules/ramda/src"
     for ramdaFn in $(ls -1 "${ramdaFunctionFilenames}" | sed 's/\.js$//g'); do
-        echo "${ramdaFn}" >> "${finalDictionaryFileName}"
+        echo "${ramdaFn}" >> "${1}"
     done
+}
+
+removeDuplicates() {
+    cat "${1}" | awk '!x[$0]++' > "${1}"
 }
 
 # Scrapes Array methods from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
@@ -42,7 +51,8 @@ addRamdaFunctions() {
     # TODO
 # }
 
-clearFinalDictionary
-concatenateJavaScriptDictionaries
-addChipsFunctions
-addRamdaFunctions
+clearFinalDictionary "${finalDictionaryFile}"
+concatenateJavaScriptDictionaries "${finalDictionaryFile}"
+addChipsFunctions "${finalDictionaryFile}"
+addRamdaFunctions "${finalDictionaryFile}"
+# removeDuplicates "${finalDictionaryFile}"

@@ -31,7 +31,6 @@ codeDir="${mainDir}/Code"
 
 alias gs="git status"
 alias q="exit"
-alias t="tmuxall"
 alias v="vim"
 alias clock="tty-clock -Sc"
 alias rcconf="vim ~/.config/ranger/rc.conf"
@@ -48,8 +47,7 @@ alias test="vim ${codeDir}/JS/Test.js"
 alias main="cd ${mainDir} && ${lslaVar}"
 alias acad="cd ${academDir} && ${lslaVar}"
 alias code="cd ${codeDir} && ${lslaVar}"
-alias config="cd ${codeDir}/Git/config && ${lslaVar}"
-alias conf="cd ~/Main/Code/Git/config/ && ${lslaVar}"
+alias conf="cd ${codeDir}/Git/config && ${lslaVar}"
 alias parse="cd ${codeDir}/Status"
 alias get="brew install"
 alias remove="brew uninstall"
@@ -73,8 +71,9 @@ alias tmuxline="vim ~/.tmux/tmuxline.conf"
 alias rangerrc="vim ~/.config/ranger/rc.conf"
 alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
 alias tmuxall="tmux attach -t All || tmux new -s All"
-alias tmuxmain="tmux attach -t Main || tmux new -s Main"
+alias t="tmuxall"
 alias tmuxmusic="tmux attach -t Music || tmux new -s Music"
+alias tmus="tmuxmusic"
 alias weather="curl wttr.in/boston"
 alias xit="exit"
 alias eixt="exit"
@@ -98,23 +97,6 @@ alias btc="curl -sSL https://coinbase.com/api/v1/prices/historical | head -n 1 |
 alias thesaurus="node ~/Main/Code/JS/Bin/thesaurus.js $@"
 
 # END ALIASES -----------------------------------------------------------------
-
-
-# START FUNCTION ALIASES ------------------------------------------------------
-
-
-function ip() {
-    externalIP=`curl -s "http://whatismijnip.nl" | cut -d " " -f 5`
-    if [[ "${externalIP}" != "" ]]; then
-        echo "<${externalIP}> " # Spacing and brackets for $PS1
-    else
-        echo ""
-    fi
-}
-export -f ip
-
-
-# END FUNCTION ALIASES --------------------------------------------------------
 
 
 # START PROMT STRING ----------------------------------------------------------

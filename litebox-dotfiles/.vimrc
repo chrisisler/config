@@ -131,13 +131,14 @@ let g:ctrlp_custom_ignore='node_modules'
 
 let g:neocomplete#enable_at_startup=1
 let g:neocomplete#enable_smart_case=1
-let g:neocomplete#sources#syntax#min_keyword_length=2
+let g:neocomplete#sources#syntax#min_keyword_length=1
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
             \ 'default' : '',
-            \ 'javascript' : '~/Main/Code/JS/Dictionary/js-all.txt'
+            \ 'text' : '/usr/share/dict/connectives',
+            \ 'javascript' : '~/Main/Code/JS/Dictionary/all.txt'
             \ }
 
 " Enable heavy omni completion.
@@ -236,9 +237,6 @@ nnoremap <Leader>q<CR> :bdelete %<CR>
 " Set ruler.
 nnoremap <Leader>r :set cc=
 
-" Things being highlighted after searching once is annoying.
-" nnoremap <Leader>noh :nohlsearch<CR>
-
 " Make local(?) and quickfix windows go away.
 nnoremap <Leader>w :lcl<CR>:ccl<CR>
 
@@ -332,7 +330,6 @@ inoremap <silent> <Leader>sigma σ
 inoremap <silent> <Leader>std σ
 inoremap <silent> <Leader>stddev σ
 
-
 inoremap <silent> <Leader>complement ⁽
 inoremap <silent> <Leader>compl ⁽
 
@@ -350,6 +347,8 @@ inoremap <silent> <Leader>then →
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap U <C-r>
 
 " Open nerdtree.
 nnoremap <silent> \ :NERDTreeToggle<CR>
@@ -399,6 +398,9 @@ snoremap ;; <ESC>l
 noremap ; :
 noremap : ;
 
+" Cool new thing: http://mlsamuelson.com/content/vim-search-word-under-cursor
+nnoremap ,[ [I
+
 " ^ is uncomfortable to press.
 noremap 8 ^
 " $ is uncomfortable to press.
@@ -406,13 +408,14 @@ noremap 9 $
 
 " This just makes sense.
 nnoremap * *N
+nnoremap # #n
 
 " Another way to save a file, I do it on accident, so I just mapped it.
 noremap ;s<CR> :w<CR>
 
 " Move up and down faster.
-nnoremap E 2kzz
-nnoremap D 2jzz
+nnoremap E 3kzz
+nnoremap D 3jzz
 
 " Copy and paste from (actual) clipboard.
 noremap <C-c> "*y
@@ -467,3 +470,26 @@ endfunction
 
 scriptencoding utf8
 
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+    let @/ = ''
+    if exists('#auto_highlight')
+        au! auto_highlight
+        augroup! auto_highlight
+        setl updatetime=2000
+        " echo 'Highlight current word: off'
+        return 0
+    else
+        augroup auto_highlight
+            au!
+            au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+        augroup end
+        setl updatetime=200
+        " echo 'Highlight current word: ON'
+        return 1
+    endif
+endfunction
+call AutoHighlightToggle()
