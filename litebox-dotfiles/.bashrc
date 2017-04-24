@@ -95,9 +95,26 @@ alias eject="diskutil unmount $@"
 alias chips="cd ~/Main/Code/Git/chips && ${lslaVar}"
 alias btc="curl -sSL https://coinbase.com/api/v1/prices/historical | head -n 1 | sed \"s|^.*,|$|\" | sed \"s|\(\.[0-9]$\)|\10|\""
 alias thesaurus="node ~/Main/Code/JS/Bin/thesaurus.js $@"
+alias snake="rename 'y/[ _]/-/' $1"
+alias tm="ps axcu"
+alias clock='watch -t -n1 "date +%T|figlet"'
 
 # END ALIASES -----------------------------------------------------------------
 
+alias github=gh
+
+gh() {
+    if [ ! -d .git ]; then
+        echo "ERROR: Not a git directory"
+        return 1
+    fi
+    gitUrl="$(git config --get remote.origin.url | sed -e 's/^git@/https:\/\//g' -e 's/com:/com\//g')"
+    if [[ $gitUrl != https://github* ]]; then
+        echo "ERROR: Remote origin invalid"
+        return 1
+    fi
+    open $gitUrl
+}
 
 # START PROMT STRING ----------------------------------------------------------
 
@@ -132,9 +149,11 @@ white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
 source "${HOME}/Main/Code/Status/git.sh"
+
+# light mode {{{
 export PS1="\
 \n\
-${white}¤${colEnd}\
+${lightGrey}¤${colEnd}\
  ${blue}${_currentDirectory}${colEnd}\
 ${yellow}\$(gitBracketL)${colEnd}\
 ${cyan}\$(gitBranch)${colEnd}\
@@ -143,14 +162,38 @@ ${blue}\$(gitAddedChanges)${colEnd}\
 ${red}\$(gitUnaddedChanges)${colEnd}\
 ${yellow}\$(gitBracketR)${colEnd}\
 \n\
-${white}${_promptChar}${colEnd} "
+${lightGrey}${_promptChar}${colEnd} "
 
 # export PS1="\
 # \n\
-# ${cyan}¤${colEnd}\
+# ${lightGrey}¤${colEnd}\
 #  ${blue}${_currentDirectory}${colEnd}\
 # \n\
-# ${cyan}${_promptChar}${colEnd} "
+# ${lightGrey}${_promptChar}${colEnd} "
+
+# export PS1="\n${lightGrey}${_promptChar}${colEnd} "
+# }}}
+
+# dark mode {{{
+# export PS1="\
+# \n\
+# ${white}¤${colEnd}\
+#  ${blue}${_currentDirectory}${colEnd}\
+# ${yellow}\$(gitBracketL)${colEnd}\
+# ${cyan}\$(gitBranch)${colEnd}\
+# ${white}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+# ${blue}\$(gitAddedChanges)${colEnd}\
+# ${red}\$(gitUnaddedChanges)${colEnd}\
+# ${yellow}\$(gitBracketR)${colEnd}\
+# \n\
+# ${white}${_promptChar}${colEnd} "
+
+# export PS1="\
+# \n\
+# ${white}¤${colEnd}\
+#  ${blue}${_currentDirectory}${colEnd}\
+# \n\
+# ${white}${_promptChar}${colEnd} "
 
 # export PS1="\n${white}${_promptChar}${colEnd} "
-
+# }}}

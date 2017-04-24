@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
-
-set -e
-
 # This script concatenates various javascript words from many places into the final dictionary
 
+# Exit if any subcommand ($(...)) fails.
+set -e
+
 # Dynamically grab the full path to the final dictionary filename from ~/.vimrc
-finalDictionaryFile="$(cat ~/.vimrc | grep "'javascript' :" | awk '{ print $4 }' | tr -d "'")"
+finalDictionaryFile="${HOME}$(cat ~/.vimrc | grep "'javascript' :" | awk '{ print $4 }' | tr -d "' ~")"
 
 # Clear the content of the final dictionary if it exists.
 clearFinalDictionary() {
     if [ -f "${1}" ]; then
         rm -v "${1}"
-        touch "${1}"
-        chmod 644 "${1}" 2>/dev/null
     fi
+    touch "${1}"
+    chmod 644 "${1}"
 }
 
 # This function concatenates all js-dictionary-*.txt files into the final dictionary
@@ -26,7 +26,7 @@ concatenateJavaScriptDictionaries() {
 # Scrapes function names from index.js from Chips library.
 addChipsFunctions() {
     local chipsIndexJS="${HOME}/Main/Code/Git/chips/index.js"
-    local fns="$(more "${chipsIndexJS}" | grep "require" | sed 's/:.*$//g' | tr -d ' ')"
+    local fns="$(cat "${chipsIndexJS}" | grep "require" | sed 's/:.*$//g' | tr -d ' ')"
     echo "${fns}" >> "${1}"
 }
 
@@ -36,10 +36,6 @@ addRamdaFunctions() {
     for ramdaFn in $(ls -1 "${ramdaFunctionFilenames}" | sed 's/\.js$//g'); do
         echo "${ramdaFn}" >> "${1}"
     done
-}
-
-removeDuplicates() {
-    cat "${1}" | awk '!x[$0]++' > "${1}"
 }
 
 # Scrapes Array methods from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
@@ -55,4 +51,3 @@ clearFinalDictionary "${finalDictionaryFile}"
 concatenateJavaScriptDictionaries "${finalDictionaryFile}"
 addChipsFunctions "${finalDictionaryFile}"
 addRamdaFunctions "${finalDictionaryFile}"
-# removeDuplicates "${finalDictionaryFile}"

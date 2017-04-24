@@ -73,10 +73,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'othree/jspc.vim'                        " parameter auto-completion
 Plug 'othree/javascript-libraries-syntax.vim' " exactly what is sounds like
-" Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
 Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
 Plug 'mattn/emmet-vim'                        " the only way to write html in vim
+Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
@@ -101,6 +101,7 @@ Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
 Plug 'jiangmiao/auto-pairs'   " auto-match all brackets, parenthesis, quotes, etc.
 Plug 'ervandew/supertab'      " hit <tab> for autocomplete
 Plug 'shougo/neocomplete.vim' " code-completion
+Plug 'sirver/ultisnips'       " snippies
 
 " Other
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
@@ -111,13 +112,16 @@ call plug#end()
 " Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:UltiSnipsSnippetsDir="~/.vim/snippets"
+
 let g:user_emmet_mode='a' " enable emmet in all vim modes
 let g:user_emmet_install_global=0 " enable emmet for just html/css
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-j>' " remap the default emmet leader from <C-y> to <C-j>
 
-" let g:ale_sign_error='⨉⨉'
-" let g:ale_sign_warning='⚠⚠'
+let g:ale_echo_msg_warning_str=''
+let g:ale_echo_msg_error_str=''
+let g:ale_lint_delay=800
 let g:ale_open_list=1
 let g:ale_sign_column_always=1
 let g:airline_section_error='%{ale#statusline#Status()}'
@@ -125,6 +129,7 @@ let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
 let g:ale_linters={
 \   'javascript': ['eslint'],
+\   'cpp': ['g++'],
 \}
 
 let g:ctrlp_custom_ignore='node_modules'
@@ -136,10 +141,11 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
-            \ 'default' : '',
-            \ 'text' : '/usr/share/dict/connectives',
-            \ 'javascript' : '~/Main/Code/JS/Dictionary/all.txt'
-            \ }
+\ 'default' : '',
+\ 'text' : '/usr/share/dict/connectives',
+\ 'javascript' : '~/Main/Code/JS/Dictionary/all.txt',
+\ 'cpp' : '~/Main/Code/Cpp/Dictionary/cpp-dictionary-keywords.txt'
+\ }
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -177,19 +183,6 @@ let g:airline_skip_empty_sections=0
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#format=1
 
-" Add syntastic warnings and errors to statusline.
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
-" let g:syntastic_mode_map = { "mode": "passive" }
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_enable_highlighting = 1
-" let g:syntastic_stl_format = "%E{[%e Errors]} %W{[%w Warnings]}"
-" let g:syntastic_check_on_wq = 1
-" let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_javascript_eslint_exe = 'npm run lint --'
-
 " Mode=0 is asynchronous mode. Trim=1 trims empty lines in quickfix window.
 let g:asyncrun_mode=1
 let g:asyncrun_trim=1
@@ -213,11 +206,6 @@ let g:maplocalleader=","
 nnoremap <Leader>p :ALEPreviousWrap<CR>kj
 nnoremap <Leader>n :ALENextWrap<CR>kj
 nnoremap <Leader>x :ALEToggle<CR>kj
-
-" Toggle syntastic checks on save (active/passive).
-" nnoremap <Leader>x :SyntasticToggleMode<CR>
-" Run syntastic
-" nnoremap <Leader>s<CR> :w<CR>:SyntasticCheck<CR>
 
 " Horizontal and vertical resizing like my tmux key-bindings.
 nnoremap <silent> <Leader>H :vertical res -4<CR>
@@ -254,7 +242,7 @@ nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
 " Fat array function snippet after typing function arguments.
 " Uses clean indents on newline (after function header/prototype).
 " Uses recursive mapping of ; to :
-imap <Leader>{ <Space>=><CR>{<CR>;<ESC>jA;<ESC>kS
+imap <Leader>{ <Space>=><Space>{<CR>;<ESC>jA;<ESC>kS
 
 " Copy the currently hovered word and console.log it on the next line.
 nnoremap <Leader>cl "xyiwoconsole.log(<ESC>"xpA);<ESC>
@@ -457,6 +445,8 @@ nnoremap <Leader>rb<CR> :w<CR>:AsyncRun ruby %:p<CR>:copen<CR>:wincmd k<CR>
 nnoremap <Leader>c1<CR> :w<CR>:AsyncRun gcc %<CR>:copen<CR>:wincmd k<CR>
 nnoremap <Leader>c2<CR> :w<CR>:AsyncRun ./a.exe<CR>:wincmd k<CR>
 
+" C++
+nnoremap <Leader>cp<CR> :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

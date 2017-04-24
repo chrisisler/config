@@ -24,12 +24,11 @@ parsePianobarOutput()
 
     local artist="$(echo -n "${currentSongInfo}" | sed -e "s/ on .*$//g" -e "s/^.* by //g" | tr -d "\"")"
 
-    # local songIsLiked="$(echo -n "${currentSongInfo}" | grep -qE "<3$" &>/dev/null && echo "[+] " || echo "")"
-    local songIsLiked="$(echo -n "${currentSongInfo}" | grep -qE "<3" &>/dev/null && echo " ♡  " || echo " ")"
+    local songIsLiked="$(echo -n "${currentSongInfo}" | grep -qE "<3" &>/dev/null && echo " ♡" || echo "")"
 
     local positionInfo="$(echo -n "${allPianobarOutput}" | grep -E "^.*#" | tail -1 | sed -e "s/^.* -//g" -e "s/^0//g" | sed -e "s/\/0/\//g")"
 
-    echo "${artist} - ${songWithoutParenthesis}${songIsLiked}${positionInfo}"
+    echo "${artist} - ${songWithoutParenthesis}${songIsLiked}"
 }
 
 parsePianobarOutput

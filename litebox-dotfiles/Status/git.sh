@@ -5,7 +5,7 @@
 # TODO: Symbol for unknown git status: ↕
 # TODO: Rewrite in python for faster execution?
 
-function gitBracketL()
+gitBracketL()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
@@ -14,7 +14,7 @@ function gitBracketL()
     echo -n " ["
 }
 
-function gitBracketR()
+gitBracketR()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
@@ -23,7 +23,7 @@ function gitBracketR()
     echo -n "]"
 }
 
-function gitBranch()
+gitBranch()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
@@ -34,7 +34,7 @@ function gitBranch()
     echo -n "${branchName}"
 }
 
-function gitBranchAheadOrBehindOfMaster()
+gitBranchAheadOrBehindOfMaster()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
@@ -58,7 +58,7 @@ function gitBranchAheadOrBehindOfMaster()
     fi
 }
 
-function gitUnaddedChanges()
+gitUnaddedChanges()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
@@ -81,7 +81,7 @@ function gitUnaddedChanges()
 
 # Only difference between this and <gitUnaddedChanges()> is the whitespace
 # in the `grep` when retrieving the variables: numAdded, numDeleted, etc.
-function gitAddedChanges()
+gitAddedChanges()
 {
     # If current working directory is not a git repo, dont do anything.
     local isGitRepo=$(git status &>/dev/null && echo -n "true" || echo -n "false")
