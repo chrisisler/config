@@ -17,6 +17,8 @@ cp ~/.config/cmus/autosave "${dotfilesDir}"
 
 cp -r ~/Main/Code/JS/Dictionary "${dotfilesDir}"
 
+cp "${HOME}/*.terminfo" "${dotfilesDir}"
+
 git add "$(basename "${0}")"
 # git add -u ./*
 git add ./.{bashrc,inputrc,tmux.conf,vimrc}
