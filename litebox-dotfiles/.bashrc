@@ -29,6 +29,7 @@ codeDir="${mainDir}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias gphm="git push heroku master"
 alias gs="git status"
 alias q="exit"
 alias v="vim"

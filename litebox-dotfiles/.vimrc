@@ -22,15 +22,6 @@ set bs=2                       " allow backspacing over everything in insert mod
 set backspace=indent,eol,start " allow backspacing over everything
 set scrolloff=5                " minimum number of lines to keep above and below cursor
 set nolist                     " do not display eol signs ('$')
-set nojoinspaces               " prevents inserting 2 spaces when joining
-set splitright                 " put new vertically split windows to the right of current
-set splitbelow                 " put new split windows to bottom of current
-set laststatus=2               " force vim to display status line always
-set lazyredraw                 " don't redraw while executing macros
-set showfulltag                " upon word-completion of a function, show args (I think.)
-set modeline                   " ???
-set modelines=5                " ???
-set smartcase                  " smart (sometimes case-sensitive) search matching
 set formatoptions+=j           " delete comment character when Joining comments
 set ff=unix
 set fileformat=unix
@@ -45,7 +36,7 @@ set backupcopy=yes
 set complete=.,b,u,]
 set wildmode=longest,list:longest
 set completeopt=menu,preview
-set wildmenu
+set wildmenu                  " visual autocomplete
 set path+=**
 
 " Visual.
@@ -57,7 +48,7 @@ set noshowmatch " do not jump to matching brackets/parens when typing
 set noshowmode  " do not show me which mode im in (cause I use airline)
 set timeoutlen=500
 set ttimeoutlen=500
-set lazyredraw
+set lazyredraw  " redraw only when you need to
 
 " Make :Q and :W work like :q and :w
 command! W w
@@ -81,6 +72,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
 Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
+Plug 'flazz/vim-colorschemes'           " abunch of random colorschemes for vim
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
@@ -121,7 +113,7 @@ let g:user_emmet_leader_key='<C-j>' " remap the default emmet leader from <C-y> 
 
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
-let g:ale_lint_delay=800
+let g:ale_lint_delay=1500
 let g:ale_open_list=1
 let g:ale_sign_column_always=1
 let g:airline_section_error='%{ale#statusline#Status()}'
@@ -174,12 +166,22 @@ set background=dark
 colorscheme solarized
 highlight Comment cterm=italic
 
+" Javascript specific words to italicize.
+highlight JSItalics cterm=italic
+match JSItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\|@\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>/
+
+" highlight JSSyntax ctermfg=green
+" 2match JSSyntax /=\|?\|:\|>\|<\|!\|+\|-/
+
+highlight JSBuiltinAndConstants cterm=bold
+2match JSBuiltinAndConstants /__dirname\|__filename\|\<[A-Z_][A-Z0-9_]\+\>/
+
 " Airline settings.
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline_detect_iminsert=1
-let g:airline_skip_empty_sections=0
+let g:airline_skip_empty_sections=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#format=1
 
@@ -218,6 +220,10 @@ nnoremap <silent> <Leader>h :wincmd h<CR>
 nnoremap <silent> <Leader>j :wincmd j<CR>
 nnoremap <silent> <Leader>k :wincmd k<CR>
 nnoremap <silent> <Leader>l :wincmd l<CR>
+
+" Move horizontal splits to vertical splits
+nnoremap <silent> <Leader>i <C-w>t <C-w>K
+nnoremap <silent> <Leader>o <C-w>t <C-w>H
 
 " Delete current buffer.
 nnoremap <Leader>q<CR> :bdelete %<CR>
@@ -482,4 +488,4 @@ function! AutoHighlightToggle()
         return 1
     endif
 endfunction
-call AutoHighlightToggle()
+" call AutoHighlightToggle()
