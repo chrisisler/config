@@ -1,4 +1,7 @@
-" SETtings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Settings
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible " must be first line
@@ -22,7 +25,15 @@ set bs=2                       " allow backspacing over everything in insert mod
 set backspace=indent,eol,start " allow backspacing over everything
 set scrolloff=5                " minimum number of lines to keep above and below cursor
 set nolist                     " do not display eol signs ('$')
+set nojoinspaces               " prevents inserting 2 spaces when joining
+set splitright                 " put new vertically split windows to the right of current
+set splitbelow                 " put new split windows to bottom of current
+set laststatus=2               " force vim to display status line always
+set showfulltag                " display more info when auto-completing
+set modeline                   " i have no idea what this does tbh
+set modelines=5                " see above
 set formatoptions+=j           " delete comment character when Joining comments
+set formatoptions-=t           " stop vim  from auto-wrapping lines at a ruler
 set ff=unix
 set fileformat=unix
 set ignorecase
@@ -55,16 +66,17 @@ command! W w
 command! Q q
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Plugins (vim-plug)
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call plug#begin('~/.vim/plugged')
 
 " Language
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
-Plug 'othree/jspc.vim'                        " parameter auto-completion
-Plug 'othree/javascript-libraries-syntax.vim' " exactly what is sounds like
-Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
+Plug 'othree/javascript-libraries-syntax.vim' " provide proper syntax highlighting for js libs
+Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
 Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
@@ -72,14 +84,14 @@ Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
 Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
-Plug 'flazz/vim-colorschemes'           " abunch of random colorschemes for vim
+" Plug 'flazz/vim-colorschemes'           " abunch of random colorschemes for vim
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
 
 " Integrations
 Plug 'tpope/vim-commentary' " sane (un)commenting
-Plug 'tpope/vim-fugitive'   " git integration
+" Plug 'tpope/vim-fugitive'   " git integration
 Plug 'w0rp/ale'             " async linter
 
 " Commands
@@ -101,12 +113,14 @@ Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Plugin Settings
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 
-let g:user_emmet_mode='a' " enable emmet in all vim modes
+let g:user_emmet_mode='a'         " enable emmet in all vim modes
 let g:user_emmet_install_global=0 " enable emmet for just html/css
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-j>' " remap the default emmet leader from <C-y> to <C-j>
@@ -129,7 +143,7 @@ let g:ctrlp_custom_ignore='node_modules'
 let g:neocomplete#enable_at_startup=1
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#sources#syntax#min_keyword_length=1
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
@@ -156,30 +170,6 @@ let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
 
 let g:jsx_ext_required=0
-
-" Syntax and colorscheme.
-syntax on
-if !exists("g:syntax_on")
-    syntax enable
-endif
-set background=dark
-colorscheme solarized
-highlight Comment cterm=italic
-
-" Javascript specific words to italicize.
-highlight JSItalics cterm=italic
-match JSItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\|\* @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>\|\<prototype\>/
-
-" highlight JSSyntax ctermfg=foo
-" 2match JSSyntax /=\|?\|:\|>\|<\|!\|+\|-\|;/
-
-" 31 is blue
-highlight JSSyntax ctermfg=31
-2match JSSyntax /=\|?\|:\|>\|<\|!\|+\|-\|;\|,\|\*\|\/\|%\|\./
-
-highlight JSBuiltinAndConstants cterm=bold
-3match JSBuiltinAndConstants /__dirname\|__filename\|\<[A-Z_][A-Z0-9_]\+\>/
-
 " Airline settings.
 let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
@@ -198,8 +188,11 @@ let g:multi_cursor_exit_from_insert_mode=0
 let g:multi_cursor_exit_from_visual_mode=0
 
 let g:used_javascript_libs = 'ramda, underscore'
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Leader Mappings
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Map leader to comma.
@@ -235,7 +228,7 @@ nnoremap <silent> <Leader>q<CR> :bdelete %<CR>
 " Set ruler.
 nnoremap <silent> <Leader>r :set cc=
 
-" Make local(?) and quickfix windows go away.
+" Make local/loclist and quickfix windows go away.
 nnoremap <silent> <Leader>w :lcl<CR>:ccl<CR>
 
 " Mappings for saving and sourcing .vimrc.
@@ -276,10 +269,15 @@ nnoremap <Leader>t2 :set shiftwidth=2<CR>:set tabstop=2<CR>
 nnoremap <Leader>t4 :set shiftwidth=4<CR>:set tabstop=4<CR>
 
 " switch to last open buffer
-nnoremap <leader>b :b#<CR>
+nnoremap <Leader>b :b#<CR>
+
+" Add a semi-colon to the end of the cursor's current line.
+nnoremap <Leader>; A;<ESC>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Mappings for Mathematical Symbols
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 inoremap <silent> <Leader>intersection ∩
@@ -343,9 +341,12 @@ inoremap <silent> <Leader>thentaut ⇒
 inoremap <silent> <Leader>then →
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Mappings
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" <C-r> is hard to type, man.
 nnoremap U <C-r>
 
 " Open nerdtree.
@@ -358,7 +359,7 @@ nnoremap [ <C-w>w
 nnoremap <silent> <space> :nohlsearch<CR>
 
 " keep cursor where it is when joining lines.
-nnoremap J mzJ`z
+" nnoremap J mzJ`z
 
 " Go to next/previous buffer.
 nnoremap ] :bn<CR>
@@ -397,7 +398,7 @@ noremap ; :
 noremap : ;
 
 " Cool new thing: http://mlsamuelson.com/content/vim-search-word-under-cursor
-nnoremap ,[ [I
+nnoremap <Leader>[ [I
 
 " ^ is uncomfortable to press.
 noremap 8 ^
@@ -408,17 +409,14 @@ noremap 9 $
 nnoremap * *N
 nnoremap # #n
 
-" Another way to save a file, I do it on accident, so I just mapped it.
-noremap ;s<CR> :w<CR>
-
 " Move up and down faster.
 nnoremap E 3kzz
 nnoremap D 3jzz
 
 " Copy and paste from (actual) clipboard.
-noremap <C-c> "*y
-noremap <C-v> "*p
-noremap <C-a> ggVG
+nnoremap <C-c> "*y
+nnoremap <C-v> "*p
+nnoremap <C-a> ggVG
 
 " (Experimental) Auto-indent pasted code (see `:h =`).
 nnoremap P P==
@@ -427,9 +425,11 @@ vnoremap P P=
 vnoremap p p=
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Compile and Run - Mappings
 "
 " Note: Must be in same directory of file to get correct output.
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Javascript
@@ -457,13 +457,53 @@ nnoremap <Leader>c2<CR> :w<CR>:AsyncRun ./a.exe<CR>:wincmd k<CR>
 
 " C++
 nnoremap <Leader>cp<CR> :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<CR>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Highlighting
+"
+" Note: See :help cterm-colors for more information.
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Syntax and colorscheme.
+syntax on
+if !exists("g:syntax_on")
+    syntax enable
+endif
+set background=dark
+colorscheme solarized
+highlight Comment cterm=italic
+highlight Special cterm=italic
+
+call clearmatches()
+highlight myItalics cterm=italic
+match myItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\|\* @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>/
+" call matchadd("myItalics", "\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\|\* @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>", 1)
+
+highlight mySpecificSyntax ctermfg=darkblue
+2match mySpecificSyntax /=\|?\|:\|>\|<\|!\|+\|-\|;\|,\|\*\|%\|\.\|&\||/
+" call matchadd("mySpecificSyntax", "=\|?\|:\|>\|<\|!\|+\|-\|;\|,\|\*\|%\|\.\|&\||", 2)
+
+highlight purpleWords cterm=italic ctermfg=darkred
+3match purpleWords /\<arguments\>\|\<prototype\>\|=>\|__dirname\|__filename/
+" call matchadd("purpleWords", "\<arguments\>\|\<prototype\>\|=>\|__dirname\|__filename", 3)
+
+" highlight Special ctermfg=darkgrey
+
+" I tried to highlight functions like sublime text and vscode does it, to no success.
+" https://stackoverflow.com/questions/29192124/how-to-color-function-call-in-vim-syntax-highlighting
+" syntax match jsFunctionCall "\<\w\+\ze("
+syntax match jsFunctionCall /\k\+\%(\s*(\)\@=/
+hi link jsFunctionCall purpleWords
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
 " Set quickfix window default to 5 lines.
-au FileType qf call AdjustWindowHeight(3, 15)
+au FileType qf call AdjustWindowHeight(2, 15)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
