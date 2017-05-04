@@ -1,10 +1,10 @@
+set nocompatible " must be first line
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " Settings
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set nocompatible " must be first line
 
 " General.
 filetype plugin indent on " automatically detect file types
@@ -30,6 +30,7 @@ set splitright                 " put new vertically split windows to the right o
 set splitbelow                 " put new split windows to bottom of current
 set laststatus=2               " force vim to display status line always
 set showfulltag                " display more info when auto-completing
+set smartcase                  " smart (case-sensitive when you specify) search matching
 set modeline                   " i have no idea what this does tbh
 set modelines=5                " see above
 set formatoptions+=j           " delete comment character when Joining comments
@@ -274,6 +275,10 @@ nnoremap <Leader>b :b#<CR>
 " Add a semi-colon to the end of the cursor's current line.
 nnoremap <Leader>; A;<ESC>
 
+" Disable/Enable auto-complete framework.
+nnoremap <Leader>1 :NeoCompleteEnable<CR>
+nnoremap <Leader>2 :NeoCompleteDisable<CR>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " Mappings for Mathematical Symbols
@@ -463,46 +468,49 @@ nnoremap <Leader>cp<CR> :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<
 " Highlighting
 "
 " Note: See :help cterm-colors for more information.
-"
+" Note: https://stackoverflow.com/questions/29192124/how-to-color-function-call-in-vim-syntax-highlighting
+" Note: http://learnvimscriptthehardway.stevelosh.com/chapters/46.html
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Syntax and colorscheme.
+" Colorscheme.
 syntax on
 if !exists("g:syntax_on")
     syntax enable
 endif
 set background=dark
 colorscheme solarized
+
+call clearmatches()
+" Custom syntax highlighting.
 highlight Comment cterm=italic
 highlight Special cterm=italic
 
-call clearmatches()
-highlight myItalics cterm=italic
-match myItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\|\* @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>/
-" call matchadd("myItalics", "\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\|\* @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>", 1)
-
 highlight mySpecificSyntax ctermfg=darkblue
-2match mySpecificSyntax /=\|?\|:\|>\|<\|!\|+\|-\|;\|,\|\*\|%\|\.\|&\||/
-" call matchadd("mySpecificSyntax", "=\|?\|:\|>\|<\|!\|+\|-\|;\|,\|\*\|%\|\.\|&\||", 2)
+2match mySpecificSyntax /=\|?\|:\|>\|<\|!\|+\|-\|;\|,\|\*\|%\|\.\|&\||\|\<\w\+\ze(\|\//
 
-highlight purpleWords cterm=italic ctermfg=darkred
-3match purpleWords /\<arguments\>\|\<prototype\>\|=>\|__dirname\|__filename/
-" call matchadd("purpleWords", "\<arguments\>\|\<prototype\>\|=>\|__dirname\|__filename", 3)
+" This group is not `highlight link`'ed to Special because of priority. See :help :match for more
+highlight myItalics cterm=italic
+match myItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>\|\<arguments\>\|\<prototype\>\|\<super\>\|\<JSON\>/
 
-" highlight Special ctermfg=darkgrey
+highlight swagReturn ctermfg=magenta
+call matchadd("swagReturn", "return ")
+call matchadd("swagReturn", "=>")
+call matchadd("swagReturn", "?")
+call matchadd("swagReturn", ":")
 
-" I tried to highlight functions like sublime text and vscode does it, to no success.
-" https://stackoverflow.com/questions/29192124/how-to-color-function-call-in-vim-syntax-highlighting
-" syntax match jsFunctionCall "\<\w\+\ze("
-syntax match jsFunctionCall /\k\+\%(\s*(\)\@=/
-hi link jsFunctionCall purpleWords
+highlight jsSpecial ctermfg=darkmagenta cterm=italic
+call matchadd("jsSpecial", "prototype")
+call matchadd("jsSpecial", "__dirname")
+call matchadd("jsSpecial", "__filename")
+call matchadd("jsSpecial", "true")
+call matchadd("jsSpecial", "false")
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
-" Set quickfix window default to 5 lines.
+" Set quickfix window default to X-Y lines.
 au FileType qf call AdjustWindowHeight(2, 15)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
