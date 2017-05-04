@@ -66,7 +66,7 @@ alias rm="rm -rv"
 alias mv="mv -iv"
 alias tree="tree -I *node_modules*"
 alias brc="vim ~/.bashrc"
-alias sbrc="source ~/.bashrc && clear"
+alias sbrc="clear && source ~/.bashrc"
 alias vrc="vim ~/.vimrc"
 alias tmuxconf="vim ~/.tmux.conf"
 alias tmuxline="vim ~/.tmux/tmuxline.conf"
@@ -118,6 +118,13 @@ gh() {
     open $gitUrl
 }
 
+displayAdvice() {
+    # https://stackoverflow.com/questions/11393817/bash-read-lines-in-file-into-an-array
+    IFS=$'\r\n' GLOBIGNORE='*' command eval 'arr=($(cat ~/Main/Bin/pragmatic-programmer.txt))'
+    echo "Advice:" ${arr["$[RANDOM % ${#arr[@]}]"]}
+}
+displayAdvice
+
 # START PROMT STRING ----------------------------------------------------------
 
 # Prompt variables.
@@ -151,8 +158,6 @@ white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
 source "${HOME}/Main/Code/Status/git.sh"
-
-# light mode {{{
 export PS1="\
 \n\
 ${lightGrey}¤${colEnd}\
@@ -174,28 +179,3 @@ ${lightGrey}${_promptChar}${colEnd} "
 # ${lightGrey}${_promptChar}${colEnd} "
 
 # export PS1="\n${lightGrey}${_promptChar}${colEnd} "
-# }}}
-
-# dark mode {{{
-# export PS1="\
-# \n\
-# ${white}¤${colEnd}\
-#  ${blue}${_currentDirectory}${colEnd}\
-# ${yellow}\$(gitBracketL)${colEnd}\
-# ${cyan}\$(gitBranch)${colEnd}\
-# ${white}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-# ${blue}\$(gitAddedChanges)${colEnd}\
-# ${red}\$(gitUnaddedChanges)${colEnd}\
-# ${yellow}\$(gitBracketR)${colEnd}\
-# \n\
-# ${white}${_promptChar}${colEnd} "
-
-# export PS1="\
-# \n\
-# ${white}¤${colEnd}\
-#  ${blue}${_currentDirectory}${colEnd}\
-# \n\
-# ${white}${_promptChar}${colEnd} "
-
-# export PS1="\n${white}${_promptChar}${colEnd} "
-# }}}

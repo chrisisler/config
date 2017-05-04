@@ -168,13 +168,17 @@ highlight Comment cterm=italic
 
 " Javascript specific words to italicize.
 highlight JSItalics cterm=italic
-match JSItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\|@\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>/
+match JSItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\|\* @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>\|\<prototype\>/
 
-" highlight JSSyntax ctermfg=green
-" 2match JSSyntax /=\|?\|:\|>\|<\|!\|+\|-/
+" highlight JSSyntax ctermfg=foo
+" 2match JSSyntax /=\|?\|:\|>\|<\|!\|+\|-\|;/
+
+" 31 is blue
+highlight JSSyntax ctermfg=31
+2match JSSyntax /=\|?\|:\|>\|<\|!\|+\|-\|;\|,\|\*\|\/\|%\|\./
 
 highlight JSBuiltinAndConstants cterm=bold
-2match JSBuiltinAndConstants /__dirname\|__filename\|\<[A-Z_][A-Z0-9_]\+\>/
+3match JSBuiltinAndConstants /__dirname\|__filename\|\<[A-Z_][A-Z0-9_]\+\>/
 
 " Airline settings.
 let g:airline_theme='solarized'
@@ -226,16 +230,16 @@ nnoremap <silent> <Leader>i <C-w>t <C-w>K
 nnoremap <silent> <Leader>o <C-w>t <C-w>H
 
 " Delete current buffer.
-nnoremap <Leader>q<CR> :bdelete %<CR>
+nnoremap <silent> <Leader>q<CR> :bdelete %<CR>
 
 " Set ruler.
-nnoremap <Leader>r :set cc=
+nnoremap <silent> <Leader>r :set cc=
 
 " Make local(?) and quickfix windows go away.
-nnoremap <Leader>w :lcl<CR>:ccl<CR>
+nnoremap <silent> <Leader>w :lcl<CR>:ccl<CR>
 
 " Mappings for saving and sourcing .vimrc.
-nnoremap <Leader>5<CR> :w<CR>:so %<CR>
+nnoremap <silent> <Leader>5<CR> :w<CR>:so $MYVIMRC<CR>
 
 " Replace variable name with variable definition and delete variable.
 " Example (with cursor hovering N in 'names' on line 2):
