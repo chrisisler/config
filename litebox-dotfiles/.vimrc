@@ -233,14 +233,15 @@ nnoremap <silent> <Leader>r :set cc=
 nnoremap <silent> <Leader>w :lcl<CR>:ccl<CR>
 
 " Mappings for saving and sourcing .vimrc.
-nnoremap <silent> <Leader>5<CR> :w<CR>:so $MYVIMRC<CR>
+nnoremap <silent> <Leader>5<CR> :w<CR>:so %<CR>
+nnoremap <silent> <Leader>4<CR> :w<CR>:so $MYVIMRC<CR>
 
 " Replace variable name with variable definition and delete variable.
 " Example (with cursor hovering N in 'names' on line 2):
-"       1. var names = people.filter(person => person.name);
+"       1. var names = people.map(person => person.name);
 "       2. doStuff(names, otherVar);
 "      Turns into:
-"          doStuff(people.filter(person => person.name), otherVar);
+"          doStuff(people.map(person => person.name), otherVar);
 nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
 
 " Fat array function snippet after typing function arguments.
@@ -486,24 +487,28 @@ highlight Comment cterm=italic
 highlight Special cterm=italic
 
 highlight mySpecificSyntax ctermfg=darkblue
-2match mySpecificSyntax /=\|?\|:\|>\|<\|!\|+\|-\|;\|,\|\*\|%\|\.\|&\||\|\<\w\+\ze(\|\//
+2match mySpecificSyntax /\s=\s\|\s===\s\|\s?\s\|\s:\s\|!\|,\|\.\|&\|\s|\s\|\<\w\+\ze(/
+" 2match mySpecificSyntax /=\|?\|:\|>\|<\|!\|+\|-\|,\|%\|\.\|&\||\|\<\w\+\ze(/
+" 2match mySpecificSyntax /=\|?\|:\|>\|<\|!\|+\|-\|;\|,\|\*\|%\|\.\|&\||\|\<\w\+\ze(\|\//
 
 " This group is not `highlight link`'ed to Special because of priority. See :help :match for more
 highlight myItalics cterm=italic
-match myItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>\|\<arguments\>\|\<prototype\>\|\<super\>\|\<JSON\>/
+match myItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>\|\<arguments\>\|\<super\>\|\<JSON\>\|\<Date\>\|\<prototype\>\|\<__filename\>\|\<__dirname\>/
 
 highlight swagReturn ctermfg=magenta
 call matchadd("swagReturn", "return ")
+call matchadd("swagReturn", "new ")
 call matchadd("swagReturn", "=>")
 call matchadd("swagReturn", "?")
 call matchadd("swagReturn", ":")
 
-highlight jsSpecial ctermfg=darkmagenta cterm=italic
-call matchadd("jsSpecial", "prototype")
-call matchadd("jsSpecial", "__dirname")
-call matchadd("jsSpecial", "__filename")
-call matchadd("jsSpecial", "true")
-call matchadd("jsSpecial", "false")
+" highlight jsSpecial ctermfg=darkmagenta cterm=italic
+" call matchadd("jsSpecial", "\<prototype\ze")
+" call matchadd("jsSpecial", "\<__dirname\ze")
+" call matchadd("jsSpecial", "\<__filename\ze")
+" call matchadd("jsSpecial", "\<true\ze")
+" call matchadd("jsSpecial", "\<false\ze")
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Misc

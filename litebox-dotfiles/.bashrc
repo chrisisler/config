@@ -29,6 +29,7 @@ codeDir="${mainDir}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias tm="ps auxc"
 alias gphm="git push heroku master"
 alias gs="git status"
 alias q="exit"
@@ -49,6 +50,7 @@ alias cpp="vim ${codeDir}/Cpp/Test.cpp"
 alias main="cd ${mainDir} && ${lslaVar}"
 alias acad="cd ${academDir} && ${lslaVar}"
 alias code="cd ${codeDir} && ${lslaVar}"
+alias ed="cd ${codeDir}/Git/erxidesk && ${lslaVar}"
 alias conf="cd ${codeDir}/Git/config && ${lslaVar}"
 alias parse="cd ${codeDir}/Status"
 alias get="brew install"
@@ -125,6 +127,10 @@ displayAdvice() {
 }
 displayAdvice
 
+getNewMacAddress() {
+    openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
+}
+
 # START PROMT STRING ----------------------------------------------------------
 
 # Prompt variables.
@@ -158,9 +164,7 @@ white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
 source "${HOME}/Main/Code/Status/git.sh"
-export PS1="\
-\n\
-${lightGrey}¤${colEnd}\
+export PS1="\n\
  ${blue}${_currentDirectory}${colEnd}\
 ${yellow}\$(gitBracketL)${colEnd}\
 ${cyan}\$(gitBranch)${colEnd}\
@@ -168,8 +172,20 @@ ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
 ${blue}\$(gitAddedChanges)${colEnd}\
 ${red}\$(gitUnaddedChanges)${colEnd}\
 ${yellow}\$(gitBracketR)${colEnd}\
-\n\
-${lightGrey}${_promptChar}${colEnd} "
+ ${lightGrey}¤${colEnd} "
+
+# export PS1="\
+# \n\
+# ${lightGrey}¤${colEnd}\
+#  ${blue}${_currentDirectory}${colEnd}\
+# ${yellow}\$(gitBracketL)${colEnd}\
+# ${cyan}\$(gitBranch)${colEnd}\
+# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+# ${blue}\$(gitAddedChanges)${colEnd}\
+# ${red}\$(gitUnaddedChanges)${colEnd}\
+# ${yellow}\$(gitBracketR)${colEnd}\
+# \n\
+# ${lightGrey}${_promptChar}${colEnd} "
 
 # export PS1="\
 # \n\
