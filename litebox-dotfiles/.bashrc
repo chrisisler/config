@@ -125,7 +125,7 @@ displayAdvice() {
     IFS=$'\r\n' GLOBIGNORE='*' command eval 'arr=($(cat ~/Main/Bin/pragmatic-programmer.txt))'
     echo "Advice:" ${arr["$[RANDOM % ${#arr[@]}]"]}
 }
-displayAdvice
+# displayAdvice
 
 getNewMacAddress() {
     openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
@@ -163,10 +163,39 @@ normal="\[\e[1;36m\]"
 white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
+# Deprecated.
+# gitPrompt() {
+#     source "${HOME}/Main/Code/Status/git.sh"
+
+#     local _gitBracketL="${yellow}\$(gitBracketL)${colEnd}"
+#     local _gitBranch="${cyan}\$(gitBranch)${colEnd}"
+#     local _gitBranchAheadOrBehindOfMaster="${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}"
+#     local _gitAddedChanges="${blue}\$(gitAddedChanges)${colEnd}"
+#     local _gitUnaddedChanges="${red}\$(gitUnaddedChanges)${colEnd}"
+#     local _gitBracketR="${yellow}\$(gitBracketR)${colEnd}"
+
+#     local gitInfo="${_gitBracketL}${_gitBranch}${_gitBranchAheadOrBehindOfMaster}${_gitAddedChanges}${_gitUnaddedChanges}${_gitBracketR}"
+
+#     local marker=" ${white}¤${colEnd} "
+
+#     PS1="$(printf "%${COLUMNS}s\r" "right")${marker}"
+# }
+# PROMPT_COMMAND=gitPrompt
+
+# Savestate.
 source "${HOME}/Main/Code/Status/git.sh"
+# export PS1="\n\
+# ${yellow}\$(gitBracketL)${colEnd}\
+# ${cyan}\$(gitBranch)${colEnd}\
+# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+# ${blue}\$(gitAddedChanges)${colEnd}\
+# ${red}\$(gitUnaddedChanges)${colEnd}\
+# ${yellow}\$(gitBracketR)${colEnd}\
+#  ${white}¤${colEnd} "
+
 export PS1="\n\
  ${blue}${_currentDirectory}${colEnd}\
-${yellow}\$(gitBracketL)${colEnd}\
+ ${yellow}\$(gitBracketL)${colEnd}\
 ${cyan}\$(gitBranch)${colEnd}\
 ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
 ${blue}\$(gitAddedChanges)${colEnd}\

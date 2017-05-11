@@ -478,7 +478,7 @@ syntax on
 if !exists("g:syntax_on")
     syntax enable
 endif
-set background=dark
+set background=light
 colorscheme solarized
 
 call clearmatches()
