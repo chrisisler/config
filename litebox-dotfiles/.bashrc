@@ -29,6 +29,7 @@ codeDir="${mainDir}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias getFiletypes="ls -1F | sed 's/^.*//g' | grep -vE '/$' | tr -d '*' | sort | uniq"
 alias tm="ps auxc"
 alias gphm="git push heroku master"
 alias gs="git status"
@@ -131,6 +132,13 @@ getNewMacAddress() {
     openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
 }
 
+ip() {
+    externalIP=`curl -s "http://whatismijnip.nl" | cut -d " " -f 5`
+    if [[ "${externalIP}" != "" ]]; then
+        echo -n "${externalIP}"
+    fi
+}
+
 # START PROMT STRING ----------------------------------------------------------
 
 # Prompt variables.
@@ -195,7 +203,7 @@ source "${HOME}/Main/Code/Status/git.sh"
 
 export PS1="\n\
  ${blue}${_currentDirectory}${colEnd}\
- ${yellow}\$(gitBracketL)${colEnd}\
+${yellow}\$(gitBracketL)${colEnd}\
 ${cyan}\$(gitBranch)${colEnd}\
 ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
 ${blue}\$(gitAddedChanges)${colEnd}\

@@ -35,6 +35,7 @@ set modeline                   " i have no idea what this does tbh
 set modelines=5                " see above
 set formatoptions+=j           " delete comment character when Joining comments
 set formatoptions-=t           " stop vim  from auto-wrapping lines at a ruler
+set nowrap                     " stop vim from auto-wrapping lines when there's not enough horizontal space http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
 set ff=unix
 set fileformat=unix
 set ignorecase
@@ -85,6 +86,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
 Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
+Plug 'sonph/onehalf'                    " atom's one dark colorscheme (half version)
 " Plug 'flazz/vim-colorschemes'           " abunch of random colorschemes for vim
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar
@@ -172,7 +174,7 @@ let NERDTreeShowHidden=1
 
 let g:jsx_ext_required=0
 " Airline settings.
-let g:airline_theme='solarized'
+" let g:airline_theme='solarized'
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline_detect_iminsert=1
@@ -201,6 +203,9 @@ let mapleader=","
 let g:mapleader=","
 let maplocalleader=","
 let g:maplocalleader=","
+
+" Open ~/.vimrc quickly.
+nnoremap <Leader>v<CR> :e ~/.vimrc<CR>jk
 
 " Linter mappings
 nnoremap <Leader>p :ALEPreviousWrap<CR>kj
@@ -478,7 +483,7 @@ syntax on
 if !exists("g:syntax_on")
     syntax enable
 endif
-set background=light
+set background=dark
 colorscheme solarized
 
 call clearmatches()
@@ -487,27 +492,24 @@ highlight Comment cterm=italic
 highlight Special cterm=italic
 
 highlight mySpecificSyntax ctermfg=darkblue
-2match mySpecificSyntax /\s=\s\|\s===\s\|\s?\s\|\s:\s\|!\|,\|\.\|&\|\s|\s\|\<\w\+\ze(/
-" 2match mySpecificSyntax /=\|?\|:\|>\|<\|!\|+\|-\|,\|%\|\.\|&\||\|\<\w\+\ze(/
-" 2match mySpecificSyntax /=\|?\|:\|>\|<\|!\|+\|-\|;\|,\|\*\|%\|\.\|&\||\|\<\w\+\ze(\|\//
+2match mySpecificSyntax /\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s|\s\|+\|-\|\<\w\+\ze(/
 
 " This group is not `highlight link`'ed to Special because of priority. See :help :match for more
 highlight myItalics cterm=italic
-match myItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>\|\<arguments\>\|\<super\>\|\<JSON\>\|\<Date\>\|\<prototype\>\|\<__filename\>\|\<__dirname\>/
+match myItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>\|\<super\>\|\<JSON\>\|\<Date\>\|\<prototype\>/
 
 highlight swagReturn ctermfg=magenta
 call matchadd("swagReturn", "return ")
 call matchadd("swagReturn", "new ")
 call matchadd("swagReturn", "=>")
-call matchadd("swagReturn", "?")
-call matchadd("swagReturn", ":")
+call matchadd("swagReturn", "? ")
+call matchadd("swagReturn", ": ")
 
-" highlight jsSpecial ctermfg=darkmagenta cterm=italic
-" call matchadd("jsSpecial", "\<prototype\ze")
-" call matchadd("jsSpecial", "\<__dirname\ze")
-" call matchadd("jsSpecial", "\<__filename\ze")
-" call matchadd("jsSpecial", "\<true\ze")
-" call matchadd("jsSpecial", "\<false\ze")
+highlight jsSpecial ctermfg=darkmagenta
+call matchadd("jsSpecial", "__dirname")
+call matchadd("jsSpecial", "__filename")
+call matchadd("jsSpecial", "true")
+call matchadd("jsSpecial", "false")
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

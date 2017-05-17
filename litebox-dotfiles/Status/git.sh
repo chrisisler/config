@@ -11,7 +11,7 @@ gitBracketL()
     local isGitRepo=$(git status &>/dev/null && printf "true" || printf "false")
     if [[ "${isGitRepo}" == "false" ]]; then exit -1; fi
 
-    printf "["
+    printf " ["
 }
 
 gitBracketR()
