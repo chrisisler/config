@@ -73,7 +73,7 @@ lslaVar="ls -hoAF --color --sort=extension --group-directories-first"
 # change directories
 alias main="cd ${mainDir} && ${lslaVar}"
 alias code="cd ${codeDir} && ${lslaVar}"
-alias ed="cd ${codeDir}/Git/ErxiDesk && ${lslaVar}"
+# alias ed="cd ${codeDir}/Git/ErxiDesk && ${lslaVar}"
 alias chips="cd ${codeDir}/Git/chips && ${lslaVar}"
 alias desktop="cd ${desktopDir} && ${lslaVar}"
 alias bad="cd ${mainDir}/Bad && ${lslaVar}"
@@ -116,7 +116,7 @@ alias tree="tree -I *node_modules*"
 
 # edit config files
 alias brc="vim ~/.bashrc"
-alias sbrc="source ~/.bashrc && clear"
+alias sbrc="source ${HOME}/.bashrc && clear"
 alias vrc="vim ~/.vimrc"
 alias tmuxconf="vim ~/.tmux.conf"
 alias tmuxline="vim ~/.tmux/tmuxline.conf"
@@ -136,54 +136,53 @@ alias stats="cygstart ${mainDir}/Academic/Statistics-Textbook.pdf"
 alias chrome="cygstart ${x86Directory}/Google/Chrome/Application/chrome.exe $@"
 alias tor="cygstart ${mainDir}/Secure/Tor\ Browser/Browser/firefox.exe $@"
 alias firefox="cygstart ${x86Directory}/Mozilla\ Firefox/firefox.exe $@"
-alias vivaldi="cygstart ${x86Directory}/Vivaldi/Application/vivaldi.exe $@"
+# alias vivaldi="cygstart ${x86Directory}/Vivaldi/Application/vivaldi.exe $@"
 alias deluge="cygstart ${x86Directory}/Deluge/deluge.exe $@"
 alias u1603="cygstart ${mainDir}/Secure/Bin/Ultrareach-Proxy/u1603.exe"
-alias nmap="${x86Directory}/Nmap/nmap.exe"
+# alias nmap="${x86Directory}/Nmap/nmap.exe"
 alias wireshark="cygstart ${cDriveDir}/Program\ Files/Wireshark/Wireshark.exe"
 alias vmware="cygstart ${x86Directory}/VMWare/VMWare\ Workstation/vmware.exe"
-alias vm="${cDriveDir}/Program\ Files/Oracle/VirtualBox/VirtualBox.exe --startvm \"d597cc7b-d26e-4d81-902c-a66a46729e64\" &"
+# alias vm="${cDriveDir}/Program\ Files/Oracle/VirtualBox/VirtualBox.exe --startvm \"d597cc7b-d26e-4d81-902c-a66a46729e64\" &"
 alias reaper="cygstart ${cDriveDir}/Program\ Files/REAPER\ \(x64\)/reaper.exe"
 
 
 # programming
+alias v="vim"
 alias gs="git status"
 alias gsp="git status --porcelain"
 alias p="clear; more package.json | jq --tab"
 alias ns="npm start"
+alias nt="npm test"
 alias codetime="sleep 25m && die mintty &"
 
 alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
-alias tmuxmain="tmux attach -t Main || tmux new -s Main"
+alias tmuxall="tmux attach -t All || tmux new -s All"
+alias t="tmuxall"
 alias tmuxmusic="tmux attach -t Music || tmux new -s Music"
-alias tmuxed="cd ${codeDir}/Git/ErxiDesk && ${lslaVar}; tmux attach -t ErxiDesk || tmux new -s ErxiDesk"
 
 
 # scripts
 alias jsmail='node "`cygpath -w ${codeDir}/JS/Nodemailer/Mail/js-mail.js`"' "$@"
 alias foodlog='node "`cygpath -w ${codeDir}/JS/FoodLog/food-log.js`"'
 alias clean="${chrisDir}/Desktop/Main/Code/Shell/Bin/clean.sh"
-# alias add-clean='echo "die '$1' 2>/dev/null" >> ${codeDir}/Shell/Bin/clean.sh'
 alias tg="${codeDir}/CSharp/TypeGroup/Version2.exe $@"
 alias weather="curl wttr.in/boston"
-alias stoprs="jsmail islerryan@gmail.com 'STOP PLAYING RS' 'STOP STOP STOP STOP STOP'"
-alias updateconfig="${codeDir}/Git/config/update.sh"
-alias cmus-control="start ${codeDir}/AutoHotKey/Cmus-Integration/control.ahk"
+alias updateconfig="${codeDir}/Git/config/mainbox-dotfiles/update.sh"
 alias dark-mode="${codeDir}/Shell/Bin/dark-mode.sh"
 alias light-mode="${codeDir}/Shell/Bin/light-mode.sh"
 
 
 # utilities (in the terminal)
-alias cmdfetch2="${codeDir}/Bin/fetch/cmdfetch.lua --logo windows7 --lefty --color blue"
-alias cmdfetch="${codeDir}/Bin/fetch/cmdfetch.lua"
+# alias cmdfetch2="${codeDir}/Bin/fetch/cmdfetch.lua --logo windows7 --lefty --color blue"
+# alias cmdfetch="${codeDir}/Bin/fetch/cmdfetch.lua"
 alias fetch="${codeDir}/Shell/Bin/erxi-fetch.sh"
 alias ranger="${codeDir}/Bin/ranger-1.7.2/scripts/ranger"
 alias bugn="cygstart ${codeDir}/Bin/bug.n-8.4.0/bugn.exe"
 alias pandora="cd ~ && ${codeDir}/Bin/pianobarfly/pianobarfly.exe | tee ~/.config/pianobarfly/custom-out"
-alias torrent="rtorrent -d /cygdrive/c/Users/Christopher/Downloads -s /cygdrive/c/Users/Christopher/Downloads"
+# alias torrent="rtorrent -d /cygdrive/c/Users/Christopher/Downloads -s /cygdrive/c/Users/Christopher/Downloads"
 alias pdf='node "`cygpath -w ${codeDir}/JS/Bin/pdf/index.js`"' "$@" # yay for quotes working properly.
 alias r='ranger'
-alias progress='pv'
+# alias progress='pv'
 alias ampv="mpv $@ &>/dev/null &"
 alias cmus-control="start ${codeDir}/AutoHotKey/Cmus-Integration/control.ahk"
 
@@ -209,6 +208,7 @@ alias weedoc="vivaldi http://weechat.org/files/doc/stable/weechat_user.en.html"
 alias pipesx="${codeDir}/Bin/pipesX/pipesX.sh"
 alias pipes="${codeDir}/Bin/pipes/pipes.sh"
 alias mpv="mpv --loop=inf $@ &>/dev/null"
+alias alais="alias"
 
 
 # Games
@@ -217,7 +217,7 @@ alias typespeed='typespeed'
 
 
 # commands
-alias tm="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | grep -vie 'gawk.exe' -vie 'grep.exe' -vie 'sort.exe' -vie 'head.exe'"
+alias tm="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | grep -vie 'gawk.exe' -vie 'grep.exe' -vie 'sort.exe' -vie 'head.exe' -vie 'bash.exe' -vie 'sh.exe'"
 alias tm5="tm | head -35"
 alias path='echo "${PATH}" | tr ":" "\n" | sort'
 
@@ -368,4 +368,8 @@ colEnd="\[\e[0m\]"
 # ${white}${_promptChar}${colEnd} "
 
 # export PS1="\n${white}¤${red}›>${colEnd} "
-export PS1="\n${red} >${colEnd} "
+export PS1="\n ${blue}${_currentDirectory}\
+${red} ¤${colEnd} "
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

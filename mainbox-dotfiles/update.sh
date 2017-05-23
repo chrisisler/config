@@ -2,22 +2,15 @@
 # This script copies .*rc and other config files to this directory.
 
 _codeDir="/cygdrive/c/Users/Christopher/Desktop/Main/Code"
-confDir="${_codeDir}/Git/config"
 
-# if [[ "$(uname)" == "Darwin" ]]; then
-#     _codeDir="/Volumes/Users/Christopher/Desktop/Main/Code"
-#     confDir="${_codeDir}/Git/config"
-#     # TODO: Make Windows ~ available from litebox
-# fi
+cp ~/.tmux/tmuxline.conf .
+cp ~/.tmux.conf .
 
-cp ~/.tmux/tmuxline.conf ${confDir}
-cp ~/.tmux.conf ${confDir}
+cp ~/.bashrc .
+cp ~/.minttyrc .
+cp ~/.vimrc .
 
-cp ~/.bashrc ${confDir}
-cp ~/.minttyrc ${confDir}
-cp ~/.vimrc ${confDir}
-
-cp -r ~/.vim/snippets ${confDir}
+cp -r ~/.vim/snippets .
 
 cp -r ${_codeDir}/Shell/Status/ ./status
 

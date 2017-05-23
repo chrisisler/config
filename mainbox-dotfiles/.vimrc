@@ -75,7 +75,6 @@ Plug 'mxw/vim-jsx'                            " React JSX syntax highlighting an
 Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
 Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
 Plug 'cakebaker/scss-syntax.vim'              " syntax for sassy css
-" Plug 'elzr/vim-json'                          " bettern JSON highlighting
 
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
@@ -84,7 +83,6 @@ Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
 Plug 'tomasr/molokai'                   " monokai color scheme
-" Plug 'majutsushi/tagbar'                " UML-like namespace/class diagram
 
 " Integrations
 Plug 'tpope/vim-commentary' " sane (un)commenting
@@ -207,10 +205,6 @@ nnoremap <Leader>q<CR> :bdelete %<CR>
 " Set ruler.
 nnoremap <Leader>r :set cc=
 
-" Things being highlighted after searching once is annoying.
-nnoremap <Leader>noh :nohlsearch<CR>
-" nnoremap <Leader>noh /@@<CR>:nohlsearch<CR>
-
 " Make location and quickfix windows go away.
 nnoremap <Leader>w :lcl<CR>:ccl<CR>
 
@@ -256,6 +250,10 @@ inoremap <Leader>> <ESC>j>>kS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" Things being highlighted after searching once is annoying.
+nnoremap <Space> :nohlsearch<CR>
 
 noremap <F5> :NeoCompleteDisable<CR>
 noremap <F6> :NeoCompleteEnable<CR>
