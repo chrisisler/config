@@ -36,11 +36,14 @@ set undofile                   " save undo's after file closes
 set undodir=~/.vim/undo        " where to save undo histories
 set undolevels=1000            " how many undos
 set undoreload=10000           " num of lines to save for undo
-set ignorecase
+set nowrap                     " don't wrap lines
+set ignorecase                 " ignore case when searching unless specfic case is used
+set shiftround                 " number of spaces for autoindenting
+set wildignore=*.swp,*.bak,*.pyc,*.class
 set ff=unix
 set fileformat=unix
-set ttimeoutlen=50
 set incsearch
+set nobackup
 set noswapfile
 set virtualedit=block
 set encoding=utf-8
@@ -62,6 +65,8 @@ set hlsearch    " search highlighting
 set matchtime=2 " number of seconds to show matching bracket for
 set ttyfast     " assume fast terminal
 set noshowmode  " do not show current vim mode
+set ttimeoutlen=50
+set relativenumber
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins (vim-plug)
@@ -231,6 +236,7 @@ nnoremap <Leader>w :lcl<CR>:ccl<CR>
 
 " Mappings for saving and sourcing .vimrc.
 nnoremap <Leader>5<CR> :w<CR>:so %<CR>
+nnoremap <Leader>4<CR> :w $MYVIMRC<CR>:so $MYVIMRC<CR>
 
 " Replace variable name with variable definition and delete variable.
 " Hovered var must be first use of var - could be improved by using marks.
@@ -271,6 +277,9 @@ inoremap <Leader>> <ESC>j>>kS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <silent> - :set relativenumber<CR>
+nnoremap <silent> = :set norelativenumber<CR>
 
 " Things being highlighted after searching once is annoying.
 nnoremap <Space> :nohlsearch<CR>
