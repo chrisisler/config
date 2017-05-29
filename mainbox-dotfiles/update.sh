@@ -3,6 +3,8 @@
 
 _codeDir="/cygdrive/c/Users/Christopher/Desktop/Main/Code"
 
+cp ${_codeDir}/Shell/Bin/clean.sh .
+
 cp ~/.tmux/tmuxline.conf .
 cp ~/.tmux.conf .
 

@@ -4,7 +4,7 @@
 # - Get weather temperature (the problem is, the output is in unicode (utf8) when we need ascii)
 # - Get percent chance of rain
 
-weather="$(curl --silent wttr.in/boston)"
+weather="$(curl --silent wttr.in/minneapolis)"
 
 # mayRain="$(echo -n "${weather}" | head -12 | tail -1 | grep -iE "(rain|thunder)" &>/dev/null && echo " - Rain")"
 

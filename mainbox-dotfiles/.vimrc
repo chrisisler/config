@@ -39,6 +39,7 @@ set undoreload=10000           " num of lines to save for undo
 set ignorecase
 set ff=unix
 set fileformat=unix
+set ttimeoutlen=50
 set incsearch
 set noswapfile
 set virtualedit=block
@@ -69,15 +70,16 @@ set noshowmode  " do not show current vim mode
 call plug#begin('~/.vim/plugged')
 
 " Language
-Plug 'othree/javascript-libraries-syntax.vim' " library-based js syntax highlighting
+" Plug 'othree/javascript-libraries-syntax.vim' " library-based js syntax highlighting
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'mxw/vim-jsx'                            " React JSX syntax highlighting and indenting
-Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
+" Plug 'scrooloose/syntastic'                   " IDE-like syntax checks
 Plug 'hail2u/vim-css3-syntax'                 " css3 sytnax
 Plug 'cakebaker/scss-syntax.vim'              " syntax for sassy css
 
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
+Plug 'majutsushi/tagbar'                " displays tags in a window (ordered by scope)
 Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar
@@ -86,19 +88,20 @@ Plug 'tomasr/molokai'                   " monokai color scheme
 
 " Integrations
 Plug 'tpope/vim-commentary' " sane (un)commenting
+Plug 'w0rp/ale'             " async linter
 
 " Commands
 Plug 'terryma/vim-multiple-cursors' " sublime-like multi cursors
 Plug 'ctrlpvim/ctrlp.vim'           " fuzzy finder
 Plug 'skywind3000/asyncrun.vim'     " run terminal commands and show in quickfix
 Plug 'tpope/vim-surround'           " manipulating characters that surround text objects
-Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
+" Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
 
 " Completion
 Plug 'jiangmiao/auto-pairs' " auto-match all brackets
 Plug 'ervandew/supertab'    " hit <tab> for autocomplete
 Plug 'sirver/ultisnips'     " snippets
-Plug 'shougo/neocomplete.vim' " completion framework
+" Plug 'shougo/neocomplete.vim' " completion framework
 Plug 'mattn/emmet-vim'      " makes html easier
 
 " Other
@@ -109,6 +112,19 @@ call plug#end()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:ale_echo_msg_warning_str=''
+let g:ale_echo_msg_error_str=''
+let g:ale_lint_delay=1500
+let g:ale_open_list=1
+let g:ale_sign_column_always=1
+let g:airline_section_error='%{ale#statusline#Status()}'
+let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
+let g:ale_linters={
+\   'javascript': ['eslint'],
+\   'cpp': ['g++'],
+\}
 
 let g:ctrlp_custom_ignore='node_modules'
 
@@ -147,21 +163,23 @@ let g:airline_detect_iminsert=1
 let g:airline_skip_empty_sections=1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#branch#format=1
+let g:airline_section_x=''
+let g:airline_section_c=' '
 
 " Add syntastic warnings and errors to statusline.
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_stl_format="%E{[%e Errors]} %W{[%w Warnings]}"
-let g:syntastic_mode_map = { "mode": "passive" }
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_enable_highlighting=1
-let g:syntastic_auto_loc_list=1
-let g:syntastic_check_on_open=0
-let g:syntastic_check_on_wq=0
-let g:syntastic_auto_jump=1
-let g:syntastic_javascript_checkers=['eslint']
-let g:syntastic_javascript_eslint_exe='npm run lint --'
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_stl_format="%E{[%e Errors]} %W{[%w Warnings]}"
+" let g:syntastic_mode_map = { "mode": "passive" }
+" let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_enable_highlighting=1
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_check_on_open=0
+" let g:syntastic_check_on_wq=0
+" let g:syntastic_auto_jump=1
+" let g:syntastic_javascript_checkers=['eslint']
+" let g:syntastic_javascript_eslint_exe='npm run lint --'
 
 " Which javascript libraries to provide syntax highlighting for.
 let g:used_javascript_libs='react, ramda, underscore'
@@ -197,7 +215,10 @@ nnoremap <silent> <Leader>k :wincmd k<CR>
 nnoremap <silent> <Leader>l :wincmd l<CR>
 
 " Run syntax checker.
-nnoremap <Leader>s<CR> :w<CR>:SyntasticCheck<CR>
+" nnoremap <Leader>s<CR> :w<CR>:SyntasticCheck<CR>
+
+" Edit ~/.vimrc
+nnoremap <Leader>v<CR> :e ~/.vimrc<CR>
 
 " Delete current buffer.
 nnoremap <Leader>q<CR> :bdelete %<CR>
@@ -236,7 +257,7 @@ inoremap <Leader>l <C-x><C-l>
 nnoremap <Leader>t :Tab /
 
 " Toggle syntax-checks on save (active/passive).
-nnoremap <Leader>x :SyntasticToggleMode<CR>
+" nnoremap <Leader>x :SyntasticToggleMode<CR>
 
 " Remove trailing whitespace
 nnoremap <Leader>nows<CR> :%s/\s\+$//e<CR>:nohlsearch<CR>:w<CR>
@@ -251,7 +272,6 @@ inoremap <Leader>> <ESC>j>>kS
 " Mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 " Things being highlighted after searching once is annoying.
 nnoremap <Space> :nohlsearch<CR>
 
@@ -259,7 +279,7 @@ noremap <F5> :NeoCompleteDisable<CR>
 noremap <F6> :NeoCompleteEnable<CR>
 
 " Open tagbar.
-" nnoremap <silent> \| :TagbarToggle<CR>
+nnoremap <silent> \| :TagbarToggle<CR>
 
 " Open nerdtree.
 nnoremap <silent> \ :NERDTreeToggle<CR>
@@ -318,8 +338,8 @@ noremap ;s<CR> :w<CR>
 " nnoremap z zz
 
 " Move up and down faster.
-nnoremap E 2kzz
-nnoremap D 2jzz
+nnoremap E 3kzz
+nnoremap D 3jzz
 
 " Copy and paste from (actual) clipboard.
 noremap <C-c> "*y
@@ -376,3 +396,30 @@ function! AdjustWindowHeight(minheight, maxheight)
 endfunction
 
 scriptencoding utf8
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Highlighting
+"
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+call clearmatches()
+" highlight Comment cterm=italic
+" highlight Special cterm=italic
+
+highlight mySpecificSyntax ctermfg=darkblue
+2match mySpecificSyntax /\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s|\s\|+\|-\|\<\w\+\ze(/
+
+highlight swagReturn ctermfg=magenta
+call matchadd("swagReturn", "return ")
+call matchadd("swagReturn", "new ")
+call matchadd("swagReturn", "=>")
+call matchadd("swagReturn", "? ")
+call matchadd("swagReturn", ": ")
+
+highlight jsSpecial ctermfg=darkmagenta
+call matchadd("jsSpecial", "__dirname")
+call matchadd("jsSpecial", "__filename")
+call matchadd("jsSpecial", "true")
+call matchadd("jsSpecial", "false")

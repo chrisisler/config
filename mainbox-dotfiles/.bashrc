@@ -49,6 +49,7 @@ export EDITOR="vim"
 # solarized dark color scheme by default
 source "${HOME}/mintty-colors-solarized/sol.dark"
 
+export PATH=$PATH:/home/Christopher/bin/
 
 # DEFINE COMMONLY USED DIRECTORIES ---------------------------------------------------
 
@@ -73,8 +74,9 @@ lslaVar="ls -hoAF --color --sort=extension --group-directories-first"
 # change directories
 alias main="cd ${mainDir} && ${lslaVar}"
 alias code="cd ${codeDir} && ${lslaVar}"
-# alias ed="cd ${codeDir}/Git/ErxiDesk && ${lslaVar}"
+alias ed="cd ${codeDir}/Git/ErxiDesk && ${lslaVar}"
 alias chips="cd ${codeDir}/Git/chips && ${lslaVar}"
+alias conf="cd ${codeDir}/Git/config && ${lslaVar}"
 alias desktop="cd ${desktopDir} && ${lslaVar}"
 alias bad="cd ${mainDir}/Bad && ${lslaVar}"
 alias music="cd ${chrisDir}/Music && ${lslaVar}"
@@ -156,9 +158,8 @@ alias nt="npm test"
 alias codetime="sleep 25m && die mintty &"
 
 alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
-alias tmuxall="tmux attach -t All || tmux new -s All"
-alias t="tmuxall"
-alias tmuxmusic="tmux attach -t Music || tmux new -s Music"
+alias tmus="tmux attach -t Music || tmux new -s Music"
+alias t="tmux attach -t All || tmux new -s All"
 
 
 # scripts
@@ -197,7 +198,7 @@ alias eixt="exit"
 alias q="exit"
 alias cpi="rsync -vrthP"
 alias setup="cygstart ${codeDir}/Bin/setup-*.exe"
-alias noleague="die 'LolClient'; die 'Lolpatcher'; die 'LolClient'; die 'League of Legends'"
+alias noleague="die leagueclientuxrender; die leagueclient; die leagueclientux"
 alias notor="die 'tor'; die'firefox'"
 alias sniptool="cygstart ${cDriveDir}/WINDOWS/system32/SnippingTool.exe"
 alias cpan="control panel"
@@ -217,7 +218,7 @@ alias typespeed='typespeed'
 
 
 # commands
-alias tm="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | grep -vie 'gawk.exe' -vie 'grep.exe' -vie 'sort.exe' -vie 'head.exe' -vie 'bash.exe' -vie 'sh.exe'"
+alias tm="clear; tasklist | grep 'Console' | sort -r -k 4 | awk '{ printf \"%30s : %5s : %s%s\n\", \$1,\$2,\$5,\$6 }' | grep -vie 'gawk.exe' -vie 'grep.exe' -vie 'sort.exe' -vie 'head.exe' -vie 'bash.exe' -vie 'sh.exe' -vie 'chrome.exe'"
 alias tm5="tm | head -35"
 alias path='echo "${PATH}" | tr ":" "\n" | sort'
 
@@ -347,29 +348,24 @@ white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
 # source "${codeDir}/Shell/Status/git_status_multi.sh"
-# export PS1="\
-# \n\
-# ${white}¤${colEnd}\
+# export PS1="\n\
 #  ${blue}${_currentDirectory}${colEnd}\
-# ${yellow}\$(gitBracketL)${colEnd}\
-# ${cyan}\$(gitBranch)${colEnd}\
-# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-# ${blue}\$(gitAddedChanges)${colEnd}\
-# ${red}\$(gitUnaddedChanges)${colEnd}\
-# ${yellow}\$(gitBracketR)${colEnd}\
-# \n\
-# ${white}${_promptChar}${colEnd} "
+# ${yellow}\$(gitBracketL &)${colEnd}\
+# ${cyan}\$(gitBranch &)${colEnd}\
+# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster &)${colEnd}\
+# ${blue}\$(gitAddedChanges &)${colEnd}\
+# ${red}\$(gitUnaddedChanges &)${colEnd}\
+# ${yellow}\$(gitBracketR &)${colEnd}\
+# ${red} ¤${colEnd} "
 
-# export PS1="\
-# \n\
-# ${white}¤${colEnd}\
-#  ${blue}${_currentDirectory}${colEnd}\
-# \n\
-# ${white}${_promptChar}${colEnd} "
-
-# export PS1="\n${white}¤${red}›>${colEnd} "
-export PS1="\n ${blue}${_currentDirectory}\
-${red} ¤${colEnd} "
+export PS1="\n ${blue}${_currentDirectory}${red} ¤${colEnd} "
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+### Bashhub.com Installation.
+### This Should be at the EOF. https://bashhub.com/docs
+if [ -f ~/.bashhub/bashhub.sh ]; then
+    source ~/.bashhub/bashhub.sh
+fi
+
