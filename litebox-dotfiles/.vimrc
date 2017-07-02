@@ -34,8 +34,14 @@ set smartcase                  " smart (case-sensitive when you specify) search 
 set modeline                   " i have no idea what this does tbh
 set modelines=5                " see above
 set formatoptions+=j           " delete comment character when Joining comments
+set undofile                   " save undo's after file closes
+set undodir=~/.vim/undo        " where to save undo histories
+set undolevels=1000            " how many undos
+set undoreload=10000           " num of lines to save for undo
 set formatoptions-=t           " stop vim  from auto-wrapping lines at a ruler
 set nowrap                     " stop vim from auto-wrapping lines when there's not enough horizontal space http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
+set shiftround                 " number of spaces for autoindenting
+set wildignore=*.swp,*.bak,*.pyc,*.class
 set ff=unix
 set fileformat=unix
 set ignorecase
@@ -59,9 +65,10 @@ set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal
 set noshowmatch " do not jump to matching brackets/parens when typing
 set noshowmode  " do not show me which mode im in (cause I use airline)
-set timeoutlen=500
-set ttimeoutlen=500
+set timeoutlen=300
+set ttimeoutlen=50
 set lazyredraw  " redraw only when you need to
+set relativenumber
 
 " Make :Q and :W work like :q and :w
 command! W w
@@ -77,20 +84,19 @@ call plug#begin('~/.vim/plugged')
 
 " Language
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
-Plug 'othree/javascript-libraries-syntax.vim' " provide proper syntax highlighting for js libs
-Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
+" Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
 Plug 'mattn/emmet-vim'                        " the only way to write html in vim
-Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
+" Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
 Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
-Plug 'sonph/onehalf'                    " atom's one dark colorscheme (half version)
 " Plug 'flazz/vim-colorschemes'           " abunch of random colorschemes for vim
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
+Plug 'xuyuanp/nerdtree-git-plugin'      " show git diff in nerdtree
 
 " Integrations
 Plug 'tpope/vim-commentary' " sane (un)commenting
@@ -112,6 +118,7 @@ Plug 'sirver/ultisnips'       " snippies
 
 " Other
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
+Plug 'ap/vim-css-color'  " make things like #d6a323 show the actual color in css files
 
 call plug#end()
 
@@ -121,6 +128,10 @@ call plug#end()
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:airline_section_x=''
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+
 let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 
 let g:user_emmet_mode='a'         " enable emmet in all vim modes
@@ -128,6 +139,7 @@ let g:user_emmet_install_global=0 " enable emmet for just html/css
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-j>' " remap the default emmet leader from <C-y> to <C-j>
 
+let g:ale_enabled=0
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
 let g:ale_lint_delay=1500
@@ -167,7 +179,7 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
-let g:loaded_matchparen=0
+" let g:loaded_matchparen=0
 
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
@@ -184,13 +196,11 @@ let g:airline#extensions#branch#format=1
 
 " Mode=0 is asynchronous mode. Trim=1 trims empty lines in quickfix window.
 let g:asyncrun_mode=1
-let g:asyncrun_trim=1
+" let g:asyncrun_trim=1
 
 " When set to 0, <ESC>ing in the following modes will not quit multi-cursor mode.
 let g:multi_cursor_exit_from_insert_mode=0
 let g:multi_cursor_exit_from_visual_mode=0
-
-let g:used_javascript_libs = 'ramda, underscore'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -248,6 +258,9 @@ nnoremap <silent> <Leader>4<CR> :w<CR>:so $MYVIMRC<CR>
 "      Turns into:
 "          doStuff(people.map(person => person.name), otherVar);
 nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
+
+" Used for putting the trailing comma at the beginning of the line instead of at the end.
+" nnoremap <Leader>k $"xx0wh"xpa<Space>
 
 " Fat array function snippet after typing function arguments.
 " Uses clean indents on newline (after function header/prototype).
@@ -421,8 +434,8 @@ nnoremap * *N
 nnoremap # #n
 
 " Move up and down faster.
-nnoremap E 3kzz
-nnoremap D 3jzz
+nnoremap E 5kzz
+nnoremap D 5jzz
 
 " Copy and paste from (actual) clipboard.
 nnoremap <C-c> "*y
@@ -490,13 +503,25 @@ call clearmatches()
 " Custom syntax highlighting.
 highlight Comment cterm=italic
 highlight Special cterm=italic
+highlight Number ctermfg=darkmagenta
+highlight MatchParen ctermfg=white ctermbg=NONE
+highlight Search cterm=bold,underline ctermfg=white
+
+highlight jsxNativeHTMLColor ctermfg=lightblue
+let jsxNativeHTML = '[</]\zs\l\w\+\>\ze.*>'
+call matchadd("jsxNativeHTMLColor", jsxNativeHTML)
+call matchadd("jsxNativeHTMLColor", '\.\.\.')
+
+highlight jsxCustomComponentsColor ctermfg=lightblue cterm=italic
+let jsxCustomComponents = '[</]\zs\u\w\+\>\ze.*>'
+call matchadd("jsxCustomComponentsColor", jsxCustomComponents)
 
 highlight mySpecificSyntax ctermfg=darkblue
-2match mySpecificSyntax /\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s|\s\|+\|-\|\<\w\+\ze(/
+2match mySpecificSyntax /+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
 
 " This group is not `highlight link`'ed to Special because of priority. See :help :match for more
 highlight myItalics cterm=italic
-match myItalics /\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>\|\<super\>\|\<JSON\>\|\<Date\>\|\<prototype\>/
+match myItalics /\<\w*\ze=.*>\|\<default\>\|\<this\>\|\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>\|\<super\>\|\<JSON\>\|\<Date\>\|\<prototype\>/
 
 highlight swagReturn ctermfg=magenta
 call matchadd("swagReturn", "return ")
@@ -513,12 +538,15 @@ call matchadd("jsSpecial", "false")
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Misc
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
 " Set quickfix window default to X-Y lines.
-au FileType qf call AdjustWindowHeight(2, 15)
+au FileType qf call AdjustWindowHeight(10, 15)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction

@@ -23,15 +23,15 @@ export EDITOR="vim"
 
 lslaVar="ls -oFGHhA" # Can remove H
 
-mainDir="~/Main"
+mainDir="${HOME}/Main"
 academDir="${mainDir}/Academic"
-codeDir="${mainDir}/Code"
+# codeDir="${mainDir}/Code"
+codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
 alias getFiletypes="ls -1F | sed 's/^.*//g' | grep -vE '/$' | tr -d '*' | sort | uniq"
 alias tm="ps auxc"
-alias gphm="git push heroku master"
 alias gs="git status"
 alias q="exit"
 alias v="vim"
@@ -58,7 +58,6 @@ alias get="brew install"
 alias remove="brew uninstall"
 alias r="ranger"
 alias c="clear"
-alias lsla="ls -la"
 alias l="${lslaVar}"
 alias cl="clear && ${lslaVar}"
 alias lc="clear && ${lslaVar}"
@@ -97,9 +96,9 @@ alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resourc
 alias mpv="\\mpv --loop=inf $@ &>/dev/null"
 alias mpvfit="\\mpv --loop=inf --autofit-smaller=800x800 --autofit-larger=800x00 $@ &>/dev/null"
 alias eject="diskutil unmount $@"
-alias chips="cd ~/Main/Code/Git/chips && ${lslaVar}"
+alias chips="cd ${codeDir}/Git/chips && ${lslaVar}"
 alias btc="curl -sSL https://coinbase.com/api/v1/prices/historical | head -n 1 | sed \"s|^.*,|$|\" | sed \"s|\(\.[0-9]$\)|\10|\""
-alias thesaurus="node ~/Main/Code/JS/Bin/thesaurus.js $@"
+alias thesaurus="node ${codeDir}/JS/Bin/thesaurus.js $@"
 alias snake="rename 'y/[ _]/-/' $1"
 alias tm="ps axcu"
 alias clock='watch -t -n1 "date +%T|figlet"'
@@ -171,35 +170,7 @@ normal="\[\e[1;36m\]"
 white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-# Deprecated.
-# gitPrompt() {
-#     source "${HOME}/Main/Code/Status/git.sh"
-
-#     local _gitBracketL="${yellow}\$(gitBracketL)${colEnd}"
-#     local _gitBranch="${cyan}\$(gitBranch)${colEnd}"
-#     local _gitBranchAheadOrBehindOfMaster="${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}"
-#     local _gitAddedChanges="${blue}\$(gitAddedChanges)${colEnd}"
-#     local _gitUnaddedChanges="${red}\$(gitUnaddedChanges)${colEnd}"
-#     local _gitBracketR="${yellow}\$(gitBracketR)${colEnd}"
-
-#     local gitInfo="${_gitBracketL}${_gitBranch}${_gitBranchAheadOrBehindOfMaster}${_gitAddedChanges}${_gitUnaddedChanges}${_gitBracketR}"
-
-#     local marker=" ${white}¤${colEnd} "
-
-#     PS1="$(printf "%${COLUMNS}s\r" "right")${marker}"
-# }
-# PROMPT_COMMAND=gitPrompt
-
-# Savestate.
-source "${HOME}/Main/Code/Status/git.sh"
-# export PS1="\n\
-# ${yellow}\$(gitBracketL)${colEnd}\
-# ${cyan}\$(gitBranch)${colEnd}\
-# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-# ${blue}\$(gitAddedChanges)${colEnd}\
-# ${red}\$(gitUnaddedChanges)${colEnd}\
-# ${yellow}\$(gitBracketR)${colEnd}\
-#  ${white}¤${colEnd} "
+source "${codeDir}/Status/git.sh"
 
 export PS1="\n\
  ${blue}${_currentDirectory}${colEnd}\
@@ -209,20 +180,7 @@ ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
 ${blue}\$(gitAddedChanges)${colEnd}\
 ${red}\$(gitUnaddedChanges)${colEnd}\
 ${yellow}\$(gitBracketR)${colEnd}\
- ${lightGrey}¤${colEnd} "
-
-# export PS1="\
-# \n\
-# ${lightGrey}¤${colEnd}\
-#  ${blue}${_currentDirectory}${colEnd}\
-# ${yellow}\$(gitBracketL)${colEnd}\
-# ${cyan}\$(gitBranch)${colEnd}\
-# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-# ${blue}\$(gitAddedChanges)${colEnd}\
-# ${red}\$(gitUnaddedChanges)${colEnd}\
-# ${yellow}\$(gitBracketR)${colEnd}\
-# \n\
-# ${lightGrey}${_promptChar}${colEnd} "
+ ${magenta}¤${colEnd} "
 
 # export PS1="\
 # \n\
@@ -232,3 +190,7 @@ ${yellow}\$(gitBracketR)${colEnd}\
 # ${lightGrey}${_promptChar}${colEnd} "
 
 # export PS1="\n${lightGrey}${_promptChar}${colEnd} "
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
