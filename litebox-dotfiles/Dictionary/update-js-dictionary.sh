@@ -31,12 +31,12 @@ addChipsFunctions() {
 }
 
 # Scrapes function names from `ls` from Ramda library.
-addRamdaFunctions() {
-    local ramdaFunctionFilenames="${HOME}/Main/Code/JS/Ramda/Test/node_modules/ramda/src"
-    for ramdaFn in $(ls -1 "${ramdaFunctionFilenames}" | sed 's/\.js$//g'); do
-        echo "${ramdaFn}" >> "${1}"
-    done
-}
+# addRamdaFunctions() {
+#     local ramdaFunctionFilenames="${HOME}/Main/Code/JS/Ramda/Test/node_modules/ramda/src"
+#     for ramdaFn in $(ls -1 "${ramdaFunctionFilenames}" | sed 's/\.js$//g'); do
+#         echo "${ramdaFn}" >> "${1}"
+#     done
+# }
 
 # Scrapes Array methods from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 # addArrayMethodsFromMDN() {
@@ -50,4 +50,4 @@ addRamdaFunctions() {
 clearFinalDictionary "${finalDictionaryFile}"
 concatenateJavaScriptDictionaries "${finalDictionaryFile}"
 addChipsFunctions "${finalDictionaryFile}"
-addRamdaFunctions "${finalDictionaryFile}"
+# addRamdaFunctions "${finalDictionaryFile}"

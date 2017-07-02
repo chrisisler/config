@@ -10,12 +10,12 @@ cp ~/.bashrc "${dotfilesDir}"
 cp ~/.vimrc "${dotfilesDir}"
 cp ~/.inputrc "${dotfilesDir}"
 
-cp -r ~/Main/Code/Status "${dotfilesDir}"
+cp -r ~/Code/Status "${dotfilesDir}"
 
 cp ~/.config/ranger/rc.conf "${dotfilesDir}"
 cp ~/.config/cmus/autosave "${dotfilesDir}"
 
-cp -r ~/Main/Code/JS/Dictionary "${dotfilesDir}"
+cp -r ~/Code/JS/Dictionary "${dotfilesDir}"
 
 cp ~/*.terminfo "${dotfilesDir}"
 
