@@ -68,7 +68,7 @@ set noshowmode  " do not show me which mode im in (cause I use airline)
 set timeoutlen=300
 set ttimeoutlen=50
 set lazyredraw  " redraw only when you need to
-set relativenumber
+" set relativenumber
 
 " Make :Q and :W work like :q and :w
 command! W w
@@ -96,7 +96,8 @@ Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
-Plug 'xuyuanp/nerdtree-git-plugin'      " show git diff in nerdtree
+Plug 'kshenoy/vim-signature'            " display marks in gutter
+Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
 
 " Integrations
 Plug 'tpope/vim-commentary' " sane (un)commenting
@@ -109,6 +110,9 @@ Plug 'ctrlpvim/ctrlp.vim'           " fuzzy finder
 Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
 Plug 'tpope/vim-surround'           " manipulating characters that surround text objects
 Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
+Plug 'easymotion/vim-easymotion'        " vim motions on speed
+Plug 'tpope/vim-abolish'            " easily search/substitute/whatever multiple variants of a word
+" Plug 'andrewradev/splitjoin.vim'    " easily transition between single/multi line code
 
 " Completion
 Plug 'jiangmiao/auto-pairs'   " auto-match all brackets, parenthesis, quotes, etc.
@@ -119,6 +123,7 @@ Plug 'sirver/ultisnips'       " snippies
 " Other
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'ap/vim-css-color'  " make things like #d6a323 show the actual color in css files
+Plug 'valloric/matchtagalways' " show matching tags (the onse your cursor is inside of)
 
 call plug#end()
 
@@ -139,11 +144,11 @@ let g:user_emmet_install_global=0 " enable emmet for just html/css
 autocmd FileType html,css EmmetInstall
 let g:user_emmet_leader_key='<C-j>' " remap the default emmet leader from <C-y> to <C-j>
 
-let g:ale_enabled=0
+let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
-let g:ale_lint_delay=1500
-let g:ale_open_list=1
+let g:ale_lint_delay=500
+let g:ale_open_list=0 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
 let g:airline_section_error='%{ale#statusline#Status()}'
 let g:ale_echo_msg_format = '[%linter%] %s'
@@ -504,38 +509,38 @@ call clearmatches()
 highlight Comment cterm=italic
 highlight Special cterm=italic
 highlight Number ctermfg=darkmagenta
-highlight MatchParen ctermfg=white ctermbg=NONE
+highlight MatchParen cterm=underline ctermfg=white ctermbg=NONE
 highlight Search cterm=bold,underline ctermfg=white
 
-highlight jsxNativeHTMLColor ctermfg=lightblue
-let jsxNativeHTML = '[</]\zs\l\w\+\>\ze.*>'
-call matchadd("jsxNativeHTMLColor", jsxNativeHTML)
-call matchadd("jsxNativeHTMLColor", '\.\.\.')
-
-highlight jsxCustomComponentsColor ctermfg=lightblue cterm=italic
-let jsxCustomComponents = '[</]\zs\u\w\+\>\ze.*>'
-call matchadd("jsxCustomComponentsColor", jsxCustomComponents)
-
-highlight mySpecificSyntax ctermfg=darkblue
-2match mySpecificSyntax /+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
+highlight DarkBlue ctermfg=darkblue
+2match DarkBlue /\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
 
 " This group is not `highlight link`'ed to Special because of priority. See :help :match for more
-highlight myItalics cterm=italic
-match myItalics /\<\w*\ze=.*>\|\<default\>\|\<this\>\|\<var\>\|\<let\>\|\<const\>\|\<module\>\|\<exports\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Math\>\|\<Boolean\>\|\<super\>\|\<JSON\>\|\<Date\>\|\<prototype\>/
+highlight Italic cterm=italic
+match Italic /\<\w*\ze=.*>\|\<arguments\>\|\<default\>\|\<this\>\|\<var\>\|\<let\>\|\<const\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Boolean\>\|\<super\>\|\<prototype\>/
 
-highlight swagReturn ctermfg=magenta
-call matchadd("swagReturn", "return ")
-call matchadd("swagReturn", "new ")
-call matchadd("swagReturn", "=>")
-call matchadd("swagReturn", "? ")
-call matchadd("swagReturn", ": ")
+highlight MagentaItalic ctermfg=magenta cterm=italic
+call matchadd("MagentaItalic", '\<return\>')
 
-highlight jsSpecial ctermfg=darkmagenta
-call matchadd("jsSpecial", "__dirname")
-call matchadd("jsSpecial", "__filename")
-call matchadd("jsSpecial", "true")
-call matchadd("jsSpecial", "false")
+highlight Magenta ctermfg=magenta
+call matchadd("Magenta", '\<new\>')
+call matchadd("Magenta", '\s=>\s')
+call matchadd("Magenta", '\s?\s')
+call matchadd("Magenta", '\s:\s')
+call matchadd("Magenta",  '<\zs\l\w*\>\ze.*>')
+call matchadd("Magenta",  '</\zs\l\w*\>\ze.*>')
 
+highlight DarkMagenta ctermfg=darkmagenta
+call matchadd("DarkMagenta", '\<__dirname\>')
+call matchadd("DarkMagenta", '\<__filename\>')
+call matchadd("DarkMagenta", '\<true\>')
+call matchadd("DarkMagenta", '\<false\>')
+call matchadd("DarkMagenta", '\.\.\.\ze\w')
+" Arrow functions
+call matchadd("DarkMagenta", '\w\+\ze\s\?=\s\?[a-zA-Z0-9_()]\+ =>')
+" JSX Custom Components (jsx that begins with upper case letter (\u))
+call matchadd("DarkMagenta", '[</]\zs\u\w*\>\ze.*>')
+            
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
