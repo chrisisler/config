@@ -134,6 +134,10 @@ call plug#end()
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:mta_use_matchparen_group=1
+
+let g:tern#is_show_argument_hints_enabled=1
+
 let g:airline_section_x=''
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -141,14 +145,14 @@ let g:airline_right_sep=''
 let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 
 let g:user_emmet_mode='a'         " enable emmet in all vim modes
-let g:user_emmet_install_global=0 " enable emmet for just html/css
-autocmd FileType html,css EmmetInstall
+let g:user_emmet_install_global=0 " enable emmet for just the below types
+autocmd FileType html,css,js,jsx EmmetInstall
 let g:user_emmet_leader_key='<C-j>' " remap the default emmet leader from <C-y> to <C-j>
 
 let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
-let g:ale_lint_delay=500
+let g:ale_lint_delay=800
 let g:ale_open_list=0 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
 let g:airline_section_error='%{ale#statusline#Status()}'
@@ -530,6 +534,8 @@ call matchadd("Magenta", '\s?\s')
 call matchadd("Magenta", '\s:\s')
 call matchadd("Magenta",  '<\zs\l\w*\>\ze.*>')
 call matchadd("Magenta",  '</\zs\l\w*\>\ze.*>')
+" JSX Custom Components (jsx that begins with upper case letter (\u))
+call matchadd("Magenta", '[</]\zs\u\w*\>\ze.*>')
 
 highlight DarkMagenta ctermfg=darkmagenta
 call matchadd("DarkMagenta", '\<__dirname\>')
@@ -539,11 +545,7 @@ call matchadd("DarkMagenta", '\<false\>')
 call matchadd("DarkMagenta", '\.\.\.\ze\w')
 " Arrow functions. todo: fix
 " call matchadd("DarkMagenta", '[a-z]*\s\zs=\s[a-zA-Z0-9_()]\+\s\?=>')
-" JSX Custom Components (jsx that begins with upper case letter (\u))
-call matchadd("DarkMagenta", '[</]\zs\u\w*\>\ze.*>')
             
-" const map = (f, xs) => xs.map(f);
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " Misc
@@ -553,7 +555,7 @@ call matchadd("DarkMagenta", '[</]\zs\u\w*\>\ze.*>')
 
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
 " Set quickfix window default to X-Y lines.
-au FileType qf call AdjustWindowHeight(10, 15)
+au FileType qf call AdjustWindowHeight(2, 15)
 function! AdjustWindowHeight(minheight, maxheight)
   exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
