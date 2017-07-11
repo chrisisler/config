@@ -54,6 +54,7 @@ set backupcopy=yes
 " https://robots.thoughtbot.com/vim-you-complete-me
 set complete=.,b,u,]
 set wildmode=longest,list:longest
+set previewheight=8
 set completeopt=longest,menuone,preview
 set wildmenu                  " visual autocomplete
 set path+=**
@@ -510,12 +511,20 @@ set background=dark
 colorscheme solarized
 
 call clearmatches()
+
+" See `:vert h highlight`
 " Custom syntax highlighting.
 highlight Comment cterm=italic
 highlight Special cterm=italic
 highlight Number ctermfg=darkmagenta
 highlight MatchParen cterm=underline ctermfg=white ctermbg=NONE
 highlight Search cterm=bold,underline ctermfg=white
+highlight LineNr ctermbg=NONE
+highlight CursorLineNr ctermbg=black ctermfg=gray
+highlight VertSplit ctermbg=black ctermfg=black
+highlight EndOfBuffer ctermfg=black ctermbg=NONE
+" Preview (popup) menu syntax highlighting
+highlight Pmenu ctermbg=white ctermfg=black
 
 highlight DarkBlue ctermfg=darkblue
 2match DarkBlue /\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
