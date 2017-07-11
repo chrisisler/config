@@ -54,7 +54,7 @@ set backupcopy=yes
 " https://robots.thoughtbot.com/vim-you-complete-me
 set complete=.,b,u,]
 set wildmode=longest,list:longest
-set completeopt=menu,preview
+set completeopt=longest,menuone,preview
 set wildmenu                  " visual autocomplete
 set path+=**
 
@@ -120,6 +120,7 @@ Plug 'ervandew/supertab'      " hit <tab> for autocomplete
 Plug 'shougo/neocomplete.vim' " code-completion
 Plug 'sirver/ultisnips'       " snippies
 Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, types, refs, renames, etc.
+Plug 'othree/jspc.vim'        " js parameter completion in auto-comp preview menu
 
 " Other
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
@@ -137,6 +138,8 @@ call plug#end()
 let g:mta_use_matchparen_group=1
 
 let g:tern#is_show_argument_hints_enabled=1
+let g:tern_show_argument_hints=1
+let g:tern_show_signature_in_pum=1
 
 let g:airline_section_x=''
 let g:airline_left_sep=''
@@ -152,7 +155,7 @@ let g:user_emmet_leader_key='<C-j>' " remap the default emmet leader from <C-y> 
 let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
-let g:ale_lint_delay=800
+let g:ale_lint_delay=1000
 let g:ale_open_list=0 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
 let g:airline_section_error='%{ale#statusline#Status()}'
@@ -165,31 +168,28 @@ let g:ale_linters={
 
 let g:ctrlp_custom_ignore='node_modules'
 
+" Use neocomplete.
 let g:neocomplete#enable_at_startup=1
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#sources#syntax#min_keyword_length=2
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-
+let g:neocomplete#enable_auto_close_preview=1
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
-\ 'default' : '',
-\ 'text' : '/usr/share/dict/connectives',
-\ 'javascript' : '~/Main/Code/JS/Dictionary/all.txt',
-\ 'cpp' : '~/Main/Code/Cpp/Dictionary/cpp-dictionary-keywords.txt'
-\ }
-
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-
+            \ 'default' : '',
+            \ 'text' : '/usr/share/dict/connectives',
+            \ 'javascript' : $HOME.'/Code/JS/Dictionary/all.txt',
+            \ 'cpp' : $HOME.'/Code/Cpp/Dictionary/cpp-dictionary-keywords.txt'
+            \ }
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" let g:loaded_matchparen=0
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
 
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
@@ -197,7 +197,7 @@ let NERDTreeShowHidden=1
 let g:jsx_ext_required=0
 " Airline settings.
 " let g:airline_theme='solarized'
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 let g:airline#extensions#tabline#enabled=1
 let g:airline_detect_iminsert=1
 let g:airline_skip_empty_sections=1
@@ -206,7 +206,7 @@ let g:airline#extensions#branch#format=1
 
 " Mode=0 is asynchronous mode. Trim=1 trims empty lines in quickfix window.
 let g:asyncrun_mode=1
-" let g:asyncrun_trim=1
+let g:asyncrun_trim=1
 
 " When set to 0, <ESC>ing in the following modes will not quit multi-cursor mode.
 let g:multi_cursor_exit_from_insert_mode=0
@@ -233,10 +233,10 @@ nnoremap <Leader>n :ALENextWrap<CR>kj
 nnoremap <Leader>x :ALEToggle<CR>kj
 
 " Horizontal and vertical resizing like my tmux key-bindings.
-nnoremap <silent> <Leader>H :vertical res -4<CR>
-nnoremap <silent> <Leader>J :res -4<CR>
-nnoremap <silent> <Leader>K :res +4<CR>
-nnoremap <silent> <Leader>L :vertical res +4<CR>
+nnoremap <silent> <Leader>H :vertical res -6<CR>
+nnoremap <silent> <Leader>J :res -6<CR>
+nnoremap <silent> <Leader>K :res +6<CR>
+nnoremap <silent> <Leader>L :vertical res +6<CR>
 
 " Navigate between splits like my tmux key-bindings.
 nnoremap <silent> <Leader>h :wincmd h<CR>
@@ -254,8 +254,8 @@ nnoremap <silent> <Leader>q<CR> :bdelete %<CR>
 " Set ruler.
 nnoremap <silent> <Leader>r :set cc=
 
-" Make local/loclist and quickfix windows go away.
-nnoremap <silent> <Leader>w :lcl<CR>:ccl<CR>
+" Make local/loclist, preview, and quickfix windows go away.
+nnoremap <silent> <Leader>w :lclose<CR>:cclose<CR>:pclose<CR>
 
 " Mappings for saving and sourcing .vimrc.
 nnoremap <silent> <Leader>5<CR> :w<CR>:so %<CR>
@@ -270,7 +270,7 @@ nnoremap <silent> <Leader>4<CR> :w<CR>:so $MYVIMRC<CR>
 nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
 
 " Used for putting the trailing comma at the beginning of the line instead of at the end.
-" nnoremap <Leader>k $"xx0wh"xpa<Space>
+" nnoremap <Leader>z $"xx0wh"xpa<Space>
 
 " Fat array function snippet after typing function arguments.
 " Uses clean indents on newline (after function header/prototype).
@@ -545,7 +545,7 @@ call matchadd("DarkMagenta", '\<false\>')
 call matchadd("DarkMagenta", '\.\.\.\ze\w')
 " Arrow functions. todo: fix
 " call matchadd("DarkMagenta", '[a-z]*\s\zs=\s[a-zA-Z0-9_()]\+\s\?=>')
-            
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " Misc
@@ -557,7 +557,7 @@ call matchadd("DarkMagenta", '\.\.\.\ze\w')
 " Set quickfix window default to X-Y lines.
 au FileType qf call AdjustWindowHeight(2, 15)
 function! AdjustWindowHeight(minheight, maxheight)
-  exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
+    exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
 
 scriptencoding utf8
