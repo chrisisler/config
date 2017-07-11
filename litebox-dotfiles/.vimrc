@@ -119,6 +119,7 @@ Plug 'jiangmiao/auto-pairs'   " auto-match all brackets, parenthesis, quotes, et
 Plug 'ervandew/supertab'      " hit <tab> for autocomplete
 Plug 'shougo/neocomplete.vim' " code-completion
 Plug 'sirver/ultisnips'       " snippies
+Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, types, refs, renames, etc.
 
 " Other
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
@@ -162,7 +163,7 @@ let g:ctrlp_custom_ignore='node_modules'
 
 let g:neocomplete#enable_at_startup=1
 let g:neocomplete#enable_smart_case=1
-let g:neocomplete#sources#syntax#min_keyword_length=1
+let g:neocomplete#sources#syntax#min_keyword_length=2
 " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 " Define dictionary.
@@ -536,11 +537,12 @@ call matchadd("DarkMagenta", '\<__filename\>')
 call matchadd("DarkMagenta", '\<true\>')
 call matchadd("DarkMagenta", '\<false\>')
 call matchadd("DarkMagenta", '\.\.\.\ze\w')
-" Arrow functions
-call matchadd("DarkMagenta", '\w\+\ze\s\?=\s\?[a-zA-Z0-9_()]\+ =>')
+" Arrow functions. todo: fix
+" call matchadd("DarkMagenta", '[a-z]*\s\zs=\s[a-zA-Z0-9_()]\+\s\?=>')
 " JSX Custom Components (jsx that begins with upper case letter (\u))
 call matchadd("DarkMagenta", '[</]\zs\u\w*\>\ze.*>')
             
+" const map = (f, xs) => xs.map(f);
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "

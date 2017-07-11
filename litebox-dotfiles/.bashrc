@@ -170,24 +170,18 @@ normal="\[\e[1;36m\]"
 white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-source "${codeDir}/Status/git.sh"
-
-export PS1="\n\
- ${blue}${_currentDirectory}${colEnd}\
-${yellow}\$(gitBracketL)${colEnd}\
-${cyan}\$(gitBranch)${colEnd}\
-${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-${blue}\$(gitAddedChanges)${colEnd}\
-${red}\$(gitUnaddedChanges)${colEnd}\
-${yellow}\$(gitBracketR)${colEnd}\
- ${magenta}¤${colEnd} "
-
-# export PS1="\
-# \n\
-# ${lightGrey}¤${colEnd}\
+# source "${codeDir}/Status/git.sh"
+# export PS1="\n\
 #  ${blue}${_currentDirectory}${colEnd}\
-# \n\
-# ${lightGrey}${_promptChar}${colEnd} "
+# ${yellow}\$(gitBracketL)${colEnd}\
+# ${cyan}\$(gitBranch)${colEnd}\
+# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+# ${blue}\$(gitAddedChanges)${colEnd}\
+# ${red}\$(gitUnaddedChanges)${colEnd}\
+# ${yellow}\$(gitBracketR)${colEnd}\
+#  ${magenta}¤${colEnd} "
+
+export PS1="\n ${blue}${_currentDirectory}${colEnd} ${magenta}¤${colEnd} "
 
 # export PS1="\n${lightGrey}${_promptChar}${colEnd} "
 
