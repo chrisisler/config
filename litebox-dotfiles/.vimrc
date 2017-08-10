@@ -84,6 +84,7 @@ command! Q q
 call plug#begin('~/.vim/plugged')
 
 " Language
+Plug 'fsharp/vim-fsharp'                      " fsharp syn-hi, etc.
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 " Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
@@ -93,7 +94,7 @@ Plug 'mattn/emmet-vim'                        " the only way to write html in vi
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
 Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
-" Plug 'flazz/vim-colorschemes'           " abunch of random colorschemes for vim
+Plug 'flazz/vim-colorschemes'           " abunch of random colorschemes for vim
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
@@ -114,6 +115,7 @@ Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
 Plug 'easymotion/vim-easymotion'        " vim motions on speed
 Plug 'tpope/vim-abolish'            " easily search/substitute/whatever multiple variants of a word
 " Plug 'andrewradev/splitjoin.vim'    " easily transition between single/multi line code
+Plug 'tpope/vim-dispatch' "async commands
 
 " Completion
 Plug 'jiangmiao/auto-pairs'   " auto-match all brackets, parenthesis, quotes, etc.
@@ -151,7 +153,7 @@ let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 let g:user_emmet_mode='a'         " enable emmet in all vim modes
 let g:user_emmet_install_global=0 " enable emmet for just the below types
 autocmd FileType html,css,js,jsx EmmetInstall
-let g:user_emmet_leader_key='<C-j>' " remap the default emmet leader from <C-y> to <C-j>
+let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
 
 let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
@@ -279,9 +281,9 @@ nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
 imap <Leader>{ <Space>=><Space>{<CR>;<ESC>jA;<ESC>kS
 
 " Copy the currently hovered word and console.log it on the next line.
-nnoremap <Leader>cl "xyiwoconsole.log(<ESC>"xpA);<ESC>
+nnoremap <Leader>cl "xyiwoconsole.log(<ESC>"xpA)<ESC>
 " Same as above, except: console.log('variable is:', variable);
-nnoremap <Leader>clv "xyiwoconsole.log('<ESC>"xpa<Space>is:',<Space><ESC>"xpa);<ESC>
+nnoremap <Leader>clv "xyiwoconsole.log('<ESC>"xpa<Space>is:',<Space><ESC>"xpa)<ESC>
 
 " echo a cursor-hovered variable for shell scripts.
 nnoremap <Leader>en "xyiwoecho -n "${}"hh"xp
@@ -468,7 +470,9 @@ vnoremap p p=
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Javascript
-nnoremap <Leader>js<CR> :w<CR>:AsyncRun node %<CR>:copen<CR>:wincmd k<CR><CR>
+" nnoremap <Leader>js<CR> :w<CR>:AsyncRun node % 2>/dev/null<CR>:copen<CR>:wincmd k<CR><CR>
+" nnoremap <Leader>js<CR> :w<CR>:Dispatch! node %<CR>:cw<CR>:wincmd k<CR>
+nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
 
 " Java
 nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
@@ -518,40 +522,43 @@ highlight Comment cterm=italic
 highlight Special cterm=italic
 highlight Number ctermfg=darkmagenta
 highlight MatchParen cterm=underline ctermfg=white ctermbg=NONE
-highlight Search cterm=bold,underline ctermfg=white
+highlight Search cterm=bold ctermfg=white
 highlight LineNr ctermbg=NONE
-highlight CursorLineNr ctermbg=black ctermfg=gray
+highlight CursorLineNr ctermbg=NONE ctermfg=gray
 highlight VertSplit ctermbg=black ctermfg=black
 highlight EndOfBuffer ctermfg=black ctermbg=NONE
-" Preview (popup) menu syntax highlighting
+" " Preview (popup) menu syntax highlighting
 highlight Pmenu ctermbg=white ctermfg=black
 
-highlight DarkBlue ctermfg=darkblue
-2match DarkBlue /\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
+" highlight DarkBlue ctermfg=darkblue
+" 2match DarkBlue /\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
 
 " This group is not `highlight link`'ed to Special because of priority. See :help :match for more
-highlight Italic cterm=italic
-match Italic /\<\w*\ze=.*>\|\<arguments\>\|\<default\>\|\<this\>\|\<var\>\|\<let\>\|\<const\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Boolean\>\|\<super\>\|\<prototype\>/
+" highlight Italic cterm=italic
+" match Italic /\<\w*\ze=.*>\|\<arguments\>\|\<export\>\s\+\zs\<default\>\ze\|\<this\>\|\<var\>\|\<let\>\|\<const\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Boolean\>\|\<super\>\|\<prototype\>/
 
-highlight MagentaItalic ctermfg=magenta cterm=italic
-call matchadd("MagentaItalic", '\<return\>')
+highlight foo ctermfg=magenta
+call matchadd("foo", '[', 9)
+call matchadd("foo", ']', 10)
 
-highlight Magenta ctermfg=magenta
-call matchadd("Magenta", '\<new\>')
-call matchadd("Magenta", '\s=>\s')
-call matchadd("Magenta", '\s?\s')
-call matchadd("Magenta", '\s:\s')
-call matchadd("Magenta",  '<\zs\l\w*\>\ze.*>')
-call matchadd("Magenta",  '</\zs\l\w*\>\ze.*>')
+" highlight MagentaItalic ctermfg=magenta cterm=italic
+" call matchadd("MagentaItalic", '\<return\>')
+
+" highlight Magenta ctermfg=magenta
+" call matchadd("Magenta", '\<new\>')
+" call matchadd("Magenta", '\s*=>\s*')
+" call matchadd("Magenta", '\s?\s')
+" call matchadd("Magenta", '\s:\s')
+" call matchadd("Magenta",  '<\zs\l\w*\>\ze.*>')
+" call matchadd("Magenta",  '</\zs\l\w*\>\ze.*>')
 " JSX Custom Components (jsx that begins with upper case letter (\u))
-call matchadd("Magenta", '[</]\zs\u\w*\>\ze.*>')
+" call matchadd("Magenta", '[</]\zs\u\w*\>\ze.*>')
 
-highlight DarkMagenta ctermfg=darkmagenta
-call matchadd("DarkMagenta", '\<__dirname\>')
-call matchadd("DarkMagenta", '\<__filename\>')
-call matchadd("DarkMagenta", '\<true\>')
-call matchadd("DarkMagenta", '\<false\>')
-call matchadd("DarkMagenta", '\.\.\.\ze\w')
+" highlight DarkMagenta ctermfg=darkmagenta
+" call matchadd("DarkMagenta", '\<__dirname\>')
+" call matchadd("DarkMagenta", '\<__filename\>')
+" call matchadd("DarkMagenta", '\<true\>')
+" call matchadd("DarkMagenta", '\<false\>')
 " Arrow functions. todo: fix
 " call matchadd("DarkMagenta", '[a-z]*\s\zs=\s[a-zA-Z0-9_()]\+\s\?=>')
 
@@ -561,14 +568,11 @@ call matchadd("DarkMagenta", '\.\.\.\ze\w')
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
-" Set quickfix window default to X-Y lines.
-au FileType qf call AdjustWindowHeight(2, 15)
+au FileType qf call AdjustWindowHeight(3, 20)
 function! AdjustWindowHeight(minheight, maxheight)
-    exe max([min([line("$")+1, a:maxheight]), a:minheight]) . "wincmd _"
+    exe max([min([line('$')+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
-
 scriptencoding utf8
 
 " Highlight all instances of word under cursor, when idle.

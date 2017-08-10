@@ -19,11 +19,11 @@ parsePianobarOutput() {
 
     local artist="$(printf "${currentSongInfo}" | sed -e "s/ on .*$//g" -e "s/^.* by //g" | tr -d "\"")"
 
-    local songIsLiked="$(printf "${currentSongInfo}" | grep -qE "<3" &>/dev/null && echo " ♡" || echo "")"
+    local songIsLiked="$(printf "${currentSongInfo}" | grep -qE "<3" &>/dev/null && echo " ♡  " || echo "")"
 
     local positionInfo="$(printf "${allPianobarOutput}" | grep -E "^.*#" | tail -1 | sed -e "s/^.* -//g" -e "s/^0//g" | sed -e "s/\/0/\//g")"
 
-    local result="${artist} - ${songWithoutParenthesis}${songIsLiked}"
+    local result="${artist} - ${songWithoutParenthesis}${songIsLiked}${positionInfo}"
     printf "${result}"
 }
 
