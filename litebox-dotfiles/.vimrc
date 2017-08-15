@@ -1,4 +1,4 @@
-set nocompatible " must be first line
+set nocompatible
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -84,7 +84,7 @@ command! Q q
 call plug#begin('~/.vim/plugged')
 
 " Language
-Plug 'fsharp/vim-fsharp'                      " fsharp syn-hi, etc.
+Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 " Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
@@ -95,6 +95,7 @@ Plug 'mattn/emmet-vim'                        " the only way to write html in vi
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
 Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 Plug 'flazz/vim-colorschemes'           " abunch of random colorschemes for vim
+" Plug 'rakr/vim-one.vim'
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
@@ -512,7 +513,9 @@ if !exists("g:syntax_on")
     syntax enable
 endif
 set background=dark
+" colorscheme one
 colorscheme solarized
+" let g:one_allow_italics=1
 
 call clearmatches()
 
@@ -527,40 +530,40 @@ highlight LineNr ctermbg=NONE
 highlight CursorLineNr ctermbg=NONE ctermfg=gray
 highlight VertSplit ctermbg=black ctermfg=black
 highlight EndOfBuffer ctermfg=black ctermbg=NONE
-" " Preview (popup) menu syntax highlighting
+" Preview (popup) menu syntax highlighting
 highlight Pmenu ctermbg=white ctermfg=black
 
-" highlight DarkBlue ctermfg=darkblue
-" 2match DarkBlue /\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
+highlight DarkBlue ctermfg=darkblue
+match DarkBlue /\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
 
 " This group is not `highlight link`'ed to Special because of priority. See :help :match for more
-" highlight Italic cterm=italic
-" match Italic /\<\w*\ze=.*>\|\<arguments\>\|\<export\>\s\+\zs\<default\>\ze\|\<this\>\|\<var\>\|\<let\>\|\<const\>\|\<function\>\| @\w*.*$\|\<console\>\|\<Array\>\|\<Function\>\|\<Object\>\|\<String\>\|\<Number\>\|\<Boolean\>\|\<super\>\|\<prototype\>/
+highlight ItalicKeywords cterm=italic
+call matchadd("ItalicKeywords", '\<\w*\ze=.*>')
+call matchadd("ItalicKeywords", '\<arguments\>')
+call matchadd("ItalicKeywords", '\<var\>')
+call matchadd("ItalicKeywords", '\<let\>')
+call matchadd("ItalicKeywords", '\<const\>')
+call matchadd("ItalicKeywords", '\<function\>')
+call matchadd("ItalicKeywords", '\s@\w*.*$')
 
-highlight foo ctermfg=magenta
-call matchadd("foo", '[', 9)
-call matchadd("foo", ']', 10)
-
-" highlight MagentaItalic ctermfg=magenta cterm=italic
-" call matchadd("MagentaItalic", '\<return\>')
-
-" highlight Magenta ctermfg=magenta
-" call matchadd("Magenta", '\<new\>')
-" call matchadd("Magenta", '\s*=>\s*')
-" call matchadd("Magenta", '\s?\s')
-" call matchadd("Magenta", '\s:\s')
-" call matchadd("Magenta",  '<\zs\l\w*\>\ze.*>')
-" call matchadd("Magenta",  '</\zs\l\w*\>\ze.*>')
+highlight MagentaKeywords ctermfg=magenta
+call matchadd("MagentaKeywords", '\<return\>')
+call matchadd("MagentaKeywords", '\<void\>')
+call matchadd("MagentaKeywords", '\<new\>')
+call matchadd("MagentaKeywords", '\s*=>\s*')
+call matchadd("MagentaKeywords", '\s?\s')
+call matchadd("MagentaKeywords", '\s:\s')
+call matchadd("MagentaKeywords",  '<\zs\l\w*\>\ze.*>')
+" JSX any (lowercase-beginning) html-tag
+call matchadd("MagentaKeywords",  '</\zs\l\w*\>\ze.*>')
 " JSX Custom Components (jsx that begins with upper case letter (\u))
-" call matchadd("Magenta", '[</]\zs\u\w*\>\ze.*>')
+call matchadd("MagentaKeywords", '[</]\zs\u\w*\>\ze.*>')
 
-" highlight DarkMagenta ctermfg=darkmagenta
-" call matchadd("DarkMagenta", '\<__dirname\>')
-" call matchadd("DarkMagenta", '\<__filename\>')
+highlight DarkMagenta ctermfg=darkmagenta
+call matchadd("DarkMagenta", '\<__dirname\>')
+call matchadd("DarkMagenta", '\<__filename\>')
 " call matchadd("DarkMagenta", '\<true\>')
 " call matchadd("DarkMagenta", '\<false\>')
-" Arrow functions. todo: fix
-" call matchadd("DarkMagenta", '[a-z]*\s\zs=\s[a-zA-Z0-9_()]\+\s\?=>')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "

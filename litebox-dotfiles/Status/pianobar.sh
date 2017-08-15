@@ -23,7 +23,7 @@ parsePianobarOutput() {
 
     local positionInfo="$(printf "${allPianobarOutput}" | grep -E "^.*#" | tail -1 | sed -e "s/^.* -//g" -e "s/^0//g" | sed -e "s/\/0/\//g")"
 
-    local result="${artist} - ${songWithoutParenthesis}${songIsLiked}${positionInfo}"
+    local result="${artist} - ${songWithoutParenthesis}${songIsLiked} ${positionInfo}"
     printf "${result}"
 }
 
