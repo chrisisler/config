@@ -7,8 +7,10 @@ cp ~/.tmux.conf "${dotfilesDir}"
 cp ~/.tmux/tmuxline.conf "${dotfilesDir}"
 
 cp ~/.bashrc "${dotfilesDir}"
-cp ~/.vimrc "${dotfilesDir}"
 cp ~/.inputrc "${dotfilesDir}"
+cp ~/.vimrc "${dotfilesDir}"
+
+cp -r ~/.vim/rc "${dotfilesDir}"
 
 cp -r ~/Code/Status "${dotfilesDir}"
 
