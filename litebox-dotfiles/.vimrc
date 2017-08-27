@@ -1,5 +1,4 @@
 set nocompatible
-
 source $HOME/.vim/rc/general-settings.vim
 source $HOME/.vim/rc/plugins.vim
 source $HOME/.vim/rc/mappings.vim

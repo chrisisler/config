@@ -31,6 +31,7 @@ codeDir="${HOME}/Code"
 # START ALIASES ----------------------------------------------------------------------
 
 alias getFiletypes="ls -1F | sed 's/^.*//g' | grep -vE '/$' | tr -d '*' | sort | uniq"
+alias g="cd ${HOME}/Code/Git"
 alias tm="ps auxc"
 alias gs="git status"
 alias q="exit"
@@ -73,6 +74,8 @@ alias tmuxconf="vim ~/.tmux.conf"
 alias tmuxline="vim ~/.tmux/tmuxline.conf"
 alias rangerrc="vim ~/.config/ranger/rc.conf"
 alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
+alias temp="tmuxtemp"
+alias tt="tmuxtemp"
 alias tmuxall="tmux attach -t All || tmux new -s All"
 alias t="tmuxall"
 alias tmuxmusic="tmux attach -t Music || tmux new -s Music"
@@ -169,18 +172,18 @@ normal="\[\e[1;36m\]"
 white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-source "${codeDir}/Status/git.sh"
-export PS1="\n\
- ${blue}${_currentDirectory}${colEnd}\
-${yellow}\$(gitBracketL)${colEnd}\
-${cyan}\$(gitBranch)${colEnd}\
-${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-${blue}\$(gitAddedChanges)${colEnd}\
-${red}\$(gitUnaddedChanges)${colEnd}\
-${yellow}\$(gitBracketR)${colEnd}\
- ${magenta}¤${colEnd} "
+# source "${codeDir}/Status/git.sh"
+# export PS1="\n\
+#  ${blue}${_currentDirectory}${colEnd}\
+# ${yellow}\$(gitBracketL)${colEnd}\
+# ${cyan}\$(gitBranch)${colEnd}\
+# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+# ${blue}\$(gitAddedChanges)${colEnd}\
+# ${red}\$(gitUnaddedChanges)${colEnd}\
+# ${yellow}\$(gitBracketR)${colEnd}\
+#  ${magenta}¤${colEnd} "
 
-# export PS1="\n ${blue}${_currentDirectory}${colEnd} ${magenta}¤${colEnd} "
+export PS1="\n ${blue}${_currentDirectory}${colEnd} ${magenta}¤${colEnd} "
 
 # export PS1="\n${lightGrey}${_promptChar}${colEnd} "
 

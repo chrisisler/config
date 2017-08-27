@@ -46,9 +46,11 @@ match DarkBlue /\s==\s\|>\s\|<\s\|\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s
 " Function calls.
 highlight Erxi3LightBlueKeywords ctermfg=red
 call matchadd("Erxi3LightBlueKeywords", '\<\w\+\ze(')
+call matchadd("Erxi3LightBlueKeywords", '\s\+\zs\h\w\+\ze\s*=\s*')
 
 highlight ItalicKeywords cterm=italic
-call matchadd("ItalicKeywords", '\<\w*\ze=.*>')
+call matchadd("ItalicKeywords", '\<this\>')
+call matchadd("ItalicKeywords", '\<<.*\zs\w*\ze=.*>')
 call matchadd("ItalicKeywords", '\<arguments\>')
 call matchadd("ItalicKeywords", '\<var\>')
 call matchadd("ItalicKeywords", '\<let\>')

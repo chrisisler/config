@@ -1,9 +1,10 @@
 " General.
 filetype plugin indent on      " automatically detect file types
+set nocompatible
 set tabstop=4
 set softtabstop=0
 set shiftwidth=4
-set showcmd
+" set showcmd
 set autoindent                 " auto indent new lines
 set smartindent                " don't indent like an idiot
 set noerrorbells
@@ -23,6 +24,9 @@ set nojoinspaces               " prevents inserting 2 spaces when joining
 set splitright                 " put new vertically split windows to the right of current
 set splitbelow                 " put new split windows to bottom of current
 set laststatus=2               " force vim to display status line always
+
+set showtabline=2              " Display list of buffers at the top
+
 set showfulltag                " display more info when auto-completing
 set smartcase                  " smart (case-sensitive when you specify) search matching
 set modeline                   " i have no idea what this does tbh

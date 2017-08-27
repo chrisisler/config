@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 " Language
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
-" Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
+Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
 Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 Plug 'eagletmt/neco-ghc'
@@ -76,9 +76,6 @@ let g:tern#is_show_argument_hints_enabled=1
 let g:tern_show_argument_hints=1
 let g:tern_show_signature_in_pum=1
 
-let g:airline_section_x=''
-let g:airline_left_sep=''
-let g:airline_right_sep=''
 
 let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 
@@ -93,7 +90,7 @@ let g:ale_echo_msg_error_str=''
 let g:ale_lint_delay=1000
 let g:ale_open_list=0 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
-let g:airline_section_error='%{ale#statusline#Status()}'
+" let g:airline_section_error='%{ale#statusline#Status()}'
 let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
 let g:ale_linters={
@@ -129,15 +126,32 @@ endif
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
 
+" jsx extension settings
 let g:jsx_ext_required=0
-" Airline settings.
+
+" Airline settings. See `vert h statusline`
 " let g:airline_theme='solarized'
+let g:airline_section_error=''
 let g:airline_powerline_fonts=0
-let g:airline#extensions#tabline#enabled=1
-let g:airline_detect_iminsert=1
+" let g:airline_detect_iminsert=1
 let g:airline_skip_empty_sections=1
-let g:airline#extensions#branch#enabled=1
-let g:airline#extensions#branch#format=1
+let g:airline#extensions#ale#enabled=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#buffers_label=''
+let g:airline#extensions#tabline#tabs_label='tabs'
+" let g:airline#extensions#tabline#tab_min_count = 0
+" let g:airline_extensions = ['tabline']
+let g:airline_section_a=''
+let g:airline_section_b=''
+let g:airline_section_c=airline#section#create(['mode', '  %t'])
+let g:airline_section_x='%l, %c '
+let g:airline_section_y=''
+let g:airline_section_z=''
+let g:airline_section_error=''
+let g:airline_section_warning=''
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+" call airline#parts#define_accent('mode', 'gray')
 
 " Mode=0 is asynchronous mode. Trim=1 trims empty lines in quickfix window.
 " let g:asyncrun_mode=1

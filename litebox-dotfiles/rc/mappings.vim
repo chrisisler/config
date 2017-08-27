@@ -1,5 +1,92 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
+" Mappings
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" niche
+vnoremap 3 5
+
+" <C-r> is hard to type, man.
+nnoremap U <C-r>
+
+" Open nerdtree.
+nnoremap <silent> \ :NERDTreeToggle<CR>
+
+" Next window.
+nnoremap [ <C-w>w
+
+" Not highlighting things happens pretty often.
+nnoremap <silent> <space> :nohlsearch<CR>
+
+" keep cursor where it is when joining lines.
+" nnoremap J mzJ`z
+
+" Go to next/previous buffer.
+nnoremap ] :bn<CR>
+nnoremap } :bp<CR>
+
+" X is uncomfortable to type, ' is better.
+nnoremap ' X
+
+" I dont like accidently pressing these.
+nnoremap <F1> <nop>
+nnoremap Q <nop>
+nnoremap K <nop>
+
+" Tmux uses C-k
+noremap <C-k> <C-u>
+inoremap <C-u> <C-k>
+
+" Make Y behave like C and D.
+nnoremap Y y$
+
+" Center screen after moving to next match.
+nnoremap n nzz
+nnoremap N Nzz
+
+" Wrapped lines go up/down to next row, not next line.
+noremap j gj
+noremap k gk
+
+" Avoid pressing escape. Avoid pressing <C-[>
+inoremap ;; <ESC>l
+vnoremap ;; <ESC>l
+snoremap ;; <ESC>l
+
+" Best mapping ever.
+noremap ; :
+noremap : ;
+
+" Cool new thing: http://mlsamuelson.com/content/vim-search-word-under-cursor
+nnoremap <Leader>[ [I
+
+" ^ is uncomfortable to press.
+noremap 8 ^
+" $ is uncomfortable to press.
+noremap 9 $
+
+" This just makes sense.
+nnoremap * *N
+nnoremap # #n
+
+" Move up and down faster.
+nnoremap E 5kzz
+nnoremap D 5jzz
+
+" Copy and paste from (actual) clipboard.
+nnoremap <C-c> "*y
+nnoremap <C-v> "*p
+nnoremap <C-a> ggVG
+
+" (Experimental) Auto-indent pasted code (see `:h =`).
+nnoremap P P==
+nnoremap p p==
+vnoremap P P=
+vnoremap p p=
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Leader Mappings
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -97,6 +184,46 @@ nnoremap <Leader>2 :NeoCompleteDisable<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
+" Compile and Run - Mappings
+"
+" Note: Must be in same directory of file to get correct output.
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Javascript
+" nnoremap <Leader>js<CR> :w<CR>:AsyncRun node % 2>/dev/null<CR>:copen<CR>:wincmd k<CR><CR>
+" nnoremap <Leader>js<CR> :w<CR>:Dispatch! node %<CR>:cw<CR>:wincmd k<CR>
+nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
+
+" Haskell
+nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./foo % && ./foo<CR>
+
+" Java
+" nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
+" nnoremap <Leader>j2<CR> :w<CR>:AsyncRun java %:t:r<CR>:copen<CR>:wincmd k<CR>
+
+" C#
+" nnoremap <Leader>cs<CR> :w<CR>:AsyncRun csc /nologo /t:exe %<CR>:copen<CR>:wincmd k<CR>
+
+" Shell
+" nnoremap <Leader>sh<CR> :w<CR>:AsyncRun bash %:p<CR>:copen<CR>:wincmd k<CR>
+
+" Python
+" nnoremap <Leader>py<CR> :w<CR>:AsyncRun python %<CR>:copen<CR>:wincmd k<CR>
+
+" Ruby
+" nnoremap <Leader>rb<CR> :w<CR>:AsyncRun ruby %:p<CR>:copen<CR>:wincmd k<CR>
+
+" C
+" nnoremap <Leader>c1<CR> :w<CR>:AsyncRun gcc %<CR>:copen<CR>:wincmd k<CR>
+" nnoremap <Leader>c2<CR> :w<CR>:AsyncRun ./a.exe<CR>:wincmd k<CR>
+
+" C++
+" nnoremap <Leader>cp<CR> :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<CR>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Mappings for Mathematical Symbols
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -160,126 +287,3 @@ inoremap <silent> <Leader>ifftaut ⇔
 inoremap <silent> <Leader>iff ↔
 inoremap <silent> <Leader>thentaut ⇒
 inoremap <silent> <Leader>then →
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" Mappings
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" <C-r> is hard to type, man.
-nnoremap U <C-r>
-
-" Open nerdtree.
-nnoremap <silent> \ :NERDTreeToggle<CR>
-
-" Next window.
-nnoremap [ <C-w>w
-
-" Not highlighting things happens pretty often.
-nnoremap <silent> <space> :nohlsearch<CR>
-
-" keep cursor where it is when joining lines.
-" nnoremap J mzJ`z
-
-" Go to next/previous buffer.
-nnoremap ] :bn<CR>
-nnoremap } :bp<CR>
-
-" X is uncomfortable to type, ' is better.
-nnoremap ' X
-
-" I dont like accidently pressing these.
-nnoremap <F1> <nop>
-nnoremap Q <nop>
-nnoremap K <nop>
-
-" Tmux uses C-k
-noremap <C-k> <C-u>
-inoremap <C-u> <C-k>
-
-" Make Y behave like C and D.
-nnoremap Y y$
-
-" Center screen after moving to next match.
-nnoremap n nzz
-nnoremap N Nzz
-
-" Wrapped lines go up/down to next row, not next line.
-noremap j gj
-noremap k gk
-
-" Avoid pressing escape. Avoid pressing <C-[>
-inoremap ;; <ESC>l
-vnoremap ;; <ESC>l
-snoremap ;; <ESC>l
-
-" Best mapping ever.
-noremap ; :
-noremap : ;
-
-" Cool new thing: http://mlsamuelson.com/content/vim-search-word-under-cursor
-nnoremap <Leader>[ [I
-
-" ^ is uncomfortable to press.
-noremap 8 ^
-" $ is uncomfortable to press.
-noremap 9 $
-
-" This just makes sense.
-nnoremap * *N
-nnoremap # #n
-
-" Move up and down faster.
-nnoremap E 5kzz
-nnoremap D 5jzz
-
-" Copy and paste from (actual) clipboard.
-nnoremap <C-c> "*y
-nnoremap <C-v> "*p
-nnoremap <C-a> ggVG
-
-" (Experimental) Auto-indent pasted code (see `:h =`).
-nnoremap P P==
-nnoremap p p==
-vnoremap P P=
-vnoremap p p=
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" Compile and Run - Mappings
-"
-" Note: Must be in same directory of file to get correct output.
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Javascript
-" nnoremap <Leader>js<CR> :w<CR>:AsyncRun node % 2>/dev/null<CR>:copen<CR>:wincmd k<CR><CR>
-" nnoremap <Leader>js<CR> :w<CR>:Dispatch! node %<CR>:cw<CR>:wincmd k<CR>
-nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
-
-" Haskell
-nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./foo % && ./foo<CR>
-
-" Java
-" nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
-" nnoremap <Leader>j2<CR> :w<CR>:AsyncRun java %:t:r<CR>:copen<CR>:wincmd k<CR>
-
-" C#
-" nnoremap <Leader>cs<CR> :w<CR>:AsyncRun csc /nologo /t:exe %<CR>:copen<CR>:wincmd k<CR>
-
-" Shell
-" nnoremap <Leader>sh<CR> :w<CR>:AsyncRun bash %:p<CR>:copen<CR>:wincmd k<CR>
-
-" Python
-" nnoremap <Leader>py<CR> :w<CR>:AsyncRun python %<CR>:copen<CR>:wincmd k<CR>
-
-" Ruby
-" nnoremap <Leader>rb<CR> :w<CR>:AsyncRun ruby %:p<CR>:copen<CR>:wincmd k<CR>
-
-" C
-" nnoremap <Leader>c1<CR> :w<CR>:AsyncRun gcc %<CR>:copen<CR>:wincmd k<CR>
-" nnoremap <Leader>c2<CR> :w<CR>:AsyncRun ./a.exe<CR>:wincmd k<CR>
-
-" C++
-" nnoremap <Leader>cp<CR> :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<CR>
