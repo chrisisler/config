@@ -9,11 +9,12 @@ call plug#begin('~/.vim/plugged')
 " Language
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
+Plug 'othree/es.next.syntax.vim'              " es7 syntax
 Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
-Plug 'mattn/emmet-vim'                        " the only way to write html in vim
-Plug 'eagletmt/neco-ghc'
-Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
+" Plug 'mattn/emmet-vim'                        " the only way to write html in vim
+" Plug 'eagletmt/neco-ghc'
+" Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
 " Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 
 " Interface
@@ -24,9 +25,9 @@ Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 " Plug 'rakr/vim-one'                     " take #2 for one dark pro theme
 " Plug 'chriskempson/base16-vim'          " base16 colorschemes
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
-Plug 'bling/vim-airline'                " vim status bar
+Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
-Plug 'kshenoy/vim-signature'            " display marks in gutter
+" Plug 'kshenoy/vim-signature'            " display marks in gutter
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
 
 " Integrations
@@ -66,9 +67,12 @@ call plug#end()
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:necoghc_enable_detailed_browse=1
-let g:haskellmode_completion_ghc=0
-autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
+" disabled by default
+let g:gitgutter_enabled=0
+
+" let g:necoghc_enable_detailed_browse=1
+" let g:haskellmode_completion_ghc=0
+" autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
 
 let g:mta_use_matchparen_group=1
 
@@ -87,7 +91,7 @@ let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> 
 let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
-let g:ale_lint_delay=1000
+let g:ale_lint_delay=750
 let g:ale_open_list=0 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
 " let g:airline_section_error='%{ale#statusline#Status()}'
@@ -133,17 +137,18 @@ let g:jsx_ext_required=0
 " let g:airline_theme='solarized'
 let g:airline_section_error=''
 let g:airline_powerline_fonts=0
-" let g:airline_detect_iminsert=1
+let g:airline_detect_iminsert=1
 let g:airline_skip_empty_sections=1
 let g:airline#extensions#ale#enabled=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#buffers_label=''
 let g:airline#extensions#tabline#tabs_label='tabs'
+let g:airline#extensions#wordcount#format=''
 " let g:airline#extensions#tabline#tab_min_count = 0
 " let g:airline_extensions = ['tabline']
 let g:airline_section_a=''
 let g:airline_section_b=''
-let g:airline_section_c=airline#section#create(['mode', '  %t'])
+let g:airline_section_c=airline#section#create(['%t'])
 let g:airline_section_x='%l, %c '
 let g:airline_section_y=''
 let g:airline_section_z=''
@@ -151,7 +156,7 @@ let g:airline_section_error=''
 let g:airline_section_warning=''
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-" call airline#parts#define_accent('mode', 'gray')
+" call airline#parts#define_accent('mode', 'blue')
 
 " Mode=0 is asynchronous mode. Trim=1 trims empty lines in quickfix window.
 " let g:asyncrun_mode=1

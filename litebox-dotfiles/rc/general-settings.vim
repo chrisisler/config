@@ -23,7 +23,8 @@ set nolist                     " do not display eol signs ('$')
 set nojoinspaces               " prevents inserting 2 spaces when joining
 set splitright                 " put new vertically split windows to the right of current
 set splitbelow                 " put new split windows to bottom of current
-set laststatus=2               " force vim to display status line always
+set laststatus=0               " force vim to display status line always
+autocmd VimEnter * set laststatus=0 " force set 0 on start. for some reasong it wasnt working on its own
 
 set showtabline=2              " Display list of buffers at the top
 
@@ -63,7 +64,7 @@ set cursorline  " highlight current line
 set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal
 set noshowmatch " do not jump to matching brackets/parens when typing
-set noshowmode  " do not show me which mode im in (cause I use airline)
+set noshowmode  " do not show me which mode im in
 set timeoutlen=400
 set ttimeoutlen=50
 " set lazyredraw  " redraw only when you need to

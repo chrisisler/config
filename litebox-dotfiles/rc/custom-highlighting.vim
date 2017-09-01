@@ -41,15 +41,16 @@ highlight Pmenu ctermbg=white ctermfg=black
 highlight DarkBlue ctermfg=darkblue
 " highlight DarkBlue ctermfg=darkblue
 " match DarkBlue /<\s\|\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
-match DarkBlue /\s==\s\|>\s\|<\s\|\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-/
+match DarkBlue /\s*==\s*\|>\s\|<\s\|\[\|\]\|+=\|<=\|>=\|\s*=\s*\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-/
 
 " Function calls.
 highlight Erxi3LightBlueKeywords ctermfg=red
 call matchadd("Erxi3LightBlueKeywords", '\<\w\+\ze(')
-call matchadd("Erxi3LightBlueKeywords", '\s\+\zs\h\w\+\ze\s*=\s*')
+" arrow function definition
+call matchadd("Erxi3LightBlueKeywords", '\w\+\s\+\zs\<\h\w*\>\ze\s*=[^.]\+=>')
 
 highlight ItalicKeywords cterm=italic
-call matchadd("ItalicKeywords", '\<this\>')
+call matchadd("ItalicKeywords", '\zs\<this\>\ze\.\h')
 call matchadd("ItalicKeywords", '\<<.*\zs\w*\ze=.*>')
 call matchadd("ItalicKeywords", '\<arguments\>')
 call matchadd("ItalicKeywords", '\<var\>')
@@ -62,7 +63,7 @@ highlight MagentaKeywords ctermfg=magenta
 call matchadd("MagentaKeywords", '\<return\>')
 call matchadd("MagentaKeywords", '\<void\>')
 call matchadd("MagentaKeywords", '\<null\>')
-call matchadd("MagentaKeywords", '\<new\>')
+" call matchadd("MagentaKeywords", '\<new\>')
 call matchadd("MagentaKeywords", '=>')
 call matchadd("MagentaKeywords", '\s?\s')
 call matchadd("MagentaKeywords", '\s:\s')
@@ -73,7 +74,13 @@ call matchadd("MagentaKeywords",  '</\zs\l\w*\>\ze.*>')
 call matchadd("MagentaKeywords", '[</]\zs\u\w*\>\ze.*>')
 
 highlight DarkMagentaKeywords ctermfg=darkmagenta
+call matchadd("DarkMagentaKeywords", '\<new\>')
 call matchadd("DarkMagentaKeywords", '\<__dirname\>')
 call matchadd("DarkMagentaKeywords", '\<__filename\>')
+call matchadd("DarkMagentaKeywords", '\<import\>')
+call matchadd("DarkMagentaKeywords", '\<export\>')
+call matchadd("DarkMagentaKeywords", '\<default\>')
+call matchadd("DarkMagentaKeywords", '\<from\>')
+call matchadd("DarkMagentaKeywords", '\.\.\.')
 " " call matchadd("DarkMagentaKeywords", '\<true\>')
 " " call matchadd("DarkMagentaKeywords", '\<false\>')

@@ -4,6 +4,9 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" misspelling
+inoremap cosnt const
+
 " niche
 vnoremap 3 5
 
@@ -100,11 +103,6 @@ let g:maplocalleader=","
 " Open ~/.vimrc quickly.
 nnoremap <Leader>v<CR> :e ~/.vimrc<CR>jk
 
-" Linter mappings
-nnoremap <Leader>p :ALEPreviousWrap<CR>kj
-nnoremap <Leader>n :ALENextWrap<CR>kj
-nnoremap <Leader>x :ALEToggle<CR>kj
-
 " Horizontal and vertical resizing like my tmux key-bindings.
 nnoremap <silent> <Leader>H :vertical res -6<CR>
 nnoremap <silent> <Leader>J :res -6<CR>
@@ -142,9 +140,6 @@ nnoremap <silent> <Leader>4<CR> :so $MYVIMRC<CR>
 "          doStuff(people.map(person => person.name), otherVar);
 nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
 
-" Used for putting the trailing comma at the beginning of the line instead of at the end.
-" nnoremap <Leader>z $"xx0wh"xpa<Space>
-
 " Fat array function snippet after typing function arguments.
 " Uses clean indents on newline (after function header/prototype).
 " Uses recursive mapping of ; to :
@@ -179,8 +174,16 @@ nnoremap <Leader>b :b#<CR>
 nnoremap <Leader>; A;<ESC>
 
 " Disable/Enable auto-complete framework.
-nnoremap <Leader>1 :NeoCompleteEnable<CR>
-nnoremap <Leader>2 :NeoCompleteDisable<CR>
+nnoremap <Leader>1 :NeoCompleteEnable<CR>:GitGutterEnable<CR>:set number<CR>:set laststatus=2<CR>:ALEDisable<CR>
+nnoremap <Leader>2 :NeoCompleteDisable<CR>:GitGutterDisable<CR>:set nonumber<CR>:set laststatus=0<CR>:ALEDisable<CR>
+
+nnoremap <Leader>z :NeoCompleteToggle<CR>
+nnoremap <Leader>g :GitGutterToggle<CR>
+nnoremap <Leader>x :ALEToggle<CR>kj
+
+" Linter mappings
+nnoremap <Leader>p :ALEPreviousWrap<CR>kj
+nnoremap <Leader>n :ALENextWrap<CR>kj
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
