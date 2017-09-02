@@ -13,8 +13,8 @@ Plug 'othree/es.next.syntax.vim'              " es7 syntax
 Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
 " Plug 'mattn/emmet-vim'                        " the only way to write html in vim
-" Plug 'eagletmt/neco-ghc'
-" Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
+Plug 'eagletmt/neco-ghc'
+Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
 " Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 
 " Interface
@@ -70,9 +70,19 @@ call plug#end()
 " disabled by default
 let g:gitgutter_enabled=0
 
-" let g:necoghc_enable_detailed_browse=1
-" let g:haskellmode_completion_ghc=0
-" autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
+" haskell settings
+" haskell-vim
+let g:haskell_enabled_quantification=1
+let g:haskell_enabled_recursivedo=1
+let g:haskell_enabled_arrowsyntax=1
+let g:haskell_enabled_pattern_synonyms=1
+let g:haskell_enabled_typeroles=1
+let g:haskell_enabled_static_pointers=1
+let g:haskell_backpack=1
+" neco-ghc
+let g:necoghc_enable_detailed_browse=1
+let g:haskellmode_completion_ghc=0
+autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
 
 let g:mta_use_matchparen_group=1
 

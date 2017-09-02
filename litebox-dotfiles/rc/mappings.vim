@@ -4,6 +4,8 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+
 " misspelling
 inoremap cosnt const
 
@@ -99,6 +101,9 @@ let mapleader=","
 let g:mapleader=","
 let maplocalleader=","
 let g:maplocalleader=","
+
+" Open ~/.vim/snippets/javascript.snippets quickly.
+nnoremap <Leader>sn<CR> :e ~/.vim/snippets/javascript.snippets<CR>
 
 " Open ~/.vimrc quickly.
 nnoremap <Leader>v<CR> :e ~/.vimrc<CR>jk
