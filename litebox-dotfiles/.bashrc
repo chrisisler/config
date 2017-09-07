@@ -24,12 +24,14 @@ export EDITOR="vim"
 lslaVar="ls -oFGHhA" # Can remove H
 
 mainDir="${HOME}/Main"
-academDir="${mainDir}/Academic"
-# codeDir="${mainDir}/Code"
+academicDir="${mainDir}/Uni"
 codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias u="cd ${academicDir} && ${lslaVar}"
+alias uni="cd ${academicDir} && ${lslaVar}"
+alias today="date '+%Y-%m-%d'"
 alias getFiletypes="ls -1F | sed 's/^.*//g' | grep -vE '/$' | tr -d '*' | sort | uniq"
 alias g="cd ${HOME}/Code/Git"
 alias tm="ps auxc"
@@ -46,10 +48,9 @@ alias ....="cd ../../.. && ${lslaVar}"
 alias .....="cd ../../../.. && ${lslaVar}"
 alias ......="cd ../../../../.. && ${lslaVar}"
 alias hs="vim ${codeDir}/Haskell/Test.hs"
-alias test="vim ${codeDir}/JS/Test.js"
+alias test="vim ${codeDir}/Test/Test.js"
 alias cpp="vim ${codeDir}/Cpp/Test.cpp"
 alias main="cd ${mainDir} && ${lslaVar}"
-alias acad="cd ${academDir} && ${lslaVar}"
 alias code="cd ${codeDir} && ${lslaVar}"
 alias ed="cd ${codeDir}/Git/erxidesk && ${lslaVar}"
 alias conf="cd ${codeDir}/Git/config && ${lslaVar}"

@@ -52,10 +52,10 @@ set backupcopy=yes
 
 " https://robots.thoughtbot.com/vim-you-complete-me
 set complete=.,b,u,]
-set wildmode=longest,list:longest
+set wildmenu                  " visual autocomplete
+set wildmode=longest,list:longest 
 set previewheight=8
 set completeopt=longest,menuone,preview
-set wildmenu                  " visual autocomplete
 set path+=**
 
 " Visual.

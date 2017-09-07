@@ -4,6 +4,8 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" pressing enter key when auto-complete (pop-up) menu is open will press enter
+inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
 
 
 " misspelling
@@ -204,7 +206,7 @@ nnoremap <Leader>n :ALENextWrap<CR>kj
 nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
 
 " Haskell
-nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./foo % && ./foo<CR>
+nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./%:t:r % && ./%:t:r<CR>
 
 " Java
 " nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>

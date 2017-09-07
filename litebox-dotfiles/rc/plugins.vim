@@ -52,12 +52,9 @@ Plug 'ervandew/supertab'      " hit <tab> for autocomplete
 Plug 'shougo/neocomplete.vim' " code-completion
 Plug 'sirver/ultisnips'       " snippies
 Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, types, refs, renames, etc.
-" Plug 'othree/jspc.vim'        " js parameter completion in auto-comp preview menu - not in use
 
 " Other
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
-" Plug 'ap/vim-css-color'  " make things like #d6a323 show the actual color in css files
-" Plug 'valloric/matchtagalways' " show matching tags (the onse your cursor is inside of)
 
 call plug#end()
 
@@ -81,7 +78,7 @@ let g:haskell_enabled_static_pointers=1
 let g:haskell_backpack=1
 " neco-ghc
 let g:necoghc_enable_detailed_browse=1
-let g:haskellmode_completion_ghc=0
+let g:haskellmode_completion_ghc=1
 autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
 
 let g:mta_use_matchparen_group=1
@@ -93,12 +90,12 @@ let g:tern_show_signature_in_pum=1
 
 let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 
-let g:user_emmet_mode='a'         " enable emmet in all vim modes
-let g:user_emmet_install_global=0 " enable emmet for just the below types
-autocmd FileType html,css,js,jsx EmmetInstall
-let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
+" let g:user_emmet_mode='a'         " enable emmet in all vim modes
+" let g:user_emmet_install_global=0 " enable emmet for just the below types
+" autocmd FileType html,css,js,jsx EmmetInstall
+" let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
 
-let g:ale_enabled=1
+let g:ale_enabled=0
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
 let g:ale_lint_delay=750
@@ -115,7 +112,7 @@ let g:ale_linters={
 let g:ctrlp_custom_ignore='node_modules'
 
 " Use neocomplete.
-let g:neocomplete#enable_at_startup=1
+let g:neocomplete#enable_at_startup=0
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#sources#syntax#min_keyword_length=2
 let g:neocomplete#enable_auto_close_preview=1
