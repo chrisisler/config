@@ -38,8 +38,6 @@ highlight Comment cterm=italic
 " do not change the bacground color of the line numbers (flat ui)
 highlight LineNr ctermbg=bg
 
-" remove background color highlighting from the current line number
-highlight CursorLineNr ctermbg=bg ctermfg=green
 
 " do not display "~" character for end of buffer (make text color = bg color)
 highlight EndOfBuffer ctermfg=bg ctermbg=NONE
@@ -54,9 +52,9 @@ highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 if &background == "dark"
 
     " Preview (popup) menu syntax highlighting
-    highlight Pmenu ctermbg=fg ctermfg=bg
-    highlight PmenuSel cterm=reverse ctermbg=fg ctermfg=black
-    highlight PmenuThumb ctermbg=fg ctermfg=bg
+    " highlight Pmenu ctermbg=fg ctermfg=bg
+    " highlight PmenuSel cterm=reverse ctermbg=fg ctermfg=black
+    " highlight PmenuThumb ctermbg=fg ctermfg=bg
 
     " highlight the matching parenthesis/bracket/angle and make it bold white
     " highlight MatchParen ctermfg=white ctermbg=bg
@@ -80,28 +78,38 @@ else
 endif
 
 " Highlighted (in visual mode) syntax highlighting
-highlight Visual cterm=reverse ctermbg=fg ctermfg=black
+highlight Visual ctermbg=fg ctermfg=black
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 
-" Solarized Dark JavaScript specific syntax highlighting
+" One Dark JavaScript specific syntax highlighting
 " 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" remove background color highlighting from the current line number
+highlight CursorLineNr ctermbg=bg ctermfg=15
 
 autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaScriptOneDark()
 function! HighlightJavaScriptOneDark()
 
-    " todo
-    highlight Search cterm=bold,reverse ctermbg=lightmagenta
-
     call clearmatches()
 
-    highlight OneDarkItalic cterm=italic
-    call matchadd("OneDarkItalic", '\<this\>')
+    " todo
+    " highlight Search 
+    " highlight Visual 
 
-    " function arguments, JS specific
-    " highlight Special cterm=italic
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+    " Note: 3 is the `inaccessible` golden yellow color (raw ANSI yellow color).
+    highlight OneDarkItalicGolden cterm=italic ctermfg=3
+    call matchadd("OneDarkItalicGolden", '\<this\>')
+
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
     " function definition and function call are same 'blue' color.
     highlight FuncDefAndCall ctermfg=darkblue
@@ -109,8 +117,11 @@ function! HighlightJavaScriptOneDark()
     " arrow function definition. does not work for arrow func as class property.
     " call matchadd("FuncDefAndCall", '\w\+\s\+\zs\<[A-Za-z_]\w*\>\ze\s*=[^.]\+=>')
     " arrow function definition. DOES WORK for arrow func as class property.
-    " call matchadd("FuncDefAndCall", '\w*\s\+\zs\<[A-Za-z_]\w*\>\ze\s*=[^.]\+=>')
     call matchadd("FuncDefAndCall", '\w*\s\+\zs\<[A-Za-z_]\w*\>\ze\s*=[^.]\+=>')
+
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
     " `require` is specifically 'cyan' colored.
     highlight ReservedFunc ctermfg=cyan
@@ -119,6 +130,11 @@ function! HighlightJavaScriptOneDark()
     call matchadd("ReservedFunc", '\.\<test\>\ze(')
     call matchadd("ReservedFunc", '\.\<slice\>\ze(')
     call matchadd("ReservedFunc", '\.\<forEach\>\ze(')
+    call matchadd("ReservedFunc", '\.\.\.\ze\h')
+
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
     " return
     highlight Statement cterm=italic ctermfg=magenta
@@ -133,31 +149,77 @@ function! HighlightJavaScriptOneDark()
     " instanceof, typeof, new, in, void
     highlight Identifier cterm=italic ctermfg=magenta
 
-    highlight Todo cterm=bold,underline ctermfg=NONE
+    highlight Todo cterm=underline ctermfg=NONE
 
-    " highlight OneDarkGolden ctermfg=yellow
-    " call matchadd("OneDarkGolden", '(var|let|const|.)\zs[A-Z][A-Z0-9_]*')
 
-    " highlight OneDarkVar cterm=italic ctermfg=magenta
-    " call matchadd("OneDarkVar", '\s*[^*/]\zs\<var\>')
-    " call matchadd("OneDarkVar", '\s*[^*/]\zs\<let\>')
-    " call matchadd("OneDarkVar", '\s*[^*/]\zs\<const\>')
-    " call matchadd("OneDarkVar", '\s*[^*/]\zs\<function\>')
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " Note: In One Dark, `Keyword` is the iconic red color.
-    highlight OneDarkRed ctermfg=red
+
+    highlight OneDarkItalicMagenta cterm=italic ctermfg=magenta
+    call matchadd("OneDarkItalicMagenta", '\<var\>')
+    call matchadd("OneDarkItalicMagenta", '\<let\>')
+    call matchadd("OneDarkItalicMagenta", '\<const\>')
+    call matchadd("OneDarkItalicMagenta", '\<function\>') " todo
+
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+    " Note: `red` and `darkred` are the same (from the custom `Erxi` itermcolorscheme)
+    highlight OneDarkRed ctermfg=darkred
+
+    " highlight for /** @see myFunc */
     call matchadd("OneDarkRed", '@see\s\+\zs\S\+\ze')
+
     " make stuff like /** @param {String} myFoo */ highlighted red for `myFoo`
     call matchadd("OneDarkRed", '\*\s*@[A-Za-z]\+\s*{.*}\s*\zs\<\h\S\+\>')
+
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+    " todo: arrow func args
+    highlight OneDarkRedItalic cterm=italic ctermfg=darkyellow
+    " highlight OneDarkRedItalic cterm=italic ctermfg=11
+    call matchadd("OneDarkRedItalic", '\h\w*\ze\s*=>')
+
+    " todo: func args
+
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+    highlight OneDarkGolden ctermfg=3
+
+    call matchadd("OneDarkGolden", '\<document\>')
+
+    " All caps things like regexp's and constants.
+    " call matchadd("OneDarkGolden", '(var|let|const|.)\zs[A-Z][A-Z0-9_]*')
+    " call matchadd("OneDarkGolden", '\<[A-Z_][0-9A-Z_]*\>\ze\(\s\+ =\)\|\.')
+    " call matchadd("OneDarkGolden", '\<[A-Z_][0-9A-Z_]*\>')
+
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+    " idea: force comment things that are comments, and @foo thingies that are comments
+    call matchadd("Comment", '^\s*\*\s*.*')
+    call matchadd("Comment", '^\s*\*@\h\w\+\s\+[0-9A-Za-z_.{}]\+\s\zs\s*.*')
 
 endfunction
 
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" 
+" One Dark JavaScript specific syntax highlighting
+" 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 
 function! HighlightJavaScriptSolarized()
+    highlight CursorLineNr ctermbg=bg ctermfg=green
 
     " when searching, highlight found matches as bold white
     highlight Search cterm=bold ctermfg=white
