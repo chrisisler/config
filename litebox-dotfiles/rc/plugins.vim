@@ -9,21 +9,22 @@ call plug#begin('~/.vim/plugged')
 " Language
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
-Plug 'othree/es.next.syntax.vim'              " es7 syntax
+" Plug 'othree/es.next.syntax.vim'              " es7 syntax
 Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
-" Plug 'mattn/emmet-vim'                        " the only way to write html in vim
+Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 Plug 'eagletmt/neco-ghc'
 Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
+Plug 'hynek/vim-python-pep8-indent' " python correct indentation
 " Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
 Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
-" Plug 'flazz/vim-colorschemes'           " abunch of random colorschemes for vim, mostly sucky
-" Plug 'joshdick/onedark.vim'             " hopefully good
-" Plug 'rakr/vim-one'                     " take #2 for one dark pro theme
-" Plug 'chriskempson/base16-vim'          " base16 colorschemes
+Plug 'flazz/vim-colorschemes'           " some solid colorschems! (:
+Plug 'joshdick/onedark.vim'             " hopefully good
+Plug 'rakr/vim-one'                     " take #2 for one dark pro theme
+Plug 'chriskempson/base16-vim'          " base16 colorschemes
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
@@ -64,7 +65,10 @@ call plug#end()
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" disabled by default
+" dont auto-fold python functions
+let g:pymode_folding=0
+
+" git diff in gutter, disabled by default
 let g:gitgutter_enabled=0
 
 " haskell settings
@@ -87,13 +91,12 @@ let g:tern#is_show_argument_hints_enabled=1
 let g:tern_show_argument_hints=1
 let g:tern_show_signature_in_pum=1
 
-
 let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 
-" let g:user_emmet_mode='a'         " enable emmet in all vim modes
-" let g:user_emmet_install_global=0 " enable emmet for just the below types
+let g:user_emmet_mode='a'         " enable emmet in all vim modes
+let g:user_emmet_install_global=0 " enable emmet for just the below types
 " autocmd FileType html,css,js,jsx EmmetInstall
-" let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
+let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
 
 let g:ale_enabled=0
 let g:ale_echo_msg_warning_str=''
@@ -111,9 +114,13 @@ let g:ale_linters={
 
 let g:ctrlp_custom_ignore='node_modules'
 
-" Use neocomplete.
-let g:neocomplete#enable_at_startup=0
+" neocomplete settings.
+let g:neocomplete#enable_at_startup=1
+let g:neocomplete#auto_complete_delay=200
 let g:neocomplete#enable_smart_case=1
+" Auto select the first available auto-complete option instead of making me do it
+let g:neocomplete#enable_auto_select=1
+let g:neocomplete#max_list=15
 let g:neocomplete#sources#syntax#min_keyword_length=2
 let g:neocomplete#enable_auto_close_preview=1
 " Define dictionary.

@@ -15,31 +15,19 @@ endif
 " do not throw error if colorscheme not found
 try
     colorscheme solarized
+    " colorscheme gruvbox
 catch /:E185:/
     " Silently ignore if colorscheme not found
 endtry
 
-set background=light
-
-" remove previous syntax highlight (and apply the below highlights)
-call clearmatches()
+set background=dark
 
 " make comments italic
 highlight Comment cterm=italic
 
-" function arguments, JS specific
-highlight Special cterm=italic
-
-" make numbers deep purple/pink
-" todo: not dark/light background-color agnostic
-highlight Number ctermfg=darkmagenta
-
-" highlight the matching parenthesis/bracket/angle and make it bold white
-highlight MatchParen ctermfg=fg ctermbg=NONE
-
 " when searching, highlight found matches as bold white
 " todo: not dark/light background-color agnostic
-highlight Search cterm=bold ctermfg=white
+" highlight Search cterm=bold ctermfg=white
 
 " do not change the bacground color of the line numbers (flat ui)
 highlight LineNr ctermbg=bg
@@ -51,51 +39,91 @@ highlight CursorLineNr ctermbg=bg ctermfg=blue
 highlight VertSplit ctermfg=bg ctermbg=bg
 " highlight VertSplit ctermbg=black ctermfg=black
 
-" do not display "~" character for end of buffer
+" do not display "~" character for end of buffer (make text color = bg color)
 highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 
-" " Preview (popup) menu syntax highlighting
-highlight Pmenu ctermbg=white ctermfg=black
+if &background == "dark"
 
-highlight DarkBlue ctermfg=darkblue
-" highlight DarkBlue ctermfg=darkblue
-" match DarkBlue /<\s\|\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
-" match DarkBlue /=>\|==\|>\s\|<\s\|\[\|\]\|+=\|<=\|>=\|\s*=\s*\|\s\W==\s\|!\|&\|\s!=\s\|\s|\s\|+\|-/
-call matchadd("DarkBlue", '=')
-call matchadd("DarkBlue", '>')
-call matchadd("DarkBlue", '<')
-call matchadd("DarkBlue", '+')
-call matchadd("DarkBlue", '-')
-call matchadd("DarkBlue", '/(?=/)')
-" call matchadd("DarkBlue", '*')
-" call matchadd("DarkBlue", '[')
-" call matchadd("DarkBlue", ']')
-call matchadd("DarkBlue", '&')
-call matchadd("DarkBlue", '|')
-call matchadd("DarkBlue",  '?')
-call matchadd("DarkBlue",  ':')
-call matchadd("DarkBlue",  '!')
+    " Preview (popup) menu syntax highlighting
+    highlight Pmenu ctermbg=fg ctermfg=bg
+    highlight PmenuSel cterm=reverse ctermbg=fg ctermfg=black
 
-" Function calls.
-highlight Erxi3LightBlueKeywords ctermfg=red
-call matchadd("Erxi3LightBlueKeywords", '\<\w\+\ze(')
-" arrow function definition
-call matchadd("Erxi3LightBlueKeywords", '\w\+\s\+\zs\<\h\w*\>\ze\s*=[^.]\+=>')
+    " Highlighted (in visual mode) syntax highlighting
+    highlight Visual cterm=underline,reverse ctermbg=fg ctermfg=black
 
-highlight ItalicKeywords cterm=italic
-call matchadd("ItalicKeywords", '\zs\<this\>\ze\.\h')
-call matchadd("ItalicKeywords", '\<<.*\zs\w*\ze=.*>')
-call matchadd("ItalicKeywords", '\s@\w*.*$')
-call matchadd("ItalicKeywords", '\<var\>')
-call matchadd("ItalicKeywords", '\<let\>')
-call matchadd("ItalicKeywords", '\<const\>')
-call matchadd("ItalicKeywords", '\<function\>')
+    " highlight the matching parenthesis/bracket/angle and make it bold white
+    highlight MatchParen ctermfg=white ctermbg=bg
 
-highlight MagentaKeywords ctermfg=magenta
-call matchadd("MagentaKeywords", '\<return\>')
-call matchadd("MagentaKeywords",  '<\zs\l\w*\>\ze.*>')
+    call HighlightJavaScript()
+else
+    " todo
+    highlight Pmenu cterm=reverse ctermbg=fg ctermfg=bg
+    highlight PmenuSel ctermbg=white ctermfg=darkblue
 
-" JSX any (lowercase-beginning) html-tag
-" call matchadd("MagentaKeywords",  '</\zs\l\w*\>\ze.*>')
-" JSX Custom Components (jsx that begins with upper case letter (\u))
-" call matchadd("MagentaKeywords", '[</]\zs\u\w*\>\ze.*>')
+    highlight MatchParen ctermfg=black ctermbg=bg
+endif
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaScript()
+" autocmd FileType javascript call HighlightJavaScript()
+function! HighlightJavaScript()
+
+    " function arguments, JS specific
+    highlight Special cterm=italic
+
+    " make numbers deep purple/pink
+    " todo: not dark/light background-color agnostic
+    highlight Number ctermfg=darkmagenta
+
+    " remove previous syntax highlight (and apply the below highlights)
+    call clearmatches()
+
+    highlight DarkBlue ctermfg=darkblue
+    " highlight DarkBlue ctermfg=darkblue
+    " match DarkBlue /<\s\|\[\|\]\|+=\|<=\|>=\|\s=\s\|\s\W==\s\|\s?\s\|\s:\s\|!\|&\|\s!=\s\|\s|\s\|+\|-\||\|\<\w\+\ze(/
+    " match DarkBlue /=>\|==\|>\s\|<\s\|\[\|\]\|+=\|<=\|>=\|\s*=\s*\|\s\W==\s\|!\|&\|\s!=\s\|\s|\s\|+\|-/
+    call matchadd("DarkBlue", '=')
+    call matchadd("DarkBlue", '>')
+    call matchadd("DarkBlue", '<')
+    call matchadd("DarkBlue", '+')
+    call matchadd("DarkBlue", '-')
+
+    " highlight forward slash only when not followed by a foward slash
+    call matchadd("DarkBlue", '/(?=/)')
+    " call matchadd("DarkBlue", '*')
+    " call matchadd("DarkBlue", '[')
+    " call matchadd("DarkBlue", ']')
+    call matchadd("DarkBlue", '&')
+    call matchadd("DarkBlue", '|')
+    call matchadd("DarkBlue",  '?')
+    call matchadd("DarkBlue",  ':')
+    call matchadd("DarkBlue",  '!')
+
+    " Function calls.
+    highlight Erxi3LightBlueKeywords ctermfg=red
+    call matchadd("Erxi3LightBlueKeywords", '\<\w\+\ze(')
+    " arrow function definition
+    call matchadd("Erxi3LightBlueKeywords", '\w\+\s\+\zs\<\h\w*\>\ze\s*=[^.]\+=>')
+
+    highlight ItalicKeywords cterm=italic
+    call matchadd("ItalicKeywords", '\zs\<this\>\ze\.\h')
+    call matchadd("ItalicKeywords", '\<<.*\zs\w*\ze=.*>')
+    call matchadd("ItalicKeywords", '\s@\w*.*$')
+    " call matchadd("ItalicKeywords", '\<var\>')
+    " call matchadd("ItalicKeywords", '\<let\>')
+    " call matchadd("ItalicKeywords", '\<const\>')
+    call matchadd("ItalicKeywords", '\<function\>')
+
+    highlight MagentaKeywords ctermfg=magenta
+    call matchadd("MagentaKeywords", '\<return\>')
+
+    " JSX any (lowercase-beginning) html-tag
+    call matchadd("MagentaKeywords",  '<\zs\l\w*\>\ze.*>')
+    call matchadd("MagentaKeywords",  '</\zs\l\w*\>\ze.*>')
+    " JSX Custom Components (jsx that begins with upper case letter (\u))
+    call matchadd("MagentaKeywords", '[</]\zs\u\w*\>\ze.*>')
+
+endfunction

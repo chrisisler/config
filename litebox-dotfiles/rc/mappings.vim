@@ -200,6 +200,9 @@ nnoremap <Leader>n :ALENextWrap<CR>kj
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Custom dispatch call
+nnoremap <Leader>d<CR> :w<CR>:Dispatch 
+
 " Javascript
 " nnoremap <Leader>js<CR> :w<CR>:AsyncRun node % 2>/dev/null<CR>:copen<CR>:wincmd k<CR><CR>
 " nnoremap <Leader>js<CR> :w<CR>:Dispatch! node %<CR>:cw<CR>:wincmd k<CR>
@@ -207,6 +210,10 @@ nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
 
 " Haskell
 nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./%:t:r % && ./%:t:r<CR>
+
+" Python
+" nnoremap <Leader>py<CR> :w<CR>:AsyncRun python %<CR>:copen<CR>:wincmd k<CR>
+nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
 
 " Java
 " nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
@@ -217,9 +224,6 @@ nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./%:t:r % && ./%:t:r<CR>
 
 " Shell
 " nnoremap <Leader>sh<CR> :w<CR>:AsyncRun bash %:p<CR>:copen<CR>:wincmd k<CR>
-
-" Python
-" nnoremap <Leader>py<CR> :w<CR>:AsyncRun python %<CR>:copen<CR>:wincmd k<CR>
 
 " Ruby
 " nnoremap <Leader>rb<CR> :w<CR>:AsyncRun ruby %:p<CR>:copen<CR>:wincmd k<CR>

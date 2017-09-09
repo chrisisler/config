@@ -59,13 +59,14 @@ set completeopt=longest,menuone,preview
 set path+=**
 
 " Visual.
-set number      " show line numbers
+set noruler
+set number      " show line numbers on left
 set cursorline  " highlight current line
 set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal
 set noshowmatch " do not jump to matching brackets/parens when typing
 set noshowmode  " do not show me which mode im in
-set timeoutlen=400
+set timeoutlen=500
 set ttimeoutlen=50
 " set lazyredraw  " redraw only when you need to
 " set relativenumber
