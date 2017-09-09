@@ -15,16 +15,19 @@ Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
 Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 Plug 'eagletmt/neco-ghc'
 Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
-Plug 'hynek/vim-python-pep8-indent' " python correct indentation
+" Plug 'hynek/vim-python-pep8-indent' " python correct indentation
 " Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 
 " Interface
 Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
 Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
-Plug 'flazz/vim-colorschemes'           " some solid colorschems! (:
-Plug 'joshdick/onedark.vim'             " hopefully good
-Plug 'rakr/vim-one'                     " take #2 for one dark pro theme
-Plug 'chriskempson/base16-vim'          " base16 colorschemes
+
+Plug 'kristijanhusak/vim-hybrid-material'
+
+" Plug 'flazz/vim-colorschemes'           " some solid colorschems! (:
+Plug 'joshdick/onedark.vim'             " the only good one dark plugin
+
+" Plug 'chriskempson/base16-vim'          " base16 colorschemes
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
 Plug 'airblade/vim-gitgutter'           " git diff in gutter
@@ -65,8 +68,9 @@ call plug#end()
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" dont auto-fold python functions
-let g:pymode_folding=0
+" must be 16
+let g:onedark_termcolors=16
+let g:onedark_terminal_italics=1
 
 " git diff in gutter, disabled by default
 let g:gitgutter_enabled=0
@@ -148,7 +152,7 @@ let NERDTreeShowHidden=1
 let g:jsx_ext_required=0
 
 " Airline settings. See `vert h statusline`
-" let g:airline_theme='solarized'
+let g:airline_theme='solarized'
 let g:airline_section_error=''
 let g:airline_powerline_fonts=0
 let g:airline_detect_iminsert=1
