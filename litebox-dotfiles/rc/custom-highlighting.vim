@@ -93,9 +93,12 @@ autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaS
 function! HighlightJavaScriptOneDark()
 
     " todo
-    highlight Search cterm=bold ctermbg=lightmagenta
+    highlight Search cterm=bold,reverse ctermbg=lightmagenta
 
     call clearmatches()
+
+    highlight OneDarkItalic cterm=italic
+    call matchadd("OneDarkItalic", '\<this\>')
 
     " function arguments, JS specific
     " highlight Special cterm=italic
@@ -106,28 +109,53 @@ function! HighlightJavaScriptOneDark()
     " arrow function definition. does not work for arrow func as class property.
     " call matchadd("FuncDefAndCall", '\w\+\s\+\zs\<[A-Za-z_]\w*\>\ze\s*=[^.]\+=>')
     " arrow function definition. DOES WORK for arrow func as class property.
+    " call matchadd("FuncDefAndCall", '\w*\s\+\zs\<[A-Za-z_]\w*\>\ze\s*=[^.]\+=>')
     call matchadd("FuncDefAndCall", '\w*\s\+\zs\<[A-Za-z_]\w*\>\ze\s*=[^.]\+=>')
 
     " `require` is specifically 'cyan' colored.
     highlight ReservedFunc ctermfg=cyan
-    call matchadd("ReservedFunc", '\<require\>\ze(')
-    call matchadd("ReservedFunc", '\<keys\>\ze(')
-    call matchadd("ReservedFunc", '\<test\>\ze(')
-    call matchadd("ReservedFunc", '\<slice\>\ze(')
+    call matchadd("ReservedFunc", '\.\<require\>\ze(')
+    call matchadd("ReservedFunc", '\.\<keys\>\ze(')
+    call matchadd("ReservedFunc", '\.\<test\>\ze(')
+    call matchadd("ReservedFunc", '\.\<slice\>\ze(')
+    call matchadd("ReservedFunc", '\.\<forEach\>\ze(')
 
     " return
     highlight Statement cterm=italic ctermfg=magenta
     " if else
     highlight Conditional cterm=italic ctermfg=magenta
-    " for, while, do
+    " for, while, do, of
     highlight Repeat cterm=italic ctermfg=magenta
     " try, catch, finally, throw
     highlight Exception cterm=italic ctermfg=magenta
+    " case, default
+    highlight Label cterm=italic ctermfg=magenta
+    " instanceof, typeof, new, in, void
+    highlight Identifier cterm=italic ctermfg=magenta
 
-    " This should be off: `Identifier` = `in`, `new`
-    " highlight Identifier cterm=italic ctermfg=magenta
+    highlight Todo cterm=bold,underline ctermfg=NONE
+
+    " highlight OneDarkGolden ctermfg=yellow
+    " call matchadd("OneDarkGolden", '(var|let|const|.)\zs[A-Z][A-Z0-9_]*')
+
+    " highlight OneDarkVar cterm=italic ctermfg=magenta
+    " call matchadd("OneDarkVar", '\s*[^*/]\zs\<var\>')
+    " call matchadd("OneDarkVar", '\s*[^*/]\zs\<let\>')
+    " call matchadd("OneDarkVar", '\s*[^*/]\zs\<const\>')
+    " call matchadd("OneDarkVar", '\s*[^*/]\zs\<function\>')
+
+    " Note: In One Dark, `Keyword` is the iconic red color.
+    highlight OneDarkRed ctermfg=red
+    call matchadd("OneDarkRed", '@see\s\+\zs\S\+\ze')
+    " make stuff like /** @param {String} myFoo */ highlighted red for `myFoo`
+    call matchadd("OneDarkRed", '\*\s*@[A-Za-z]\+\s*{.*}\s*\zs\<\h\S\+\>')
 
 endfunction
+
+
+
+
+
 
 function! HighlightJavaScriptSolarized()
 
