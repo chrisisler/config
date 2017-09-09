@@ -54,7 +54,9 @@ if &background == "dark"
     " highlight the matching parenthesis/bracket/angle and make it bold white
     highlight MatchParen ctermfg=white ctermbg=bg
 
-    call HighlightJavaScript()
+    if &filetype == "javascript.jsx"
+        call HighlightJavaScript()
+    endif
 else
     " todo
     highlight Pmenu cterm=reverse ctermbg=fg ctermfg=bg
@@ -67,12 +69,14 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaScript()
+" autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaScript()
 " autocmd FileType javascript call HighlightJavaScript()
+
 function! HighlightJavaScript()
 
     " function arguments, JS specific
     highlight Special cterm=italic
+    highlight Boolean ctermfg=magenta
 
     " make numbers deep purple/pink
     " todo: not dark/light background-color agnostic
