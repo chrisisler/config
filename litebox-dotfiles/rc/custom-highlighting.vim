@@ -30,7 +30,9 @@ endtry
 
 set background=dark
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 " make comments italic
 highlight Comment cterm=italic
@@ -38,9 +40,9 @@ highlight Comment cterm=italic
 " do not change the bacground color of the line numbers (flat ui)
 highlight LineNr ctermbg=bg
 
-
-" do not display "~" character for end of buffer (make text color = bg color)
+" do not display ~ character for end of buffer (make text color = bg color)
 highlight EndOfBuffer ctermfg=bg ctermbg=NONE
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 
@@ -67,11 +69,11 @@ if &background == "dark"
     endif
 else
     " todo
-    highlight Pmenu cterm=reverse ctermbg=fg ctermfg=bg
-    highlight PmenuSel ctermbg=white ctermfg=darkblue
+    " highlight Pmenu cterm=reverse ctermbg=fg ctermfg=bg
+    " highlight PmenuSel ctermbg=white ctermfg=darkblue
     " highlight MatchParen ctermfg=black ctermbg=bg
-    highlight Search cterm=bold ctermfg=black
-    highlight VertSplit ctermfg=bg ctermbg=bg
+    " highlight Search cterm=bold ctermfg=black
+    " highlight VertSplit ctermfg=bg ctermbg=bg
 
     " done
     " ...
@@ -95,10 +97,19 @@ function! HighlightJavaScriptOneDark()
 
     call clearmatches()
 
-    " todo
+    " todo:
     " highlight Search 
     " highlight Visual 
-
+    " arrow func args with parens
+    " `function` func args with parens
+    " `function` func args with parens
+    " jsx props -> italicize
+    " jsx nodeNames
+    " light mode?
+    " put this func in a separate file
+    " pmenusel
+    " pmenuthumb
+    " bufline colors
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -123,14 +134,15 @@ function! HighlightJavaScriptOneDark()
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-    " `require` is specifically 'cyan' colored.
     highlight ReservedFunc ctermfg=cyan
     call matchadd("ReservedFunc", '\.\<require\>\ze(')
     call matchadd("ReservedFunc", '\.\<keys\>\ze(')
     call matchadd("ReservedFunc", '\.\<test\>\ze(')
     call matchadd("ReservedFunc", '\.\<slice\>\ze(')
     call matchadd("ReservedFunc", '\.\<forEach\>\ze(')
-    call matchadd("ReservedFunc", '\.\.\.\ze\h')
+    call matchadd("ReservedFunc", '\.\<call\>\ze(')
+    call matchadd("ReservedFunc", '\.\<apply\>\ze(')
+    call matchadd("ReservedFunc", '\.\.\.\ze\S\?\h')
 
 
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -144,7 +156,7 @@ function! HighlightJavaScriptOneDark()
     highlight Repeat cterm=italic ctermfg=magenta
     " try, catch, finally, throw
     highlight Exception cterm=italic ctermfg=magenta
-    " case, default
+    " case, default, and object keys
     highlight Label cterm=italic ctermfg=magenta
     " instanceof, typeof, new, in, void
     highlight Identifier cterm=italic ctermfg=magenta
@@ -178,9 +190,10 @@ function! HighlightJavaScriptOneDark()
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+    " todo: move to separate file
     " todo: arrow func args
-    highlight OneDarkRedItalic cterm=italic ctermfg=darkyellow
-    " highlight OneDarkRedItalic cterm=italic ctermfg=11
+    highlight OneDarkRedItalic cterm=italic ctermfg=cyan
+    " highlight OneDarkRedItalic cterm=italic ctermfg=darkyellow
     call matchadd("OneDarkRedItalic", '\h\w*\ze\s*=>')
 
     " todo: func args
@@ -203,8 +216,8 @@ function! HighlightJavaScriptOneDark()
 
 
     " idea: force comment things that are comments, and @foo thingies that are comments
-    call matchadd("Comment", '^\s*\*\s*.*')
-    call matchadd("Comment", '^\s*\*@\h\w\+\s\+[0-9A-Za-z_.{}]\+\s\zs\s*.*')
+    " call matchadd("Comment", '^\s*\*\s*.*')
+    " call matchadd("Comment", '^\s*\*@\h\w\+\s\+[0-9A-Za-z_.{}]\+\s\zs\s*.*')
 
 endfunction
 
@@ -264,6 +277,7 @@ function! HighlightJavaScriptSolarized()
 
     " jsx props
     " call matchadd("ItalicKeywords", '\<<.*\zs\w*\ze=.*>')
+    call matchadd("ItalicKeywords", '\zs\<\h\w*\>\ze=.\+')
 
     " `this` keyword. Cannot be replaced by builtin/native highlight any group.
     call matchadd("ItalicKeywords", '\zs\<this\>\ze\.\h')

@@ -102,7 +102,7 @@ alias eject="diskutil unmount $@"
 alias chips="cd ${codeDir}/Git/chips && ${lslaVar}"
 alias btc="curl -sSL https://coinbase.com/api/v1/prices/historical | head -n 1 | sed \"s|^.*,|$|\" | sed \"s|\(\.[0-9]$\)|\10|\""
 alias thesaurus="node ${codeDir}/JS/Bin/thesaurus.js $@"
-alias snake="rename 'y/[ _]/-/' $1"
+alias snakecase="rename 'y/[ _]/-/' $1"
 alias tm="ps axcu"
 alias clock='watch -t -n1 "date +%T|figlet"'
 
