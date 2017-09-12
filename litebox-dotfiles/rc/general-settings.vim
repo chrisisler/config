@@ -26,7 +26,7 @@ set splitbelow                 " put new split windows to bottom of current
 set laststatus=0               " force vim to display status line always
 autocmd VimEnter * set laststatus=0 " force set 0 on start. for some reasong it wasnt working on its own
 
-set showtabline=2              " Display list of buffers at the top
+set showtabline=2              " Display list of buffers at the top, uses airline plugin.
 
 set showfulltag                " display more info when auto-completing
 set smartcase                  " smart (case-sensitive when you specify) search matching
@@ -61,7 +61,8 @@ set path+=**
 " Visual.
 set noruler
 set number      " show line numbers on left
-set cursorline  " highlight current line
+" set cursorline  " highlight current line
+set nocursorline  " highlight current line
 set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal
 set noshowmatch " do not jump to matching brackets/parens when typing

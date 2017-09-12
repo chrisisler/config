@@ -13,16 +13,14 @@ Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
 Plug 'mattn/emmet-vim'                        " the only way to write html in vim
-Plug 'eagletmt/neco-ghc'
+" Plug 'eagletmt/neco-ghc'
 Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
 " Plug 'hynek/vim-python-pep8-indent' " python correct indentation
 " Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 
 " Interface
-Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
-Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
-
-Plug 'kristijanhusak/vim-hybrid-material'
+" Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
+" Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 
 " Plug 'flazz/vim-colorschemes'           " some solid colorschems! (:
 Plug 'joshdick/onedark.vim'             " the only good one dark plugin
@@ -30,7 +28,7 @@ Plug 'joshdick/onedark.vim'             " the only good one dark plugin
 " Plug 'chriskempson/base16-vim'          " base16 colorschemes
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
-Plug 'airblade/vim-gitgutter'           " git diff in gutter
+" Plug 'airblade/vim-gitgutter'           " git diff in gutter
 " Plug 'kshenoy/vim-signature'            " display marks in gutter
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
 
@@ -73,7 +71,7 @@ let g:onedark_termcolors=16
 let g:onedark_terminal_italics=1
 
 " git diff in gutter, disabled by default
-let g:gitgutter_enabled=0
+" let g:gitgutter_enabled=0
 
 " haskell settings
 " haskell-vim
@@ -120,10 +118,8 @@ let g:ctrlp_custom_ignore='node_modules'
 
 " neocomplete settings.
 let g:neocomplete#enable_at_startup=1
-let g:neocomplete#auto_complete_delay=200
+let g:neocomplete#auto_complete_delay=100
 let g:neocomplete#enable_smart_case=1
-" Auto select the first available auto-complete option instead of making me do it
-let g:neocomplete#enable_auto_select=1
 let g:neocomplete#max_list=15
 let g:neocomplete#sources#syntax#min_keyword_length=2
 let g:neocomplete#enable_auto_close_preview=1
@@ -147,12 +143,18 @@ endif
 
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
+" off
+let NERDTreeStatusLine=-1
+let NERDTreeAutoDeleteBuffer=1
+" the CWD is changed whenever the tree root is changed
+let NERDTreeChDirMode=2
 
 " jsx extension settings
 let g:jsx_ext_required=0
 
 " Airline settings. See `vert h statusline`
-let g:airline_theme='solarized'
+" Note: these settings aren't used anymore as i've switched to a more minimal layout.
+let g:airline_theme='onedark'
 let g:airline_section_error=''
 let g:airline_powerline_fonts=0
 let g:airline_detect_iminsert=1
