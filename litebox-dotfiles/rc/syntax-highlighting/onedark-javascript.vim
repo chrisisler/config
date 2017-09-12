@@ -148,7 +148,7 @@ call matchadd("SeanLarkinnItalicLightMagenta", '^\<import\>\s\+\S\+\s\+\zs\<from
 " export
 call matchadd("SeanLarkinnItalicLightMagenta", '\<export\>\ze\s\+\S\+')
 " default
-call matchadd("SeanLarkinnItalicLightMagenta", '\<export\>\s\+\S\+\s\+\zs\<default\>\ze\s\S\+')
+call matchadd("SeanLarkinnItalicLightMagenta", '\<export\>\s\+\zs\<default\>\ze\s\+\S\+')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
