@@ -61,8 +61,7 @@ set path+=**
 " Visual.
 set noruler
 set number      " show line numbers on left
-" set cursorline  " highlight current line
-set nocursorline  " highlight current line
+set cursorline  " highlight current line
 set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal
 set noshowmatch " do not jump to matching brackets/parens when typing
