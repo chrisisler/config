@@ -118,7 +118,7 @@ let g:ctrlp_custom_ignore='node_modules'
 
 " neocomplete settings.
 let g:neocomplete#enable_at_startup=1
-let g:neocomplete#auto_complete_delay=100
+let g:neocomplete#auto_complete_delay=150
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=15
 let g:neocomplete#sources#syntax#min_keyword_length=2
@@ -141,6 +141,7 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
+let NERDTreeMinimalUI=1
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
 " off
@@ -161,8 +162,21 @@ let g:airline_detect_iminsert=1
 let g:airline_skip_empty_sections=1
 let g:airline#extensions#ale#enabled=1
 let g:airline#extensions#tabline#enabled=1
+
+" Display buffer number
+let g:airline#extensions#tabline#buffer_nr_show=1
+" Prepend buffer name with buffer name.
+let g:airline#extensions#tabline#buffer_nr_format = '%s '
+
+" let g:airline#extensions#tabline#tabs_label='Tabs'
+" minimal ui
+let airline#extensions#tabline#middle_click_preserves_windows=1
+
+let g:airline#extensions#tabline#fnamemod = ':t'
+"savestate
+" let g:airline#extensions#tabline#fnamemod = ':p:.'
 let g:airline#extensions#tabline#buffers_label=''
-let g:airline#extensions#tabline#tabs_label='tabs'
+
 let g:airline#extensions#wordcount#format=''
 " let g:airline#extensions#tabline#tab_min_count = 0
 " let g:airline_extensions = ['tabline']

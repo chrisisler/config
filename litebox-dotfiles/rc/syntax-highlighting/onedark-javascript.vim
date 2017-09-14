@@ -128,6 +128,7 @@ call matchadd("Red", '\*\s*@[A-Za-z]\+\s*{.*}\s*\zs\<\h\w*\>') " * @returns {Boo
 call matchadd("Red", '\w\.\zs\<prototype\>')
 call matchadd("Red", '\w\.\zs\<value\>')
 call matchadd("Red", '\w\.\zs\<props\>')
+call matchadd("Red", '\w\.\zs\<exports\>')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -173,6 +174,9 @@ call matchadd("ItalicLightMagenta", '\<export\>\s\+\zs\<default\>\ze\s\+\S\+')
 "return
 call matchadd("ItalicLightMagenta", '\<return\>')
 
+" function definition shorthand on an object
+" call matchadd("ItalicLightMagenta", '^\s\{2,}\<\h\w*\>(\zs\<\h\w*\>\ze')
+
 " arrow function parameters, single, no parenthesis
 " call matchadd("ItalicLightMagenta", '[A-Za-z_$][0-9A-Za-z_$]*\ze\s*=>')
 " arrow function parameters, single, parenthesis
@@ -180,18 +184,18 @@ call matchadd("ItalicLightMagenta", '\<return\>')
 
 " arrow function parameters, multiple {{{
 " first param, arrow must be on same line
-call matchadd("ItalicLightMagenta", '(\zs\<[A-Za-z_$][0-9A-Za-z_$]*\>\ze,\s*.*=>')
+" call matchadd("ItalicLightMagenta", '(\zs\<[A-Za-z_$][0-9A-Za-z_$]*\>\ze,\s*.*=>')
 " middle params, arrow must be on same line
-call matchadd("ItalicLightMagenta", ',\s*\zs\<[A-Za-z_$][0-9A-Za-z_$]*\>\ze,\?\s*.*=>')
+" call matchadd("ItalicLightMagenta", ',\s*\zs\<[A-Za-z_$][0-9A-Za-z_$]*\>\ze,\?\s*[^}]*=>')
 " last param, arrow must be on same line
-call matchadd("ItalicLightMagenta", '[(,]\?\s*\zs\<[A-Za-z_$][0-9A-Za-z_$]*\>\ze\s*[,)]\?\s*=>')
+" call matchadd("ItalicLightMagenta", '[(,]\?\s*\zs\<[A-Za-z_$][0-9A-Za-z_$]*\>\ze\s*[,)]\?\s*=>')
 " }}}
 
 " class
 call matchadd("ItalicLightMagenta", '\<class\>\ze\s\+')
 
 " extends (note: using `\h\w` does not include the cash sign character '$')
-call matchadd("ItalicLightMagenta", '\<class\>\s\+\<\h\w*\>\s\+\zs\<extends\>')
+call matchadd("ItalicLightMagenta", '\<class\>\s\+\(\<\h\w*\>\s\+\)\?\zs\<extends\>')
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

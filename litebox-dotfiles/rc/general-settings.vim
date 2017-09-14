@@ -66,7 +66,8 @@ set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal
 set noshowmatch " do not jump to matching brackets/parens when typing
 set noshowmode  " do not show me which mode im in
-set timeoutlen=500
+set showcmd     " show me what command im typing as i type it (see `timeoutlen`)
+set timeoutlen=400
 set ttimeoutlen=50
 " set lazyredraw  " redraw only when you need to
 " set relativenumber

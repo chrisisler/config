@@ -109,6 +109,8 @@ nnoremap <Leader>sn<CR> :e ~/.vim/snippets/javascript.snippets<CR>
 
 " Open ~/.vimrc quickly.
 nnoremap <Leader>v<CR> :e ~/.vimrc<CR>jk
+" open onedarkjs syntax file quickly
+nnoremap <Leader>vs<CR> :e ~/.vim/rc/syntax-highlighting/onedark-javascript.vim<CR>jk
 
 " Horizontal and vertical resizing like my tmux key-bindings.
 nnoremap <silent> <Leader>H :vertical res -6<CR>
@@ -245,7 +247,6 @@ nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
 inoremap <silent> <Leader>intersection ∩
 inoremap <silent> <Leader>is ∩
 inoremap <silent> <Leader>union ∪
-inoremap <silent> <Leader>un ∪
 inoremap <silent> <Leader>and ∧
 inoremap <silent> <Leader>or ∨
 

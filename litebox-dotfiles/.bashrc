@@ -48,7 +48,7 @@ alias ....="cd ../../.. && ${lslaVar}"
 alias .....="cd ../../../.. && ${lslaVar}"
 alias ......="cd ../../../../.. && ${lslaVar}"
 alias hs="vim ${codeDir}/Haskell/Test.hs"
-alias test="vim ${codeDir}/Test/Test.js"
+alias test="cd ${codeDir}/Test && vim ./Test.js"
 alias cpp="vim ${codeDir}/Cpp/Test.cpp"
 alias main="cd ${mainDir} && ${lslaVar}"
 alias code="cd ${codeDir} && ${lslaVar}"
@@ -140,7 +140,7 @@ ip() {
 # Prompt variables.
 # _numDirs='$(ls -1AF | grep / | wc -l)'
 # _numFiles='$(ls -1AF | grep -v / | wc -l)'
-# _currentDirectory="\w"
+_currentDirectory="\w"
 # _christopher="\u"
 # _computerName="\h"
 # _time="\@"
@@ -149,9 +149,9 @@ ip() {
 
 # Colors based on solarized dark colorscheme (ethanschoonover.com/solarized).
 # base01="\[\e[0;30m\]"
-# red="\[\e[0;31m\]"
-# yellow="\[\e[0;32m\]"
-# orange="\[\e[0;33m\]"
+red="\[\e[0;31m\]"
+yellow="\[\e[0;32m\]"
+orange="\[\e[0;33m\]"
 blue="\[\e[0;34m\]"
 # magenta="\[\e[0;35m\]"
 # cyan="\[\e[0;36m\]"
@@ -180,7 +180,21 @@ colEnd="\[\e[0m\]"
 
 # export PS1="\n ${blue}${_currentDirectory}${colEnd} ${magenta}¤${colEnd} "
 
-export PS1="\n ${blue}»»»${colEnd} "
+# Do not display CWD if in TMUX (where `#{pane_current_path}` is in tmuxline status).
+customBashPrompt() {
+    isUsingTmux="$(printf "$TERM" | grep -iq "tmux" && printf "Y" || printf "N")"
+    indicator="${orange}»»»${colEnd}"
+
+    if [[ "${isUsingTmux}" == "Y" ]]; then
+        PS1="\n ${indicator} "
+    else
+        PS1="\n ${blue}${_currentDirectory}${colEnd} ${indicator} "
+    fi
+}
+
+PROMPT_COMMAND=customBashPrompt
+
+# export PS1="\n ${blue}»»»${colEnd} "
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
