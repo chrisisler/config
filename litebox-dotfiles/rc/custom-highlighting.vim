@@ -44,6 +44,8 @@ highlight LineNr ctermbg=bg
 highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 
 
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 
 " Theme and background (dark/light) color dependent
@@ -94,11 +96,20 @@ function! HighlightJavaScriptOneDark()
     source ~/.vim/rc/syntax-highlighting/onedark-javascript.vim
 endfunction
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" highlight URLUnderline cterm=underline
+" call matchadd("URLUnderline", 'https\?://([a-z0-9A-Z]\+(:[a-zA-Z0-9]\+)\?@)\?([a-z0-9A-Z][-a-z0-9A-Z]*\.)\+[A-Za-z][-A-Za-z]*((:[0-9]\+)\?)(/[a-zA-Z0-9;/\.\-_+%?&amp;@=#\(\)]*)\?')
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 
-" One Dark JavaScript specific syntax highlighting
+" Solarized JavaScript specific syntax highlighting
 " 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

@@ -1,10 +1,9 @@
 " General.
 filetype plugin indent on      " automatically detect file types
 set nocompatible
-set tabstop=4
+set tabstop=2
+set shiftwidth=2
 set softtabstop=0
-set shiftwidth=4
-" set showcmd
 set autoindent                 " auto indent new lines
 set smartindent                " don't indent like an idiot
 set noerrorbells

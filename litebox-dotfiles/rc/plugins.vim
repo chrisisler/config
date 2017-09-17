@@ -57,6 +57,7 @@ Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, typ
 
 " Other
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
+Plug 'metakirby5/codi.vim' " inline/automatic evaluation
 
 call plug#end()
 
@@ -65,6 +66,9 @@ call plug#end()
 " Plugin Settings
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:codi#rightsplit=1
+let g:codi#rightalign=0
 
 " must be 16
 let g:onedark_termcolors=16
