@@ -22,7 +22,8 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 export EDITOR="vim"
 
 # lslaVar="ls -oFGHhA" # Can remove H
-lslaVar="ls -AGF"
+# lslaVar="ls -AGF"
+lslaVar="ls -AGFlh"
 
 mainDir="${HOME}/Main"
 academicDir="${mainDir}/Uni"
@@ -53,13 +54,13 @@ alias cpp="vim ${codeDir}/Cpp/Test.cpp"
 alias main="cd ${mainDir} && ${lslaVar}"
 alias code="cd ${codeDir} && ${lslaVar}"
 alias ed="cd ${codeDir}/Git/erxidesk && ${lslaVar}"
+alias e2="cd ${codeDir}/Git/e2 && ${lslaVar}"
 alias conf="cd ${codeDir}/Git/config && ${lslaVar}"
 alias parse="cd ${codeDir}/Status"
 alias get="brew install"
 alias remove="brew uninstall"
 alias r="ranger"
 alias c="clear"
-alias ll="${lslaVar} -l"
 alias l="${lslaVar}"
 alias cl="clear && ${lslaVar}"
 alias lc="clear && ${lslaVar}"
@@ -179,21 +180,20 @@ colEnd="\[\e[0m\]"
 # ${yellow}\$(gitBracketR)${colEnd}\
 #  ${magenta}¤${colEnd} "
 
-# export PS1="\n ${blue}${_currentDirectory}${colEnd} ${magenta}¤${colEnd} "
+export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
 
 # Do not display CWD if in TMUX (where `#{pane_current_path}` is in tmuxline status).
-customBashPrompt() {
-    isUsingTmux="$(printf "$TERM" | grep -iq "tmux" && printf "Y" || printf "N")"
-    indicator="${orange}»»»${colEnd}"
+# customBashPrompt() {
+#     isUsingTmux="$(printf "$TERM" | grep -iq "tmux" && printf "Y" || printf "N")"
+#     indicator="${orange}»»»${colEnd}"
 
-    if [[ "${isUsingTmux}" == "Y" ]]; then
-        PS1="\n ${indicator} "
-    else
-        PS1="\n ${blue}${_currentDirectory}${colEnd} ${indicator} "
-    fi
-}
-
-PROMPT_COMMAND=customBashPrompt
+#     if [[ "${isUsingTmux}" == "Y" ]]; then
+#         PS1="\n ${indicator} "
+#     else
+#         PS1="\n ${blue}${_currentDirectory}${colEnd} ${indicator} "
+#     fi
+# }
+# PROMPT_COMMAND=customBashPrompt
 
 # export PS1="\n ${blue}»»»${colEnd} "
 

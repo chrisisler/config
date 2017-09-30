@@ -1,8 +1,8 @@
 " General.
 filetype plugin indent on      " automatically detect file types
 set nocompatible
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set softtabstop=0
 set autoindent                 " auto indent new lines
 set smartindent                " don't indent like an idiot
@@ -39,7 +39,7 @@ set undolevels=1000            " how many undos
 set undoreload=10000           " num of lines to save for undo
 set nowrap                     " stop vim from auto-wrapping lines when there's not enough horizontal space http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
 set shiftround                 " number of spaces for autoindenting
-set wildignore=*.swp,*.bak,*.pyc,*.class
+set wildignore=*.swp,*.bak,*.pyc,*.class,*/.git/*
 set ff=unix
 set fileformat=unix
 set ignorecase

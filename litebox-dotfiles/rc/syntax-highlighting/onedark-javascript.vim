@@ -17,12 +17,6 @@ call clearmatches()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" new goes here
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 " Golden background
 highlight Search cterm=reverse ctermbg=bg ctermfg=3
 highlight IncSearch cterm=reverse ctermbg=bg ctermfg=3
@@ -42,12 +36,12 @@ highlight MatchParen cterm=bold ctermfg=cyan
 highlight DefaultColor ctermfg=fg
 
 " jsx brackets syntax
-call matchadd("DefaultColor", '\/\?>')
-call matchadd("DefaultColor", '<\/\?\ze\<\a\w*\>')
-call matchadd("DefaultColor", '<\/\?\<\a\w*\>.*\zs\/\?>')
-
-" object keys
-" call matchadd("DefaultColor", '[0-9A-Za-z_$]\+')
+" call matchadd("DefaultColor", '\/\?>')
+" call matchadd("DefaultColor", '\(\w\|\/\|\S\)\s*\zs\/\?>')
+" call matchadd("DefaultColor", '^\s\+\zs\/\?>$')
+" beginning
+" call matchadd("DefaultColor", '<\/\?\ze\<\a\w*\>')
+" call matchadd("DefaultColor", '<\/\?\<\a\w*\>.*\zs\/\?>')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -55,6 +49,7 @@ call matchadd("DefaultColor", '<\/\?\<\a\w*\>.*\zs\/\?>')
 
 highlight ItalicGolden cterm=italic ctermfg=3
 call matchadd("ItalicGolden", '\<this\>')
+" call matchadd("ItalicGolden", '\S\zs\<this\>\ze\S')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -62,11 +57,14 @@ call matchadd("ItalicGolden", '\<this\>')
 
 highlight FuncDefAndCall ctermfg=darkblue
 " function invocation
-call matchadd("FuncDefAndCall", '\<[A-Za-z_]\w*\ze(')
+" call matchadd("FuncDefAndCall", '\<[a-z_]\w*\>\ze(')
+call matchadd("FuncDefAndCall", '\<\h\w*\>\ze(')
 " function definition
-call matchadd("FuncDefAndCall", '\w\+\s\+\zs\<\h\w*\>\ze\s*=[^.]\+=>')
+call matchadd("FuncDefAndCall", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=[^.<>]\+=>')
+" function definition with destructuring
+call matchadd("FuncDefAndCall", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=\s\+(.*)\s\+=>')
 " function definition as a class property
-call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s*=[^.]\+=>')
+call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s\+=[^.]\+=>')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -115,8 +113,9 @@ highlight Todo cterm=underline ctermfg=NONE
 highlight ItalicMagenta cterm=italic ctermfg=magenta
 call matchadd("ItalicMagenta", '\<var\>')
 call matchadd("ItalicMagenta", '\<let\>')
-call matchadd("ItalicMagenta", '\<const\>')
-call matchadd("ItalicMagenta", '\<function\>')
+" call matchadd("ItalicMagenta", '\(^\|\s\{2,}\)\zs\<const\>\ze\s\+')
+call matchadd("ItalicMagenta", '\<const\>\ze\s\+')
+call matchadd("ItalicMagenta", '\<function\>\ze\s*(')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -129,12 +128,13 @@ call matchadd("Red", '\w\.\zs\<prototype\>')
 call matchadd("Red", '\w\.\zs\<value\>')
 call matchadd("Red", '\w\.\zs\<props\>')
 call matchadd("Red", '\w\.\zs\<exports\>')
+" anything after `this`, excluding functions
+call matchadd("Red", '\<this\>\.\zs\<\h\w*\>\ze[^(]')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 highlight Golden ctermfg=3
-call matchadd("Golden", '\<document\>')
 " all caps constants, min len 1, not strings. fixme: defend against
 " surrounding single/double quotes.
 " call matchadd("Golden", '\<[A-Z_][^a-z]*\>')
@@ -147,7 +147,7 @@ call matchadd("Golden", '\<document\>')
 call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
 
 " `CapitalizedThing.property`
-call matchadd("Golden", '\<[A-Z]\w*\>\ze\.\h\w*')
+call matchadd("Golden", '[^/]\zs\<[A-Z]\w*\>\ze\.\h\w*')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -165,7 +165,9 @@ highlight ItalicLightMagenta cterm=italic ctermfg=darkmagenta
 " import
 call matchadd("ItalicLightMagenta", '^\<import\>\ze\s\+\S\+')
 " from
-call matchadd("ItalicLightMagenta", '}\s*\zs\<from\>\ze\s*\S\+')
+call matchadd("ItalicLightMagenta", '}\?\s\+\zs\<from\>\ze\s*\S\+')
+" as
+call matchadd("ItalicLightMagenta", '\s\+\zs\<as\>\ze\s\+')
 " export
 call matchadd("ItalicLightMagenta", '\<export\>\ze\s\+\S\+')
 " default
@@ -202,3 +204,11 @@ call matchadd("ItalicLightMagenta", '\<class\>\s\+\(\<\h\w*\>\s\+\)\?\zs\<extend
 
 highlight Magenta ctermfg=magenta
 call matchadd("Magenta", '=>')
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" new goes here
+
+

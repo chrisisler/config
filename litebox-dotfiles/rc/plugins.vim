@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
 " Language
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
-" Plug 'othree/es.next.syntax.vim'              " es7 syntax
+Plug 'othree/es.next.syntax.vim'              " es7 syntax
 Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
 Plug 'mattn/emmet-vim'                        " the only way to write html in vim
@@ -20,16 +20,15 @@ Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentat
 
 " Interface
 " Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
-" Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
-
-" Plug 'flazz/vim-colorschemes'           " some solid colorschems! (:
+Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 Plug 'joshdick/onedark.vim'             " the only good one dark plugin
+" Plug 'flazz/vim-colorschemes'           " some solid colorschems! (:
 
 " Plug 'chriskempson/base16-vim'          " base16 colorschemes
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
 " Plug 'airblade/vim-gitgutter'           " git diff in gutter
-" Plug 'kshenoy/vim-signature'            " display marks in gutter
+Plug 'kshenoy/vim-signature'            " display marks in gutter
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
 
 " Integrations
@@ -58,6 +57,7 @@ Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, typ
 " Other
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'metakirby5/codi.vim' " inline/automatic evaluation
+" Plug 'yggdroot/indentline' " cool indent lines 
 
 call plug#end()
 
@@ -66,6 +66,9 @@ call plug#end()
 " Plugin Settings
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" let g:indentLine_enabled=1
+" let g:indentLine_char='⎸'
 
 let g:codi#rightsplit=1
 let g:codi#rightalign=0
@@ -104,11 +107,11 @@ let g:user_emmet_install_global=0 " enable emmet for just the below types
 " autocmd FileType html,css,js,jsx EmmetInstall
 let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
 
-let g:ale_enabled=0
+let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
 let g:ale_lint_delay=750
-let g:ale_open_list=0 " auto-open the loclist to show errs/warnings
+let g:ale_open_list=1 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
 " let g:airline_section_error='%{ale#statusline#Status()}'
 let g:ale_echo_msg_format = '[%linter%] %s'
@@ -119,9 +122,11 @@ let g:ale_linters={
 \}
 
 let g:ctrlp_custom_ignore='node_modules'
+let g:ctrlp_show_hidden=1
+let g:ctrlp_max_depth=10
 
 " neocomplete settings.
-let g:neocomplete#enable_at_startup=1
+let g:neocomplete#enable_at_startup=0
 let g:neocomplete#auto_complete_delay=150
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=15
@@ -146,6 +151,7 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
 endif
 
 let NERDTreeMinimalUI=1
+let NERDTreeShowLineNumbers=0
 let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
 " off

@@ -16,5 +16,5 @@ if [ "${isChargingSymbol}" == "↓" ];then
     fi
 fi
 
-# echo -n "${isChargingSymbol}${percent}${timeRemaining}"
-echo -n "${isChargingSymbol}${percent}"
+echo -n "${isChargingSymbol}${percent}${timeRemaining}"
+# echo -n "${isChargingSymbol}${percent}"
