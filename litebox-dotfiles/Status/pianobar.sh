@@ -29,7 +29,8 @@ parsePianobarOutput() {
     # different versions
     # local result="${artist} - ${songWithoutParenthesis}${songIsLiked}"
     # local result="${artist} - ${songWithoutParenthesis}${songIsLiked} ${positionInfo}"
-    local result="${artist} - ${songWithoutParenthesis}"
+    local result="${artist} - ${songWithoutParenthesis}  ${positionInfo}"
+    # local result="${artist} - ${songWithoutParenthesis}"
     printf "${result}"
 }
 

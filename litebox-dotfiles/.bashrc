@@ -39,6 +39,8 @@ alias g="cd ${HOME}/Code/Git"
 # alias tm="ps auxc"
 alias gs="git status"
 alias q="exit"
+# careful of the "*" here in this vim alias.
+alias vim="/usr/local/Cellar/vim/*/bin/vim $@"
 alias v="vim"
 # alias rcconf="vim ~/.config/ranger/rc.conf"
 alias safe="md /tmp/safe && cd /tmp/safe && ${lslaVar}"
@@ -84,7 +86,6 @@ alias weather="curl wttr.in/boston"
 # alias xit="exit"
 # alias eixt="exit"
 # alias spamrandom="cat /dev/urandom | tr -cd '01'"
-alias vim="/usr/local/Cellar/vim/8.*/bin/vim $@"
 alias vi="vim"
 alias pandora="pianobar 2>/dev/null | tee ~/.config/pianobar/custom-out"
 alias cellar="cd /usr/local/Cellar"
@@ -122,9 +123,9 @@ gh() {
 displayAdvice() {
     # https://stackoverflow.com/questions/11393817/bash-read-lines-in-file-into-an-array
     IFS=$'\r\n' GLOBIGNORE='*' command eval 'arr=($(cat ~/Main/Bin/pragmatic-programmer.txt))'
-    echo "Advice:" ${arr["$[RANDOM % ${#arr[@]}]"]}
+    printf "${arr["$[RANDOM % ${#arr[@]}]"]}"
 }
-displayAdvice
+# displayAdvice
 
 getNewMacAddress() {
     openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
@@ -180,7 +181,9 @@ colEnd="\[\e[0m\]"
 # ${yellow}\$(gitBracketR)${colEnd}\
 #  ${magenta}¤${colEnd} "
 
-export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
+
+export PS1="\n ${blue}${_currentDirectory}${colEnd} "
+# export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "
 
 # Do not display CWD if in TMUX (where `#{pane_current_path}` is in tmuxline status).
 # customBashPrompt() {

@@ -111,6 +111,7 @@ let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
 let g:ale_lint_delay=750
+" Idea : set function mapping for g:ale_open_list : see `stackoverflow.com/questions/20579142`
 let g:ale_open_list=1 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
 " let g:airline_section_error='%{ale#statusline#Status()}'
