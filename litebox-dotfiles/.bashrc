@@ -87,7 +87,7 @@ alias weather="curl wttr.in/boston"
 # alias eixt="exit"
 # alias spamrandom="cat /dev/urandom | tr -cd '01'"
 alias vi="vim"
-alias pandora="pianobar 2>/dev/null | tee ~/.config/pianobar/custom-out"
+alias pandora="clear && pianobar 2>/dev/null | tee ~/.config/pianobar/custom-out"
 alias cellar="cd /usr/local/Cellar"
 alias p="clear; more ./package.json | jq $@"
 alias start="open"
@@ -199,7 +199,3 @@ export PS1="\n ${blue}${_currentDirectory}${colEnd} "
 # PROMPT_COMMAND=customBashPrompt
 
 # export PS1="\n ${blue}»»»${colEnd} "
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -9,26 +9,31 @@ call plug#begin('~/.vim/plugged')
 " Language
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
-Plug 'othree/es.next.syntax.vim'              " es7 syntax
-Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
+" Plug 'othree/es.next.syntax.vim'              " es7 syntax
+" Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
-Plug 'mattn/emmet-vim'                        " the only way to write html in vim
+" Plug 'Quramy/vim-js-pretty-template' " syntax highlighting for js template strings
+Plug 'quramy/tsuquyomi' " typescript ide features
+Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
+" Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 " Plug 'eagletmt/neco-ghc'
-Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
+" Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
 " Plug 'hynek/vim-python-pep8-indent' " python correct indentation
 " Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 
+Plug 'tpope/vim-vinegar' " idk
+
 " Interface
 " Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
-Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
+" Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 Plug 'joshdick/onedark.vim'             " the only good one dark plugin
 " Plug 'flazz/vim-colorschemes'           " some solid colorschems! (:
 
 " Plug 'chriskempson/base16-vim'          " base16 colorschemes
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
-" Plug 'airblade/vim-gitgutter'           " git diff in gutter
-Plug 'kshenoy/vim-signature'            " display marks in gutter
+Plug 'airblade/vim-gitgutter'           " git diff in gutter
+" Plug 'kshenoy/vim-signature'            " display marks in gutter
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
 
 " Integrations
@@ -42,7 +47,7 @@ Plug 'ctrlpvim/ctrlp.vim'           " fuzzy finder
 " Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
 Plug 'tpope/vim-surround'           " manipulating characters that surround text objects
 Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
-Plug 'easymotion/vim-easymotion'        " vim motions on speed
+" Plug 'easymotion/vim-easymotion'        " vim motions on speed
 " Plug 'tpope/vim-abolish'            " easily search/substitute/whatever multiple variants of a word
 " Plug 'andrewradev/splitjoin.vim'    " easily transition between single/multi line code
 Plug 'tpope/vim-dispatch' "async commands
@@ -77,8 +82,8 @@ let g:codi#rightalign=0
 let g:onedark_termcolors=16
 let g:onedark_terminal_italics=1
 
-" git diff in gutter, disabled by default
-" let g:gitgutter_enabled=0
+" git diff in gutter, default setting:
+let g:gitgutter_enabled=1
 
 " haskell settings
 " haskell-vim
@@ -107,12 +112,13 @@ let g:user_emmet_install_global=0 " enable emmet for just the below types
 " autocmd FileType html,css,js,jsx EmmetInstall
 let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
 
+let g:ale_set_highlights=0
 let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
-let g:ale_lint_delay=750
+let g:ale_lint_delay=800
 " Idea : set function mapping for g:ale_open_list : see `stackoverflow.com/questions/20579142`
-let g:ale_open_list=1 " auto-open the loclist to show errs/warnings
+let g:ale_open_list=0 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
 " let g:airline_section_error='%{ale#statusline#Status()}'
 let g:ale_echo_msg_format = '[%linter%] %s'
@@ -122,12 +128,14 @@ let g:ale_linters={
 \   'cpp': ['g++'],
 \}
 
+let g:ctrlp_regexp = 0
 let g:ctrlp_custom_ignore='node_modules'
 let g:ctrlp_show_hidden=1
-let g:ctrlp_max_depth=10
+let g:ctrlp_max_depth=12
+let g:ctrlp_match_window='max:16'
 
 " neocomplete settings.
-let g:neocomplete#enable_at_startup=0
+let g:neocomplete#enable_at_startup=1
 let g:neocomplete#auto_complete_delay=150
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=15

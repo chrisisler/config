@@ -8,6 +8,9 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Remove line numbers for quickfix window
+au FileType qf setlocal nonumber colorcolumn=
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 
@@ -34,11 +37,18 @@ set background=dark
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+highlight MatchParen cterm=bold ctermbg=darkgray ctermfg=black
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 " make comments italic
 highlight Comment cterm=italic
 
 " do not change the bacground color of the line numbers (flat ui)
-highlight LineNr ctermbg=bg
+" highlight LineNr ctermbg=bg
+" highlight CursorLineNr ctermbg=bg
 
 " do not display ~ character for end of buffer (make text color = bg color)
 highlight EndOfBuffer ctermfg=bg ctermbg=NONE
@@ -82,7 +92,7 @@ else
 endif
 
 " Highlighted (in visual mode) syntax highlighting
-highlight Visual ctermbg=fg ctermfg=black
+" highlight Visual ctermbg=fg ctermfg=black
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -95,13 +105,6 @@ autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaS
 function! HighlightJavaScriptOneDark()
     source ~/.vim/rc/syntax-highlighting/onedark-javascript.vim
 endfunction
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-" highlight URLUnderline cterm=underline
-" call matchadd("URLUnderline", 'https\?://([a-z0-9A-Z]\+(:[a-zA-Z0-9]\+)\?@)\?([a-z0-9A-Z][-a-z0-9A-Z]*\.)\+[A-Za-z][-A-Za-z]*((:[0-9]\+)\?)(/[a-zA-Z0-9;/\.\-_+%?&amp;@=#\(\)]*)\?')
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

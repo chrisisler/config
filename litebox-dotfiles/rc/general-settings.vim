@@ -51,6 +51,7 @@ set backupcopy=yes
 
 " https://robots.thoughtbot.com/vim-you-complete-me
 set complete=.,b,u,]
+set complete-=i
 set wildmenu                  " visual autocomplete
 set wildmode=longest,list:longest 
 set previewheight=8
@@ -65,7 +66,7 @@ set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal
 set noshowmatch " do not jump to matching brackets/parens when typing
 set noshowmode  " do not show me which mode im in
-set showcmd     " show me what command im typing as i type it (see `timeoutlen`)
+" set showcmd     " show me what command im typing as i type it (see `timeoutlen`)
 set timeoutlen=400
 set ttimeoutlen=50
 " set lazyredraw  " redraw only when you need to

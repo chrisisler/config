@@ -7,7 +7,6 @@
 " pressing enter key when auto-complete (pop-up) menu is open will press enter
 inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
 
-
 " misspelling
 inoremap cosnt const
 
