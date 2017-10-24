@@ -9,7 +9,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Remove line numbers for quickfix window
-au FileType qf setlocal nonumber colorcolumn=
+" au FileType qf setlocal nonumber colorcolumn=
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -43,7 +43,6 @@ highlight MatchParen cterm=bold ctermbg=darkgray ctermfg=black
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" make comments italic
 highlight Comment cterm=italic
 
 " do not change the bacground color of the line numbers (flat ui)
@@ -118,122 +117,122 @@ endfunction
 
 
 
-function! HighlightJavaScriptSolarized()
-    highlight CursorLineNr ctermbg=bg ctermfg=green
+"function! HighlightJavaScriptSolarized()
+"    highlight CursorLineNr ctermbg=bg ctermfg=green
 
-    " when searching, highlight found matches as bold white
-    highlight Search cterm=bold ctermfg=white
+"    " when searching, highlight found matches as bold white
+"    highlight Search cterm=bold ctermfg=white
 
-    " remove previous syntax highlight (and apply the below highlights)
-    call clearmatches()
+"    " remove previous syntax highlight (and apply the below highlights)
+"    call clearmatches()
 
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " 
-    " Italic
-    " 
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"    " 
+"    " Italic
+"    " 
+"    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    " function arguments, JS specific
-    highlight Special cterm=italic
+"    " function arguments, JS specific
+"    highlight Special cterm=italic
 
-    " This native/built-in highlight replaces the `matchadd` call commented out below.
-    " This is for @foo thingies in js comments which have types like String which are not italicized.
-    highlight SpecialComment cterm=italic ctermfg=darkred
-    " call matchadd("ItalicKeywords", '\s@\w*.*$') 
+"    " This native/built-in highlight replaces the `matchadd` call commented out below.
+"    " This is for @foo thingies in js comments which have types like String which are not italicized.
+"    highlight SpecialComment cterm=italic ctermfg=darkred
+"    " call matchadd("ItalicKeywords", '\s@\w*.*$') 
 
-    " Every `Statement` except `Keyword`
-    " Italic builtin control flow keywords. See any Sean Larkin coding video on youtube.
-    " Does not include `try`, `catch`, `finally`, `return`, `throw`
-    highlight Conditional cterm=italic ctermfg=darkgreen
-    highlight Repeat cterm=italic ctermfg=darkgreen
-    highlight Operator cterm=italic ctermfg=darkgreen
-    highlight Label cterm=italic ctermfg=darkgreen
-    " I dont think `Exception` actually does anything in JS with yajs highlighting.
-    highlight Exception cterm=italic ctermfg=darkgreen
-    call matchadd("Exception", '\<try\>')
-    call matchadd("Exception", '\<catch\>')
-    call matchadd("Exception", '\<finally\>')
-    call matchadd("Exception", '\<throw\>')
+"    " Every `Statement` except `Keyword`
+"    " Italic builtin control flow keywords. See any Sean Larkin coding video on youtube.
+"    " Does not include `try`, `catch`, `finally`, `return`, `throw`
+"    highlight Conditional cterm=italic ctermfg=darkgreen
+"    highlight Repeat cterm=italic ctermfg=darkgreen
+"    highlight Operator cterm=italic ctermfg=darkgreen
+"    highlight Label cterm=italic ctermfg=darkgreen
+"    " I dont think `Exception` actually does anything in JS with yajs highlighting.
+"    highlight Exception cterm=italic ctermfg=darkgreen
+"    call matchadd("Exception", '\<try\>')
+"    call matchadd("Exception", '\<catch\>')
+"    call matchadd("Exception", '\<finally\>')
+"    call matchadd("Exception", '\<throw\>')
 
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " Italic - forced custom matches, overrides comments, which is really bad,
-    " and the motivation for switching to native/built-in `highlight` groups.
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"    " Italic - forced custom matches, overrides comments, which is really bad,
+"    " and the motivation for switching to native/built-in `highlight` groups.
+"    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    highlight ItalicKeywords cterm=italic
+"    highlight ItalicKeywords cterm=italic
 
-    " jsx props
-    " call matchadd("ItalicKeywords", '\<<.*\zs\w*\ze=.*>')
-    call matchadd("ItalicKeywords", '\zs\<\h\w*\>\ze=.\+')
+"    " jsx props
+"    " call matchadd("ItalicKeywords", '\<<.*\zs\w*\ze=.*>')
+"    call matchadd("ItalicKeywords", '\zs\<\h\w*\>\ze=.\+')
 
-    " `this` keyword. Cannot be replaced by builtin/native highlight any group.
-    call matchadd("ItalicKeywords", '\zs\<this\>\ze\.\h')
+"    " `this` keyword. Cannot be replaced by builtin/native highlight any group.
+"    call matchadd("ItalicKeywords", '\zs\<this\>\ze\.\h')
 
-    " `Identifier` = `const`, `let`, `var`, {}, [], `new`, `void`, `in`
-    " see below
-    " highlight Identifier cterm=italic
-    " call matchadd("ItalicKeywords", '\<var\>')
-    " call matchadd("ItalicKeywords", '\<let\>')
-    " call matchadd("ItalicKeywords", '\<const\>')
-    " call matchadd("ItalicKeywords", '\<function\>')
+"    " `Identifier` = `const`, `let`, `var`, {}, [], `new`, `void`, `in`
+"    " see below
+"    " highlight Identifier cterm=italic
+"    " call matchadd("ItalicKeywords", '\<var\>')
+"    " call matchadd("ItalicKeywords", '\<let\>')
+"    " call matchadd("ItalicKeywords", '\<const\>')
+"    " call matchadd("ItalicKeywords", '\<function\>')
 
-    highlight Return cterm=italic ctermfg=magenta
-    call matchadd("Return", '\<return\>')
+"    highlight Return cterm=italic ctermfg=magenta
+"    call matchadd("Return", '\<return\>')
 
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    " 
-    " Other
-    " 
-    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"    " 
+"    " Other
+"    " 
+"    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-    highlight Boolean ctermfg=darkmagenta
-    highlight Number ctermfg=darkmagenta
-
-
-
-
-    " todo: make custon syntax highlighting for these in the same way that
-    " the yajs plugin does it.
-    highlight OperatorSymbol ctermfg=darkblue
-    call matchadd("OperatorSymbol", '=')
-    call matchadd("OperatorSymbol", '>')
-    call matchadd("OperatorSymbol", '<')
-    call matchadd("OperatorSymbol", '+')
-    call matchadd("OperatorSymbol", '-')
-    call matchadd("OperatorSymbol", '&')
-    call matchadd("OperatorSymbol", '|')
-    call matchadd("OperatorSymbol",  '?')
-    call matchadd("OperatorSymbol",  ':')
-    call matchadd("OperatorSymbol",  '!')
-    " call matchadd("OperatorSymbol", '/')
-    " call matchadd("OperatorSymbol", '*')
-    " call matchadd("OperatorSymbol", '[')
-    " call matchadd("OperatorSymbol", ']')
+"    highlight Boolean ctermfg=darkmagenta
+"    highlight Number ctermfg=darkmagenta
 
 
 
 
-
-
-
-    " JSX any (lowercase-beginning) html-tag
-    highlight MagentaKeywords ctermfg=magenta
-    call matchadd("MagentaKeywords",  '<\zs\l\w*\>\ze.*>')
-    call matchadd("MagentaKeywords",  '</\zs\l\w*\>\ze.*>')
-    " JSX Custom Components (jsx that begins with upper case letter (\u))
-    call matchadd("MagentaKeywords", '[</]\zs\u\w*\>\ze.*>')
+"    " todo: make custon syntax highlighting for these in the same way that
+"    " the yajs plugin does it.
+"    highlight OperatorSymbol ctermfg=darkblue
+"    call matchadd("OperatorSymbol", '=')
+"    call matchadd("OperatorSymbol", '>')
+"    call matchadd("OperatorSymbol", '<')
+"    call matchadd("OperatorSymbol", '+')
+"    call matchadd("OperatorSymbol", '-')
+"    call matchadd("OperatorSymbol", '&')
+"    call matchadd("OperatorSymbol", '|')
+"    call matchadd("OperatorSymbol",  '?')
+"    call matchadd("OperatorSymbol",  ':')
+"    call matchadd("OperatorSymbol",  '!')
+"    " call matchadd("OperatorSymbol", '/')
+"    " call matchadd("OperatorSymbol", '*')
+"    " call matchadd("OperatorSymbol", '[')
+"    " call matchadd("OperatorSymbol", ']')
 
 
 
 
 
 
-    " Function calls. Cannot be replaced with native highlight groups unfortunately.
-    highlight FunctionCallAndArrowFuncDefinition ctermfg=red
-    call matchadd("FunctionCallAndArrowFuncDefinition", '\<\w\+\ze(') " function calls
-    call matchadd("FunctionCallAndArrowFuncDefinition", '\w\+\s\+\zs\<\h\w*\>\ze\s*=[^.]\+=>') " arrow function definition
 
-endfunction
+"    " JSX any (lowercase-beginning) html-tag
+"    highlight MagentaKeywords ctermfg=magenta
+"    call matchadd("MagentaKeywords",  '<\zs\l\w*\>\ze.*>')
+"    call matchadd("MagentaKeywords",  '</\zs\l\w*\>\ze.*>')
+"    " JSX Custom Components (jsx that begins with upper case letter (\u))
+"    call matchadd("MagentaKeywords", '[</]\zs\u\w*\>\ze.*>')
 
-" autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaScript()
-" autocmd FileType javascript call HighlightJavaScript()
+
+
+
+
+
+"    " Function calls. Cannot be replaced with native highlight groups unfortunately.
+"    highlight FunctionCallAndArrowFuncDefinition ctermfg=red
+"    call matchadd("FunctionCallAndArrowFuncDefinition", '\<\w\+\ze(') " function calls
+"    call matchadd("FunctionCallAndArrowFuncDefinition", '\w\+\s\+\zs\<\h\w*\>\ze\s*=[^.]\+=>') " arrow function definition
+
+"endfunction
+
+"" autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaScript()
+"" autocmd FileType javascript call HighlightJavaScript()

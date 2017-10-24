@@ -9,19 +9,20 @@ call plug#begin('~/.vim/plugged')
 " Language
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
+Plug 'posva/vim-vue'
 " Plug 'othree/es.next.syntax.vim'              " es7 syntax
 " Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
-Plug 'mxw/vim-jsx'                            " react-jsx syntax highlighting
+Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
 " Plug 'Quramy/vim-js-pretty-template' " syntax highlighting for js template strings
-Plug 'quramy/tsuquyomi' " typescript ide features
-Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
+" Plug 'quramy/tsuquyomi' " typescript ide features
+" Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
 " Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 " Plug 'eagletmt/neco-ghc'
 " Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
 " Plug 'hynek/vim-python-pep8-indent' " python correct indentation
 " Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 
-Plug 'tpope/vim-vinegar' " idk
+" Plug 'tpope/vim-vinegar' " idk
 
 " Interface
 " Plug 'vim-airline/vim-airline-themes'   " themes for airline (status)
@@ -71,6 +72,7 @@ call plug#end()
 " Plugin Settings
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 
 " let g:indentLine_enabled=1
 " let g:indentLine_char='⎸'
@@ -135,10 +137,11 @@ let g:ctrlp_max_depth=12
 let g:ctrlp_match_window='max:16'
 
 " neocomplete settings.
+let g:neocomplete#enable_refresh_always=1 " refreshes candidates automatically
 let g:neocomplete#enable_at_startup=1
-let g:neocomplete#auto_complete_delay=150
+let g:neocomplete#auto_complete_delay=200
 let g:neocomplete#enable_smart_case=1
-let g:neocomplete#max_list=15
+let g:neocomplete#max_list=20
 let g:neocomplete#sources#syntax#min_keyword_length=2
 let g:neocomplete#enable_auto_close_preview=1
 " Define dictionary.
@@ -161,13 +164,13 @@ endif
 
 let NERDTreeMinimalUI=1
 let NERDTreeShowLineNumbers=0
-let NERDTreeShowBookmarks=1
+let NERDTreeShowBookmarks=0
 let NERDTreeShowHidden=1
 " off
 let NERDTreeStatusLine=-1
 let NERDTreeAutoDeleteBuffer=1
 " the CWD is changed whenever the tree root is changed
-let NERDTreeChDirMode=2
+" let NERDTreeChDirMode=2
 
 " jsx extension settings
 let g:jsx_ext_required=0

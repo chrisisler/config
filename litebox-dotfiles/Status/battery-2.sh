@@ -11,10 +11,10 @@ percent=$(echo -n "${commandOutput}\n" | head -2 | tail -1 | awk '{ print $3 }' 
 timeRemaining=""
 if [ "${isChargingSymbol}" == "↓" ];then
     timeRemaining=" $(echo -n "${commandOutput}" | head -2 | tail -1 | awk '{ print $5 }')"
-    if [ grep -q "${timeRemaining}" "(no" ]]; then
+    if [ grep -q "${timeRemaining}" "(no" ]; then
         timeRemaining=" (${timeRemaning})"
     fi
 fi
 
-# echo -n "${isChargingSymbol}${percent}${timeRemaining}"
-echo -n "${isChargingSymbol}${percent}"
+echo -n "${isChargingSymbol}${percent}${timeRemaining}"
+# echo -n "${isChargingSymbol}${percent}"
