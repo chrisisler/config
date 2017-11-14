@@ -71,6 +71,7 @@ if &background == "dark"
 
     " highlight the matching parenthesis/bracket/angle and make it bold white
     " highlight MatchParen ctermfg=white ctermbg=bg
+    highlight VertSplit ctermfg=fg ctermbg=fg
 
     highlight VertSplit ctermfg=bg ctermbg=bg
 

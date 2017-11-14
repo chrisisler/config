@@ -8,7 +8,6 @@ call clearmatches()
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " lowercase s
 
-
 highlight javascriptCase ctermfg=magenta cterm=italic
 highlight javascriptArrowFunc ctermfg=magenta
 highlight javascriptFuncKeyword ctermfg=magenta cterm=italic
@@ -25,7 +24,7 @@ highlight javascriptReturn ctermfg=darkmagenta cterm=italic
 highlight javascriptTry ctermfg=magenta cterm=italic
 highlight javascriptCatch ctermfg=magenta cterm=italic
 
-" highlight javascriptIdentifierName ctermfg=red
+highlight javascriptIdentifierName ctermfg=9
 
 " 'this' keyword
 highlight javascriptIdentifier ctermfg=3 cterm=italic
@@ -104,6 +103,8 @@ call matchadd("Conditional", '\s\+\zs\<in\>\ze\s\+')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" the keyword 'function'
+call matchadd("Conditional", '\<function\>\ze\s*(')
 
 " highlight Golden ctermfg=3
 " call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')

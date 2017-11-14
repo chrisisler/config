@@ -13,6 +13,7 @@ Plug 'posva/vim-vue'
 " Plug 'othree/es.next.syntax.vim'              " es7 syntax
 " Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
+Plug 'ElmCast/elm-vim'
 " Plug 'Quramy/vim-js-pretty-template' " syntax highlighting for js template strings
 " Plug 'quramy/tsuquyomi' " typescript ide features
 " Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
@@ -130,11 +131,11 @@ let g:ale_linters={
 \   'cpp': ['g++'],
 \}
 
-let g:ctrlp_regexp = 0
+let g:ctrlp_regexp=0
 let g:ctrlp_custom_ignore='node_modules'
 let g:ctrlp_show_hidden=1
-let g:ctrlp_max_depth=12
-let g:ctrlp_match_window='max:16'
+let g:ctrlp_max_depth=6
+let g:ctrlp_match_window='max:10'
 
 " neocomplete settings.
 let g:neocomplete#enable_refresh_always=1 " refreshes candidates automatically
