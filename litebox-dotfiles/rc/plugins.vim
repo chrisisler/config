@@ -14,12 +14,13 @@ Plug 'posva/vim-vue'
 " Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
 Plug 'ElmCast/elm-vim'
+Plug 'artur-shaik/vim-javacomplete2' " java stuff
 " Plug 'Quramy/vim-js-pretty-template' " syntax highlighting for js template strings
 " Plug 'quramy/tsuquyomi' " typescript ide features
 " Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
 " Plug 'mattn/emmet-vim'                        " the only way to write html in vim
-" Plug 'eagletmt/neco-ghc'
-" Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
+Plug 'eagletmt/neco-ghc'
+Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
 " Plug 'hynek/vim-python-pep8-indent' " python correct indentation
 " Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 

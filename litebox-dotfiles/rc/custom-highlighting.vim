@@ -37,6 +37,7 @@ set background=dark
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+" highlight MatchParen cterm=bold ctermbg=bg ctermfg=3
 highlight MatchParen cterm=bold ctermbg=darkgray ctermfg=black
 
 
@@ -71,13 +72,24 @@ if &background == "dark"
 
     " highlight the matching parenthesis/bracket/angle and make it bold white
     " highlight MatchParen ctermfg=white ctermbg=bg
-    highlight VertSplit ctermfg=fg ctermbg=fg
 
-    highlight VertSplit ctermfg=bg ctermbg=bg
+    " highlight VertSplit ctermfg=fg ctermbg=fg
+
+    " highlight VertSplit ctermfg=bg ctermbg=bg
 
     if &filetype == "javascript.jsx"
         " call HighlightJavaScriptSolarized()
         call HighlightJavaScriptOneDark()
+    endif
+    if &filetype == "java"
+        highlight _FuncDefAndCall ctermfg=darkblue
+        call matchadd("_FuncDefAndCall", '\<\h\w*\>\ze(')
+
+        highlight javaConditional ctermfg=magenta cterm=italic
+        highlight javaExceptions ctermfg=magenta cterm=italic
+        highlight javaRepeat ctermfg=magenta cterm=italic
+        highlight javaOperator ctermfg=magenta cterm=italic
+        highlight Statement ctermfg=magenta cterm=italic
     endif
 else
     " todo

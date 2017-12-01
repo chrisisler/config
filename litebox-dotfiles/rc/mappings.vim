@@ -181,12 +181,12 @@ nnoremap <Leader>b :b#<CR>
 " Add a semi-colon to the end of the cursor's current line.
 nnoremap <Leader>; A;<ESC>
 
-" Disable/Enable auto-complete framework.
-" nnoremap <Leader>1 :NeoCompleteEnable<CR>:GitGutterEnable<CR>:set number<CR>:set laststatus=2<CR>:ALEDisable<CR>
-" nnoremap <Leader>2 :NeoCompleteDisable<CR>:GitGutterDisable<CR>:set nonumber<CR>:set laststatus=0<CR>:ALEDisable<CR>
+" Disable/Enable lots of things
+nnoremap <Leader>1 :NeoCompleteEnable<CR>:GitGutterEnable<CR>:set number<CR>:set laststatus=2<CR>:ALEDisable<CR>
+nnoremap <Leader>2 :NeoCompleteDisable<CR>:GitGutterDisable<CR>:set nonumber<CR>:set laststatus=0<CR>:ALEDisable<CR>
 
 nnoremap <Leader>z :NeoCompleteToggle<CR>
-" nnoremap <Leader>g :GitGutterToggle<CR>
+nnoremap <Leader>g :GitGutterToggle<CR>
 nnoremap <Leader>x :ALEToggle<CR>kj
 
 " Linter mappings
