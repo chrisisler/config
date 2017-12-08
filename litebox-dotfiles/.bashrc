@@ -32,6 +32,7 @@ codeDir="${HOME}/Code"
 # START ALIASES ----------------------------------------------------------------------
 
 alias u="cd ${academicDir} && ${lslaVar}"
+alias downloads="cd ~/Downloads && ${lslaVar}"
 alias uni="cd ${academicDir} && ${lslaVar}"
 alias today="date '+%Y-%m-%d'"
 # alias getFiletypes="ls -1F | sed 's/^.*//g' | grep -vE '/$' | tr -d '*' | sort | uniq"

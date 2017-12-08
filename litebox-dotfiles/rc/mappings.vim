@@ -4,6 +4,9 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" vim full screen
+" https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
+
 " pressing enter key when auto-complete (pop-up) menu is open will press enter
 inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
 
