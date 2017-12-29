@@ -23,6 +23,7 @@ set nojoinspaces               " prevents inserting 2 spaces when joining
 set splitright                 " put new vertically split windows to the right of current
 set splitbelow                 " put new split windows to bottom of current
 set laststatus=0               " force vim to display status line always
+" set laststatus=2               " force vim to display status line always
 autocmd VimEnter * set laststatus=0 " force set 0 on start. for some reasong it wasnt working on its own
 
 set showtabline=2              " Display list of buffers at the top, uses airline plugin.

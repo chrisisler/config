@@ -17,7 +17,7 @@ Plug 'ElmCast/elm-vim'
 Plug 'artur-shaik/vim-javacomplete2' " java stuff
 " Plug 'Quramy/vim-js-pretty-template' " syntax highlighting for js template strings
 " Plug 'quramy/tsuquyomi' " typescript ide features
-" Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
+Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
 " Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 Plug 'eagletmt/neco-ghc'
 Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
@@ -66,6 +66,8 @@ Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, typ
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'metakirby5/codi.vim' " inline/automatic evaluation
 " Plug 'yggdroot/indentline' " cool indent lines 
+Plug 'heavenshell/vim-jsdoc' " auto-gen docs for js funcs
+Plug 'prettier/prettier' " auto-fmt js
 
 call plug#end()
 
@@ -75,6 +77,16 @@ call plug#end()
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+"vim-jsdoc settings
+let g:jsdoc_allow_input_prompt=1
+let g:jsdoc_input_description=1
+let g:jsdoc_return=1
+let g:jsdoc_return_type=1
+let g:jsdoc_return_description=1
+let g:jsdoc_underscore_private=1
+let g:jsdoc_enable_es6=1
+let g:jsdoc_param_description_separator=' - '
 
 " let g:indentLine_enabled=1
 " let g:indentLine_char='⎸'
@@ -116,6 +128,9 @@ let g:user_emmet_install_global=0 " enable emmet for just the below types
 " autocmd FileType html,css,js,jsx EmmetInstall
 let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
 
+let g:ale_fixers = {
+            \ 'javascript': ['eslint', 'prettier']
+            \}
 let g:ale_set_highlights=0
 let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
@@ -141,7 +156,7 @@ let g:ctrlp_match_window='max:10'
 " neocomplete settings.
 let g:neocomplete#enable_refresh_always=1 " refreshes candidates automatically
 let g:neocomplete#enable_at_startup=1
-let g:neocomplete#auto_complete_delay=200
+let g:neocomplete#auto_complete_delay=150
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=20
 let g:neocomplete#sources#syntax#min_keyword_length=2

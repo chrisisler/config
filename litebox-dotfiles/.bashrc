@@ -167,7 +167,7 @@ blue="\[\e[0;34m\]"
 # darkGrey="\[\e[1;32m\]"
 # mediumGrey="\[\e[1;33m\]"
 # lightGrey="\[\e[1;34m\]"
-# violet="\[\e[1;35m\]"
+violet="\[\e[1;35m\]"
 # normal="\[\e[1;36m\]"
 
 # white="\[\e[37m\]"
@@ -186,6 +186,8 @@ colEnd="\[\e[0m\]"
 
 
 export PS1="\n ${blue}${_currentDirectory}${colEnd} "
+# export PS1="\n ${blue}${_currentDirectory}${colEnd} ${violet}λ${colEnd} "
+
 # export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "
 
 # Do not display CWD if in TMUX (where `#{pane_current_path}` is in tmuxline status).

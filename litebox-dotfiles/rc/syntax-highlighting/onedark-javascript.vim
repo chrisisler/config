@@ -1,28 +1,28 @@
-" TODO
-" - explicit 'function' keyword needs its highlighting back, retrieve from github.
-" - 'new Foo' should allow 'Foo' to be golden, retrieve from github.
-
 call clearmatches()
-
+" highlight RegExp cterm=bold
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " lowercase s
 
-highlight javascriptCase ctermfg=magenta cterm=italic
 highlight javascriptArrowFunc ctermfg=magenta
+
+highlight javascriptCase ctermfg=magenta cterm=italic
 highlight javascriptFuncKeyword ctermfg=magenta cterm=italic
 highlight javascriptVariable ctermfg=magenta cterm=italic
 highlight javascriptClassKeyword ctermfg=darkmagenta cterm=italic
 highlight javascriptClassExtends ctermfg=darkmagenta cterm=italic
 highlight javascriptImport ctermfg=darkmagenta cterm=italic
-highlight javascriptReturn ctermfg=darkmagenta cterm=italic
+highlight javascriptReturn ctermfg=darkmagenta cterm=italic,underline
+" highlight javascriptReturn ctermfg=darkcyan cterm=italic
 " highlight javascriptObjectLabelColon ctermfg=cyan
 " highlight javascriptEndColons ctermfg=cyan
 " highlight javascriptComma ctermfg=cyan
-" highlight javascriptNull ctermfg=lightgreen
+
+" null is special, it's Golden
+highlight javascriptNull ctermfg=3
 
 highlight javascriptTry ctermfg=magenta cterm=italic
-highlight javascriptCatch ctermfg=magenta cterm=italic
+" highlight javascriptCatch ctermfg=magenta cterm=italic
 
 highlight javascriptIdentifierName ctermfg=9
 
@@ -35,8 +35,13 @@ highlight javascriptExport ctermfg=darkmagenta cterm=italic
 " spread/rest operator
 " highlight javascriptObjectLiteral ctermfg=cyan
 
+
+
+" doesn't work for keyword 'async' inside a class definition
 " highlight javascriptAsyncFuncKeyword ctermfg=magenta cterm=italic
-" highlight javascriptAwaitFuncKeyword ctermfg=magenta cterm=italic
+
+highlight javascriptAwaitFuncKeyword ctermfg=magenta cterm=italic
+
 
 
 highlight javascriptFuncArg ctermfg=3 cterm=italic
@@ -46,8 +51,9 @@ highlight javascriptFuncArg ctermfg=3 cterm=italic
 
 
 
-" object keys are green (not es6 key/val sorthand)
-highlight javaScriptObjectLabel ctermfg=green
+" object keys (not es6 key/val sorthand)
+highlight javaScriptObjectLabel ctermfg=darkmagenta
+" highlight javaScriptObjectLabel ctermfg=green
 
 " highlight javaScriptReserved ctermfg=green
 
@@ -96,6 +102,15 @@ highlight Exception cterm=italic ctermfg=magenta
 
 " instanceof, typeof, new, in, void
 " highlight Identifier cterm=italic ctermfg=magenta
+
+highlight MagentaItalic ctermfg=magenta cterm=italic
+call matchadd("MagentaItalic", '\<catch\>')
+call matchadd("MagentaItalic", '\<async\>\ze\s\+')
+
+highlight JustMagenta ctermfg=magenta
+call matchadd("JustMagenta", '\<new\>\ze\s\+\u')
+
+
 call matchadd("Conditional", '\s\+\zs\<instanceof\>\ze\s\+')
 call matchadd("Conditional", '\<typeof\>\ze\s\+')
 call matchadd("Conditional", '\s\+\zs\<in\>\ze\s\+')
@@ -103,8 +118,69 @@ call matchadd("Conditional", '\s\+\zs\<in\>\ze\s\+')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+" constants that are named in all capital characters
+" The '\.*\(=>\)\@!' part of the regexp at the end excludes arrow functions
+" highlight UnderlinedRed cterm=underline
+" call matchadd("UnderlinedRed", '[^A-Z_.]\zs\<[A-Z_][0-9A-Z_$]\+\>\ze\.*\(=>\)\@!')
+" call matchadd("UnderlinedRed", '\(^\| \)\zs\<[A-Z_][0-9A-Z_$]\+\>\ze\.*\(=>\)\@!')
+
+
 " the keyword 'function'
 call matchadd("Conditional", '\<function\>\ze\s*(')
 
-" highlight Golden ctermfg=3
-" call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
+
+highlight Golden ctermfg=3
+call matchadd("Golden", '\<__dirname\>')
+call matchadd("Golden", '\<__filename\>')
+call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" typescript syntax
+if &filetype == "typescript"
+
+    " cause vim typescript syntax highlighting sucks, gots do it my self.
+    call matchadd("JustMagenta", '=>')
+
+    " TODO
+    " identifiers -> red (avoid using the 'Normal' syntax highlighting group)
+    " args -> golden
+    " * / + -  -> cyan
+
+    " keywords: function
+    highlight typescriptFuncKeyword ctermfg=magenta
+    " keywords: let const var
+    highlight typescriptIdentifier ctermfg=magenta cterm=italic
+    " keywords: && ||
+    highlight typescriptLogicSymbols ctermfg=cyan
+    " type annotations are Golden
+    " const num: Number = 42 // 'Number' is highlighted Golden
+    highlight typescriptType ctermfg=3
+    " keywords: ( )
+    highlight typescriptParens ctermfg=fg
+    " keywords: = == === != !== => > < <= >=
+    highlight typescriptOpSymbols ctermfg=cyan
+
+    " TODO: does this work?
+    " highlight typescriptRepeat ctermfg=cyan
+
+    " does this even do anything?
+    " highlight typescriptOperator ctermfg=cyan
+
+
+    """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    " All syntax-highlighting below is for typescript where Normal=red
+    " TODO
+    " object keys are still red
+
+    " highlight typescriptDotNotation ctermfg=fg
+    " highlight typescriptInterpolationDelimiter ctermfg=fg
+    " " IMPORTANT : this line must be at the end of other `highlight` changes/calls
+    " highlight Normal ctermfg=red
+
+    " keys of an object
+    " WARNING : BREAKS VAR DECLARATIONS WITH TYPE ANNOTATIONS
+    " highlight JustDarkMagenta ctermfg=darkmagenta
+    " call matchadd("JustDarkMagenta", '\<\h\w*\>\ze:')
+end

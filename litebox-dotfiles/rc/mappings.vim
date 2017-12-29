@@ -246,61 +246,62 @@ nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-inoremap <silent> <Leader>intersection ∩
-inoremap <silent> <Leader>is ∩
-inoremap <silent> <Leader>union ∪
-inoremap <silent> <Leader>and ∧
-inoremap <silent> <Leader>or ∨
+" inoremap <silent> <Leader>intersection ∩
+" inoremap <silent> <Leader>is ∩
+" inoremap <silent> <Leader>union ∪
+" inoremap <silent> <Leader>and ∧
+" inoremap <silent> <Leader>or ∨
 
-inoremap <silent> <Leader>congruent ≡
+" inoremap <silent> <Leader>congruent ≡
 
-inoremap <silent> <Leader>propersubset ⊂
-inoremap <silent> <Leader>subset ⊆
+" inoremap <silent> <Leader>propersubset ⊂
+" inoremap <silent> <Leader>subset ⊆
 
-inoremap <silent> <Leader>roughlyequal ≈
-inoremap <silent> <Leader>notequal ≠
+" inoremap <silent> <Leader>roughlyequal ≈
+" inoremap <silent> <Leader>notequal ≠
 
-inoremap <silent> <Leader>plusorminus ±
-inoremap <silent> <Leader>therefore ∴
-inoremap <silent> <Leader>foreach ∀
-inoremap <silent> <Leader>forany ∀
-inoremap <silent> <Leader>lambda λ
-inoremap <silent> <Leader>lamda λ
-inoremap <silent> <Leader>emptyset ∅
-inoremap <silent> <Leader>sum Σ
-inoremap <silent> <Leader>mult ∏
-inoremap <silent> <Leader>multiply ∏
-inoremap <silent> <Leader>times ∙
-inoremap <silent> <Leader>integral ∫
-inoremap <silent> <Leader>derivative ∂
-inoremap <silent> <Leader>not ¬
-inoremap <silent> <Leader>in ∈
-inoremap <silent> <Leader>cartesianproduct ×
-inoremap <silent> <Leader>by ×
-inoremap <silent> <Leader>beta ∝
-inoremap <silent> <Leader>thereexists ∃
-inoremap <silent> <Leader>perp ⊥
-inoremap <silent> <Leader>suchthat ﬆ
-inoremap <silent> <Leader>st ﬆ
-inoremap <silent> <Leader>xor ⊕
-inoremap <silent> <Leader>degree °
-inoremap <silent> <Leader>composition °
-inoremap <silent> <Leader>compo °
-inoremap <silent> <Leader>divide ÷
-inoremap <silent> <Leader>sigma σ
-inoremap <silent> <Leader>std σ
-inoremap <silent> <Leader>stddev σ
+" inoremap <silent> <Leader>plusorminus ±
+" inoremap <silent> <Leader>therefore ∴
+" inoremap <silent> <Leader>foreach ∀
+" inoremap <silent> <Leader>forany ∀
+" " commented out to make whole-line auto-complete faster (see approx Line168)
+" " inoremap <silent> <Leader>lambda λ
+" " inoremap <silent> <Leader>lamda λ
+" inoremap <silent> <Leader>emptyset ∅
+" inoremap <silent> <Leader>sum Σ
+" inoremap <silent> <Leader>mult ∏
+" inoremap <silent> <Leader>multiply ∏
+" inoremap <silent> <Leader>times ∙
+" inoremap <silent> <Leader>integral ∫
+" inoremap <silent> <Leader>derivative ∂
+" inoremap <silent> <Leader>not ¬
+" inoremap <silent> <Leader>in ∈
+" inoremap <silent> <Leader>cartesianproduct ×
+" inoremap <silent> <Leader>by ×
+" inoremap <silent> <Leader>beta ∝
+" inoremap <silent> <Leader>thereexists ∃
+" inoremap <silent> <Leader>perp ⊥
+" inoremap <silent> <Leader>suchthat ﬆ
+" inoremap <silent> <Leader>st ﬆ
+" inoremap <silent> <Leader>xor ⊕
+" inoremap <silent> <Leader>degree °
+" inoremap <silent> <Leader>composition °
+" inoremap <silent> <Leader>compo °
+" inoremap <silent> <Leader>divide ÷
+" inoremap <silent> <Leader>sigma σ
+" inoremap <silent> <Leader>std σ
+" inoremap <silent> <Leader>stddev σ
 
-inoremap <silent> <Leader>complement ⁽
-inoremap <silent> <Leader>compl ⁽
+" inoremap <silent> <Leader>complement ⁽
+" inoremap <silent> <Leader>compl ⁽
 
-inoremap <silent> <Leader>floor ┗ x┛
-inoremap <silent> <Leader>ceiling ┏ x┓
+" inoremap <silent> <Leader>floor ┗ x┛
+" inoremap <silent> <Leader>ceiling ┏ x┓
 
-inoremap <silent> <Leader>greaterthanequal ≥
-inoremap <silent> <Leader>lessthanequal ≤
+" inoremap <silent> <Leader>greaterthanequal ≥
+" inoremap <silent> <Leader>lessthanequal ≤
 
-inoremap <silent> <Leader>ifftaut ⇔
-inoremap <silent> <Leader>iff ↔
-inoremap <silent> <Leader>thentaut ⇒
-inoremap <silent> <Leader>then →
+" inoremap <silent> <Leader>ifftaut ⇔
+" inoremap <silent> <Leader>iff ↔
+" inoremap <silent> <Leader>thentaut ⇒
+" inoremap <silent> <Leader>then →

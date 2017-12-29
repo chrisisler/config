@@ -77,10 +77,11 @@ if &background == "dark"
 
     " highlight VertSplit ctermfg=bg ctermbg=bg
 
-    if &filetype == "javascript.jsx"
+    if &filetype == "javascript.jsx" || &filetype == "typescript"
         " call HighlightJavaScriptSolarized()
         call HighlightJavaScriptOneDark()
     endif
+
     if &filetype == "java"
         highlight _FuncDefAndCall ctermfg=darkblue
         call matchadd("_FuncDefAndCall", '\<\h\w*\>\ze(')
