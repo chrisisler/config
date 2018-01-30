@@ -53,8 +53,8 @@ parseCmusOutput()
     local isShuffle="$(getDataFromCmus "${cmusData}" "set shuffle")"
     local isRepeat="$(getDataFromCmus "${cmusData}" "set repeat")"
 
-    echo -n "${artistName} - ${songTitle}"
-    # echo -n "${artistName} - ${songTitle} ${songPositionFormatted}/${songDurationFormatted}"
+    # echo -n "${artistName} - ${songTitle} ·"
+    echo -n "${artistName} - ${songTitle} ${songPositionFormatted}/${songDurationFormatted} ·"
 }
 
 parseCmusOutput

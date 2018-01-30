@@ -21,6 +21,8 @@ nnoremap U <C-r>
 
 " Open nerdtree.
 nnoremap <silent> \ :NERDTreeToggle<CR>
+" Open nerdtree and keep cursor in editor.
+nnoremap <silent> \| :NERDTreeToggle<CR><C-w>l
 
 " Next window.
 nnoremap [ <C-w>w
@@ -185,8 +187,8 @@ nnoremap <Leader>b :b#<CR>
 nnoremap <Leader>; A;<ESC>
 
 " Disable/Enable lots of things
-nnoremap <Leader>1 :NeoCompleteEnable<CR>:GitGutterEnable<CR>:set number<CR>:set laststatus=2<CR>:ALEDisable<CR>
-nnoremap <Leader>2 :NeoCompleteDisable<CR>:GitGutterDisable<CR>:set nonumber<CR>:set laststatus=0<CR>:ALEDisable<CR>
+nnoremap <Leader>1 :NeoCompleteEnable<CR>:set number<CR>:set laststatus=2<CR>:ALEDisable<CR>
+nnoremap <Leader>2 :NeoCompleteDisable<CR>:set nonumber<CR>:set laststatus=0<CR>:ALEDisable<CR>
 
 nnoremap <Leader>z :NeoCompleteToggle<CR>
 nnoremap <Leader>g :GitGutterToggle<CR>

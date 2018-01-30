@@ -9,7 +9,7 @@ highlight javascriptArrowFunc ctermfg=magenta
 highlight javascriptCase ctermfg=magenta cterm=italic
 highlight javascriptFuncKeyword ctermfg=magenta cterm=italic
 highlight javascriptVariable ctermfg=magenta cterm=italic
-highlight javascriptClassKeyword ctermfg=darkmagenta cterm=italic
+highlight javascriptClassKeyword ctermfg=magenta cterm=italic
 highlight javascriptClassExtends ctermfg=darkmagenta cterm=italic
 highlight javascriptImport ctermfg=darkmagenta cterm=italic
 highlight javascriptReturn ctermfg=darkmagenta cterm=italic,underline
@@ -66,28 +66,6 @@ highlight javaScriptObjectLabel ctermfg=darkmagenta
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-highlight FuncDefAndCall ctermfg=darkblue
-
-" function invocation
-" call matchadd("FuncDefAndCall", '[^{]\zs\<\h\w*\>\ze(')
-call matchadd("FuncDefAndCall", '\<\h\w*\>\ze(')
-
-" function definition
-call matchadd("FuncDefAndCall", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=[^{.<>]\+=>')
-
-" function definition with destructuring
-call matchadd("FuncDefAndCall", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=\s\+(.*)\s\+=>')
-
-" function definition as a class property or without const/let/var
-" call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s\+=[^.()]\+=>')
-" call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s\+=\s\+\(\h\|(\)[^.()]*\s\+=>')
-" not working
-call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s\+=\s\+\(\h\|(\).*\s\+=>')
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 " if else
 highlight Conditional cterm=italic ctermfg=magenta
 
@@ -107,13 +85,14 @@ highlight MagentaItalic ctermfg=magenta cterm=italic
 call matchadd("MagentaItalic", '\<catch\>')
 call matchadd("MagentaItalic", '\<async\>\ze\s\+')
 
+
 highlight JustMagenta ctermfg=magenta
 call matchadd("JustMagenta", '\<new\>\ze\s\+\u')
+call matchadd("JustMagenta", '\s\+\zs\<in\>\ze\s\+')
 
 
 call matchadd("Conditional", '\s\+\zs\<instanceof\>\ze\s\+')
 call matchadd("Conditional", '\<typeof\>\ze\s\+')
-call matchadd("Conditional", '\s\+\zs\<in\>\ze\s\+')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -134,6 +113,29 @@ highlight Golden ctermfg=3
 call matchadd("Golden", '\<__dirname\>')
 call matchadd("Golden", '\<__filename\>')
 call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+highlight FuncDefAndCall ctermfg=darkblue
+
+" function invocation
+" call matchadd("FuncDefAndCall", '[^{]\zs\<\h\w*\>\ze(')
+call matchadd("FuncDefAndCall", '\<\h\w*\>\ze(')
+
+" function definition
+call matchadd("FuncDefAndCall", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=[^{.<>]\+=>')
+
+" function definition with destructuring
+call matchadd("FuncDefAndCall", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=\s\+(.*)\s\+=>')
+
+" function definition as a class property or without const/let/var
+" call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s\+=[^.()]\+=>')
+" call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s\+=\s\+\(\h\|(\)[^.()]*\s\+=>')
+" not working
+call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s\+=\s\+\(\h\|(\).*\s\+=>')
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -184,3 +186,4 @@ if &filetype == "typescript"
     " highlight JustDarkMagenta ctermfg=darkmagenta
     " call matchadd("JustDarkMagenta", '\<\h\w*\>\ze:')
 end
+

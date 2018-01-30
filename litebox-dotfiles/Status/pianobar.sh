@@ -33,7 +33,7 @@ parsePianobarOutput() {
     # local result="${artist} - ${songNameNoParens}${songIsLiked} ${positionInfo}"
     local result="${artist} - ${songNameNoParens} ${positionInfo}"
     # local result="${artist} - ${songNameNoParens}"
-    printf "${result}"
+    printf "${result} ·"
 }
 
 exitIfPianobarIsNotRunning

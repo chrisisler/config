@@ -14,13 +14,13 @@ Plug 'posva/vim-vue'
 " Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
 Plug 'ElmCast/elm-vim'
-Plug 'artur-shaik/vim-javacomplete2' " java stuff
+" Plug 'artur-shaik/vim-javacomplete2' " java stuff
 " Plug 'Quramy/vim-js-pretty-template' " syntax highlighting for js template strings
 " Plug 'quramy/tsuquyomi' " typescript ide features
 Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
 " Plug 'mattn/emmet-vim'                        " the only way to write html in vim
-Plug 'eagletmt/neco-ghc'
-Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
+" Plug 'eagletmt/neco-ghc'
+" Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
 " Plug 'hynek/vim-python-pep8-indent' " python correct indentation
 " Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 
@@ -35,7 +35,7 @@ Plug 'joshdick/onedark.vim'             " the only good one dark plugin
 " Plug 'chriskempson/base16-vim'          " base16 colorschemes
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
-Plug 'airblade/vim-gitgutter'           " git diff in gutter
+" Plug 'airblade/vim-gitgutter'           " git diff in gutter
 " Plug 'kshenoy/vim-signature'            " display marks in gutter
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
 
@@ -67,7 +67,7 @@ Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'metakirby5/codi.vim' " inline/automatic evaluation
 " Plug 'yggdroot/indentline' " cool indent lines 
 Plug 'heavenshell/vim-jsdoc' " auto-gen docs for js funcs
-Plug 'prettier/prettier' " auto-fmt js
+" Plug 'prettier/prettier' " auto-fmt js
 
 call plug#end()
 
@@ -137,7 +137,7 @@ let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
 let g:ale_lint_delay=800
 " Idea : set function mapping for g:ale_open_list : see `stackoverflow.com/questions/20579142`
-let g:ale_open_list=0 " auto-open the loclist to show errs/warnings
+let g:ale_open_list=1 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
 " let g:airline_section_error='%{ale#statusline#Status()}'
 let g:ale_echo_msg_format = '[%linter%] %s'
