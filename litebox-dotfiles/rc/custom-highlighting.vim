@@ -39,7 +39,7 @@ set background=dark
 
 " highlight MatchParen cterm=bold ctermbg=bg ctermfg=3
 " highlight MatchParen cterm=bold ctermbg=darkgray ctermfg=black
-highlight MatchParen cterm=bold,underline
+" highlight MatchParen cterm=bold,underline
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

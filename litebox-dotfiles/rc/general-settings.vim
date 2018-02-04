@@ -51,6 +51,8 @@ set incsearch
 set noswapfile
 set virtualedit=block
 set encoding=utf-8
+" disable safe write to enable hot module reload (for js)
+" @see https://parceljs.org/hmr.html
 set backupcopy=yes
 
 " https://robots.thoughtbot.com/vim-you-complete-me

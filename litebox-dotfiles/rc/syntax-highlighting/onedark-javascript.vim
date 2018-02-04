@@ -84,6 +84,7 @@ highlight Exception cterm=italic ctermfg=magenta
 highlight MagentaItalic ctermfg=magenta cterm=italic
 call matchadd("MagentaItalic", '\<catch\>')
 call matchadd("MagentaItalic", '\<async\>\ze\s\+')
+call matchadd("MagentaItalic", '\<static\>\ze\s\+')
 
 
 highlight JustMagenta ctermfg=magenta
@@ -103,10 +104,6 @@ call matchadd("Conditional", '\<typeof\>\ze\s\+')
 " highlight UnderlinedRed cterm=underline
 " call matchadd("UnderlinedRed", '[^A-Z_.]\zs\<[A-Z_][0-9A-Z_$]\+\>\ze\.*\(=>\)\@!')
 " call matchadd("UnderlinedRed", '\(^\| \)\zs\<[A-Z_][0-9A-Z_$]\+\>\ze\.*\(=>\)\@!')
-
-
-" the keyword 'function'
-call matchadd("Conditional", '\<function\>\ze\s*(')
 
 
 highlight Golden ctermfg=3
@@ -186,4 +183,9 @@ if &filetype == "typescript"
     " highlight JustDarkMagenta ctermfg=darkmagenta
     " call matchadd("JustDarkMagenta", '\<\h\w*\>\ze:')
 end
+
+
+" the keyword 'function'
+call matchadd("Conditional", '\<function\>\ze\s*(')
+
 

@@ -132,7 +132,7 @@ let g:ale_fixers = {
             \ 'javascript': ['eslint', 'prettier']
             \}
 let g:ale_set_highlights=0
-let g:ale_enabled=1
+let g:ale_enabled=0
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
 let g:ale_lint_delay=800
