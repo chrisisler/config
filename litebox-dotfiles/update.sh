@@ -3,6 +3,7 @@
 
 dotfilesDir="$(pwd)"
 
+cp -r ~/Code/Bin/itermcolors "${dotfilesDir}"
 cp ~/.tmux.conf "${dotfilesDir}"
 cp ~/.tmux/tmuxline.conf "${dotfilesDir}"
 
