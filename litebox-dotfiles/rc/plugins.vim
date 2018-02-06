@@ -63,10 +63,10 @@ Plug 'sirver/ultisnips'       " snippies
 Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, types, refs, renames, etc.
 
 " Other
-Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
+" Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'metakirby5/codi.vim' " inline/automatic evaluation
 " Plug 'yggdroot/indentline' " cool indent lines 
-Plug 'heavenshell/vim-jsdoc' " auto-gen docs for js funcs
+" Plug 'heavenshell/vim-jsdoc' " auto-gen docs for js funcs
 " Plug 'prettier/prettier' " auto-fmt js
 
 call plug#end()

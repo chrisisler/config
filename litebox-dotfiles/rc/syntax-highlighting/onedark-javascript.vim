@@ -88,7 +88,7 @@ call matchadd("MagentaItalic", '\<static\>\ze\s\+')
 
 
 highlight JustMagenta ctermfg=magenta
-call matchadd("JustMagenta", '\<new\>\ze\s\+\u')
+call matchadd("JustMagenta", '\<new\>\ze\s\+\h')
 call matchadd("JustMagenta", '\s\+\zs\<in\>\ze\s\+')
 
 

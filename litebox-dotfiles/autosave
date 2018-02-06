@@ -4,9 +4,9 @@ set altformat_playlist= %f%= %d
 set altformat_title=%f
 set altformat_trackwin= %f%= %d 
 set auto_expand_albums_follow=true
-set auto_expand_albums_search=true
-set auto_expand_albums_selcur=true
-set auto_reshuffle=true
+set auto_expand_albums_search=false
+set auto_expand_albums_selcur=false
+set auto_reshuffle=false
 set buffer_seconds=10
 set color_cmdline_attr=default
 set color_cmdline_bg=default

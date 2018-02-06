@@ -31,6 +31,7 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias tkill="tmux kill-pane -t $@"
 alias rsync="/usr/local/Cellar/rsync/3.1.3_1/bin/rsync"
 alias u="cd ${academicDir} && ${lslaVar}"
 alias downloads="cd ~/Downloads && ${lslaVar}"
@@ -38,7 +39,7 @@ alias uni="cd ${academicDir} && ${lslaVar}"
 alias today="date '+%Y-%m-%d'"
 # alias getFiletypes="ls -1F | sed 's/^.*//g' | grep -vE '/$' | tr -d '*' | sort | uniq"
 alias g="cd ${HOME}/Code/Git"
-# alias tm="ps auxc"
+alias tm="ps xc | awk '{ print \$1, \$5 }' | sed 1d | sort -fk 2 | column"
 alias gs="git status"
 alias bad="cd ~/Main/Bin/Bad"
 alias q="exit"
@@ -85,7 +86,7 @@ alias rangerrc="vim ~/.config/ranger/rc.conf"
 alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
 alias tt="tmuxtemp"
 alias t="tmux attach -t All || tmux new -s All"
-alias tmus="tmux attach -t Music || tmux new -s Music"
+alias tmus="tmux attach -t ♫ || tmux new -s ♫"
 alias weather="curl wttr.in/boston"
 # alias spamrandom="cat /dev/urandom | tr -cd '01'"
 alias vi="vim"
@@ -104,42 +105,52 @@ alias chips="cd ${codeDir}/Git/chips && ${lslaVar}"
 alias btc="curl -sSL https://coinbase.com/api/v1/prices/historical | head -n 1 | sed \"s|^.*,|$|\" | sed \"s|\(\.[0-9]$\)|\10|\""
 alias thesaurus="node ${codeDir}/JS/Bin/thesaurus.js $@"
 # alias snakecase="rename 'y/[ _]/-/' $1"
-alias tm="ps axcu"
 alias clock='watch -t -n1 "date +%T|figlet"'
 
 # END ALIASES -----------------------------------------------------------------
 
 alias github=gh
 gh() {
-    if [ ! -d .git ]; then
-        echo "ERROR: Not a git directory"
-        return 1
-    fi
-    gitUrl="$(git config --get remote.origin.url | sed -e 's/^git@/https:\/\//g' -e 's/com:/com\//g')"
-    if [[ $gitUrl != https://github* ]]; then
-        echo "ERROR: Remote origin invalid"
-        return 1
-    fi
-    open $gitUrl
+  if [ ! -d .git ]; then
+    echo "ERROR: Not a git directory"
+    return 1
+  fi
+  gitUrl="$(git config --get remote.origin.url | sed -e 's/^git@/https:\/\//g' -e 's/com:/com\//g')"
+  if [[ $gitUrl != https://github* ]]; then
+    echo "ERROR: Remote origin invalid"
+    return 1
+  fi
+  open $gitUrl
 }
 
 displayAdvice() {
-    # https://stackoverflow.com/questions/11393817/bash-read-lines-in-file-into-an-array
-    IFS=$'\r\n' GLOBIGNORE='*' command eval 'arr=($(cat ~/Main/Bin/pragmatic-programmer.txt))'
-    printf "${arr["$[RANDOM % ${#arr[@]}]"]}"
+  # https://stackoverflow.com/questions/11393817/bash-read-lines-in-file-into-an-array
+  IFS=$'\r\n' GLOBIGNORE='*' command eval 'arr=($(cat ~/Main/Bin/pragmatic-programmer.txt))'
+  printf "${arr["$[RANDOM % ${#arr[@]}]"]}"
 }
 # displayAdvice
 
 getNewMacAddress() {
-    openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
+  openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
 }
 
 ip() {
-    externalIP=`curl -s "http://whatismijnip.nl" | cut -d " " -f 5`
-    if [[ "${externalIP}" != "" ]]; then
-        echo -n "${externalIP}"
-    fi
+  externalIP=`curl -s "http://whatismijnip.nl" | cut -d " " -f 5`
+  if [[ "${externalIP}" != "" ]]; then
+    echo -n "${externalIP}"
+  fi
 }
+
+## Colors
+# red() {
+#   printf "%s%s%s" "\033[1;31m" $1 "\033[0m"
+# }
+# green() {
+#   printf "%s%s%s" "\033[1;32m" $1 "\033[0m"
+# }
+# blue() {
+#   printf "%s%s%s" "\033[1;34m" $1 "\033[0m"
+# }
 
 # START PROMPT STRING ----------------------------------------------------------
 
@@ -155,37 +166,40 @@ _currentDirectory="\w"
 
 # Colors based on solarized dark colorscheme (ethanschoonover.com/solarized).
 # base01="\[\e[0;30m\]"
+
 red="\[\e[0;31m\]"
 yellow="\[\e[0;32m\]"
 orange="\[\e[0;33m\]"
 blue="\[\e[0;34m\]"
-# magenta="\[\e[0;35m\]"
-# cyan="\[\e[0;36m\]"
 
-# base00="\[\e[1;30m\]"
-# orangeRed="\[\e[1;31m\]"
-# darkGrey="\[\e[1;32m\]"
-# mediumGrey="\[\e[1;33m\]"
-# lightGrey="\[\e[1;34m\]"
+magenta="\[\e[0;35m\]"
+cyan="\[\e[0;36m\]"
+
+base00="\[\e[1;30m\]"
+orangeRed="\[\e[1;31m\]"
+darkGrey="\[\e[1;32m\]"
+mediumGrey="\[\e[1;33m\]"
+lightGrey="\[\e[1;34m\]"
 violet="\[\e[1;35m\]"
-# normal="\[\e[1;36m\]"
+normal="\[\e[1;36m\]"
 
 # white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-# source "${codeDir}/Status/git.sh"
-# export PS1="\n\
-#  ${blue}${_currentDirectory}${colEnd}\
-# ${yellow}\$(gitBracketL)${colEnd}\
-# ${cyan}\$(gitBranch)${colEnd}\
-# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-# ${blue}\$(gitAddedChanges)${colEnd}\
-# ${red}\$(gitUnaddedChanges)${colEnd}\
-# ${yellow}\$(gitBracketR)${colEnd}\
-#  ${magenta}¤${colEnd} "
+source "${codeDir}/Status/git.sh"
+export PS1="\n\
+ ${blue}${_currentDirectory}${colEnd}\
+${yellow}\$(gitBracketL)${colEnd}\
+${cyan}\$(gitBranch)${colEnd}\
+${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+${blue}\$(gitAddedChanges)${colEnd}\
+${red}\$(gitUnaddedChanges)${colEnd}\
+${yellow}\$(gitBracketR)${colEnd} "
+# ${orange}»»»${colEnd} "
+# ${orange}¤${colEnd} "
 
 
-export PS1="\n ${blue}${_currentDirectory}${colEnd} "
+# export PS1="\n ${blue}${_currentDirectory}${colEnd} "
 # export PS1="\n ${blue}${_currentDirectory}${colEnd} ${violet}λ${colEnd} "
 
 # export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "
