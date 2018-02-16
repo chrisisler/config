@@ -20,7 +20,6 @@ export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 
 export EDITOR="vim"
-export openWeatherMapAPIKey="619a668af9d55d2377325ce0e407d9bc"
 
 # lslaVar="ls -oFGHhA" # Can remove H
 # lslaVar="ls -AGF"
@@ -40,7 +39,7 @@ alias uni="cd ${academicDir} && ${lslaVar}"
 alias today="date '+%Y-%m-%d'"
 # alias getFiletypes="ls -1F | sed 's/^.*//g' | grep -vE '/$' | tr -d '*' | sort | uniq"
 alias g="cd ${HOME}/Code/Git"
-alias tm="ps xc | awk '{ print \$1, \$5 }' | sed 1d | sort -fk 2 | column -t | column"
+alias tm="ps xc | awk '{ print \$1, \$5 }' | sed 1d | sort -fk 2 | column"
 alias gs="git status"
 alias bad="cd ~/Main/Bin/Bad"
 alias q="exit"
@@ -171,7 +170,6 @@ _currentDirectory="\w"
 red="\[\e[0;31m\]"
 yellow="\[\e[0;32m\]"
 orange="\[\e[0;33m\]"
-# blue="\[\e[1;44m\]"
 blue="\[\e[0;34m\]"
 
 magenta="\[\e[0;35m\]"

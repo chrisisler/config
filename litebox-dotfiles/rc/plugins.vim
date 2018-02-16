@@ -35,8 +35,8 @@ Plug 'joshdick/onedark.vim'             " the only good one dark plugin
 " Plug 'chriskempson/base16-vim'          " base16 colorschemes
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
-Plug 'airblade/vim-gitgutter'           " git diff in gutter
-Plug 'kshenoy/vim-signature'            " display marks in gutter
+" Plug 'airblade/vim-gitgutter'           " git diff in gutter
+" Plug 'kshenoy/vim-signature'            " display marks in gutter
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
 
 " Integrations
@@ -68,7 +68,6 @@ Plug 'metakirby5/codi.vim' " inline/automatic evaluation
 " Plug 'yggdroot/indentline' " cool indent lines 
 " Plug 'heavenshell/vim-jsdoc' " auto-gen docs for js funcs
 " Plug 'prettier/prettier' " auto-fmt js
-Plug 'severin-lemaignan/vim-minimap' " sublime text-like minimap. ,mm to open and ,mc to close
 
 call plug#end()
 
@@ -78,8 +77,6 @@ call plug#end()
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" vim-minimap
-let g:minimap_highlight='visual'
 
 "vim-jsdoc settings
 let g:jsdoc_allow_input_prompt=1
@@ -92,7 +89,6 @@ let g:jsdoc_enable_es6=1
 let g:jsdoc_param_description_separator=' - '
 
 " let g:indentLine_enabled=1
-" let g:indentLine_char='・'
 " let g:indentLine_char='⎸'
 
 let g:codi#rightsplit=1
@@ -143,7 +139,7 @@ let g:ale_lint_delay=800
 " Idea : set function mapping for g:ale_open_list : see `stackoverflow.com/questions/20579142`
 let g:ale_open_list=1 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
-let g:airline_section_error='%{ale#statusline#Status()}'
+" let g:airline_section_error='%{ale#statusline#Status()}'
 let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
 let g:ale_linters={
@@ -154,7 +150,7 @@ let g:ale_linters={
 let g:ctrlp_regexp=0
 let g:ctrlp_custom_ignore='node_modules'
 let g:ctrlp_show_hidden=1
-let g:ctrlp_max_depth=4
+let g:ctrlp_max_depth=6
 let g:ctrlp_match_window='max:10'
 
 " neocomplete settings.
@@ -199,7 +195,7 @@ let g:jsx_ext_required=0
 " Airline settings. See `vert h statusline`
 " Note: these settings aren't used anymore as i've switched to a more minimal layout.
 let g:airline_theme='onedark'
-" let g:airline_section_error=''
+let g:airline_section_error=''
 let g:airline_powerline_fonts=0
 let g:airline_detect_iminsert=1
 let g:airline_skip_empty_sections=1
@@ -208,22 +204,21 @@ let g:airline#extensions#tabline#enabled=1
 
 " Display buffer number
 let g:airline#extensions#tabline#buffer_nr_show=1
-" Prepend buffer number with buffer name.
-" let g:airline#extensions#tabline#buffer_nr_format = '%s '
-" TODO show buf number before buf name
+" Prepend buffer name with buffer name.
+let g:airline#extensions#tabline#buffer_nr_format = '%s '
 
-let g:airline#extensions#tabline#tabs_label='Tabs'
+" let g:airline#extensions#tabline#tabs_label='Tabs'
 " minimal ui
 let airline#extensions#tabline#middle_click_preserves_windows=1
 
 let g:airline#extensions#tabline#fnamemod = ':t'
 "savestate
-let g:airline#extensions#tabline#fnamemod = ':p:.'
+" let g:airline#extensions#tabline#fnamemod = ':p:.'
 let g:airline#extensions#tabline#buffers_label=''
 
 let g:airline#extensions#wordcount#format=''
-let g:airline#extensions#tabline#tab_min_count = 0
-let g:airline_extensions = ['tabline']
+" let g:airline#extensions#tabline#tab_min_count = 0
+" let g:airline_extensions = ['tabline']
 let g:airline_section_a=''
 let g:airline_section_b=''
 let g:airline_section_c=airline#section#create(['%t'])
@@ -234,7 +229,7 @@ let g:airline_section_error=''
 let g:airline_section_warning=''
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-call airline#parts#define_accent('mode', 'blue')
+" call airline#parts#define_accent('mode', 'blue')
 
 " Mode=0 is asynchronous mode. Trim=1 trims empty lines in quickfix window.
 " let g:asyncrun_mode=1
@@ -243,25 +238,3 @@ call airline#parts#define_accent('mode', 'blue')
 " When set to 0, <ESC>ing in the following modes will not quit multi-cursor mode.
 let g:multi_cursor_exit_from_insert_mode=0
 let g:multi_cursor_exit_from_visual_mode=0
-
-" --------------- vim-signature settings ---------------
-
-"  Highlight signs of marks dynamically based upon state indicated by vim-gitgutter.
-let g:SignatureMarkTextHLDynamic=1
-let g:SignatureDeleteConfirmation=1
-let g:SignaturePurgeConfirmation=1
-
-" *g:SignatureMap['Leader']*
-" String, Default: 'm'
-
-" Set the key used to toggle marks and markers.
-" For eg. If this key is set to `<leader>m`,
-" `<leader>ma`       will toggle the mark 'a' on the current line
-" `<leader>m,`       will place the next available mark
-" `<leader>m.`       will place the next available mark if there are no
-" marks already on the line; otherwise, will remove
-" first mark from line
-" `<leader>m<Space>` will delete all marks
-" `<leader>m1`       will toggle the marker '!'
-" `<leader>m!`       will remove all the '!' markers
-" `<leader>m<BS>`    will remove all markers
