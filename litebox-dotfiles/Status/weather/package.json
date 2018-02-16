@@ -1,0 +1,12 @@
+{
+  "name": "weather",
+  "version": "0.0.1",
+  "description": "current weather info fetching script",
+  "main": "weather.js",
+  "author": "Chris Isler",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "node-fetch": "^2.0.0"
+  }
+}

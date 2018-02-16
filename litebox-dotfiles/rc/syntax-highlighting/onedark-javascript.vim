@@ -19,7 +19,7 @@ highlight javascriptReturn ctermfg=darkmagenta cterm=italic,underline
 " highlight javascriptComma ctermfg=cyan
 
 " null is special, it's Golden
-highlight javascriptNull ctermfg=3
+highlight javascriptNull ctermfg=yellow
 
 highlight javascriptTry ctermfg=magenta cterm=italic
 " highlight javascriptCatch ctermfg=magenta cterm=italic
@@ -35,20 +35,16 @@ highlight javascriptExport ctermfg=darkmagenta cterm=italic
 " spread/rest operator
 " highlight javascriptObjectLiteral ctermfg=cyan
 
-
-
 " doesn't work for keyword 'async' inside a class definition
 " highlight javascriptAsyncFuncKeyword ctermfg=magenta cterm=italic
 
 highlight javascriptAwaitFuncKeyword ctermfg=magenta cterm=italic
 
-
-
 highlight javascriptFuncArg ctermfg=3 cterm=italic
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " uppercase S
-
 
 
 " object keys (not es6 key/val sorthand)
@@ -63,53 +59,20 @@ highlight javaScriptObjectLabel ctermfg=darkmagenta
 " highlight javascriptProps ctermfg=green cterm=italic
 " highlight javascriptProperty ctermfg=green cterm=italic
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-" if else
-highlight Conditional cterm=italic ctermfg=magenta
-
-" for, while, do, of
-highlight Repeat cterm=italic ctermfg=magenta
-
-" try, catch, finally
-highlight Exception cterm=italic ctermfg=magenta
-
-" case, default
-" highlight Label cterm=italic ctermfg=magenta
-
-" instanceof, typeof, new, in, void
-" highlight Identifier cterm=italic ctermfg=magenta
-
-highlight MagentaItalic ctermfg=magenta cterm=italic
-call matchadd("MagentaItalic", '\<catch\>')
-call matchadd("MagentaItalic", '\<async\>\ze\s\+')
-call matchadd("MagentaItalic", '\<static\>\ze\s\+')
-
-
-highlight JustMagenta ctermfg=magenta
-call matchadd("JustMagenta", '\<new\>\ze\s\+\h')
-call matchadd("JustMagenta", '\s\+\zs\<in\>\ze\s\+')
-
-
-call matchadd("Conditional", '\s\+\zs\<instanceof\>\ze\s\+')
-call matchadd("Conditional", '\<typeof\>\ze\s\+')
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" constants that are named in all capital characters
-" The '\.*\(=>\)\@!' part of the regexp at the end excludes arrow functions
-" highlight UnderlinedRed cterm=underline
-" call matchadd("UnderlinedRed", '[^A-Z_.]\zs\<[A-Z_][0-9A-Z_$]\+\>\ze\.*\(=>\)\@!')
-" call matchadd("UnderlinedRed", '\(^\| \)\zs\<[A-Z_][0-9A-Z_$]\+\>\ze\.*\(=>\)\@!')
-
+highlight Red ctermfg=red
+call matchadd("Red", '\.\zs\<\h\w*\>')
 
 highlight Golden ctermfg=3
 call matchadd("Golden", '\<__dirname\>')
 call matchadd("Golden", '\<__filename\>')
 call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
+
+highlight GoldenItalic ctermfg=3 cterm=italic
+call matchadd("GoldenItalic", '\<self\>')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -120,10 +83,10 @@ highlight FuncDefAndCall ctermfg=darkblue
 " function invocation
 " call matchadd("FuncDefAndCall", '[^{]\zs\<\h\w*\>\ze(')
 call matchadd("FuncDefAndCall", '\<\h\w*\>\ze(')
+" call matchadd("FuncDefAndCall", '\<\h\w*\>\ze\s\?(')
 
 " function definition
-call matchadd("FuncDefAndCall", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=[^{.<>]\+=>')
-
+call matchadd("FuncDefAndCall", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=[^{.<>]\+=>') 
 " function definition with destructuring
 call matchadd("FuncDefAndCall", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=\s\+(.*)\s\+=>')
 
@@ -133,13 +96,19 @@ call matchadd("FuncDefAndCall", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=\s\+(.*)\s\+=>'
 " not working
 call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s\+=\s\+\(\h\|(\).*\s\+=>')
 
+" the keyword 'function'
+call matchadd("Conditional", '\<function\>\ze\s*(')
+
+highlight Gray ctermfg=white
+call matchadd("Gray", '^//\zs.*')
+call matchadd("Gray", '\s\+//\zs.*')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 " typescript syntax
 if &filetype == "typescript"
-
-    " cause vim typescript syntax highlighting sucks, gots do it my self.
     call matchadd("JustMagenta", '=>')
 
     " TODO
@@ -163,15 +132,10 @@ if &filetype == "typescript"
 
     " TODO: does this work?
     " highlight typescriptRepeat ctermfg=cyan
-
-    " does this even do anything?
     " highlight typescriptOperator ctermfg=cyan
-
-
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " All syntax-highlighting below is for typescript where Normal=red
-    " TODO
-    " object keys are still red
+    " TODO object keys are still red
 
     " highlight typescriptDotNotation ctermfg=fg
     " highlight typescriptInterpolationDelimiter ctermfg=fg
@@ -185,7 +149,40 @@ if &filetype == "typescript"
 end
 
 
-" the keyword 'function'
-call matchadd("Conditional", '\<function\>\ze\s*(')
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
+" if else
+highlight Conditional cterm=italic ctermfg=magenta
+
+" for, while, do, of
+highlight Repeat cterm=italic ctermfg=magenta
+
+" try, catch, finally
+highlight Exception cterm=italic ctermfg=magenta
+
+" case, default
+" highlight Label cterm=italic ctermfg=magenta
+
+" instanceof, typeof, new, in, void
+" highlight Identifier cterm=italic ctermfg=magenta
+
+highlight MagentaItalic ctermfg=magenta cterm=italic
+call matchadd("MagentaItalic", '\<catch\>')
+call matchadd("MagentaItalic", '\<async\>\ze\s\+')
+call matchadd("MagentaItalic", '\<static\>\ze\s\+')
+call matchadd("MagentaItalic", '\<delete\>\ze\s\+')
+call matchadd("MagentaItalic", '\<get\>\ze\s\+')
+call matchadd("MagentaItalic", '\<set\>\ze\s\+')
+
+
+highlight JustMagenta ctermfg=magenta
+call matchadd("JustMagenta", '\<new\>\ze\s\+\h')
+call matchadd("JustMagenta", '\s\+\zs\<in\>\ze\s\+')
+
+
+call matchadd("Conditional", '\s\+\zs\<instanceof\>\ze\s\+')
+call matchadd("Conditional", '\<typeof\>\ze\s\+')
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
