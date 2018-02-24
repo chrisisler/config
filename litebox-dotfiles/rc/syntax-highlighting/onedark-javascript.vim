@@ -64,7 +64,7 @@ highlight javaScriptObjectLabel ctermfg=darkmagenta
 
 
 highlight Red ctermfg=red
-call matchadd("Red", '\.\zs\<\h\w*\>')
+call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
 
 highlight Golden ctermfg=3
 call matchadd("Golden", '\<__dirname\>')
@@ -179,7 +179,7 @@ call matchadd("MagentaItalic", '\<set\>\ze\s\+')
 highlight JustMagenta ctermfg=magenta
 call matchadd("JustMagenta", '\<new\>\ze\s\+\h')
 call matchadd("JustMagenta", '\s\+\zs\<in\>\ze\s\+')
-
+call matchadd("JustMagenta", '\<void\>\ze\s\+')
 
 call matchadd("Conditional", '\s\+\zs\<instanceof\>\ze\s\+')
 call matchadd("Conditional", '\<typeof\>\ze\s\+')

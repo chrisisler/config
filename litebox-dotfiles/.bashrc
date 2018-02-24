@@ -32,6 +32,7 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias path="echo $PATH | tr ':' '\n'"
 alias tkill="tmux kill-pane -t $@"
 alias rsync="/usr/local/Cellar/rsync/3.1.3_1/bin/rsync"
 alias u="cd ${academicDir} && ${lslaVar}"
@@ -86,7 +87,7 @@ alias tmuxline="vim ~/.tmux/tmuxline.conf"
 alias rangerrc="vim ~/.config/ranger/rc.conf"
 alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
 alias tt="tmuxtemp"
-alias t="tmux attach -t All || tmux new -s All"
+alias t="tmux attach -t ¤ || tmux new -s ¤"
 alias tmus="tmux attach -t ♫ || tmux new -s ♫"
 alias weather="curl wttr.in/boston"
 # alias spamrandom="cat /dev/urandom | tr -cd '01'"
@@ -171,7 +172,7 @@ _currentDirectory="\w"
 red="\[\e[0;31m\]"
 yellow="\[\e[0;32m\]"
 orange="\[\e[0;33m\]"
-# blue="\[\e[1;44m\]"
+# blue="\[\e[0;30;44m\]" # bg
 blue="\[\e[0;34m\]"
 
 magenta="\[\e[0;35m\]"
@@ -188,20 +189,20 @@ normal="\[\e[1;36m\]"
 # white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-source "${codeDir}/Status/git.sh"
-export PS1="\n\
- ${blue}${_currentDirectory}${colEnd}\
-${yellow}\$(gitBracketL)${colEnd}\
-${cyan}\$(gitBranch)${colEnd}\
-${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-${blue}\$(gitAddedChanges)${colEnd}\
-${red}\$(gitUnaddedChanges)${colEnd}\
-${yellow}\$(gitBracketR)${colEnd} "
+# source "${codeDir}/Status/git.sh"
+# export PS1="\n\
+#  ${blue}${_currentDirectory}${colEnd}\
+# ${yellow}\$(gitBracketL)${colEnd}\
+# ${cyan}\$(gitBranch)${colEnd}\
+# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+# ${blue}\$(gitAddedChanges)${colEnd}\
+# ${red}\$(gitUnaddedChanges)${colEnd}\
+# ${yellow}\$(gitBracketR)${colEnd} "
 # ${orange}»»»${colEnd} "
 # ${orange}¤${colEnd} "
 
 
-# export PS1="\n ${blue}${_currentDirectory}${colEnd} "
+export PS1="\n ${blue}${_currentDirectory}${colEnd} "
 # export PS1="\n ${blue}${_currentDirectory}${colEnd} ${violet}λ${colEnd} "
 
 # export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "

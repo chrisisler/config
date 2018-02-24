@@ -5,6 +5,12 @@ function! AdjustWindowHeight(minheight, maxheight)
 endfunction
 
 
+" Exclude quickfix window from `:bn[ext]` and `:bp[revious]` commands.
+" Essentially cements it as an output-only window positioned at bottom.
+augroup qf
+    autocmd!
+    autocmd FileType qf set nobuflisted
+augroup END
 
 
 " Highlight all instances of word under cursor, when idle.

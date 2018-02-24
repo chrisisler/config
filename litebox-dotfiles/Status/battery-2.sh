@@ -4,6 +4,11 @@
 set -e
 
 commandOutput="$(pmset -g batt)"
+
+if [ "${commandOutput}" -eq "Now drawing from 'AC Power'" ]; then
+  exit 0
+fi
+
 isChargingSymbol=$(echo -n "${commandOutput}\n" | head -1 | grep -q "AC Power" && echo -n "↑" || echo -n "↓")
 percent=$(echo -n "${commandOutput}\n" | head -2 | tail -1 | awk '{ print $3 }' | tr -d ';%')
 # percent=$(echo -n "${commandOutput}\n" | head -2 | tail -1 | awk '{ print $3 }' | tr -d ';')

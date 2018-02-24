@@ -36,7 +36,10 @@ set background=dark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" remove obnoxious highlighting from quickfix window
+highlight QuickFixLine ctermfg=fg ctermbg=bg
 
+highlight MatchParen cterm=bold,reverse ctermbg=bg ctermfg=darkgray
 " highlight MatchParen cterm=bold ctermbg=bg ctermfg=3
 " highlight MatchParen cterm=bold ctermbg=darkgray ctermfg=black
 " highlight MatchParen cterm=bold,underline
@@ -76,7 +79,7 @@ if &background == "dark"
 
     " highlight VertSplit ctermfg=fg ctermbg=fg
 
-    " highlight VertSplit ctermfg=bg ctermbg=bg
+    highlight VertSplit ctermfg=bg ctermbg=bg
 
     if &filetype == "javascript.jsx" || &filetype == "typescript"
         " call HighlightJavaScriptSolarized()

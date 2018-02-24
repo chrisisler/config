@@ -198,49 +198,6 @@ nnoremap <Leader>x :ALEToggle<CR>kj
 nnoremap <Leader>p :ALEPreviousWrap<CR>kj
 nnoremap <Leader>n :ALENextWrap<CR>kj
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-" Compile and Run - Mappings
-"
-" Note: Must be in same directory of file to get correct output.
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Custom dispatch call
-nnoremap <Leader>d<CR> :w<CR>:Dispatch 
-
-" Javascript
-" nnoremap <Leader>js<CR> :w<CR>:AsyncRun node % 2>/dev/null<CR>:copen<CR>:wincmd k<CR><CR>
-" nnoremap <Leader>js<CR> :w<CR>:Dispatch! node %<CR>:cw<CR>:wincmd k<CR>
-nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
-
-" Haskell
-nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./%:t:r % && ./%:t:r<CR>
-
-" Python
-" nnoremap <Leader>py<CR> :w<CR>:AsyncRun python %<CR>:copen<CR>:wincmd k<CR>
-nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
-
-" Java
-" nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
-" nnoremap <Leader>j2<CR> :w<CR>:AsyncRun java %:t:r<CR>:copen<CR>:wincmd k<CR>
-
-" C#
-" nnoremap <Leader>cs<CR> :w<CR>:AsyncRun csc /nologo /t:exe %<CR>:copen<CR>:wincmd k<CR>
-
-" Shell
-" nnoremap <Leader>sh<CR> :w<CR>:AsyncRun bash %:p<CR>:copen<CR>:wincmd k<CR>
-
-" Ruby
-" nnoremap <Leader>rb<CR> :w<CR>:AsyncRun ruby %:p<CR>:copen<CR>:wincmd k<CR>
-
-" C
-" nnoremap <Leader>c1<CR> :w<CR>:AsyncRun gcc %<CR>:copen<CR>:wincmd k<CR>
-" nnoremap <Leader>c2<CR> :w<CR>:AsyncRun ./a.exe<CR>:wincmd k<CR>
-
-" C++
-" nnoremap <Leader>cp<CR> :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -286,7 +243,7 @@ nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
 " inoremap <silent> <Leader>suchthat ﬆ
 " inoremap <silent> <Leader>st ﬆ
 " inoremap <silent> <Leader>xor ⊕
-" inoremap <silent> <Leader>degree °
+inoremap <silent> <Leader>degree °
 " inoremap <silent> <Leader>composition °
 " inoremap <silent> <Leader>compo °
 " inoremap <silent> <Leader>divide ÷
@@ -307,3 +264,53 @@ nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
 " inoremap <silent> <Leader>iff ↔
 " inoremap <silent> <Leader>thentaut ⇒
 " inoremap <silent> <Leader>then →
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
+" Compile and Run - Mappings
+"
+" Note: Must be in same directory of file to get correct output.
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" Rust (if you want _less_ output, switch to `Dispatch`.)
+" nnoremap <silent> <Leader>rs<CR> :w<CR>:AsyncRun cargo run % --color=never --quiet<CR> :copen<CR>:wincmd k<CR>
+nnoremap <silent> <Leader>rs1 :w<CR>:AsyncRun rustc %<CR>:copen<CR>:wincmd k<CR>
+nnoremap <silent> <Leader>rs2 :w<CR>:AsyncRun %:p:r<CR>:copen<CR>:wincmd k<CR>
+
+" Custom dispatch call
+nnoremap <Leader>d<CR> :w<CR>:Dispatch 
+
+" Javascript
+" nnoremap <Leader>js<CR> :w<CR>:AsyncRun node % 2>/dev/null<CR>:copen<CR>:wincmd k<CR><CR>
+" nnoremap <Leader>js<CR> :w<CR>:Dispatch! node %<CR>:cw<CR>:wincmd k<CR>
+nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
+
+" Haskell
+nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./%:t:r % && ./%:t:r<CR>
+
+" Python
+" nnoremap <Leader>py<CR> :w<CR>:AsyncRun python %<CR>:copen<CR>:wincmd k<CR>
+nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
+
+" Java
+" nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
+" nnoremap <Leader>j2<CR> :w<CR>:AsyncRun java %:t:r<CR>:copen<CR>:wincmd k<CR>
+
+" C#
+" nnoremap <Leader>cs<CR> :w<CR>:AsyncRun csc /nologo /t:exe %<CR>:copen<CR>:wincmd k<CR>
+
+" Shell
+" nnoremap <Leader>sh<CR> :w<CR>:AsyncRun bash %:p<CR>:copen<CR>:wincmd k<CR>
+
+" Ruby
+" nnoremap <Leader>rb<CR> :w<CR>:AsyncRun ruby %:p<CR>:copen<CR>:wincmd k<CR>
+
+" C
+" nnoremap <Leader>c1<CR> :w<CR>:AsyncRun gcc %<CR>:copen<CR>:wincmd k<CR>
+" nnoremap <Leader>c2<CR> :w<CR>:AsyncRun ./a.exe<CR>:wincmd k<CR>
+
+" C++
+" nnoremap <Leader>cp<CR> :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<CR>

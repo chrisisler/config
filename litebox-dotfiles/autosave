@@ -1,4 +1,4 @@
-set aaa_mode=all
+set aaa_mode=artist
 set altformat_current= %F 
 set altformat_playlist= %f%= %d 
 set altformat_title=%f
@@ -84,12 +84,12 @@ set show_all_tracks=true
 set show_current_bitrate=false
 set show_hidden=true
 set show_playback_position=true
-set show_remaining_time=false
+set show_remaining_time=true
 set shuffle=false
 set skip_track_info=false
 set smart_artist_sort=true
 set softvol=true
-set softvol_state=20 20
+set softvol_state=60 60
 set status_display_program=
 set wrap_search=true
 bind browser backspace browser-up
