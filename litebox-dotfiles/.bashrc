@@ -22,6 +22,9 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 export EDITOR="vim"
 export openWeatherMapAPIKey="619a668af9d55d2377325ce0e407d9bc"
 
+# add yarn(pkg) to PATH
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
 # lslaVar="ls -oFGHhA" # Can remove H
 # lslaVar="ls -AGF"
 lslaVar="ls -AGFlh"
@@ -32,6 +35,8 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias pipes="pipes.sh -p 10 -R -t 6"
+alias chrome="open /Volumes/Macintosh\ HD/Applications/Google\ Chrome.app"
 alias path="echo $PATH | tr ':' '\n'"
 alias tkill="tmux kill-pane -t $@"
 alias rsync="/usr/local/Cellar/rsync/3.1.3_1/bin/rsync"

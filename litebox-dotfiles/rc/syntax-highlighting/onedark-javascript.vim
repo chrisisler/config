@@ -63,8 +63,8 @@ highlight javaScriptObjectLabel ctermfg=darkmagenta
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-highlight Red ctermfg=red
-call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
+" highlight Red ctermfg=red
+" call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
 
 highlight Golden ctermfg=3
 call matchadd("Golden", '\<__dirname\>')
@@ -99,9 +99,6 @@ call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s\+=\s\+\(\h\|(\).*\s\+=
 " the keyword 'function'
 call matchadd("Conditional", '\<function\>\ze\s*(')
 
-highlight Gray ctermfg=white
-call matchadd("Gray", '^//\zs.*')
-call matchadd("Gray", '\s\+//\zs.*')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -168,7 +165,7 @@ highlight Exception cterm=italic ctermfg=magenta
 " highlight Identifier cterm=italic ctermfg=magenta
 
 highlight MagentaItalic ctermfg=magenta cterm=italic
-call matchadd("MagentaItalic", '\<catch\>')
+call matchadd("MagentaItalic", '\<catch\>\ze\s\+(')
 call matchadd("MagentaItalic", '\<async\>\ze\s\+')
 call matchadd("MagentaItalic", '\<static\>\ze\s\+')
 call matchadd("MagentaItalic", '\<delete\>\ze\s\+')
@@ -186,3 +183,7 @@ call matchadd("Conditional", '\<typeof\>\ze\s\+')
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+highlight Gray ctermfg=white
+call matchadd("Gray", '^//\zs.*')
+call matchadd("Gray", '\s\+//\zs.*')

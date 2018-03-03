@@ -46,6 +46,7 @@ Plug 'tpope/vim-commentary' " sane (un)commenting
 Plug 'w0rp/ale'             " async linter
 
 " Commands
+Plug 'dhruvasagar/vim-table-mode' " neat tables
 Plug 'terryma/vim-multiple-cursors' " sublime-like multi cursors
 Plug 'ctrlpvim/ctrlp.vim'           " fuzzy finder
 " Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
@@ -65,7 +66,7 @@ Plug 'sirver/ultisnips'       " snippies
 Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, types, refs, renames, etc.
 
 " Other
-" Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
+Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'metakirby5/codi.vim' " inline/automatic evaluation
 " Plug 'yggdroot/indentline' " cool indent lines 
 " Plug 'heavenshell/vim-jsdoc' " auto-gen docs for js funcs
@@ -79,6 +80,10 @@ call plug#end()
 " Plugin Settings
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" tables
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
 
 " rust code auto-formatting via `rustfmt` (format upon saving file)
 let g:rustfmt_autosave = 1

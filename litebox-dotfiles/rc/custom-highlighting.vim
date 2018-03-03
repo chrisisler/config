@@ -81,6 +81,10 @@ if &background == "dark"
 
     highlight VertSplit ctermfg=bg ctermbg=bg
 
+    if &filetype == "rust"
+      call HighlightRustOneDark()
+    endif
+
     if &filetype == "javascript.jsx" || &filetype == "typescript"
         " call HighlightJavaScriptSolarized()
         call HighlightJavaScriptOneDark()
@@ -110,6 +114,11 @@ endif
 
 " Highlighted (in visual mode) syntax highlighting
 " highlight Visual ctermbg=fg ctermfg=black
+
+autocmd BufEnter,BufRead,BufNewFile,FileType *.rs call HighlightRustOneDark()
+function! HighlightRustOneDark()
+    source ~/.vim/rc/syntax-highlighting/onedark-rust.vim
+endfunction
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

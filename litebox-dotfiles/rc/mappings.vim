@@ -279,6 +279,7 @@ inoremap <silent> <Leader>degree °
 " nnoremap <silent> <Leader>rs<CR> :w<CR>:AsyncRun cargo run % --color=never --quiet<CR> :copen<CR>:wincmd k<CR>
 nnoremap <silent> <Leader>rs1 :w<CR>:AsyncRun rustc %<CR>:copen<CR>:wincmd k<CR>
 nnoremap <silent> <Leader>rs2 :w<CR>:AsyncRun %:p:r<CR>:copen<CR>:wincmd k<CR>
+nnoremap <silent> <Leader>rst :w<CR>:AsyncRun cargo test --color=never<CR>:copen<CR>:wincmd k<CR>
 
 " Custom dispatch call
 nnoremap <Leader>d<CR> :w<CR>:Dispatch 

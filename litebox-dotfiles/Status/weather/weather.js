@@ -13,9 +13,17 @@ async function main () {
       // const min = Math.round(data.main.temp_min)
       // const tempRange = `${max}-${min}°F`
       const description = data.weather.map(_ => _.main).join(' ')
-      const temperature = Math.round(data.main.temp)
+      const temperature = Math.round(data.main.temp) + 'F'
+      // const temperature = Math.round(data.main.temp) + '°F'
+      const windSpeedMPH = Math.round(data.wind.speed)
 
-      console.log(temperature + '°F', description)
+      let result = `${temperature}`
+
+      if (windSpeedMPH > 20) {
+        result = `${result} ${windSpeedMPH}mph`
+      }
+
+      console.log(result)
     } 
   } catch (error) {
     console.error('Error: ' + error.message)
