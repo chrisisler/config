@@ -1,1 +1,1 @@
-no
+airline, ale, prettier, flow, fugitive

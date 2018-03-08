@@ -274,7 +274,7 @@ inoremap <silent> <Leader>then →
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <silent> <Leader>doing :Dispatch! doing<Space>
+nnoremap <silent> <Leader>doing :Dispatch doing<Space>
 
 " Rust (if you want _less_ output, switch to `Dispatch`.)
 " nnoremap <silent> <Leader>rs<CR> :w<CR>:AsyncRun cargo run % --color=never --quiet<CR> :copen<CR>:wincmd k<CR>

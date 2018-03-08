@@ -71,7 +71,7 @@ Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'metakirby5/codi.vim' " inline/automatic evaluation
 " Plug 'yggdroot/indentline' " cool indent lines 
 " Plug 'heavenshell/vim-jsdoc' " auto-gen docs for js funcs
-" Plug 'prettier/prettier' " auto-fmt js
+Plug 'prettier/prettier' " auto-fmt js
 Plug 'severin-lemaignan/vim-minimap' " sublime text-like minimap. ,mm to open and ,mc to close
 
 call plug#end()
@@ -146,10 +146,18 @@ let g:user_emmet_install_global=0 " enable emmet for just the below types
 " autocmd FileType html,css,js,jsx EmmetInstall
 let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
 
-let g:ale_fixers = {
-            \ 'javascript': ['prettier']
-            \}
-let g:ale_set_highlights=0
+" <prettier js fix on save settings>
+let g:ale_fix_on_save=1
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_javascript_prettier_use_local_config = 1
+" </prettier js fix on save settings>
+
+" <flow>
+let g:flow#autoclose=1
+" </flow>
+
+let g:ale_set_highlights=1
 let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
@@ -161,7 +169,7 @@ let g:ale_sign_column_always=1
 let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
 let g:ale_linters={
-\   'javascript': ['eslint'],
+\   'javascript': ['eslint', 'flow'],
 \   'cpp': ['g++'],
 \}
 
@@ -197,13 +205,25 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
     let g:neocomplete#sources#omni#input_patterns = {}
 endif
 
+" auto open NerdTree file explorer on vim starts up
+autocmd VimEnter * call OnVimStartUp()
+function OnVimStartUp()
+  NERDTree
+  wincmd l
+endfunction
+
+" auto close if only remaining window is NerdTree
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
 let NERDTreeMinimalUI=1
+let NERDTreeMouseMode=2
 let NERDTreeShowLineNumbers=0
 let NERDTreeShowBookmarks=0
 let NERDTreeShowHidden=1
-let NERDTreeHighlightCursorline=0
+let NERDTreeHighlightCursorline=1
 " off
-let NERDTreeStatusLine=-1
+let NERDTreeStatusLine=''
+" let NERDTreeStatusLine=-1
 let NERDTreeAutoDeleteBuffer=1
 " the CWD is changed whenever the tree root is changed
 " let NERDTreeChDirMode=2
