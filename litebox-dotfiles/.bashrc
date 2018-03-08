@@ -35,6 +35,9 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias doing="printf ${@} > ~/Code/Status/what-am-i-doing.txt"
+alias mute='osascript -e "set Volume 0"'
+alias dc="cd"
 alias pipes="pipes.sh -p 10 -R -t 6"
 alias chrome="open /Volumes/Macintosh\ HD/Applications/Google\ Chrome.app"
 alias path="echo $PATH | tr ':' '\n'"
@@ -194,20 +197,21 @@ normal="\[\e[1;36m\]"
 # white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-# source "${codeDir}/Status/git.sh"
-# export PS1="\n\
-#  ${blue}${_currentDirectory}${colEnd}\
-# ${yellow}\$(gitBracketL)${colEnd}\
-# ${cyan}\$(gitBranch)${colEnd}\
-# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-# ${blue}\$(gitAddedChanges)${colEnd}\
-# ${red}\$(gitUnaddedChanges)${colEnd}\
-# ${yellow}\$(gitBracketR)${colEnd} "
+source "${codeDir}/Status/git.sh"
+export PS1="\n\
+ ${blue}${_currentDirectory}${colEnd}\
+${yellow}\$(gitBracketL)${colEnd}\
+${cyan}\$(gitBranch)${colEnd}\
+${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+${blue}\$(gitAddedChanges)${colEnd}\
+${red}\$(gitUnaddedChanges)${colEnd}\
+${yellow}\$(gitBracketR)${colEnd} "
+
 # ${orange}»»»${colEnd} "
 # ${orange}¤${colEnd} "
 
 
-export PS1="\n ${blue}${_currentDirectory}${colEnd} "
+# export PS1="\n ${blue}${_currentDirectory}${colEnd} "
 # export PS1="\n ${blue}${_currentDirectory}${colEnd} ${violet}λ${colEnd} "
 
 # export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "

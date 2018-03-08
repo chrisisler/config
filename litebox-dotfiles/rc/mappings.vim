@@ -221,27 +221,27 @@ nnoremap <Leader>n :ALENextWrap<CR>kj
 
 " inoremap <silent> <Leader>plusorminus ±
 " inoremap <silent> <Leader>therefore ∴
-" inoremap <silent> <Leader>foreach ∀
-" inoremap <silent> <Leader>forany ∀
+inoremap <silent> <Leader>foreach ∀
+inoremap <silent> <Leader>forany ∀
 " " commented out to make whole-line auto-complete faster (see approx Line168)
-" " inoremap <silent> <Leader>lambda λ
-" " inoremap <silent> <Leader>lamda λ
+inoremap <silent> <Leader>lambda λ
+inoremap <silent> <Leader>lamda λ
 " inoremap <silent> <Leader>emptyset ∅
 " inoremap <silent> <Leader>sum Σ
 " inoremap <silent> <Leader>mult ∏
 " inoremap <silent> <Leader>multiply ∏
-" inoremap <silent> <Leader>times ∙
+inoremap <silent> <Leader>times ∙
 " inoremap <silent> <Leader>integral ∫
 " inoremap <silent> <Leader>derivative ∂
 " inoremap <silent> <Leader>not ¬
-" inoremap <silent> <Leader>in ∈
+inoremap <silent> <Leader>in ∈
 " inoremap <silent> <Leader>cartesianproduct ×
 " inoremap <silent> <Leader>by ×
 " inoremap <silent> <Leader>beta ∝
-" inoremap <silent> <Leader>thereexists ∃
+inoremap <silent> <Leader>thereexists ∃
 " inoremap <silent> <Leader>perp ⊥
-" inoremap <silent> <Leader>suchthat ﬆ
-" inoremap <silent> <Leader>st ﬆ
+inoremap <silent> <Leader>suchthat ﬆ
+inoremap <silent> <Leader>st ﬆ
 " inoremap <silent> <Leader>xor ⊕
 inoremap <silent> <Leader>degree °
 " inoremap <silent> <Leader>composition °
@@ -263,7 +263,7 @@ inoremap <silent> <Leader>degree °
 " inoremap <silent> <Leader>ifftaut ⇔
 " inoremap <silent> <Leader>iff ↔
 " inoremap <silent> <Leader>thentaut ⇒
-" inoremap <silent> <Leader>then →
+inoremap <silent> <Leader>then →
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -274,6 +274,7 @@ inoremap <silent> <Leader>degree °
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+nnoremap <silent> <Leader>doing :Dispatch! doing<Space>
 
 " Rust (if you want _less_ output, switch to `Dispatch`.)
 " nnoremap <silent> <Leader>rs<CR> :w<CR>:AsyncRun cargo run % --color=never --quiet<CR> :copen<CR>:wincmd k<CR>

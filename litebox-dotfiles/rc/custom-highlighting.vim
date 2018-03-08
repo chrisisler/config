@@ -79,7 +79,7 @@ if &background == "dark"
 
     " highlight VertSplit ctermfg=fg ctermbg=fg
 
-    highlight VertSplit ctermfg=bg ctermbg=bg
+    " highlight VertSplit ctermfg=bg ctermbg=bg
 
     if &filetype == "rust"
       call HighlightRustOneDark()

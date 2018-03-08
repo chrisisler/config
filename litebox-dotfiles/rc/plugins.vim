@@ -25,18 +25,19 @@ Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentat
 " Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer' " rust auto-complete
+Plug 'flowtype/vim-flow' " facebook's static type checker for JS
 
 " Plug 'tpope/vim-vinegar' " idk
 
 " Interface
-" Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
+Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 Plug 'joshdick/onedark.vim'             " the only good one dark plugin
 " Plug 'flazz/vim-colorschemes'           " some solid colorschems! (:
 
 " Plug 'chriskempson/base16-vim'          " base16 colorschemes
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
-" Plug 'airblade/vim-gitgutter'           " git diff in gutter
+Plug 'airblade/vim-gitgutter'           " git diff in gutter
 Plug 'kshenoy/vim-signature'            " display marks in gutter
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
 
@@ -146,17 +147,17 @@ let g:user_emmet_install_global=0 " enable emmet for just the below types
 let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
 
 let g:ale_fixers = {
-            \ 'javascript': ['eslint', 'prettier']
+            \ 'javascript': ['prettier']
             \}
 let g:ale_set_highlights=0
-let g:ale_enabled=0
+let g:ale_enabled=1
 let g:ale_echo_msg_warning_str=''
 let g:ale_echo_msg_error_str=''
 let g:ale_lint_delay=800
 " Idea : set function mapping for g:ale_open_list : see `stackoverflow.com/questions/20579142`
 let g:ale_open_list=1 " auto-open the loclist to show errs/warnings
 let g:ale_sign_column_always=1
-" let g:airline_section_error='%{ale#statusline#Status()}'
+" let g:airline_section_error='%{ale#statusline#Count()}'
 let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
 let g:ale_linters={
@@ -173,7 +174,7 @@ let g:ctrlp_match_window='max:10'
 " neocomplete settings.
 let g:neocomplete#enable_refresh_always=1 " refreshes candidates automatically
 let g:neocomplete#enable_at_startup=1
-let g:neocomplete#auto_complete_delay=150
+let g:neocomplete#auto_complete_delay=300
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=20
 let g:neocomplete#sources#syntax#min_keyword_length=2
@@ -200,6 +201,7 @@ let NERDTreeMinimalUI=1
 let NERDTreeShowLineNumbers=0
 let NERDTreeShowBookmarks=0
 let NERDTreeShowHidden=1
+let NERDTreeHighlightCursorline=0
 " off
 let NERDTreeStatusLine=-1
 let NERDTreeAutoDeleteBuffer=1
@@ -211,17 +213,19 @@ let g:jsx_ext_required=0
 
 " Airline settings. See `vert h statusline`
 let g:airline_theme='onedark'
-" let g:airline_powerline_fonts=0
+" use N Buffer number.
+" use %F for full path to file in buffer
+let g:airline_powerline_fonts=1
 " let g:airline_detect_iminsert=1
-" let g:airline_skip_empty_sections=1
-" let g:airline#extensions#ale#enabled=1
+let g:airline_skip_empty_sections=1
+let g:airline#extensions#ale#enabled=1
 " `tabline` from airline displays all buffers at top of vim
 let g:airline#extensions#tabline#enabled=1
 
 " Display buffer number
 let g:airline#extensions#tabline#buffer_nr_show=1
 " show buffer number before name
-let g:airline#extensions#tabline#buffer_nr_format = ' [%s] '
+let g:airline#extensions#tabline#buffer_nr_format = '[%s] '
 
 " minimal ui
 let airline#extensions#tabline#middle_click_preserves_windows=1
@@ -240,16 +244,17 @@ let g:airline#extensions#tabline#right_alt_sep = ''
 let g:airline#extensions#wordcount#format=''
 let g:airline#extensions#tabline#tab_min_count = 0
 let g:airline_extensions = ['tabline']
-let g:airline_section_a=''
+" let g:airline_section_a=''
 let g:airline_section_b=''
-let g:airline_section_c=''
+let g:airline_section_c='%F'
 " let g:airline_section_c=airline#section#create(['%t'])
-" let g:airline_section_x='%l, %c '
-let g:airline_section_x=''
+let g:airline_section_x='Ln %l/%L, Col %c'
 let g:airline_section_y=''
 let g:airline_section_z=''
-let g:airline_section_error=''
-let g:airline_section_warning=''
+" let g:airline_section_error=''
+" let g:airline_section_warning=''
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 " call airline#parts#define_accent('mode', 'blue')

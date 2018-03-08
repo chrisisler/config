@@ -4,8 +4,8 @@ const date = new Date()
 
 const abbreviatedWeekday = abbreviate(dayNumberToName(date.getDay()))
 const dayOfMonth = date.getDate()
-const monthName = monthNumberToName(date.getMonth())
-const militaryHoursAndMinutes = getHours() + '' + date.getMinutes()
+const monthName = abbreviate(monthNumberToName(date.getMonth()))
+const militaryHoursAndMinutes = getHours() + '' + getMinutes()
 
 function main () {
   const currentTime
@@ -30,6 +30,16 @@ function getHours() {
   return hoursNumber
 }
 
+function getMinutes() {
+  let minutesNumber = date.getMinutes()
+
+  if (minutesNumber.toString().length === 1) {
+    return '0' + minutesNumber
+  }
+
+  return minutesNumber
+}
+
 
 function abbreviate (s) {
   return s.slice(0, 3)
@@ -37,13 +47,13 @@ function abbreviate (s) {
 
 
 function dayNumberToName (dayNumber) {
-  if (dayNumber === 1) return 'Monday'
+  if (dayNumber === 0) return 'Sunday'
+  else if (dayNumber === 1) return 'Monday'
   else if (dayNumber === 2) return 'Tuesday'
   else if (dayNumber === 3) return 'Wednesday'
   else if (dayNumber === 4) return 'Thursday'
   else if (dayNumber === 5) return 'Friday'
   else if (dayNumber === 6) return 'Saturday'
-  else if (dayNumber === 7) return 'Sunday'
   else return 'Err'
 }
 

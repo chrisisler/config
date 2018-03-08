@@ -63,8 +63,8 @@ highlight javaScriptObjectLabel ctermfg=darkmagenta
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" highlight Red ctermfg=red
-" call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
+highlight Red ctermfg=red
+call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
 
 highlight Golden ctermfg=3
 call matchadd("Golden", '\<__dirname\>')
