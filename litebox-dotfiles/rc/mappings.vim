@@ -7,6 +7,10 @@
 " vim full screen
 " https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
 
+" `gf` is 'go to file', `gF` is an enhanced version which will also move the
+" cursor to the row and column specified after the filepath if it exists
+nnoremap gf gF
+
 " pressing enter key when auto-complete (pop-up) menu is open will press enter
 inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
 
@@ -283,7 +287,7 @@ nnoremap <silent> <Leader>rs2 :w<CR>:AsyncRun %:p:r<CR>:copen<CR>:wincmd k<CR>
 nnoremap <silent> <Leader>rst :w<CR>:AsyncRun cargo test --color=never<CR>:copen<CR>:wincmd k<CR>
 
 " Custom dispatch call
-nnoremap <Leader>d<CR> :w<CR>:Dispatch 
+nnoremap <Leader>d<CR> :Dispatch 
 
 " Javascript
 " nnoremap <Leader>js<CR> :w<CR>:AsyncRun node % 2>/dev/null<CR>:copen<CR>:wincmd k<CR><CR>

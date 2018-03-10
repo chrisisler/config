@@ -49,7 +49,7 @@ alias uni="cd ${academicDir} && ${lslaVar}"
 alias today="date '+%Y-%m-%d'"
 # alias getFiletypes="ls -1F | sed 's/^.*//g' | grep -vE '/$' | tr -d '*' | sort | uniq"
 alias g="cd ${HOME}/Code/Git"
-alias tm="ps xc | awk '{ print \$1, \$5 }' | sed 1d | sort -fk 2 | column -t | column"
+alias tm="clear ; ps xc | awk '{ print \$1, \$5 }' | sed 1d | sort -fk 2 | column -t | column"
 alias gs="git status"
 alias bad="cd ~/Main/Bin/Bad"
 alias q="exit"
@@ -197,21 +197,21 @@ normal="\[\e[1;36m\]"
 # white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-source "${codeDir}/Status/git.sh"
-export PS1="\n\
- ${blue}${_currentDirectory}${colEnd}\
-${yellow}\$(gitBracketL)${colEnd}\
-${cyan}\$(gitBranch)${colEnd}\
-${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-${blue}\$(gitAddedChanges)${colEnd}\
-${red}\$(gitUnaddedChanges)${colEnd}\
-${yellow}\$(gitBracketR)${colEnd} "
+# source "${codeDir}/Status/git.sh"
+# export PS1="\n\
+#  ${blue}${_currentDirectory}${colEnd}\
+# ${yellow}\$(gitBracketL)${colEnd}\
+# ${cyan}\$(gitBranch)${colEnd}\
+# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+# ${blue}\$(gitAddedChanges)${colEnd}\
+# ${red}\$(gitUnaddedChanges)${colEnd}\
+# ${yellow}\$(gitBracketR)${colEnd} "
 
 # ${orange}»»»${colEnd} "
 # ${orange}¤${colEnd} "
 
 
-# export PS1="\n ${blue}${_currentDirectory}${colEnd} "
+export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
 # export PS1="\n ${blue}${_currentDirectory}${colEnd} ${violet}λ${colEnd} "
 
 # export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "

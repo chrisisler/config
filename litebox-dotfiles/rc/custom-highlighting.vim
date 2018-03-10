@@ -9,7 +9,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Remove line numbers for quickfix window
-" au FileType qf setlocal nonumber colorcolumn=
+au FileType qf setlocal nonumber colorcolumn=
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

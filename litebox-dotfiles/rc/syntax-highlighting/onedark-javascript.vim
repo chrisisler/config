@@ -12,8 +12,10 @@ highlight javascriptVariable ctermfg=magenta cterm=italic
 highlight javascriptClassKeyword ctermfg=magenta cterm=italic
 highlight javascriptClassExtends ctermfg=darkmagenta cterm=italic
 highlight javascriptImport ctermfg=darkmagenta cterm=italic
+
 highlight javascriptReturn ctermfg=darkmagenta cterm=italic,underline
-" highlight javascriptReturn ctermfg=darkcyan cterm=italic
+
+
 " highlight javascriptObjectLabelColon ctermfg=cyan
 " highlight javascriptEndColons ctermfg=cyan
 " highlight javascriptComma ctermfg=cyan
@@ -62,14 +64,11 @@ highlight javaScriptObjectLabel ctermfg=darkmagenta
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+highlight MagentaBold ctermfg=darkmagenta cterm=bold,underline
+call matchadd("MagentaBold", '\<throw\>\ze\s\+')
 
-highlight Red ctermfg=red
-call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
-
-highlight Golden ctermfg=3
-call matchadd("Golden", '\<__dirname\>')
-call matchadd("Golden", '\<__filename\>')
-call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
+" highlight Red ctermfg=red
+" call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
 
 highlight GoldenItalic ctermfg=3 cterm=italic
 call matchadd("GoldenItalic", '\<self\>')
@@ -100,12 +99,18 @@ call matchadd("FuncDefAndCall", '\s\{2,}\zs\<\h\w*\>\ze\s\+=\s\+\(\h\|(\).*\s\+=
 call matchadd("Conditional", '\<function\>\ze\s*(')
 
 
+highlight Golden ctermfg=3
+call matchadd("Golden", '\<__dirname\>')
+call matchadd("Golden", '\<__filename\>')
+call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 " typescript syntax
 if &filetype == "typescript"
+    highlight JustMagenta ctermfg=magenta
     call matchadd("JustMagenta", '=>')
 
     " TODO
@@ -177,6 +182,7 @@ highlight JustMagenta ctermfg=magenta
 call matchadd("JustMagenta", '\<new\>\ze\s\+\h')
 call matchadd("JustMagenta", '\s\+\zs\<in\>\ze\s\+')
 call matchadd("JustMagenta", '\<void\>\ze\s\+')
+call matchadd("JustMagenta", '\<type\>\ze\s\+')
 
 call matchadd("Conditional", '\s\+\zs\<instanceof\>\ze\s\+')
 call matchadd("Conditional", '\<typeof\>\ze\s\+')
