@@ -6,57 +6,52 @@
 
 call plug#begin('~/.vim/plugged')
 
-" Language
-" Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
+
+" ----- Language -----
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
-Plug 'posva/vim-vue'
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer' " rust auto-complete
+Plug 'flowtype/vim-flow' " auto-complete for flow
 Plug 'othree/es.next.syntax.vim'              " es7 syntax and flow syntax hi
-" Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
+" Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
+" Plug 'posva/vim-vue'
+" Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 " Plug 'ElmCast/elm-vim'
 " Plug 'artur-shaik/vim-javacomplete2' " java stuff
-" Plug 'Quramy/vim-js-pretty-template' " syntax highlighting for js template strings
-Plug 'quramy/tsuquyomi' " typescript ide features
-Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
+" Plug 'quramy/tsuquyomi' " typescript ide features
+" Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
 " Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 " Plug 'eagletmt/neco-ghc'
 " Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
-" Plug 'hynek/vim-python-pep8-indent' " python correct indentation
-" Plug 'octol/vim-cpp-enhanced-highlight'       " better c++ highlighting
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer' " rust auto-complete
-" Plug 'flowtype/vim-flow' " facebook's static type checker for JS
 " Plug 'xuyuanp/nerdtree-git-plugin' " show git status in file explorer
 
-" Interface
-" Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
-Plug 'joshdick/onedark.vim'             " the only good one dark plugin
-" Plug 'flazz/vim-colorschemes'           " some solid colorschems! (:
 
-" Plug 'chriskempson/base16-vim'          " base16 colorschemes
+" ----- Interface -----
+Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
+Plug 'joshdick/onedark.vim'             " the only good one dark plugin
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
-Plug 'airblade/vim-gitgutter'           " git diff in gutter
-Plug 'kshenoy/vim-signature'            " display marks in gutter
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
-Plug 'tpope/vim-capslock' 
+" Plug 'airblade/vim-gitgutter'           " git diff in gutter
+" Plug 'kshenoy/vim-signature'            " display marks in gutter
 
-" Integrations
+
+" ----- Integrations -----
 Plug 'tpope/vim-commentary' " sane (un)commenting
-Plug 'tpope/vim-fugitive'   " git integration
 Plug 'w0rp/ale'             " async linter
+" Plug 'tpope/vim-fugitive'   " git integration
 
-" Commands
-Plug 'dhruvasagar/vim-table-mode' " neat tables
+
+" ----- Commands -----
 Plug 'terryma/vim-multiple-cursors' " sublime-like multi cursors
 Plug 'ctrlpvim/ctrlp.vim'           " fuzzy finder
 Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
 Plug 'tpope/vim-surround'           " manipulating characters that surround text objects
 Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
-" Plug 'easymotion/vim-easymotion'        " vim motions on speed
-" Plug 'tpope/vim-abolish'            " easily search/substitute/whatever multiple variants of a word
-" Plug 'andrewradev/splitjoin.vim'    " easily transition between single/multi line code
 Plug 'tpope/vim-dispatch' "async commands
+" Plug 'prettier/vim-prettier'    " js auto-formatter
+" Plug 'easymotion/vim-easymotion'        " vim motions on speed
 
 " Completion
 Plug 'jiangmiao/auto-pairs'   " auto-match all brackets, parenthesis, quotes, etc.
@@ -65,13 +60,13 @@ Plug 'shougo/neocomplete.vim' " code-completion
 Plug 'sirver/ultisnips'       " snippies
 Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, types, refs, renames, etc.
 
-" Other
+
+" ----- Random -----
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'metakirby5/codi.vim' " inline/automatic evaluation
 " Plug 'yggdroot/indentline' " cool indent lines 
-" Plug 'heavenshell/vim-jsdoc' " auto-gen docs for js funcs
-Plug 'prettier/prettier' " auto-fmt js
-Plug 'severin-lemaignan/vim-minimap' " sublime text-like minimap. ,mm to open and ,mc to close
+" Plug 'severin-lemaignan/vim-minimap' " sublime text-like minimap. ,mm to open and ,mc to close
+
 
 call plug#end()
 
@@ -81,6 +76,17 @@ call plug#end()
 " Plugin Settings
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-flow
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" assign to 0 when ale enabled, 1 when ale disabled
+let g:flow#enable=0
+let g:flow#showquickfix=0
+let g:flow#autoclose=1
+let g:flow#omnifunc=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -100,7 +106,7 @@ let g:rustfmt_autosave = 1
 
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-racer
+" vim-racer (for rust auto-completion)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:racer_experimental_completer = 1
@@ -170,17 +176,23 @@ let g:haskell_enabled_typeroles=1
 let g:haskell_enabled_static_pointers=1
 let g:haskell_backpack=1
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neco-ghc (haskell auto-completion)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let g:necoghc_enable_detailed_browse=1
 let g:haskellmode_completion_ghc=1
 autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
 
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " matchparen
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:mta_use_matchparen_group=1
+
+" avoid loading plugin, it slows down Vim
+:let loaded_matchparen = 1
+" let g:mta_use_matchparen_group=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -213,6 +225,39 @@ let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> 
 " ale
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:ale_enabled=1
+let g:ale_set_signs=0
+
+let g:ale_lint_on_save=1
+let g:ale_lint_on_enter=1
+let g:ale_lint_delay=600
+
+let g:ale_fix_on_save=1
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+
+let g:ale_open_list=1
+let g:ale_set_highlights=0
+let g:ale_sign_column_always=1
+
+" function! LintStatus() abort
+"   " let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
+"   let l:counts = ale#statusline#Count(bufnr(''))
+
+"   " @see `:vert h airline` -> search for `ale#statusline#Count`
+"   let l:all_errors = l:counts.error + l:counts.style_error
+"   let l:all_warnings = l:counts.warning + l:counts.style_warning
+"   " let l:all_infos = l:counts.info
+
+"         " \   '%dW %dE',
+"   return l:counts.total == 0 ? '' : printf(
+"         \   '[%d X] [%d !]',
+"         \   all_errors,
+"         \   all_warnings
+"         \)
+" endfunction
+" let g:airline_section_error='%{LintStatus()}'
+
 " let s:ale_running = 0
 " let l:stl .= '%{s:ale_running ? "[Linting...]" : ""}'
 " augroup ALEProgress
@@ -221,27 +266,22 @@ let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> 
 "   autocmd User ALELintPost let s:ale_running = 0 | redrawstatus
 " augroup end
 
-" <prettier js fix on save settings>
-let g:ale_fix_on_save=1
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-" let g:ale_javascript_prettier_use_local_config = 1
-" let g:ale_javascript_eslint_use_global = 1
-" </prettier js fix on save settings>
+" suppress warnings when browsing files ignored by `.eslintignore` file
+let g:ale_javascript_eslint_suppress_eslintignore=1
+" let g:ale_javascript_eslint_use_global=1
 
-let g:ale_set_highlights=1
-let g:ale_enabled=1
+" only use home config `~/.flowconfig` when ...? idk
+" let g:ale_javascript_flow_executable='/usr/local/bin/flow'
+" let g:ale_javascript_flow_use_home_config=1
+" let g:ale_javascript_flow_use_global=1
+
 " let g:ale_echo_msg_warning_str=''
 " let g:ale_echo_msg_error_str=''
-let g:ale_lint_delay=800
-" Idea : set function mapping for g:ale_open_list : see `stackoverflow.com/questions/20579142`
-let g:ale_open_list=1 " auto-open the loclist to show errs/warnings
-let g:ale_sign_column_always=1
-let g:airline_section_error='%{ale#statusline#Count(winbufnr(winnr()))}'
 let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_linters={
 \   'javascript': ['eslint', 'flow'],
 \   'cpp': ['g++'],
+\   'rust': ['cargo', 'rls', 'rustc'],
 \}
 
 
@@ -252,20 +292,23 @@ let g:ale_linters={
 let g:ctrlp_regexp=0
 let g:ctrlp_custom_ignore='node_modules'
 let g:ctrlp_show_hidden=1
-let g:ctrlp_max_depth=4
-let g:ctrlp_match_window='max:10'
+let g:ctrlp_max_depth=3
+let g:ctrlp_match_window='max:8'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplete (language-agnostic autocompleter)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:neocomplete#enable_refresh_always=1 " refreshes candidates automatically
+" refreshes candidates automatically, setting to 1 increases screen flicker
+let g:neocomplete#enable_refresh_always=0
+
+let g:neocomplete#skip_auto_completion_time="0.5"
 let g:neocomplete#enable_at_startup=1
 let g:neocomplete#auto_complete_delay=300
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=20
 let g:neocomplete#sources#syntax#min_keyword_length=2
-let g:neocomplete#enable_auto_close_preview=1
+let g:neocomplete#enable_auto_close_preview=0
 " Define dictionary.
 let g:neocomplete#sources#dictionary#dictionaries = {
             \ 'default' : '',
@@ -344,29 +387,28 @@ let g:airline#extensions#tabline#tabs_label=''
 
 let g:airline#extensions#wordcount#format=''
 let g:airline#extensions#tabline#tab_min_count = 0
-let g:airline_extensions = ['tabline', 'branch', 'hunks', 'ale']
-let g:airline#extensions#fugitiveline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#hunks#enabled = 1
+let g:airline_extensions = ['tabline']
+" let g:airline_extensions = ['tabline', 'ale']
+" let g:airline#extensions#fugitiveline#enabled = 1
+" let g:airline#extensions#branch#enabled = 1
+" let g:airline#extensions#hunks#enabled = 1
 
 let g:airline_section_a=''
-" let g:airline_section_b=''
+let g:airline_section_b=''
 let g:airline_section_c='%F'
-let g:airline_section_x='Ln %l/%L, Col %c'
+let g:airline_section_x='Ln %l Col %c'
 let g:airline_section_y=''
 let g:airline_section_z=''
 
-
-" let g:airline_section_error=''
-" let g:airline_section_warning=''
+let g:airline_section_error=''
+let g:airline_section_warning=''
 
 " desired format:
-" let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
 " actual format:
-let airline#extensions#ale#error_symbol = 'E:'
-let airline#extensions#ale#warning_symbol = 'W:'
-let airline#extensions#ale#open_lnum_symbol = '(Ln '
-let airline#extensions#ale#close_lnum_symbol = ')'
+" let airline#extensions#ale#error_symbol = 'E:'
+" let airline#extensions#ale#warning_symbol = 'W:'
+" let airline#extensions#ale#open_lnum_symbol = '(Ln '
+" let airline#extensions#ale#close_lnum_symbol = ')'
 
 " let g:airline_left_sep = ''
 " let g:airline_right_sep = ''

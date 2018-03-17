@@ -25,7 +25,7 @@ set nolist                     " do not display eol signs ('$')
 set nojoinspaces               " prevents inserting 2 spaces when joining
 set splitright                 " put new vertically split windows to the right of current
 set splitbelow                 " put new split windows to bottom of current
-autocmd VimEnter * set laststatus=2 " force set 0 on start. for some reasong it wasnt working on its own. force vim to display status line always?
+autocmd VimEnter * set laststatus=0 " force set 0 on start. display status line always?
 
 set showtabline=2              " Display list of buffers at the top, uses airline plugin.
 
@@ -65,7 +65,7 @@ set path+=**
 " Visual.
 set noruler
 set number      " show line numbers on left?
-set cursorline  " highlight current line?
+set nocursorline  " highlight current line?
 
 set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal

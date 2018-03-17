@@ -23,6 +23,7 @@ fi
 
 # echo -n "${isChargingSymbol}${percent}${timeRemaining}"
 if [ "${percent}" -eq 100 ]; then
+  continue
   # printf "▣"
   # printf "✓"
 else

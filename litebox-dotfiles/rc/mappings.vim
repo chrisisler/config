@@ -7,10 +7,6 @@
 " vim full screen
 " https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
 
-" `gf` is 'go to file', `gF` is an enhanced version which will also move the
-" cursor to the row and column specified after the filepath if it exists
-nnoremap gf gF
-
 " pressing enter key when auto-complete (pop-up) menu is open will press enter
 inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
 
@@ -147,15 +143,16 @@ nnoremap <silent> <Leader>w :lclose<CR>:cclose<CR>:pclose<CR>
 
 " Mappings for saving and sourcing .vimrc.
 nnoremap <silent> <Leader>5<CR> :w<CR>:so %<CR>
-nnoremap <silent> <Leader>4<CR> :so $MYVIMRC<CR>
+nnoremap <silent> <Leader>4<CR> :so ~/.vimrc<CR>
 
 " Replace variable name with variable definition and delete variable.
 " Example (with cursor hovering N in 'names' on line 2):
-"       1. var names = people.map(person => person.name);
-"       2. doStuff(names, otherVar);
+"       1. var names = people.map(person => person.name)
+"       2. doStuff(names, otherVar)
 "      Turns into:
 "          doStuff(people.map(person => person.name), otherVar);
-nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
+nnoremap <Leader>@ gd2wv$"xy"_ddn"_deh"xp
+" nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
 
 " Fat array function snippet after typing function arguments.
 " Uses clean indents on newline (after function header/prototype).
@@ -201,6 +198,10 @@ nnoremap <Leader>x :ALEToggle<CR>kj
 " Linter mappings
 nnoremap <Leader>p :ALEPreviousWrap<CR>kj
 nnoremap <Leader>n :ALENextWrap<CR>kj
+nnoremap <Leader>a :ALELint<CR>kj
+
+nnoremap <silent> <Leader>I :set nocursorline<CR>:set nonumber<CR>
+nnoremap <silent> <Leader>i :set cursorline<CR>:set number<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -278,7 +279,7 @@ inoremap <silent> <Leader>then →
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <silent> <Leader>doing :Dispatch doing<Space>
+" nnoremap <silent> <Leader>doing :Dispatch doing<Space>
 
 " Rust (if you want _less_ output, switch to `Dispatch`.)
 " nnoremap <silent> <Leader>rs<CR> :w<CR>:AsyncRun cargo run % --color=never --quiet<CR> :copen<CR>:wincmd k<CR>
