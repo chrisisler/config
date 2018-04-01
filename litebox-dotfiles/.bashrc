@@ -35,7 +35,11 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
-alias doing="printf ${@} > ~/Code/Status/what-am-i-doing.txt"
+alias brew-latest="brew update && brew upgrade --cleanup --fetch-HEAD"
+alias ll="ls -AGFh" # exclude details
+alias w="cd ${codeDir}/Git/wavematch && ${lslaVar}"
+alias ssherxi='ssh -i ~/.ssh/id_rsa_alex erxi@jess.coffee'
+# alias doing="printf ${@} > ~/Code/Status/what-am-i-doing.txt"
 alias mute='osascript -e "set Volume 0"'
 alias dc="cd"
 alias pipes="pipes.sh -p 10 -R -t 6"

@@ -14,9 +14,10 @@ Plug 'racer-rust/vim-racer' " rust auto-complete
 Plug 'flowtype/vim-flow' " auto-complete for flow
 Plug 'othree/es.next.syntax.vim'              " es7 syntax and flow syntax hi
 Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
 " Plug 'posva/vim-vue'
-" Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 " Plug 'ElmCast/elm-vim'
 " Plug 'artur-shaik/vim-javacomplete2' " java stuff
 " Plug 'quramy/tsuquyomi' " typescript ide features
@@ -33,8 +34,8 @@ Plug 'joshdick/onedark.vim'             " the only good one dark plugin
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
+Plug 'kshenoy/vim-signature'            " display marks in gutter
 " Plug 'airblade/vim-gitgutter'           " git diff in gutter
-" Plug 'kshenoy/vim-signature'            " display marks in gutter
 
 
 " ----- Integrations -----
@@ -53,7 +54,7 @@ Plug 'tpope/vim-dispatch' "async commands
 " Plug 'prettier/vim-prettier'    " js auto-formatter
 " Plug 'easymotion/vim-easymotion'        " vim motions on speed
 
-" Completion
+" ----- Completion -----
 Plug 'jiangmiao/auto-pairs'   " auto-match all brackets, parenthesis, quotes, etc.
 Plug 'ervandew/supertab'      " hit <tab> for autocomplete
 Plug 'shougo/neocomplete.vim' " code-completion
@@ -149,6 +150,11 @@ let g:jsdoc_param_description_separator=' - '
 
 let g:codi#rightsplit=1
 let g:codi#rightalign=0
+let g:codi#width=60
+
+let g:codi#aliases = {
+      \ 'javascript.jsx': 'javascript',
+      \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " rustfmt
@@ -226,17 +232,17 @@ let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:ale_enabled=1
-let g:ale_set_signs=0
+let g:ale_set_signs=1
 
 let g:ale_lint_on_save=1
 let g:ale_lint_on_enter=1
-let g:ale_lint_delay=600
+let g:ale_lint_delay=800
 
 let g:ale_fix_on_save=1
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
 
-let g:ale_open_list=1
+let g:ale_open_list=0
 let g:ale_set_highlights=0
 let g:ale_sign_column_always=1
 
@@ -303,8 +309,8 @@ let g:ctrlp_match_window='max:8'
 let g:neocomplete#enable_refresh_always=0
 
 let g:neocomplete#skip_auto_completion_time="0.5"
-let g:neocomplete#enable_at_startup=1
-let g:neocomplete#auto_complete_delay=300
+let g:neocomplete#enable_at_startup=0
+let g:neocomplete#auto_complete_delay=50
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=20
 let g:neocomplete#sources#syntax#min_keyword_length=2
@@ -396,7 +402,8 @@ let g:airline_extensions = ['tabline']
 let g:airline_section_a=''
 let g:airline_section_b=''
 let g:airline_section_c='%F'
-let g:airline_section_x='Ln %l Col %c'
+let g:airline_section_x=''
+" let g:airline_section_x='Ln %l Col %c'
 let g:airline_section_y=''
 let g:airline_section_z=''
 

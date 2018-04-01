@@ -5,7 +5,7 @@ call clearmatches()
 
 " keyword: this
 highlight javascriptIdentifier ctermfg=3 cterm=italic
-highlight javascriptFuncArg ctermfg=3 cterm=italic
+highlight javascriptFuncArg ctermfg=6 cterm=italic
 
 highlight javascriptIdentifierName ctermfg=9
 
