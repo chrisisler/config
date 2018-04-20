@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+œôø¢çççœô¤úz"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " Plugins
 "
@@ -11,13 +11,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer' " rust auto-complete
-" Plug 'flowtype/vim-flow' " auto-complete for flow
+Plug 'flowtype/vim-flow' " auto-complete for flow
 Plug 'othree/es.next.syntax.vim'              " es7 syntax and flow syntax hi
 Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
 " Plug 'ElmCast/elm-vim'
 " Plug 'artur-shaik/vim-javacomplete2' " java stuff
 " Plug 'quramy/tsuquyomi' " typescript ide features
@@ -47,11 +47,10 @@ Plug 'w0rp/ale'             " async linter
 " ----- Commands -----
 Plug 'terryma/vim-multiple-cursors' " sublime-like multi cursors
 Plug 'ctrlpvim/ctrlp.vim'           " fuzzy finder
-Plug 'easymotion/vim-easymotion'    " go fast
+Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
 Plug 'tpope/vim-surround'           " manipulating characters that surround text objects
 Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
 Plug 'tpope/vim-dispatch' "async commands
-" Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
 " Plug 'prettier/vim-prettier'    " js auto-formatter
 " Plug 'easymotion/vim-easymotion'        " vim motions on speed
 
@@ -66,8 +65,8 @@ Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, typ
 " ----- Random -----
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'metakirby5/codi.vim' " inline/automatic evaluation
-" Plug 'junegunn/rainbow_parentheses.vim'
 " Plug 'luochen1990/rainbow'
+" Plug 'kien/rainbow_parentheses.vim'
 " Plug 'yggdroot/indentline' " cool indent lines 
 " Plug 'severin-lemaignan/vim-minimap' " sublime text-like minimap. ,mm to open and ,mc to close
 
@@ -85,27 +84,37 @@ call plug#end()
 " rainbow (parenthesis)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" let g:rainbow#max_level = 16
-" let g:rainbow#pairs = [['(', ')'], ['{', '}']]
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-flow
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" assign to 0 when ale enabled, 1 when ale disabled
-" let g:flow#enable=0
-" let g:flow#showquickfix=0
-" let g:flow#autoclose=1
-" let g:flow#omnifunc=1
+let g:rainbow_active=1
+    let g:rainbow_conf = {
+    \    'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+    \    'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+    \    'operators': '_,_',
+    \    'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+    \    'separately': {
+    \        '*': {},
+    \        'tex': {
+    \            'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+    \        },
+    \        'lisp': {
+    \            'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+    \        },
+    \        'vim': {
+    \            'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+    \        },
+    \        'html': {
+    \            'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+    \        },
+    \        'css': 0,
+    \    }
+    \}u:;
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tables
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" let g:table_mode_corner_corner='+'
-" let g:table_mode_header_fillchar='='
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -115,7 +124,7 @@ call plug#end()
 " rust code auto-formatting via `rustfmt` (format upon saving file)
 let g:rustfmt_autosave = 1
 
-
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-racer (for rust auto-completion)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -123,7 +132,14 @@ let g:rustfmt_autosave = 1
 let g:racer_experimental_completer = 1
 let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
 
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-minimap
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:minimap_highlight='visual'
+
+"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-jsdoc settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -143,8 +159,8 @@ let g:jsdoc_param_description_separator=' - '
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " let g:indentLine_enabled=1
-" let g:indentLine_char='â”‚'
-" let g:indentLine_char='ãƒ»'
+" let g:indentLine_char='œò ¢'
+" let g:indentLine_char='’¡¦'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -200,7 +216,7 @@ autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " avoid loading plugin, it slows down Vim
-let loaded_matchparen = 1
+:let loaded_matchparen = 1
 " let g:mta_use_matchparen_group=1
 
 
@@ -313,7 +329,7 @@ let g:neocomplete#enable_refresh_always=0
 
 let g:neocomplete#skip_auto_completion_time="0.5"
 let g:neocomplete#enable_at_startup=0
-let g:neocomplete#auto_complete_delay=300
+let g:neocomplete#auto_complete_delay=500
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=20
 let g:neocomplete#sources#syntax#min_keyword_length=2
@@ -341,14 +357,14 @@ endif
 " nerdtree (file explorer)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:NERDTreeDirArrowExpandable = 'â–¸'
-let g:NERDTreeDirArrowCollapsible = 'â—‡'
+let g:NERDTreeDirArrowExpandable = 'œò¡ø'
+let g:NERDTreeDirArrowCollapsible = 'œò¢§'
 let NERDTreeMinimalUI=1
 let NERDTreeMouseMode=2
 let NERDTreeShowLineNumbers=0
 let NERDTreeShowBookmarks=0
 let NERDTreeShowHidden=1
-let NERDTreeHighlightCursorline=0
+let NERDTreeHighlightCursorline=1
 " off
 let NERDTreeStatusLine=''
 " let NERDTreeStatusLine=-1
@@ -404,8 +420,7 @@ let g:airline_extensions = ['tabline']
 
 let g:airline_section_a=''
 let g:airline_section_b=''
-let g:airline_section_c=''
-" let g:airline_section_c='%F'
+let g:airline_section_c='%F'
 let g:airline_section_x=''
 " let g:airline_section_x='Ln %l Col %c'
 let g:airline_section_y=''
@@ -421,8 +436,8 @@ let g:airline_section_warning=''
 " let airline#extensions#ale#open_lnum_symbol = '(Ln '
 " let airline#extensions#ale#close_lnum_symbol = ')'
 
-" let g:airline_left_sep = 'î‚°'
-" let g:airline_right_sep = 'î‚²'
+" let g:airline_left_sep = 'œó¡ð'
+" let g:airline_right_sep = 'œó¡ò'
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 

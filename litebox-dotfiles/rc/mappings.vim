@@ -6,6 +6,10 @@
 
 " vim full screen
 " https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
+"
+
+" repeat previous command
+nnoremap <silent> <Leader><Leader> @:
 
 inoremap <silent> jk <ESC>
 
@@ -131,7 +135,7 @@ nnoremap <silent> <Leader>k :wincmd k<CR>
 nnoremap <silent> <Leader>l :wincmd l<CR>
 
 " Move horizontal splits to vertical splits
-nnoremap <silent> <Leader>i <C-w>t <C-w>K
+nnoremap <silent> <Leader>O <C-w>t <C-w>K
 nnoremap <silent> <Leader>o <C-w>t <C-w>H
 
 " Delete current buffer.
@@ -171,6 +175,7 @@ nnoremap <Leader>en "xyiwoecho -n "${}"hh"xp
 
 " Make <C-x><C-l> (whole-line auto-completion) easier to type.
 inoremap <Leader>l <C-x><C-l>
+inoremap <Leader>; <C-x><C-l>
 
 " Fast mapping to call tabular.
 nnoremap <Leader>t :Tab /
@@ -187,7 +192,8 @@ nnoremap <Leader>t4 :set shiftwidth=4<CR>:set tabstop=4<CR>
 nnoremap <Leader>b :b#<CR>
 
 " Add a semi-colon to the end of the cursor's current line.
-nnoremap <Leader>; A;<ESC>
+" disabled/commented out for whole-line auto-completion
+" nnoremap <Leader>; A;<ESC>
 
 " Disable/Enable lots of things
 nnoremap <Leader>1 :NeoCompleteEnable<CR>:set number<CR>:set laststatus=2<CR>:ALEDisable<CR>
@@ -202,8 +208,8 @@ nnoremap <Leader>p :ALEPreviousWrap<CR>kj
 nnoremap <Leader>n :ALENextWrap<CR>kj
 nnoremap <Leader>a :ALELint<CR>kj
 
-nnoremap <silent> <Leader>I :set nocursorline<CR>:set nonumber<CR>
-nnoremap <silent> <Leader>i :set cursorline<CR>:set number<CR>
+nnoremap <silent> <Leader>I :set nocursorline<CR>:set nonumber<CR>:set showtabline=0<CR>
+nnoremap <silent> <Leader>i :set number<CR>:set showtabline=2<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

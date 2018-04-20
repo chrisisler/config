@@ -14,6 +14,11 @@ shopt -s cdspell
 # Don't put duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 
+export TSA_APP_CONSUMER_KEY="hiqSjYFencTLiTDAbwYdSakM1"
+export TSA_APP_CONSUMER_SECRET="AFRdJC0ZbT2Qb0wDdGKuKfw6G3Fw4hZiNTrWhMesmExDJvIYip"
+export TSA_APP_ACCESS_TOKEN="755468464932786176-NHNVyAWBsalsmXdLbdVD5wtPmMgbIXu"
+export TSA_APP_ACCESS_TOKEN_SECRET="e56TQPL1FL9GQ5AWGUwUG8AmLGM9RYa9WZI9517cfj8IN"
+
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
@@ -35,6 +40,9 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias sandbox="cd ${codeDir}/JS/Bin/Sandbox/ && vim ./sandbox.js"
+alias cs='cd'
+alias datefmt='date "+%Y-%m-%d_%H:%M"'
 alias brew-latest="brew update && brew upgrade --cleanup --fetch-HEAD"
 alias ll="ls -AGFh" # exclude details
 alias w="cd ${codeDir}/Git/wavematch && ${lslaVar}"

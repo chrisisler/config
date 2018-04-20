@@ -25,6 +25,7 @@ catch /:E185:/
 endtry
 
 set background=dark
+" set background=light
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -42,16 +43,16 @@ highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 
 highlight VertSplit ctermfg=bg ctermbg=bg
 
+highlight MatchParen cterm=none ctermfg=cyan ctermbg=bg
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme and background (dark/light) color dependent
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-
 if &background == "dark"
   " highlight Pmenu ctermbg=fg ctermfg=bg
-  " highlight PmenuSel cterm=reverse ctermbg=fg ctermfg=black
+  " highlight PmenuSel cterm=bold ctermbg=15 ctermfg=cyan
   " highlight PmenuThumb ctermbg=fg ctermfg=bg
-  " highlight MatchParen ctermfg=white ctermbg=bg
 
   if &filetype == "rust"
     call HighlightRustOneDark()
@@ -84,7 +85,7 @@ if &background == "dark"
   "     highlight javaOperator ctermfg=magenta cterm=italic
   "     highlight Statement ctermfg=magenta cterm=italic
   " endif
-elseif &background === "light"
+elseif &background == "light"
   " highlight Pmenu cterm=reverse ctermbg=fg ctermfg=bg
   " highlight PmenuSel ctermbg=white ctermfg=darkblue
   " highlight MatchParen ctermfg=black ctermbg=bg
