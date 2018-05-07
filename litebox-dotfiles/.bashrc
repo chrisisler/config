@@ -11,6 +11,12 @@ shopt -s histappend
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
 
+# Prepend datetime of command to command itself in ~/.bash_history file
+export HISTTIMEFORMAT="%y-%m-%d %T "
+
+# Always remove previously installed software when updating said software
+export HOMEBREW_UPGRADE_CLEANUP=1
+
 # Don't put duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 
@@ -52,6 +58,7 @@ alias mute='osascript -e "set Volume 0"'
 alias dc="cd"
 alias pipes="pipes.sh -p 10 -R -t 6"
 alias chrome="open /Volumes/Macintosh\ HD/Applications/Google\ Chrome.app"
+alias nochrome="killall -9 Google\ Chrome"
 alias path="echo $PATH | tr ':' '\n'"
 alias tkill="tmux kill-pane -t $@"
 alias rsync="/usr/local/Cellar/rsync/3.1.3_1/bin/rsync"
@@ -111,7 +118,7 @@ alias tmus="tmux attach -t ♫ || tmux new -s ♫"
 alias weather="curl wttr.in/boston"
 # alias spamrandom="cat /dev/urandom | tr -cd '01'"
 alias vi="vim"
-alias pandora="clear && pianobar 2>/dev/null | tee ~/.config/pianobar/custom-out"
+alias pandora="echo \"\" > ~/.config/pianobar/custom-out && clear && pianobar 2>/dev/null | tee ~/.config/pianobar/custom-out"
 alias cellar="cd /usr/local/Cellar"
 alias p="clear; more ./package.json | jq $@"
 alias start="open"
@@ -208,24 +215,22 @@ normal="\[\e[1;36m\]"
 # white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-# source "${codeDir}/Status/git.sh"
-# export PS1="\n\
-#  ${blue}${_currentDirectory}${colEnd}\
-# ${yellow}\$(gitBracketL)${colEnd}\
-# ${cyan}\$(gitBranch)${colEnd}\
-# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-# ${blue}\$(gitAddedChanges)${colEnd}\
-# ${red}\$(gitUnaddedChanges)${colEnd}\
-# ${yellow}\$(gitBracketR)${colEnd} "
+source "${codeDir}/Status/git.sh"
+export PS1="\n\
+${blue}${_currentDirectory}${colEnd}\
+${yellow}\$(gitBracketL)${colEnd}\
+${cyan}\$(gitBranch)${colEnd}\
+${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+${blue}\$(gitAddedChanges)${colEnd}\
+${red}\$(gitUnaddedChanges)${colEnd}\
+${yellow}\$(gitBracketR)${colEnd} "
 
 # ${orange}»»»${colEnd} "
 # ${orange}¤${colEnd} "
 
+# export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
 
-export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
-# export PS1="\n ${blue}${_currentDirectory}${colEnd} ${violet}λ${colEnd} "
-
-# export PS1="\n ${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "
+# export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "
 
 # Do not display CWD if in TMUX (where `#{pane_current_path}` is in tmuxline status).
 # customBashPrompt() {

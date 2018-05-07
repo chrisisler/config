@@ -122,6 +122,7 @@ call matchadd("MagentaItalic", '\<set\>\ze\s\+')
 call matchadd("MagentaItalic", '(export )\?\|\s*\<type\>\ze\s\+')
 call matchadd("MagentaItalic", '\s\+\zs\<instanceof\>\ze\s\+')
 call matchadd("MagentaItalic", '\<typeof\>\ze\s\+')
+call matchadd("MagentaItalic", '\<yield\>\ze')
 
 
 highlight JustMagenta ctermfg=magenta

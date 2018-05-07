@@ -39,7 +39,6 @@ set undofile                   " save undo's after file closes
 set undodir=~/.vim/undo        " where to save undo histories
 set undolevels=1000            " how many undos
 set undoreload=10000           " num of lines to save for undo
-set nowrap                     " stop vim from auto-wrapping lines when there's not enough horizontal space http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
 set shiftround                 " number of spaces for autoindenting
 set wildignore=*.swp,*.bak,*.pyc,*.class,*/.git/*
 set ff=unix
@@ -52,6 +51,10 @@ set encoding=utf-8
 " disable safe write to enable hot module reload (for js)
 " @see https://parceljs.org/hmr.html
 set backupcopy=yes
+
+" http://vim.wikia.com/wiki/Automatic_word_wrapping
+" set wrap linebreak
+set nowrap                     " stop vim from auto-wrapping lines when there's not enough horizontal space http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
 
 " https://robots.thoughtbot.com/vim-you-complete-me
 set complete=.,b,u,]

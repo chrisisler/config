@@ -11,13 +11,13 @@ call plug#begin('~/.vim/plugged')
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer' " rust auto-complete
-" Plug 'flowtype/vim-flow' " auto-complete for flow
+Plug 'posva/vim-vue'
 Plug 'othree/es.next.syntax.vim'              " es7 syntax and flow syntax hi
 Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
+" Plug 'flowtype/vim-flow' " auto-complete for flow
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
-Plug 'posva/vim-vue'
 " Plug 'ElmCast/elm-vim'
 " Plug 'artur-shaik/vim-javacomplete2' " java stuff
 " Plug 'quramy/tsuquyomi' " typescript ide features
@@ -35,7 +35,7 @@ Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
 Plug 'kshenoy/vim-signature'            " display marks in gutter
-" Plug 'airblade/vim-gitgutter'           " git diff in gutter
+Plug 'airblade/vim-gitgutter'           " git diff in gutter
 
 
 " ----- Integrations -----
@@ -51,7 +51,8 @@ Plug 'easymotion/vim-easymotion'    " go fast
 Plug 'tpope/vim-surround'           " manipulating characters that surround text objects
 Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
 Plug 'tpope/vim-dispatch' "async commands
-" Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
+Plug 'jmcantrell/vim-diffchanges'
+Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
 " Plug 'prettier/vim-prettier'    " js auto-formatter
 " Plug 'easymotion/vim-easymotion'        " vim motions on speed
 
@@ -66,6 +67,7 @@ Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, typ
 " ----- Random -----
 Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'metakirby5/codi.vim' " inline/automatic evaluation
+Plug 'junegunn/goyo.vim' " distraction free
 " Plug 'junegunn/rainbow_parentheses.vim'
 " Plug 'luochen1990/rainbow'
 " Plug 'yggdroot/indentline' " cool indent lines 
@@ -80,6 +82,13 @@ call plug#end()
 " Plugin Settings
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Goyo (distraction free)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:goyo_height=90
+let g:goyo_width=80
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " rainbow (parenthesis)
