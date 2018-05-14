@@ -16,7 +16,7 @@ async function main () {
       const temperature = Math.round(data.main.temp) + 'F'
       // const temperature = Math.round(data.main.temp) + '°F'
 
-      let result = `${temperature}`
+      let result = `${temperature} ${description}`
 
       // const windSpeedMPH = Math.round(data.wind.speed)
       // result = `${result} ${windSpeedMPH}mph`

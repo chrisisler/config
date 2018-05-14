@@ -58,7 +58,7 @@ call matchadd("RedItalic", '\.\zs\<\prototype\>\ze')
 
 highlight Red ctermfg=red
 " call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
-call matchadd("Red", '\<\h\w*\>\.\zs\<\h\w*\>')
+" call matchadd("Red", '\<\h\w*\>\.\zs\<\h\w*\>')
 
 
 " highlight GoldenItalic ctermfg=3 cterm=italic

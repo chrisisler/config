@@ -46,6 +46,7 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias clean='killall -9 JavaUpdater iTunesHelper'
 alias sandbox="cd ${codeDir}/JS/Bin/Sandbox/ && vim ./sandbox.js"
 alias cs='cd'
 alias datefmt='date "+%Y-%m-%d_%H:%M"'
