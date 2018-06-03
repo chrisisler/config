@@ -1,4 +1,4 @@
-set aaa_mode=album
+set aaa_mode=all
 set altformat_current= %F 
 set altformat_playlist= %f%= %d 
 set altformat_title=%f
@@ -89,7 +89,7 @@ set shuffle=false
 set skip_track_info=false
 set smart_artist_sort=true
 set softvol=true
-set softvol_state=80 80
+set softvol_state=70 70
 set status_display_program=
 set wrap_search=true
 bind browser backspace browser-up

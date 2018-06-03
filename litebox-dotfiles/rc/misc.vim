@@ -1,5 +1,5 @@
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
-au FileType qf call AdjustWindowHeight(2, 15)
+au FileType qf call AdjustWindowHeight(2, 11)
 function! AdjustWindowHeight(minheight, maxheight)
     exe max([min([line('$')+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
