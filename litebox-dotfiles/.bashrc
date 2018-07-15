@@ -20,10 +20,10 @@ export HOMEBREW_UPGRADE_CLEANUP=1
 # Don't put duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 
-export TSA_APP_CONSUMER_KEY="hiqSjYFencTLiTDAbwYdSakM1"
-export TSA_APP_CONSUMER_SECRET="AFRdJC0ZbT2Qb0wDdGKuKfw6G3Fw4hZiNTrWhMesmExDJvIYip"
-export TSA_APP_ACCESS_TOKEN="755468464932786176-NHNVyAWBsalsmXdLbdVD5wtPmMgbIXu"
-export TSA_APP_ACCESS_TOKEN_SECRET="e56TQPL1FL9GQ5AWGUwUG8AmLGM9RYa9WZI9517cfj8IN"
+export TS_APP_CONSUMER_KEY="EZ6lPwbHp7Tuxr0YhRZjkNoUu"
+export TS_APP_CONSUMER_SECRET="sAdt3fGzG3sYRzVgxWrYkmBpa61MCxHL9oJpCnAVqWKfxyZbQb"
+export TS_APP_ACCESS_TOKEN="974700047517528065-4kRKjSnoQWwGmwwp6xjryu4ftNmVBIW"
+export TS_APP_ACCESS_TOKEN_SECRET="laGLMr6ZylfXhHoljmlzLMU6bHweVENaerhOiADmP73mP"
 
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
@@ -31,7 +31,6 @@ export TSA_APP_ACCESS_TOKEN_SECRET="e56TQPL1FL9GQ5AWGUwUG8AmLGM9RYa9WZI9517cfj8I
 export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 
 export EDITOR="vim"
-export openWeatherMapAPIKey="619a668af9d55d2377325ce0e407d9bc"
 
 # add yarn(pkg) to PATH
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -71,7 +70,7 @@ alias today="date '+%Y-%m-%d'"
 alias g="cd ${HOME}/Code/Git"
 alias tm="clear ; ps xc | awk '{ print \$1, \$5 }' | sed 1d | sort -fk 2 | column -t | column"
 alias gs="git status"
-alias bad="cd ~/Main/Bin/Bad"
+alias bad="cd ~/Main/Bin/Bad && ${lslaVar}"
 alias q="exit"
 # careful of the "*" here in this vim alias.
 alias vim="/usr/local/Cellar/vim/*/bin/vim $@"
@@ -91,7 +90,7 @@ alias main="cd ${mainDir} && ${lslaVar}"
 alias ed="cd ${codeDir}/Git/erxidesk && ${lslaVar}"
 alias e2="cd ${codeDir}/Git/e2 && ${lslaVar}"
 alias conf="cd ${codeDir}/Git/config && ${lslaVar}"
-alias parse="cd ${codeDir}/Status"
+alias parse="cd ${codeDir}/Status && ${lslaVar}"
 alias get="brew install"
 alias remove="brew uninstall"
 alias r="ranger"
@@ -112,7 +111,7 @@ alias vrc="vim ~/.vimrc"
 alias tmuxconf="vim ~/.tmux.conf"
 alias tmuxline="vim ~/.tmux/tmuxline.conf"
 alias rangerrc="vim ~/.config/ranger/rc.conf"
-alias tmuxtemp="tmux attach -t Temp || tmux new -s Temp"
+alias tmuxtemp="tmux attach -t Temp $@ || tmux new -s Temp $@"
 alias tt="tmuxtemp"
 alias t="tmux attach -t ¤ || tmux new -s ¤"
 alias tmus="tmux attach -t ♫ || tmux new -s ♫"
@@ -216,20 +215,20 @@ normal="\[\e[1;36m\]"
 # white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-source "${codeDir}/Status/git.sh"
-export PS1="\n\
-${blue}${_currentDirectory}${colEnd}\
-${yellow}\$(gitBracketL)${colEnd}\
-${cyan}\$(gitBranch)${colEnd}\
-${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-${blue}\$(gitAddedChanges)${colEnd}\
-${red}\$(gitUnaddedChanges)${colEnd}\
-${yellow}\$(gitBracketR)${colEnd} "
+# source "${codeDir}/Status/git.sh"
+# export PS1="\n\
+# ${blue}${_currentDirectory}${colEnd}\
+# ${yellow}\$(gitBracketL)${colEnd}\
+# ${cyan}\$(gitBranch)${colEnd}\
+# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+# ${blue}\$(gitAddedChanges)${colEnd}\
+# ${red}\$(gitUnaddedChanges)${colEnd}\
+# ${yellow}\$(gitBracketR)${colEnd} "
 
 # ${orange}»»»${colEnd} "
 # ${orange}¤${colEnd} "
 
-# export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
+export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
 
 # export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "
 

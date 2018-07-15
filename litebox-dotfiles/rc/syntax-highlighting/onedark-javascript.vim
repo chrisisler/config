@@ -52,28 +52,6 @@ highlight javaScriptObjectLabel ctermfg=darkmagenta
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-highlight RedItalic ctermfg=red cterm=italic
-call matchadd("RedItalic", '\.\zs\<\prototype\>\ze')
-
-
-highlight Red ctermfg=red
-" call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
-" call matchadd("Red", '\<\h\w*\>\.\zs\<\h\w*\>')
-
-
-" highlight GoldenItalic ctermfg=3 cterm=italic
-" call matchadd("GoldenItalic", '\<self\>')
-
-
-" highlight Golden ctermfg=3
-" call matchadd("Golden", '\<__dirname\>')
-" call matchadd("Golden", '\<__filename\>')
-" call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
 highlight FunctionSyntax ctermfg=darkblue
 
 
@@ -88,6 +66,12 @@ call matchadd("FunctionSyntax", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=[^{.<>]\+=>')
 " function definition with destructuring
 call matchadd("FunctionSyntax", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=\s\+(.*)\s\+=>')
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" highlight BraceSyntax ctermfg=darkmagenta
+
+" call matchadd("BraceSyntax", '{')
+" call matchadd("BraceSyntax", '}')
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -119,7 +103,7 @@ call matchadd("MagentaItalic", '\<static\>\ze\s\+')
 call matchadd("MagentaItalic", '\<delete\>\ze\s\+')
 call matchadd("MagentaItalic", '\<get\>\ze\s\+')
 call matchadd("MagentaItalic", '\<set\>\ze\s\+')
-call matchadd("MagentaItalic", '(export )\?\|\s*\<type\>\ze\s\+')
+" call matchadd("MagentaItalic", '(export )\?\|\s*\<type\>\ze\s\+')
 call matchadd("MagentaItalic", '\s\+\zs\<instanceof\>\ze\s\+')
 call matchadd("MagentaItalic", '\<typeof\>\ze\s\+')
 call matchadd("MagentaItalic", '\<yield\>\ze')
@@ -130,6 +114,7 @@ call matchadd("JustMagenta", '\s\+=>\s*')
 call matchadd("JustMagenta", '\<new\>\ze\s\+\h')
 call matchadd("JustMagenta", '\s\+\zs\<in\>\ze\s\+')
 call matchadd("JustMagenta", '\<void\>\ze\s\+')
+call matchadd("JustMagenta", '\s\+\zs\<as\>\ze\s\+')
 
 
 highlight Comments ctermfg=white
@@ -139,3 +124,29 @@ call matchadd("Comments", '\s\+//\zs.*')
 
 highlight FunctionKeyword ctermfg=magenta cterm=italic
 call matchadd("FunctionKeyword", '\<function\>\ze\s*.*(')
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+highlight RedItalic ctermfg=red cterm=italic
+call matchadd("RedItalic", '\.\zs\<\prototype\>\ze')
+
+highlight YellowItalic ctermfg=3 cterm=italic
+call matchadd("YellowItalic", '\<console\>')
+
+highlight Red ctermfg=red
+" call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
+" call matchadd("Red", '\<\h\w*\>\.\zs\<\h\w*\>')
+
+
+" highlight GoldenItalic ctermfg=3 cterm=italic
+" call matchadd("GoldenItalic", '\<self\>')
+
+
+highlight Golden ctermfg=3
+call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
+" call matchadd("Golden", '\<__dirname\>')
+" call matchadd("Golden", '\<__filename\>')
+
+

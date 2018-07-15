@@ -8,20 +8,21 @@ call plug#begin('~/.vim/plugged')
 
 
 " ----- Language -----
+Plug 'jparise/vim-graphql'
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer' " rust auto-complete
 Plug 'posva/vim-vue'
 Plug 'othree/es.next.syntax.vim'              " es7 syntax and flow syntax hi
 Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
-Plug 'octol/vim-cpp-enhanced-highlight'
+" Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 " Plug 'flowtype/vim-flow' " auto-complete for flow
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
 " Plug 'ElmCast/elm-vim'
 " Plug 'artur-shaik/vim-javacomplete2' " java stuff
-" Plug 'quramy/tsuquyomi' " typescript ide features
-" Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
+Plug 'quramy/tsuquyomi' " typescript ide features
+Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
 " Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 " Plug 'eagletmt/neco-ghc'
 " Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
@@ -29,13 +30,13 @@ Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 
 
 " ----- Interface -----
-Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
+" Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 Plug 'joshdick/onedark.vim'             " the only good one dark plugin
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
 Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
-Plug 'kshenoy/vim-signature'            " display marks in gutter
-Plug 'airblade/vim-gitgutter'           " git diff in gutter
+" Plug 'kshenoy/vim-signature'            " display marks in gutter
+" Plug 'airblade/vim-gitgutter'           " git diff in gutter
 
 
 " ----- Integrations -----
@@ -53,7 +54,7 @@ Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
 Plug 'tpope/vim-dispatch' "async commands
 Plug 'jmcantrell/vim-diffchanges'
 Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
-" Plug 'prettier/vim-prettier'    " js auto-formatter
+" Plug 'prettier/vim-prettier'    " js auto-formatter, not needed
 " Plug 'easymotion/vim-easymotion'        " vim motions on speed
 
 " ----- Completion -----
@@ -71,7 +72,7 @@ Plug 'junegunn/goyo.vim' " distraction free
 " Plug 'junegunn/rainbow_parentheses.vim'
 " Plug 'luochen1990/rainbow'
 " Plug 'yggdroot/indentline' " cool indent lines 
-" Plug 'severin-lemaignan/vim-minimap' " sublime text-like minimap. ,mm to open and ,mc to close
+Plug 'severin-lemaignan/vim-minimap' " sublime text-like minimap. ,mm to open and ,mc to close
 
 
 call plug#end()
@@ -415,8 +416,8 @@ let g:airline_section_a=''
 let g:airline_section_b=''
 let g:airline_section_c=''
 " let g:airline_section_c='%F'
-let g:airline_section_x=''
-" let g:airline_section_x='Ln %l Col %c'
+" let g:airline_section_x=''
+let g:airline_section_x='Ln %l Col %c'
 let g:airline_section_y=''
 let g:airline_section_z=''
 

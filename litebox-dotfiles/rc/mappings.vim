@@ -11,8 +11,6 @@
 " repeat previous command
 nnoremap <silent> <Leader><Leader> @:
 
-inoremap <silent> jk <ESC>
-
 " pressing enter key when auto-complete (pop-up) menu is open will press enter
 inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
 
@@ -67,9 +65,9 @@ noremap j gj
 noremap k gk
 
 " Avoid pressing escape. Avoid pressing <C-[>
-inoremap ;; <ESC>l
-vnoremap ;; <ESC>l
-snoremap ;; <ESC>l
+" inoremap ;; <ESC>l
+" vnoremap ;; <ESC>l
+" snoremap ;; <ESC>l
 
 " Best mapping ever.
 noremap ; :
@@ -159,6 +157,8 @@ nnoremap <silent> <Leader>4<CR> :so ~/.vimrc<CR>
 "          doStuff(people.map(person => person.name), otherVar);
 nnoremap <Leader>@ gd2wv$"xy"_ddn"_deh"xp
 " nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
+
+nnoremap <Leader>import "xyiwggOimport<Space><ESC>"xp$a<Space>from<Space>''<Left><ESC>a
 
 " Fat array function snippet after typing function arguments.
 " Uses clean indents on newline (after function header/prototype).

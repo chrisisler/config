@@ -44,8 +44,8 @@ parseCmusOutput()
 
     local songDuration="$(getDataFromCmus "${cmusData}" "duration")"
     local songPosition="$(getDataFromCmus "${cmusData}" "position")"
-    # local songDurationFormatted="$(getSongFormatFromSeconds "${songDuration}")"
-    # local songPositionFormatted="$(getSongFormatFromSeconds "${songPosition}")"
+    local songDurationFormatted="$(getSongFormatFromSeconds "${songDuration}")"
+    local songPositionFormatted="$(getSongFormatFromSeconds "${songPosition}")"
 
     # I keep vol_left and vol_right equal. So picking one of them gives volume int out of 100.
     local volume="$(echo -n "${cmusData}" | grep -wE "^set vol_left" | sed -e "s/set vol_left //g")"
@@ -53,8 +53,8 @@ parseCmusOutput()
     local isShuffle="$(getDataFromCmus "${cmusData}" "set shuffle")"
     local isRepeat="$(getDataFromCmus "${cmusData}" "set repeat")"
 
-    echo -n "${songTitle}"
-    # echo -n "${artistName} - ${songTitle}"
+    # echo -n "${songTitle}"
+    echo -n "${artistName} - ${songTitle}"
     # echo -n "${artistName} - ${songTitle} ${songPositionFormatted}/${songDurationFormatted}"
 }
 

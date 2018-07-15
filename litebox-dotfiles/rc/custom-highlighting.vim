@@ -107,3 +107,8 @@ autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaS
 function! HighlightJavaScriptOneDark()
   source ~/.vim/rc/syntax-highlighting/onedark-javascript.vim
 endfunction
+
+autocmd BufEnter,BufRead,BufNewFile,FileType *.ts,tsx call SetFT()
+function! SetFT()
+  set ft=javascript
+endfunction
