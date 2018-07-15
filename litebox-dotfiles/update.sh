@@ -22,6 +22,7 @@ cp -r ~/Code/JS/Dictionary "${dotfilesDir}"
 
 cp ~/*.terminfo "${dotfilesDir}"
 
+# todo: check if this file exists first
 rm ./.DS_Store
 
 git add "$(basename "${0}")"
