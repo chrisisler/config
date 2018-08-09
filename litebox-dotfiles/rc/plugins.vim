@@ -34,8 +34,8 @@ Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
 Plug 'joshdick/onedark.vim'             " the only good one dark plugin
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
 Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
-Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text
-" Plug 'kshenoy/vim-signature'            " display marks in gutter
+" Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text EDIT: disabled as it breaks copy-pasting
+Plug 'kshenoy/vim-signature'            " display marks in gutter
 " Plug 'airblade/vim-gitgutter'           " git diff in gutter
 
 
@@ -414,10 +414,12 @@ let g:airline_extensions = ['tabline']
 
 let g:airline_section_a=''
 let g:airline_section_b=''
+
 let g:airline_section_c=''
+let g:airline_section_x=''
 " let g:airline_section_c='%F'
-" let g:airline_section_x=''
-let g:airline_section_x='Ln %l Col %c'
+" let g:airline_section_x='Ln %l Col %c'
+
 let g:airline_section_y=''
 let g:airline_section_z=''
 

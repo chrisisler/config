@@ -12,7 +12,7 @@ function main () {
     = abbreviatedWeekday
     + ' ' + monthName
     + ' ' + dayOfMonth
-    // + ' ' + militaryHoursAndMinutes
+    + ' ' + militaryHoursAndMinutes
   console.log(currentTime)
 }
 

@@ -1,3 +1,5 @@
+" I want a mapping that copies lines x through y and pastes them at line z
+" I want a mapping that deletes lines x through y
 set nocompatible
 source $HOME/.vim/rc/general-settings.vim
 source $HOME/.vim/rc/plugins.vim

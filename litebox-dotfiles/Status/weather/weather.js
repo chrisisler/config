@@ -6,28 +6,35 @@ const fetch = require('node-fetch')
 async function main () {
   try {
     const response = await fetch(url())
+
     if (response.ok) {
       const data = await response.json()
 
       // const max = Math.round(data.main.temp_max)
       // const min = Math.round(data.main.temp_min)
       // const tempRange = `${max}-${min}°F`
+      // const temperature = Math.round(data.main.temp) + '°F'
+
       const description = data.weather.map(_ => _.main).join(' ')
       const temperature = Math.round(data.main.temp) + 'F'
-      // const temperature = Math.round(data.main.temp) + '°F'
 
       let result = `${temperature} ${description}`
 
-      // const windSpeedMPH = Math.round(data.wind.speed)
-      // result = `${result} ${windSpeedMPH}mph`
-      // if (windSpeedMPH > 20) {
-      // }
+      const humidityPercent = data.main.humidity
+      if (humidityPercent > 80) {
+        result += ` Humid:${humidityPercent}%`
+      }
 
-      console.log(result)
+      const windSpeedMPH = Math.round(data.wind.speed)
+      if (windSpeedMPH > 20) {
+        result += ` ${windSpeedMPH}mph`
+      }
+
+      process.stdout.write(result)
     } 
   } catch (error) {
     console.error('Error: ' + error.message)
-    process.exit(-1)
+    // process.exit(-1)
   }
 }
 
@@ -38,10 +45,6 @@ function url () {
     + 'api.openweathermap.org/data/2.5/weather'
     + '?mode=json'
     + '&units=imperial'
-    + '&q=Boston'
+    + '&q=Minneapolis'
     + '&APPID=' + process.env.openWeatherMapAPIKey
 }
-
-// function capitalize (str) {
-//   return str[0].toUpperCase() + str.slice(1)
-// }

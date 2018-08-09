@@ -8,8 +8,10 @@
 " https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
 "
 
+nnoremap <silent> <Leader><Space> ``zzjk
+
 " repeat previous command
-nnoremap <silent> <Leader><Leader> @:
+nnoremap <silent> <Leader><Leader><CR> @:
 
 " pressing enter key when auto-complete (pop-up) menu is open will press enter
 inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
@@ -237,8 +239,8 @@ nnoremap <silent> <Leader>i :set number<CR>:set showtabline=2<CR>
 inoremap <silent> <Leader>foreach ∀
 inoremap <silent> <Leader>forany ∀
 " " commented out to make whole-line auto-complete faster (see approx Line168)
-inoremap <silent> <Leader>lambda λ
-inoremap <silent> <Leader>lamda λ
+" inoremap <silent> <Leader>lambda λ
+" inoremap <silent> <Leader>lamda λ
 " inoremap <silent> <Leader>emptyset ∅
 " inoremap <silent> <Leader>sum Σ
 " inoremap <silent> <Leader>mult ∏
@@ -304,7 +306,7 @@ nnoremap <Leader>d<CR> :Dispatch
 nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
 
 " Haskell
-nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./%:t:r % && ./%:t:r<CR>
+" nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./%:t:r % && ./%:t:r<CR>
 
 " Python
 " nnoremap <Leader>py<CR> :w<CR>:AsyncRun python %<CR>:copen<CR>:wincmd k<CR>

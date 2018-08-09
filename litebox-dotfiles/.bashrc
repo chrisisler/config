@@ -24,6 +24,7 @@ export TS_APP_CONSUMER_KEY="EZ6lPwbHp7Tuxr0YhRZjkNoUu"
 export TS_APP_CONSUMER_SECRET="sAdt3fGzG3sYRzVgxWrYkmBpa61MCxHL9oJpCnAVqWKfxyZbQb"
 export TS_APP_ACCESS_TOKEN="974700047517528065-4kRKjSnoQWwGmwwp6xjryu4ftNmVBIW"
 export TS_APP_ACCESS_TOKEN_SECRET="laGLMr6ZylfXhHoljmlzLMU6bHweVENaerhOiADmP73mP"
+export openWeatherMapAPIKey="619a668af9d55d2377325ce0e407d9bc"
 
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
@@ -45,11 +46,16 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias song="~/Code/Status/cmus.sh || ~/Code/Status/pianobar.sh"
+alias goodnight="lock"
+alias discreet="$@ ; history -d $(history 1)"
+alias babel="open /Volumes/Macintosh\ HD/Applications/Google\ Chrome.app https://babeljs.io/repl"
+alias js="cd ${codeDir}/JS/Bin && ${lslaVar}"
 alias clean='killall -9 JavaUpdater iTunesHelper'
 alias sandbox="cd ${codeDir}/JS/Bin/Sandbox/ && vim ./sandbox.js"
 alias cs='cd'
 alias datefmt='date "+%Y-%m-%d_%H:%M"'
-alias brew-latest="brew update && brew upgrade --cleanup --fetch-HEAD"
+alias brew-latest="brew update && brew upgrade --cleanup --fetch-HEAD && brew cleanup -s"
 alias ll="ls -AGFh | column" # exclude details then compact
 alias w="cd ${codeDir}/Git/wavematch && ${lslaVar}"
 alias ssherxi='ssh -i ~/.ssh/id_rsa_alex erxi@jess.coffee'

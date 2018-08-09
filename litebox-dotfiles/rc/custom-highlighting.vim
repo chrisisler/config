@@ -41,9 +41,11 @@ highlight LineNr ctermbg=bg
 " do not display ~ character for end of buffer (make text color = bg color)
 highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 
+" do not show split separators
 highlight VertSplit ctermfg=bg ctermbg=bg
 
-highlight MatchParen cterm=none ctermfg=cyan ctermbg=bg
+" doesn't seem to work.
+" highlight MatchParen cterm=none ctermfg=cyan ctermbg=bg
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme and background (dark/light) color dependent

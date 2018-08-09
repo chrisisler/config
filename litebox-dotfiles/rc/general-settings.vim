@@ -48,6 +48,7 @@ set incsearch
 set noswapfile
 set virtualedit=block
 set encoding=utf-8
+
 " disable safe write to enable hot module reload (for js)
 " @see https://parceljs.org/hmr.html
 set backupcopy=yes
@@ -68,14 +69,15 @@ set path+=**
 " Visual.
 set noruler
 set number      " show line numbers on left?
-set cursorline  " highlight current line?
+set nocursorline  " highlight current line?
 
 set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal
 set noshowmatch " do not jump to matching brackets/parens when typing
 set noshowmode  " do not show me which mode im in
 " set showcmd     " show me what command im typing as i type it (see `timeoutlen`)
-set timeoutlen=400
+set timeout
+set timeoutlen=250
 set ttimeoutlen=50
 " set lazyredraw  " redraw only when you need to
 " set relativenumber

@@ -7,6 +7,8 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "node-fetch": "^2.0.0"
+    "eslint": "^5.2.0",
+    "node-fetch": "^2.0.0",
+    "prettier": "^1.13.7"
   }
 }
