@@ -54,7 +54,8 @@ parseCmusOutput()
     local isRepeat="$(getDataFromCmus "${cmusData}" "set repeat")"
 
     # echo -n "${songTitle}"
-    echo -n "${artistName} - ${songTitle}"
+    echo -n "${artistName}"
+    # echo -n "${artistName} - ${songTitle}"
     # echo -n "${artistName} - ${songTitle} ${songPositionFormatted}/${songDurationFormatted}"
 }
 

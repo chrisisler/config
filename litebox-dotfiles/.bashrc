@@ -46,6 +46,7 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias back="cd -"
 alias song="~/Code/Status/cmus.sh || ~/Code/Status/pianobar.sh"
 alias goodnight="lock"
 alias discreet="$@ ; history -d $(history 1)"
@@ -117,10 +118,10 @@ alias vrc="vim ~/.vimrc"
 alias tmuxconf="vim ~/.tmux.conf"
 alias tmuxline="vim ~/.tmux/tmuxline.conf"
 alias rangerrc="vim ~/.config/ranger/rc.conf"
-alias tmuxtemp="tmux attach -t Temp $@ || tmux new -s Temp $@"
+alias tmuxtemp="clear ; tmux attach -t Temp $@ || tmux new -s Temp $@"
 alias tt="tmuxtemp"
-alias t="tmux attach -t ¤ || tmux new -s ¤"
-alias tmus="tmux attach -t ♫ || tmux new -s ♫"
+alias t="clear ; tmux attach -t ¤ || tmux new -s ¤"
+alias tmus="clear ; tmux attach -t ♫ || tmux new -s ♫"
 alias weather="curl wttr.in/boston"
 # alias spamrandom="cat /dev/urandom | tr -cd '01'"
 alias vi="vim"
@@ -132,6 +133,7 @@ alias dir="open ."
 alias mainbox="cd /Volumes/Users/Christopher/Desktop/Main"
 alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 alias lokc="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+alias lcok="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 # alias mpv="\\mpv --loop=inf $@ &>/dev/null"
 # alias mpvfit="\\mpv --loop=inf --autofit-smaller=800x800 --autofit-larger=800x00 $@ &>/dev/null"
 alias eject="diskutil unmount $@"
@@ -155,6 +157,10 @@ gh() {
     return 1
   fi
   open $gitUrl
+}
+
+mc() {
+  mkdir -pv "$1" && cd "$1"
 }
 
 displayAdvice() {

@@ -7,7 +7,6 @@
 " vim full screen
 " https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
 "
-
 nnoremap <silent> <Leader><Space> ``zzjk
 
 " repeat previous command

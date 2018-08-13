@@ -100,17 +100,6 @@ let g:goyo_width=80
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-flow
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" assign to 0 when ale enabled, 1 when ale disabled
-" let g:flow#enable=0
-" let g:flow#showquickfix=0
-" let g:flow#autoclose=1
-" let g:flow#omnifunc=1
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tables
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -249,14 +238,14 @@ let g:ale_set_signs=1
 
 let g:ale_lint_on_save=1
 let g:ale_lint_on_enter=1
-let g:ale_lint_delay=400
+let g:ale_lint_delay=500
 
 let g:ale_fix_on_save=1
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
 
 let g:ale_open_list=0
-let g:ale_set_highlights=0
+let g:ale_set_highlights=1
 let g:ale_sign_column_always=1
 
 " function! LintStatus() abort
