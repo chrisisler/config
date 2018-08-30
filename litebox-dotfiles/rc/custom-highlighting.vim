@@ -45,7 +45,7 @@ highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 highlight VertSplit ctermfg=bg ctermbg=bg
 
 " doesn't seem to work.
-" highlight MatchParen cterm=none ctermfg=cyan ctermbg=bg
+highlight MatchParen cterm=bold,underline ctermfg=3 ctermbg=bg
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme and background (dark/light) color dependent

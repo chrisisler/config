@@ -8,13 +8,14 @@ call plug#begin('~/.vim/plugged')
 
 
 " ----- Language -----
-Plug 'jparise/vim-graphql'
+" Plug 'pangloss/vim-javascript'
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
+Plug 'othree/es.next.syntax.vim'              " es7 syntax and flow syntax hi
+Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
+Plug 'jparise/vim-graphql'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer' " rust auto-complete
 Plug 'posva/vim-vue'
-Plug 'othree/es.next.syntax.vim'              " es7 syntax and flow syntax hi
-Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
 " Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 " Plug 'flowtype/vim-flow' " auto-complete for flow
@@ -84,6 +85,8 @@ call plug#end()
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:javascript_plugin_flow = 1
+let g:javascript_plugin_jsdoc = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Goyo (distraction free)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -195,11 +198,11 @@ autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" matchparen
+" Syntactically highlight matching parenthesis/brackets/etc.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " avoid loading plugin, it slows down Vim
-let loaded_matchparen = 1
+" let loaded_matchparen = 0
 " let g:mta_use_matchparen_group=1
 
 
@@ -234,7 +237,7 @@ let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:ale_enabled=1
-let g:ale_set_signs=1
+let g:ale_set_signs=0
 
 let g:ale_lint_on_save=1
 let g:ale_lint_on_enter=1

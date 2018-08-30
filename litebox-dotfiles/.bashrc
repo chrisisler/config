@@ -107,7 +107,7 @@ alias cl="clear && ${lslaVar}"
 alias lc="clear && ${lslaVar}"
 alias tree="tree -I *node_modules*"
 alias ct="clear && tree"
-alias md="mkdir -pv"
+# alias md="mkdir -pv"
 alias rmi="rm -irv"
 alias rmf="rm -frv"
 alias rm="rm -rv"
@@ -159,7 +159,7 @@ gh() {
   open $gitUrl
 }
 
-mc() {
+md() {
   mkdir -pv "$1" && cd "$1"
 }
 
@@ -227,20 +227,20 @@ normal="\[\e[1;36m\]"
 # white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-# source "${codeDir}/Status/git.sh"
-# export PS1="\n\
-# ${blue}${_currentDirectory}${colEnd}\
-# ${yellow}\$(gitBracketL)${colEnd}\
-# ${cyan}\$(gitBranch)${colEnd}\
-# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-# ${blue}\$(gitAddedChanges)${colEnd}\
-# ${red}\$(gitUnaddedChanges)${colEnd}\
-# ${yellow}\$(gitBracketR)${colEnd} "
+source "${codeDir}/Status/git.sh"
+export PS1="\n\
+${blue}${_currentDirectory}${colEnd}\
+${yellow}\$(gitBracketL)${colEnd}\
+${cyan}\$(gitBranch)${colEnd}\
+${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+${blue}\$(gitAddedChanges)${colEnd}\
+${red}\$(gitUnaddedChanges)${colEnd}\
+${yellow}\$(gitBracketR)${colEnd}\
+ ${orange}»»»${colEnd} "
 
-# ${orange}»»»${colEnd} "
 # ${orange}¤${colEnd} "
 
-export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
+# export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
 
 # export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "
 

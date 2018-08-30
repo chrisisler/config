@@ -4,9 +4,12 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+nnoremap <Leader>X<CR> :let g:ale_open_list=
+
 " vim full screen
 " https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
-"
+noremap <silent> <C-m> <C-d>
+
 nnoremap <silent> <Leader><Space> ``zzjk
 
 " repeat previous command
