@@ -12,18 +12,18 @@ call plug#begin('~/.vim/plugged')
 Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
 Plug 'othree/es.next.syntax.vim'              " es7 syntax and flow syntax hi
 Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
-Plug 'jparise/vim-graphql'
+" Plug 'jparise/vim-graphql'
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer' " rust auto-complete
-Plug 'posva/vim-vue'
+" Plug 'posva/vim-vue'
 " Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
+" Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
 " Plug 'flowtype/vim-flow' " auto-complete for flow
 " Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
 " Plug 'ElmCast/elm-vim'
 " Plug 'artur-shaik/vim-javacomplete2' " java stuff
-Plug 'quramy/tsuquyomi' " typescript ide features
-Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
+" Plug 'quramy/tsuquyomi' " typescript ide features
+" Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
 " Plug 'mattn/emmet-vim'                        " the only way to write html in vim
 " Plug 'eagletmt/neco-ghc'
 " Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
@@ -49,11 +49,11 @@ Plug 'w0rp/ale'             " async linter
 " ----- Commands -----
 Plug 'terryma/vim-multiple-cursors' " sublime-like multi cursors
 Plug 'ctrlpvim/ctrlp.vim'           " fuzzy finder
-Plug 'easymotion/vim-easymotion'    " go fast
+" Plug 'easymotion/vim-easymotion'    " go fast
 Plug 'tpope/vim-surround'           " manipulating characters that surround text objects
 Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
 Plug 'tpope/vim-dispatch' "async commands
-Plug 'jmcantrell/vim-diffchanges'
+" Plug 'jmcantrell/vim-diffchanges'
 Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
 " Plug 'prettier/vim-prettier'    " js auto-formatter, not needed
 " Plug 'easymotion/vim-easymotion'        " vim motions on speed
@@ -67,13 +67,13 @@ Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, typ
 
 
 " ----- Random -----
-Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
+" Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
 Plug 'metakirby5/codi.vim' " inline/automatic evaluation
-Plug 'junegunn/goyo.vim' " distraction free
-" Plug 'junegunn/rainbow_parentheses.vim'
-" Plug 'luochen1990/rainbow'
-" Plug 'yggdroot/indentline' " cool indent lines 
-Plug 'severin-lemaignan/vim-minimap' " sublime text-like minimap. ,mm to open and ,mc to close
+" Plug 'junegunn/goyo.vim' " distraction free
+" Plug 'junegunn/rainbow_parentheses.vim' " failed rainbow parenthesis plugin
+" Plug 'luochen1990/rainbow' " failed rainbow parenthesis plugin
+" Plug 'yggdroot/indentline' " indent lines 
+" Plug 'severin-lemaignan/vim-minimap' " sublime text-like minimap. ,mm to open and ,mc to close
 
 
 call plug#end()
@@ -236,19 +236,21 @@ let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> 
 " ale
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:ale_sign_error='✕'
+
 let g:ale_enabled=1
-let g:ale_set_signs=0
+let g:ale_set_signs=1
 
 let g:ale_lint_on_save=1
 let g:ale_lint_on_enter=1
-let g:ale_lint_delay=500
+let g:ale_lint_delay=800
 
 let g:ale_fix_on_save=1
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
 
 let g:ale_open_list=0
-let g:ale_set_highlights=1
+let g:ale_set_highlights=0
 let g:ale_sign_column_always=1
 
 " function! LintStatus() abort

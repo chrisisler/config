@@ -11,6 +11,9 @@ shopt -s histappend
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
 
+bind 'TAB:menu-complete'
+bind 'set show-all-if-ambiguous on'
+
 # Prepend datetime of command to command itself in ~/.bash_history file
 export HISTTIMEFORMAT="%y-%m-%d %T "
 
@@ -46,6 +49,7 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias desk="cd ~/Desktop"
 alias back="cd -"
 alias song="~/Code/Status/cmus.sh || ~/Code/Status/pianobar.sh"
 alias goodnight="lock"
