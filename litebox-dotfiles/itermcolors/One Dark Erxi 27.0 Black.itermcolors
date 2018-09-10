@@ -46,13 +46,13 @@
 		<key>Alpha Component</key>
 		<real>1</real>
 		<key>Blue Component</key>
-		<real>0.054497696459293365</real>
+		<real>0.076473653316497803</real>
 		<key>Color Space</key>
 		<string>sRGB</string>
 		<key>Green Component</key>
-		<real>0.57101279497146606</real>
+		<real>0.55479347705841064</real>
 		<key>Red Component</key>
-		<real>0.9244384765625</real>
+		<real>0.91656494140625</real>
 	</dict>
 	<key>Ansi 12 Color</key>
 	<dict>
@@ -98,13 +98,13 @@
 		<key>Alpha Component</key>
 		<real>1</real>
 		<key>Blue Component</key>
-		<real>0.34117648005485535</real>
+		<real>0.29632568359375</real>
 		<key>Color Space</key>
 		<string>sRGB</string>
 		<key>Green Component</key>
-		<real>0.31764706969261169</real>
+		<real>0.27588942646980286</real>
 		<key>Red Component</key>
-		<real>0.27843138575553894</real>
+		<real>0.24182900786399841</real>
 	</dict>
 	<key>Ansi 2 Color</key>
 	<dict>
@@ -124,26 +124,26 @@
 		<key>Alpha Component</key>
 		<real>1</real>
 		<key>Blue Component</key>
-		<real>0.16751196980476379</real>
+		<real>0.10145953297615051</real>
 		<key>Color Space</key>
 		<string>sRGB</string>
 		<key>Green Component</key>
-		<real>0.77331238985061646</real>
+		<real>0.9338836669921875</real>
 		<key>Red Component</key>
-		<real>0.782470703125</real>
+		<real>0.89209479093551636</real>
 	</dict>
 	<key>Ansi 4 Color</key>
 	<dict>
 		<key>Alpha Component</key>
 		<real>1</real>
 		<key>Blue Component</key>
-		<real>0.85490196943283081</real>
+		<real>0.9775848388671875</real>
 		<key>Color Space</key>
 		<string>sRGB</string>
 		<key>Green Component</key>
-		<real>0.67198961973190308</real>
+		<real>0.65534496307373047</real>
 		<key>Red Component</key>
-		<real>0.32961520552635193</real>
+		<real>0.29770871996879578</real>
 	</dict>
 	<key>Ansi 5 Color</key>
 	<dict>
@@ -154,9 +154,9 @@
 		<key>Color Space</key>
 		<string>sRGB</string>
 		<key>Green Component</key>
-		<real>0.43925389647483826</real>
+		<real>0.4873519241809845</real>
 		<key>Red Component</key>
-		<real>0.41980084776878357</real>
+		<real>0.46960258483886719</real>
 	</dict>
 	<key>Ansi 6 Color</key>
 	<dict>

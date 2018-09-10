@@ -9,6 +9,7 @@
 
 " Remove line numbers for quickfix window
 au FileType qf setlocal nonumber colorcolumn=
+au FileType nerdtree setlocal statusline=Explorer
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -29,6 +30,12 @@ set background=dark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" make background of statusline transparent (same as background)
+highlight StatusLine ctermfg=fg ctermbg=bg
+highlight StatusLineNC ctermfg=15 ctermbg=bg
+highlight StatusLineTerm ctermfg=fg ctermbg=bg
+highlight StatusLineTermNC ctermfg=15 ctermbg=bg
+
 " remove obnoxious highlighting from quickfix window
 highlight QuickFixLine ctermfg=fg ctermbg=bg
 
@@ -44,8 +51,7 @@ highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 " do not show split separators
 highlight VertSplit ctermfg=bg ctermbg=bg
 
-" doesn't seem to work.
-highlight MatchParen cterm=bold,underline ctermfg=3 ctermbg=bg
+" highlight MatchParen cterm=bold,underline ctermfg=3 ctermbg=bg
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Theme and background (dark/light) color dependent
@@ -61,10 +67,6 @@ if &background == "dark"
   endif
 
   if &filetype == "javascript" || &filetype == "typescript" || &filetype == "javascript.jsx"
-    " NOTES:
-    " doesn't work for keyword 'async' inside a class definition
-    " highlight javascriptAsyncFuncKeyword ctermfg=magenta cterm=italic
-
     """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     " colorscheme-dependent syntax highlighting overrides:
 
@@ -87,7 +89,7 @@ if &background == "dark"
   "     highlight javaOperator ctermfg=magenta cterm=italic
   "     highlight Statement ctermfg=magenta cterm=italic
   " endif
-elseif &background == "light"
+" elseif &background == "light"
   " highlight Pmenu cterm=reverse ctermbg=fg ctermfg=bg
   " highlight PmenuSel ctermbg=white ctermfg=darkblue
   " highlight MatchParen ctermfg=black ctermbg=bg

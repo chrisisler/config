@@ -18,16 +18,23 @@ async function main () {
       const description = data.weather.map(_ => _.main).join(' ')
       const temperature = Math.round(data.main.temp) + 'F'
 
-      let result = `${temperature} ${description}`
+      let result = temperature
+      // let result = `${temperature} ${description}`
 
       const humidityPercent = data.main.humidity
-      if (humidityPercent > 80) {
-        result += ` Humid:${humidityPercent}%`
+      if (humidityPercent > 85) {
+        if (humidityPercent !== 100) {
+          // Humidity will be high when it is raining (that is the nature of rain).
+          // I only want to know the humidity if it is worth knowing.
+          if (!['Fog', 'Mist', 'Thunderstorm', 'Rain'].some(_ => description.includes(_))) {
+            // result += ` Humid:${humidityPercent}%`
+          }
+        }
       }
 
       const windSpeedMPH = Math.round(data.wind.speed)
       if (windSpeedMPH > 20) {
-        result += ` ${windSpeedMPH}mph`
+        // result += ` ${windSpeedMPH}mph`
       }
 
       process.stdout.write(result)
@@ -45,6 +52,7 @@ function url () {
     + 'api.openweathermap.org/data/2.5/weather'
     + '?mode=json'
     + '&units=imperial'
-    + '&q=Minneapolis'
+    + '&q=Boston'
+    // + '&q=Minneapolis'
     + '&APPID=' + process.env.openWeatherMapAPIKey
 }

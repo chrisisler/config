@@ -34,7 +34,7 @@ Plug 'racer-rust/vim-racer' " rust auto-complete
 " Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
 Plug 'joshdick/onedark.vim'             " the only good one dark plugin
 Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
-Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
+" Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
 " Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text EDIT: disabled as it breaks copy-pasting
 Plug 'kshenoy/vim-signature'            " display marks in gutter
 " Plug 'airblade/vim-gitgutter'           " git diff in gutter
@@ -68,7 +68,7 @@ Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, typ
 
 " ----- Random -----
 " Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
-Plug 'metakirby5/codi.vim' " inline/automatic evaluation
+" Plug 'metakirby5/codi.vim' " inline/automatic evaluation
 " Plug 'junegunn/goyo.vim' " distraction free
 " Plug 'junegunn/rainbow_parentheses.vim' " failed rainbow parenthesis plugin
 " Plug 'luochen1990/rainbow' " failed rainbow parenthesis plugin
@@ -87,12 +87,13 @@ call plug#end()
 
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Goyo (distraction free)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:goyo_height=90
-let g:goyo_width=80
+" let g:goyo_height=90
+" let g:goyo_width=80
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " rainbow (parenthesis)
@@ -116,6 +117,7 @@ let g:goyo_width=80
 
 " rust code auto-formatting via `rustfmt` (format upon saving file)
 let g:rustfmt_autosave = 1
+let g:rustfmt_command = "rustfmt +nightly"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -130,14 +132,14 @@ let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
 " vim-jsdoc settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:jsdoc_allow_input_prompt=1
-let g:jsdoc_input_description=1
-let g:jsdoc_return=1
-let g:jsdoc_return_type=1
-let g:jsdoc_return_description=1
-let g:jsdoc_underscore_private=1
-let g:jsdoc_enable_es6=1
-let g:jsdoc_param_description_separator=' - '
+" let g:jsdoc_allow_input_prompt=1
+" let g:jsdoc_input_description=1
+" let g:jsdoc_return=1
+" let g:jsdoc_return_type=1
+" let g:jsdoc_return_description=1
+" let g:jsdoc_underscore_private=1
+" let g:jsdoc_enable_es6=1
+" let g:jsdoc_param_description_separator=' - '
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -153,13 +155,13 @@ let g:jsdoc_param_description_separator=' - '
 " codi (live/inline evaluation)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:codi#rightsplit=1
-let g:codi#rightalign=0
-let g:codi#width=60
+" let g:codi#rightsplit=1
+" let g:codi#rightalign=0
+" let g:codi#width=60
 
-let g:codi#aliases = {
-      \ 'javascript.jsx': 'javascript',
-      \ }
+" let g:codi#aliases = {
+"       \ 'javascript.jsx': 'javascript',
+"       \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " rustfmt
@@ -179,22 +181,22 @@ let g:gitgutter_enabled=1
 " haskell-vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:haskell_enabled_quantification=1
-let g:haskell_enabled_recursivedo=1
-let g:haskell_enabled_arrowsyntax=1
-let g:haskell_enabled_pattern_synonyms=1
-let g:haskell_enabled_typeroles=1
-let g:haskell_enabled_static_pointers=1
-let g:haskell_backpack=1
+" let g:haskell_enabled_quantification=1
+" let g:haskell_enabled_recursivedo=1
+" let g:haskell_enabled_arrowsyntax=1
+" let g:haskell_enabled_pattern_synonyms=1
+" let g:haskell_enabled_typeroles=1
+" let g:haskell_enabled_static_pointers=1
+" let g:haskell_backpack=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neco-ghc (haskell auto-completion)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:necoghc_enable_detailed_browse=1
-let g:haskellmode_completion_ghc=1
-autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
+" let g:necoghc_enable_detailed_browse=1
+" let g:haskellmode_completion_ghc=1
+" autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -202,8 +204,8 @@ autocmd FileType hs,haskell setlocal omnifunc=necoghc#omnifunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " avoid loading plugin, it slows down Vim
-" let loaded_matchparen = 0
-" let g:mta_use_matchparen_group=1
+let loaded_matchparen = 0
+let g:mta_use_matchparen_group=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -226,32 +228,31 @@ let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 " emmet (html auto-completion)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:user_emmet_mode='a'         " enable emmet in all vim modes
-let g:user_emmet_install_global=0 " enable emmet for just the below types
-" autocmd FileType html,css,js,jsx EmmetInstall
-let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
+" let g:user_emmet_mode='a'         " enable emmet in all vim modes
+" let g:user_emmet_install_global=0 " enable emmet for just the below types
+" " autocmd FileType html,css,js,jsx EmmetInstall
+" let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ale
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:ale_sign_error='✕'
+" let g:ale_lint_on_text_changed='never'
+" let g:ale_lint_on_save = 0
+" let g:ale_lint_on_enter = 0
 
 let g:ale_enabled=1
+let g:ale_sign_error='✕'
 let g:ale_set_signs=1
-
-let g:ale_lint_on_save=1
-let g:ale_lint_on_enter=1
-let g:ale_lint_delay=800
-
+let g:ale_lint_delay=1000
 let g:ale_fix_on_save=1
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-
 let g:ale_open_list=0
 let g:ale_set_highlights=0
 let g:ale_sign_column_always=1
+
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
 
 " function! LintStatus() abort
 "   " let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
@@ -305,40 +306,46 @@ let g:ale_linters={
 let g:ctrlp_regexp=0
 let g:ctrlp_custom_ignore='node_modules'
 let g:ctrlp_show_hidden=1
-let g:ctrlp_max_depth=3
+let g:ctrlp_max_depth=2
 let g:ctrlp_match_window='max:8'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMixed'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplete (language-agnostic autocompleter)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+
+" Enabled?
+let g:neocomplete#enable_at_startup=1
+
 " refreshes candidates automatically, setting to 1 increases screen flicker
 let g:neocomplete#enable_refresh_always=0
 
+" if getting completion options is longer than this time than skip it.
 let g:neocomplete#skip_auto_completion_time="0.5"
-let g:neocomplete#enable_at_startup=0
-let g:neocomplete#auto_complete_delay=300
+let g:neocomplete#auto_complete_delay=150
 let g:neocomplete#enable_smart_case=1
-let g:neocomplete#max_list=20
+let g:neocomplete#max_list=16
 let g:neocomplete#sources#syntax#min_keyword_length=2
 let g:neocomplete#enable_auto_close_preview=0
 " Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-            \ 'default' : '',
-            \ 'text' : '/usr/share/dict/connectives',
-            \ 'javascript' : $HOME.'/Code/JS/Dictionary/all.txt',
-            \ 'cpp' : $HOME.'/Code/Cpp/Dictionary/cpp-dictionary-keywords.txt'
-            \ }
+" let g:neocomplete#sources#dictionary#dictionaries = {
+"             \ 'default' : '',
+"             \ 'text' : '/usr/share/dict/connectives',
+"             \ 'javascript' : $HOME.'/Code/JS/Dictionary/all.txt',
+"             \ 'cpp' : $HOME.'/Code/Cpp/Dictionary/cpp-dictionary-keywords.txt'
+"             \ }
 " Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 " Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
+" if !exists('g:neocomplete#sources#omni#input_patterns')
+"     let g:neocomplete#sources#omni#input_patterns = {}
+" endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -409,10 +416,10 @@ let g:airline_extensions = ['tabline']
 let g:airline_section_a=''
 let g:airline_section_b=''
 
-let g:airline_section_c=''
-let g:airline_section_x=''
-" let g:airline_section_c='%F'
-" let g:airline_section_x='Ln %l Col %c'
+" let g:airline_section_c=''
+" let g:airline_section_x=''
+let g:airline_section_c='%F'
+let g:airline_section_x='Ln %l Col %c'
 
 let g:airline_section_y=''
 let g:airline_section_z=''

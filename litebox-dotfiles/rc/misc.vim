@@ -5,6 +5,10 @@ function! AdjustWindowHeight(minheight, maxheight)
 endfunction
 
 
+" https://stackoverflow.com/questions/49784158/show-multiline-flow-errors-in-vim-status-line
+autocmd FileType qf setlocal wrap
+
+
 " Exclude quickfix window from `:bn[ext]` and `:bp[revious]` commands.
 " Essentially cements it as an output-only window positioned at bottom.
 augroup qf

@@ -33,7 +33,7 @@ nnoremap <silent> \ :NERDTreeToggle<CR>
 nnoremap <silent> \| :NERDTreeToggle<CR><C-w>l
 
 " Next window.
-nnoremap [ <C-w>w
+nnoremap <silent> [ <C-w>w
 
 " Not highlighting things happens pretty often.
 nnoremap <silent> <space> :nohlsearch<CR>
@@ -42,8 +42,8 @@ nnoremap <silent> <space> :nohlsearch<CR>
 " nnoremap J mzJ`z
 
 " Go to next/previous buffer.
-nnoremap ] :bn<CR>
-nnoremap } :bp<CR>
+nnoremap <silent> ] :bn<CR>
+nnoremap <silent> } :bp<CR>
 
 " X is uncomfortable to type, ' is better.
 nnoremap ' X

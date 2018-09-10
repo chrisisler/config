@@ -25,9 +25,9 @@ set nolist                     " do not display eol signs ('$')
 set nojoinspaces               " prevents inserting 2 spaces when joining
 set splitright                 " put new vertically split windows to the right of current
 set splitbelow                 " put new split windows to bottom of current
-autocmd VimEnter * set laststatus=0 " force set 0 on start. display status line always?
+autocmd VimEnter * set laststatus=2 " force set 0 on start. display status line always?
 
-set showtabline=2              " Display list of buffers at the top, uses airline plugin.
+set showtabline=0              " Display list of buffers at the top
 
 set showfulltag                " display more info when auto-completing
 set smartcase                  " smart (case-sensitive when you specify) search matching
@@ -63,7 +63,7 @@ set complete-=i
 set wildmenu                  " visual autocomplete
 set wildmode=longest,list:longest 
 set previewheight=8
-set completeopt=longest,menuone,preview
+set completeopt=noinsert,noselect,menuone,preview
 set path+=**
 
 " Visual.
