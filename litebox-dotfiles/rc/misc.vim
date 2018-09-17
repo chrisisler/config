@@ -1,13 +1,14 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
-au FileType qf call AdjustWindowHeight(2, 11)
+au FileType qf call AdjustWindowHeight(3, 12)
 function! AdjustWindowHeight(minheight, maxheight)
     exe max([min([line('$')+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
 
 
-" https://stackoverflow.com/questions/49784158/show-multiline-flow-errors-in-vim-status-line
-autocmd FileType qf setlocal wrap
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Exclude quickfix window from `:bn[ext]` and `:bp[revious]` commands.
 " Essentially cements it as an output-only window positioned at bottom.
@@ -15,6 +16,9 @@ augroup qf
     autocmd!
     autocmd FileType qf set nobuflisted
 augroup END
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 " Highlight all instances of word under cursor, when idle.
@@ -43,6 +47,7 @@ endfunction
 " call AutoHighlightToggle()
 
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 " Swap iTerm2 cursors in vim insert mode when using tmux
@@ -58,3 +63,26 @@ else
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" auto close vim if only remaining window is NerdTree
+autocmd BufEnter * if (winnr("$") ==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+" runtime macros/matchit.vim
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+au FileType qf setlocal wrap number colorcolumn= statusline=Info
+au FileType nerdtree setlocal statusline=Explorer
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

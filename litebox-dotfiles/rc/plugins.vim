@@ -8,36 +8,37 @@ call plug#begin('~/.vim/plugged')
 
 
 " ----- Language -----
-" Plug 'pangloss/vim-javascript'
-Plug 'othree/yajs.vim'                        " ECMAScript syntax highlighting
-Plug 'othree/es.next.syntax.vim'              " es7 syntax and flow syntax hi
-Plug 'mxw/vim-jsx'                            " jsx syntax highlighting
-" Plug 'jparise/vim-graphql'
+Plug 'othree/yajs.vim'
+Plug 'othree/es.next.syntax.vim'
+Plug 'mxw/vim-jsx'
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer' " rust auto-complete
+Plug 'racer-rust/vim-racer'
+" Plug 'pangloss/vim-javascript'
+" Plug 'jparise/vim-graphql'
 " Plug 'posva/vim-vue'
 " Plug 'octol/vim-cpp-enhanced-highlight'
-" Plug 'hail2u/vim-css3-syntax'                 " css3 syntax
-" Plug 'flowtype/vim-flow' " auto-complete for flow
-" Plug 'fsharp/vim-fsharp'                      " awesome syntax highlighting for ya boi f#
+" Plug 'hail2u/vim-css3-syntax'
+" Plug 'flowtype/vim-flow'
+" Plug 'fsharp/vim-fsharp'
 " Plug 'ElmCast/elm-vim'
-" Plug 'artur-shaik/vim-javacomplete2' " java stuff
-" Plug 'quramy/tsuquyomi' " typescript ide features
-" Plug 'leafgarland/typescript-vim' " typescript syntax highlighting
-" Plug 'mattn/emmet-vim'                        " the only way to write html in vim
+" Plug 'artur-shaik/vim-javacomplete2'
+" Plug 'quramy/tsuquyomi'
+" Plug 'leafgarland/typescript-vim'
+" Plug 'mattn/emmet-vim'
 " Plug 'eagletmt/neco-ghc'
-" Plug 'neovimhaskell/haskell-vim'              " syntax highlighting and indentation for haskell (and cabal)
-" Plug 'xuyuanp/nerdtree-git-plugin' " show git status in file explorer
+" Plug 'neovimhaskell/haskell-vim'
+" Plug 'xuyuanp/nerdtree-git-plugin'
 
 
 " ----- Interface -----
-" Plug 'altercation/vim-colors-solarized' " solarized colorscheme for vim
-Plug 'joshdick/onedark.vim'             " the only good one dark plugin
-Plug 'scrooloose/nerdtree'              " side-bar (tree explorer)
-" Plug 'bling/vim-airline'                " vim status bar and tabline (at top)
-" Plug 'docunext/closetag.vim'            " auto-close ending (x)html tags like sublime-text EDIT: disabled as it breaks copy-pasting
-Plug 'kshenoy/vim-signature'            " display marks in gutter
-" Plug 'airblade/vim-gitgutter'           " git diff in gutter
+Plug 'rakr/vim-one'
+Plug 'joshdick/onedark.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'kshenoy/vim-signature'
+Plug 'airblade/vim-gitgutter'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'bling/vim-airline'
+" Plug 'docunext/closetag.vim'
 
 
 " ----- Integrations -----
@@ -47,33 +48,41 @@ Plug 'w0rp/ale'             " async linter
 
 
 " ----- Commands -----
-Plug 'terryma/vim-multiple-cursors' " sublime-like multi cursors
-Plug 'ctrlpvim/ctrlp.vim'           " fuzzy finder
-" Plug 'easymotion/vim-easymotion'    " go fast
-Plug 'tpope/vim-surround'           " manipulating characters that surround text objects
-Plug 'tpope/vim-repeat'             " repeat plugin-specific commands
-Plug 'tpope/vim-dispatch' "async commands
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-dispatch'
+Plug 'skywind3000/asyncrun.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'easymotion/vim-easymotion'
 " Plug 'jmcantrell/vim-diffchanges'
-Plug 'skywind3000/asyncrun.vim'     " run terminal commands and display them
-" Plug 'prettier/vim-prettier'    " js auto-formatter, not needed
-" Plug 'easymotion/vim-easymotion'        " vim motions on speed
+" Plug 'prettier/vim-prettier'
+" Plug 'easymotion/vim-easymotion'
+
 
 " ----- Completion -----
-Plug 'jiangmiao/auto-pairs'   " auto-match all brackets, parenthesis, quotes, etc.
-Plug 'ervandew/supertab'      " hit <tab> for autocomplete
-Plug 'shougo/neocomplete.vim' " code-completion
-Plug 'sirver/ultisnips'       " snippies
-Plug 'ternjs/tern_for_vim'    " vim -> js-ide. omni-comp, jump-to-def, docs, types, refs, renames, etc.
+Plug 'jiangmiao/auto-pairs'
+Plug 'ervandew/supertab'
+Plug 'shougo/neocomplete.vim'
+Plug 'sirver/ultisnips'
+Plug 'ternjs/tern_for_vim'
 
 
 " ----- Random -----
-" Plug 'godlygeek/tabular' " for auto-aligning things easily (use the mapping)
-" Plug 'metakirby5/codi.vim' " inline/automatic evaluation
-" Plug 'junegunn/goyo.vim' " distraction free
-" Plug 'junegunn/rainbow_parentheses.vim' " failed rainbow parenthesis plugin
-" Plug 'luochen1990/rainbow' " failed rainbow parenthesis plugin
-" Plug 'yggdroot/indentline' " indent lines 
-" Plug 'severin-lemaignan/vim-minimap' " sublime text-like minimap. ,mm to open and ,mc to close
+Plug 'EinfachToll/DidYouMean'
+" Plug 'godlygeek/tabular'
+" Plug 'metakirby5/codi.vim'
+" Plug 'junegunn/goyo.vim'
+" Plug 'yggdroot/indentline'
+" Plug 'severin-lemaignan/vim-minimap'
+
+
+" ----- Broken plugins; these do NOT work -----
+" Plug 'junegunn/rainbow_parentheses.vim'
+" Plug 'luochen1990/rainbow'
+" Plug 'kien/rainbow_parentheses.vim'
 
 
 call plug#end()
@@ -164,14 +173,6 @@ let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
 "       \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" rustfmt
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" must be 16
-let g:onedark_termcolors=16
-let g:onedark_terminal_italics=1
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " gitgutter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -203,9 +204,9 @@ let g:gitgutter_enabled=1
 " Syntactically highlight matching parenthesis/brackets/etc.
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" avoid loading plugin, it slows down Vim
+" avoid loading match parenthesis syntax plugin?
+" (may slow down vim if enabled)
 let loaded_matchparen = 0
-let g:mta_use_matchparen_group=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -298,23 +299,41 @@ let g:ale_linters={
 \   'rust': ['cargo', 'rls', 'rustc'],
 \}
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fzf (fuzzy finder (better than ctrl-p plugin))
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:fzf_layout = { 'down': '~33%' }
+
+" mappings for fzf plugin
+nnoremap <C-i> :Files<CR>
+nnoremap <C-[> :Files<CR>
+nnoremap <C-p> :GFiles<CR>
+nnoremap <C-b> :Buffers<CR>
+nnoremap <C-h> :History<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ctrl-p (fuzzy search)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:ctrlp_regexp=0
-let g:ctrlp_custom_ignore='node_modules'
-let g:ctrlp_show_hidden=1
-let g:ctrlp_max_depth=2
-let g:ctrlp_match_window='max:8'
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlPMixed'
+" let g:ctrlp_regexp=0
+" let g:ctrlp_custom_ignore='node_modules'
+" let g:ctrlp_show_hidden=1
+" let g:ctrlp_max_depth=2
+" let g:ctrlp_match_window='max:8'
+" let g:ctrlp_map = '<c-p>'
+" let g:ctrlp_cmd = 'CtrlPMixed'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplete (language-agnostic autocompleter)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" tab to select
+" inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
+
+" the neocomplete auto complete should NOT hijack my enter key when
+" autocomplete menu is displayed
+inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 " Enabled?
 let g:neocomplete#enable_at_startup=1
@@ -352,6 +371,7 @@ endif
 " nerdtree (file explorer)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let NERDTreeShowFiles=1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '◇'
 let NERDTreeMinimalUI=1
@@ -474,22 +494,3 @@ let g:SignaturePurgeConfirmation=1
 "  Highlight signs of marks dynamically based upon state indicated by vim-gitgutter.
 let g:SignatureMarkTextHLDynamic=1
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" minimap mappings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" *g:SignatureMap['Leader']*
-" String, Default: 'm'
-
-" Set the key used to toggle marks and markers.
-" For eg. If this key is set to `<leader>m`,
-" `<leader>ma`       will toggle the mark 'a' on the current line
-" `<leader>m,`       will place the next available mark
-" `<leader>m.`       will place the next available mark if there are no
-" marks already on the line; otherwise, will remove
-" first mark from line
-" `<leader>m<Space>` will delete all marks
-" `<leader>m1`       will toggle the marker '!'
-" `<leader>m!`       will remove all the '!' markers
-" `<leader>m<BS>`    will remove all markers

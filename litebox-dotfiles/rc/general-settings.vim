@@ -35,12 +35,11 @@ set modeline                   " i have no idea what this does tbh
 set modelines=5                " see above
 set formatoptions+=j           " delete comment character when Joining comments
 set formatoptions-=t           " stop vim  from auto-wrapping lines at a ruler
-set undofile                   " save undo's after file closes
 set undodir=~/.vim/undo        " where to save undo histories
-set undolevels=1000            " how many undos
-set undoreload=10000           " num of lines to save for undo
+set undofile                   " save undo's after file closes
+" set undolevels=1000            " how many undos
+" set undoreload=10000           " num of lines to save for undo
 set shiftround                 " number of spaces for autoindenting
-set wildignore=*.swp,*.bak,*.pyc,*.class,*/.git/*
 set ff=unix
 set fileformat=unix
 set ignorecase
@@ -58,12 +57,13 @@ set backupcopy=yes
 set nowrap                     " stop vim from auto-wrapping lines when there's not enough horizontal space http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
 
 " https://robots.thoughtbot.com/vim-you-complete-me
-set complete=.,b,u,]
-set complete-=i
+" set complete=.,b,u,]
+" set complete-=i
 set wildmenu                  " visual autocomplete
-set wildmode=longest,list:longest 
+set wildmode=list:longest 
+set wildignore=*.swp,*.bak,*.pyc,*.class,*/.git/*,.hg,.svn,*~,*.png,*.gif,*.jpg,*.settings,Thumbs.db,*.min.js
 set previewheight=8
-set completeopt=noinsert,noselect,menuone,preview
+set completeopt=noinsert,noselect,menuone
 set path+=**
 
 " Visual.
@@ -75,11 +75,11 @@ set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal
 set noshowmatch " do not jump to matching brackets/parens when typing
 set noshowmode  " do not show me which mode im in
-" set showcmd     " show me what command im typing as i type it (see `timeoutlen`)
 set timeout
 set timeoutlen=250
-set ttimeoutlen=50
-" set lazyredraw  " redraw only when you need to
+set lazyredraw
+" set showcmd     " show me what command im typing as i type it (see `timeoutlen`)
+" set ttimeoutlen=50
 " set relativenumber
 
 

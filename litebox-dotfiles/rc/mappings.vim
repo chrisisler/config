@@ -1,19 +1,14 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
 " Mappings
+" Note: Mappings using `<Leader>` must be declared after the leader mapping is
+" set (i.e., in the "Leader Mappings" section).
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-nnoremap <Leader>X<CR> :let g:ale_open_list=
 
 " vim full screen
 " https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
 noremap <silent> <C-m> <C-d>
-
-nnoremap <silent> <Leader><Space> ``zzjk
-
-" repeat previous command
-nnoremap <silent> <Leader><Leader><CR> @:
 
 " pressing enter key when auto-complete (pop-up) menu is open will press enter
 inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
@@ -77,9 +72,6 @@ noremap k gk
 noremap ; :
 noremap : ;
 
-" Cool new thing: http://mlsamuelson.com/content/vim-search-word-under-cursor
-nnoremap <Leader>[ [I
-
 " ^ is uncomfortable to press.
 noremap 8 ^
 " $ is uncomfortable to press.
@@ -116,13 +108,24 @@ let g:mapleader=","
 let maplocalleader=","
 let g:maplocalleader=","
 
+nnoremap <Leader>u :let g:ale_open_list=
+
+nnoremap <silent> <Leader><Space> ``zzjk
+
+" repeat previous command
+nnoremap <silent> <Leader><Leader><CR> @:
+
+" Cool new thing: http://mlsamuelson.com/content/vim-search-word-under-cursor
+nnoremap <Leader>[ [I
+
 " Open ~/.vim/snippets/javascript.snippets quickly.
-nnoremap <Leader>sn<CR> :e ~/.vim/snippets/javascript.snippets<CR>
+" nnoremap <Leader>sn<CR> :e ~/.vim/snippets/javascript.snippets<CR>
 
 " Open ~/.vimrc quickly.
 nnoremap <Leader>v<CR> :e ~/.vimrc<CR>jk
+
 " open onedarkjs syntax file quickly
-nnoremap <Leader>vs<CR> :e ~/.vim/rc/syntax-highlighting/onedark-javascript.vim<CR>jk
+nnoremap <Leader>vs<CR> :e ~/.vim/rc/syntax-highlighting/one-javascript.vim<CR>
 
 " Horizontal and vertical resizing like my tmux key-bindings.
 nnoremap <silent> <Leader>H :vertical res -6<CR>
@@ -164,11 +167,6 @@ nnoremap <Leader>@ gd2wv$"xy"_ddn"_deh"xp
 
 nnoremap <Leader>import "xyiwggOimport<Space><ESC>"xp$a<Space>from<Space>''<Left><ESC>a
 
-" Fat array function snippet after typing function arguments.
-" Uses clean indents on newline (after function header/prototype).
-" Uses recursive mapping of ; to :
-imap <Leader>{ <Space>=><Space>{<CR>;<ESC>jA;<ESC>kS
-
 " Copy the currently hovered word and console.log it on the next line.
 nnoremap <Leader>cl "xyiwoconsole.log(<ESC>"xpA)<ESC>
 " Same as above, except: console.log('variable is:', variable);
@@ -179,11 +177,11 @@ nnoremap <Leader>en "xyiwoecho -n "${}"hh"xp
 
 " Make <C-x><C-l> (whole-line auto-completion) easier to type.
 inoremap <Leader>l <C-x><C-l>
-inoremap <Leader>; <C-x><C-l>
+" inoremap <Leader>; <C-x><C-l>
 
-" Fast mapping to call tabular.
-nnoremap <Leader>t :Tab /
-vnoremap <Leader>t :Tab /
+" Fast mapping to call Tabular plugin (error if not installed).
+" nnoremap <Leader>t :Tab /
+" vnoremap <Leader>t :Tab /
 
 " Remove trailing whitespace
 nnoremap <Leader>nows<CR> :%s/\s\+$//e<CR>:nohlsearch<CR>:w<CR>
@@ -200,8 +198,8 @@ nnoremap <Leader>b :b#<CR>
 " nnoremap <Leader>; A;<ESC>
 
 " Disable/Enable lots of things
-nnoremap <Leader>1 :NeoCompleteEnable<CR>:set number<CR>:set laststatus=2<CR>:ALEDisable<CR>
-nnoremap <Leader>2 :NeoCompleteDisable<CR>:set nonumber<CR>:set laststatus=0<CR>:ALEDisable<CR>
+" nnoremap <Leader>1 :NeoCompleteEnable<CR>:set number<CR>:set laststatus=2<CR>:ALEDisable<CR>
+" nnoremap <Leader>2 :NeoCompleteDisable<CR>:set nonumber<CR>:set laststatus=0<CR>:ALEDisable<CR>
 
 nnoremap <Leader>z :NeoCompleteToggle<CR>
 nnoremap <Leader>g :GitGutterToggle<CR>
@@ -214,7 +212,6 @@ nnoremap <Leader>a :ALELint<CR>kj
 
 nnoremap <silent> <Leader>I :set nocursorline<CR>:set nonumber<CR>:set showtabline=0<CR>
 nnoremap <silent> <Leader>i :set number<CR>:set showtabline=2<CR>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -238,8 +235,8 @@ nnoremap <silent> <Leader>i :set number<CR>:set showtabline=2<CR>
 
 " inoremap <silent> <Leader>plusorminus ±
 " inoremap <silent> <Leader>therefore ∴
-inoremap <silent> <Leader>foreach ∀
-inoremap <silent> <Leader>forany ∀
+" inoremap <silent> <Leader>foreach ∀
+" inoremap <silent> <Leader>forany ∀
 " " commented out to make whole-line auto-complete faster (see approx Line168)
 " inoremap <silent> <Leader>lambda λ
 " inoremap <silent> <Leader>lamda λ
@@ -247,20 +244,20 @@ inoremap <silent> <Leader>forany ∀
 " inoremap <silent> <Leader>sum Σ
 " inoremap <silent> <Leader>mult ∏
 " inoremap <silent> <Leader>multiply ∏
-inoremap <silent> <Leader>times ∙
+" inoremap <silent> <Leader>times ∙
 " inoremap <silent> <Leader>integral ∫
 " inoremap <silent> <Leader>derivative ∂
 " inoremap <silent> <Leader>not ¬
-inoremap <silent> <Leader>in ∈
+" inoremap <silent> <Leader>in ∈
 " inoremap <silent> <Leader>cartesianproduct ×
 " inoremap <silent> <Leader>by ×
 " inoremap <silent> <Leader>beta ∝
-inoremap <silent> <Leader>thereexists ∃
+" inoremap <silent> <Leader>thereexists ∃
 " inoremap <silent> <Leader>perp ⊥
-inoremap <silent> <Leader>suchthat ﬆ
-inoremap <silent> <Leader>st ﬆ
+" inoremap <silent> <Leader>suchthat ﬆ
+" inoremap <silent> <Leader>st ﬆ
 " inoremap <silent> <Leader>xor ⊕
-inoremap <silent> <Leader>degree °
+" inoremap <silent> <Leader>degree °
 " inoremap <silent> <Leader>composition °
 " inoremap <silent> <Leader>compo °
 " inoremap <silent> <Leader>divide ÷
@@ -280,7 +277,7 @@ inoremap <silent> <Leader>degree °
 " inoremap <silent> <Leader>ifftaut ⇔
 " inoremap <silent> <Leader>iff ↔
 " inoremap <silent> <Leader>thentaut ⇒
-inoremap <silent> <Leader>then →
+" inoremap <silent> <Leader>then →
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -312,7 +309,7 @@ nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
 
 " Python
 " nnoremap <Leader>py<CR> :w<CR>:AsyncRun python %<CR>:copen<CR>:wincmd k<CR>
-nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
+" nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
 
 " Java
 " nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
@@ -332,4 +329,4 @@ nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
 " nnoremap <Leader>c2<CR> :w<CR>:AsyncRun ./a.exe<CR>:wincmd k<CR>
 
 " C++
-nnoremap <Leader>cpp :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<CR>
+" nnoremap <Leader>cpp :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<CR>

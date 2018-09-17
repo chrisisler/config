@@ -107,4 +107,3 @@ gitAddedChanges()
 
     printf "${addedChanges}"
 }
-

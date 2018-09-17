@@ -72,7 +72,7 @@ alias dc="cd"
 alias pipes="pipes.sh -p 10 -R -t 6"
 alias chrome="open /Volumes/Macintosh\ HD/Applications/Google\ Chrome.app $@"
 alias nochrome="killall -9 Google\ Chrome"
-alias path="echo $PATH | tr ':' '\n'"
+# alias path="echo $PATH | tr ':' '\n'"
 alias tkill="tmux kill-pane -t $@"
 alias rsync="/usr/local/Cellar/rsync/3.1.3_1/bin/rsync"
 alias u="cd ${academicDir} && ${lslaVar}"
@@ -127,7 +127,7 @@ alias rangerrc="vim ~/.config/ranger/rc.conf"
 alias tmuxtemp="clear ; tmux attach -t Temp $@ || tmux new -s Temp $@"
 alias tt="tmuxtemp"
 alias t="clear ; tmux attach -t ¤ || tmux new -s ¤"
-alias tmus="clear ; tmux attach -t ♫ || tmux new -s ♫"
+alias tmus="clear ; tmux attach -t ♫ || tmux new -s ♫ -c ~"
 alias weather="curl wttr.in/boston"
 # alias spamrandom="cat /dev/urandom | tr -cd '01'"
 alias vi="vim"
@@ -233,20 +233,25 @@ normal="\[\e[1;36m\]"
 # white="\[\e[37m\]"
 colEnd="\[\e[0m\]"
 
-source "${codeDir}/Status/git.sh"
-export PS1="\n\
-${blue}${_currentDirectory}${colEnd}\
-${yellow}\$(gitBracketL)${colEnd}\
-${cyan}\$(gitBranch)${colEnd}\
-${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-${blue}\$(gitAddedChanges)${colEnd}\
-${red}\$(gitUnaddedChanges)${colEnd}\
-${yellow}\$(gitBracketR)${colEnd}\
- ${orange}»»»${colEnd} "
+# Import git functions for bash prompt.
+# source "${codeDir}/Status/git.sh"
+# export PS1="\n\
+# ${blue}${_currentDirectory}${colEnd}\
+# ${yellow}\$(gitBracketL)${colEnd}\
+# ${cyan}\$(gitBranch)${colEnd}\
+# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
+# ${blue}\$(gitAddedChanges)${colEnd}\
+# ${red}\$(gitUnaddedChanges)${colEnd}\
+# ${yellow}\$(gitBracketR)${colEnd}\
+#  ${orange}»»»${colEnd} "
 
 # ${orange}¤${colEnd} "
 
-# export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
+# if [[ -z "$TMUX" ]]; then
+# else
+# fi
+
+export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
 
 # export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "
 
