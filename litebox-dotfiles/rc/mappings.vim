@@ -85,9 +85,6 @@ nnoremap # #n
 nnoremap E 5kzz
 nnoremap D 5jzz
 
-" Copy and paste from (actual) clipboard.
-nnoremap <C-c> "*y
-nnoremap <C-v> "*p
 nnoremap <C-a> ggVG
 
 " (Experimental) Auto-indent pasted code (see `:h =`).

@@ -58,16 +58,16 @@ main() {
 
   local branchName="$(branchName)"
 
-  # If not in a git repo then dip.
-  if [[ "$branchName" == "" ]]; then
-    exit 0
-  fi
+  # If current working directory is not a git repository then exit now.
+  [[ "$branchName" == "" ]] && exit 0
 
   local porcelainStatus="$(git status --porcelain)"
   local changes="$(addedChanges "$porcelainStatus")$(unaddedChanges "$porcelainStatus")"
 
+  # http://vim.wikia.com/wiki/Entering_special_characters
+  # local gitInfo=" $branchName$changes"
   local gitInfo="[$branchName$changes]"
-
+  
   printf "$gitInfo"
 }
 

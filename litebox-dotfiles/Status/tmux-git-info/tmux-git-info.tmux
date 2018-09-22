@@ -6,11 +6,6 @@
 # Error if any subcommand fails.
 set -e
 
-thisAbsoluteDirectoryPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# Import script and immediately invoke it. Must be tilde-expanded absolute path.
-source "$thisAbsoluteDirectoryPath/tmux-git-info.sh"
-
 unexpandTilde() {
   printf "${1/"$HOME"/~}"
 }
@@ -22,8 +17,8 @@ main() {
   # `-v` => show only the value (exclude the name of the setting from output)
   local statusLeft="$(tmux show-option -gqv status-left)"
 
-  # Overwrite variable name.
-  local thisAbsoluteDirectoryPath="$(unexpandTilde "$thisAbsoluteDirectoryPath")"
+  # Result is a string like: ~/Code/Status/tmux-git-info
+  local thisAbsoluteDirectoryPath="$(unexpandTilde "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)")"
 
   # Tell tmux to execute the shell script and capture its output.
   local gitInfo="#("$thisAbsoluteDirectoryPath"/tmux-git-info.sh)"

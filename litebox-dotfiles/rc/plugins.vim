@@ -307,7 +307,6 @@ let g:fzf_layout = { 'down': '~33%' }
 
 " mappings for fzf plugin
 nnoremap <C-i> :Files<CR>
-nnoremap <C-[> :Files<CR>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-h> :History<CR>

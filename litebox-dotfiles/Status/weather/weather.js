@@ -15,7 +15,14 @@ async function main () {
       // const tempRange = `${max}-${min}°F`
       // const temperature = Math.round(data.main.temp) + '°F'
 
-      const description = data.weather.map(_ => _.main).join(' ')
+      let description = data.weather.map(_ => _.main)
+      if (description.includes('Mist') && description.includes('Rain')) {
+        description = description.filter(s => s !== 'Mist')
+      }
+      if (description.includes('Thunderstorm') && description.includes('Rain')) {
+        description = description.filter(s => s !== 'Rain' && s !== 'Fog').join(' ')
+      }
+
       const temperature = Math.round(data.main.temp) + 'F'
 
       let result = temperature
@@ -34,7 +41,7 @@ async function main () {
 
       const windSpeedMPH = Math.round(data.wind.speed)
       if (windSpeedMPH > 20) {
-        // result += ` ${windSpeedMPH}mph`
+        result += ` ${windSpeedMPH}mph`
       }
 
       process.stdout.write(result)

@@ -22,7 +22,8 @@ if [ "${isChargingSymbol}" == "↓" ];then
 fi
 
 # echo -n "${isChargingSymbol}${percent}${timeRemaining}"
-if [ "${percent}" -eq 100 ]; then
+# `ge` => greater than or equal to
+if [ "${percent}" -ge 99 ]; then
   continue
   # printf "▣"
   # printf "✓"

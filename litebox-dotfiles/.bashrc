@@ -41,6 +41,9 @@ export EDITOR="vim"
 # add yarn(pkg) to PATH
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
+# Font icons
+source ~/.fonts/devicons-regular.sh
+
 # lslaVar="ls -oFGHhA" # Can remove H
 # lslaVar="ls -AGF"
 lslaVar="ls -AGFlh"
@@ -51,6 +54,7 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias status="cd ${codeDir}/Status && ${lslaVar}"
 alias desk="cd ~/Desktop"
 alias back="cd -"
 alias song="~/Code/Status/cmus.sh || ~/Code/Status/pianobar.sh"
@@ -251,9 +255,8 @@ colEnd="\[\e[0m\]"
 # else
 # fi
 
-export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}»»»${colEnd} "
+export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}»»${colEnd} "
 
-# export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}》》≫≫»${colEnd} "
 
 # Do not display CWD if in TMUX (where `#{pane_current_path}` is in tmuxline status).
 # customBashPrompt() {
