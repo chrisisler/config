@@ -111,6 +111,8 @@ call matchadd("Red", '\<\h\w*\>\.\<\h\w*\>\.\zs\<\h\w*\>')
 call matchadd("Red", '\(\<\h\w*\>\.\)\+\zs\<\h\w*\>')
 " call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
 call matchadd("Red", '\<\h\w*\>\.\zs\<\h\w*\>')
+" For properties of objects retrieved by index.
+call matchadd("Red", ']\.\zs\<\h\w*\>')
 
 
 highlight GoldenItalic ctermfg=3 cterm=italic

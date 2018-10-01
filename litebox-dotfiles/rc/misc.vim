@@ -81,8 +81,18 @@ autocmd BufEnter * if (winnr("$") ==1 && exists("b:NERDTree") && b:NERDTree.isTa
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-au FileType qf setlocal wrap number colorcolumn= statusline=Info
-au FileType nerdtree setlocal statusline=Explorer
+au FileType qf setlocal wrap number nocursorline colorcolumn= statusline=Info
+au FileType nerdtree setlocal nocursorline statusline=Explorer
+
+" https://github.com/junegunn/fzf/blob/master/README-VIM.md#hide-statusline
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+
+
+" TODO
+" au BufRead,BufNewFile,BufEnter,FileType terminfo setlocal statusline=Terminal
+" au BufRead,BufNewFile,BufEnter,FileType cterm setlocal statusline=Terminal
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

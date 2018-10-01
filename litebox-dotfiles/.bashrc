@@ -11,8 +11,10 @@ shopt -s histappend
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
 
-bind 'TAB:menu-complete'
-bind 'set show-all-if-ambiguous on'
+# # https://unix.stackexchange.com/questions/55203
+bind "TAB:menu-complete"
+bind "set show-all-if-ambiguous on"
+# bind "set menu-complete-display-prefix on"
 
 # export LS_COLORS="di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90"
 
@@ -38,15 +40,16 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 
 export EDITOR="vim"
 
-# add yarn(pkg) to PATH
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+source ~/.bash_profile
 
-# Font icons
-source ~/.fonts/devicons-regular.sh
+# add yarn(pkg) to PATH
+# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# export PATH="$HOME/.cargo/bin:$PATH"
 
 # lslaVar="ls -oFGHhA" # Can remove H
 # lslaVar="ls -AGF"
-lslaVar="ls -AGFlh"
+# lslaVar="ls -AGFlh"
+lslaVar="exa --all --long --header --git --group-directories-first"
 
 mainDir="${HOME}/Main"
 academicDir="${mainDir}/Uni"
@@ -67,15 +70,17 @@ alias sandbox="cd ${codeDir}/JS/Bin/Sandbox/ && vim ./sandbox.js"
 alias cs='cd'
 alias datefmt='date "+%Y-%m-%d_%H:%M"'
 alias brew-latest="brew update && brew upgrade --cleanup --fetch-HEAD && brew cleanup -s"
-alias ll="ls -AGFh | column" # exclude details then compact
+# alias ll="ls -AGFh | column" # exclude details then compact
+alias ll="exa --all --header --git --group-directories-first"
 alias w="cd ${codeDir}/Git/wavematch && ${lslaVar}"
 alias ssherxi='ssh -i ~/.ssh/id_rsa_alex erxi@jess.coffee'
 # alias doing="printf ${@} > ~/Code/Status/what-am-i-doing.txt"
 alias mute='osascript -e "set Volume 0"'
 alias dc="cd"
 alias pipes="pipes.sh -p 10 -R -t 6"
-alias chrome="open /Volumes/Macintosh\ HD/Applications/Google\ Chrome.app $@"
-alias nochrome="killall -9 Google\ Chrome"
+alias browser="open /Applications/Brave-Browser-Dev.app"
+# alias chrome="open /Volumes/Macintosh\ HD/Applications/Google\ Chrome.app $@"
+# alias nochrome="killall -9 Google\ Chrome"
 # alias path="echo $PATH | tr ':' '\n'"
 alias tkill="tmux kill-pane -t $@"
 alias rsync="/usr/local/Cellar/rsync/3.1.3_1/bin/rsync"
@@ -113,11 +118,13 @@ alias remove="brew uninstall"
 alias r="ranger"
 alias c="clear"
 alias l="${lslaVar}"
+alias tree="${lslaVar} --tree"
+alias lt="${lslaVar} --tree"
+# alias tree="tree -I *node_modules*"
 alias cl="clear && ${lslaVar}"
 alias lc="clear && ${lslaVar}"
-alias tree="tree -I *node_modules*"
 alias ct="clear && tree"
-# alias md="mkdir -pv"
+alias md="mkdir -pv"
 alias rmi="rm -irv"
 alias rmf="rm -frv"
 alias rm="rm -rv"
@@ -128,10 +135,10 @@ alias vrc="vim ~/.vimrc"
 alias tmuxconf="vim ~/.tmux.conf"
 alias tmuxline="vim ~/.tmux/tmuxline.conf"
 alias rangerrc="vim ~/.config/ranger/rc.conf"
-alias tmuxtemp="clear ; tmux attach -t Temp $@ || tmux new -s Temp $@"
+alias tmuxtemp="clear ; tmux attach -t Temp $@ &>/dev/null || tmux new -s Temp $@"
 alias tt="tmuxtemp"
-alias t="clear ; tmux attach -t ¤ || tmux new -s ¤"
-alias tmus="clear ; tmux attach -t ♫ || tmux new -s ♫ -c ~"
+alias t="clear ; tmux attach -t All $@ &>/dev/null || tmux new -s All $@"
+alias tmus="clear ; tmux attach -t Music &>/dev/null || tmux new -s Music -c ~"
 alias weather="curl wttr.in/boston"
 # alias spamrandom="cat /dev/urandom | tr -cd '01'"
 alias vi="vim"
@@ -169,7 +176,7 @@ gh() {
   open $gitUrl
 }
 
-md() {
+mcd() {
   mkdir -pv "$1" && cd "$1"
 }
 
@@ -204,50 +211,7 @@ ip() {
 
 # START PROMPT STRING ----------------------------------------------------------
 
-# Prompt variables.
-# _numDirs='$(ls -1AF | grep / | wc -l)'
-# _numFiles='$(ls -1AF | grep -v / | wc -l)'
 _currentDirectory="\w"
-# _christopher="\u"
-# _computerName="\h"
-# _time="\@"
-# _date="\d"
-# _promptChar="\$"
-
-# Colors based on solarized dark colorscheme (ethanschoonover.com/solarized).
-# base01="\[\e[0;30m\]"
-
-red="\[\e[0;31m\]"
-yellow="\[\e[0;32m\]"
-orange="\[\e[0;33m\]"
-# blue="\[\e[0;30;44m\]" # bg
-blue="\[\e[0;34m\]"
-
-magenta="\[\e[0;35m\]"
-cyan="\[\e[0;36m\]"
-
-base00="\[\e[1;30m\]"
-orangeRed="\[\e[1;31m\]"
-darkGrey="\[\e[1;32m\]"
-mediumGrey="\[\e[1;33m\]"
-lightGrey="\[\e[1;34m\]"
-violet="\[\e[1;35m\]"
-normal="\[\e[1;36m\]"
-
-# white="\[\e[37m\]"
-colEnd="\[\e[0m\]"
-
-# Import git functions for bash prompt.
-# source "${codeDir}/Status/git.sh"
-# export PS1="\n\
-# ${blue}${_currentDirectory}${colEnd}\
-# ${yellow}\$(gitBracketL)${colEnd}\
-# ${cyan}\$(gitBranch)${colEnd}\
-# ${lightGrey}\$(gitBranchAheadOrBehindOfMaster)${colEnd}\
-# ${blue}\$(gitAddedChanges)${colEnd}\
-# ${red}\$(gitUnaddedChanges)${colEnd}\
-# ${yellow}\$(gitBracketR)${colEnd}\
-#  ${orange}»»»${colEnd} "
 
 # ${orange}¤${colEnd} "
 
@@ -255,20 +219,17 @@ colEnd="\[\e[0m\]"
 # else
 # fi
 
-export PS1="\n${blue}${_currentDirectory}${colEnd} ${orange}»»${colEnd} "
+# red="\[\e[0;31m\]"
+# yellow="\[\e[0;32m\]"
+# magenta="\[\e[0;35m\]"
+cyan="\[\e[0;36m\]"
+# blueBg="\[\e[0;30;44m\]" # bg
+# blue="\[\e[0;34m\]"
+colEnd="\[\e[0m\]"
+# export PS1="\n${blueBg} ${_currentDirectory} ${blue}${colEnd} "
+export PS1="\n${cyan}${_currentDirectory}${colEnd} "
 
+# https://github.com/ryanoasis/powerline-extra-symbols
 
-# Do not display CWD if in TMUX (where `#{pane_current_path}` is in tmuxline status).
-# customBashPrompt() {
-#     isUsingTmux="$(printf "$TERM" | grep -iq "tmux" && printf "Y" || printf "N")"
-#     indicator="${orange}»»»${colEnd}"
-
-#     if [[ "${isUsingTmux}" == "Y" ]]; then
-#         PS1="\n ${indicator} "
-#     else
-#         PS1="\n ${blue}${_currentDirectory}${colEnd} ${indicator} "
-#     fi
-# }
-# PROMPT_COMMAND=customBashPrompt
-
-# export PS1="\n ${blue}»»»${colEnd} "
+# save
+# export PS1="\n${red}${_currentDirectory}${colEnd} ${orange}»»${colEnd} "

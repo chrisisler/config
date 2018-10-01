@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 
 " ----- Language -----
+Plug 'artur-shaik/vim-javacomplete2'
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
 Plug 'mxw/vim-jsx'
@@ -21,7 +22,6 @@ Plug 'racer-rust/vim-racer'
 " Plug 'flowtype/vim-flow'
 " Plug 'fsharp/vim-fsharp'
 " Plug 'ElmCast/elm-vim'
-" Plug 'artur-shaik/vim-javacomplete2'
 " Plug 'quramy/tsuquyomi'
 " Plug 'leafgarland/typescript-vim'
 " Plug 'mattn/emmet-vim'
@@ -59,7 +59,6 @@ Plug 'skywind3000/asyncrun.vim'
 " Plug 'easymotion/vim-easymotion'
 " Plug 'jmcantrell/vim-diffchanges'
 " Plug 'prettier/vim-prettier'
-" Plug 'easymotion/vim-easymotion'
 
 
 " ----- Completion -----
@@ -71,6 +70,7 @@ Plug 'ternjs/tern_for_vim'
 
 
 " ----- Random -----
+Plug 'airblade/vim-rooter'
 Plug 'EinfachToll/DidYouMean'
 " Plug 'godlygeek/tabular'
 " Plug 'metakirby5/codi.vim'
@@ -96,6 +96,12 @@ call plug#end()
 
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" java-complete2
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Goyo (distraction free)
@@ -177,6 +183,8 @@ let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:gitgutter_enabled=1
+" you think you can just walk into my house and add configuration? oh heck no.
+let g:gitgutter_map_keys=0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " haskell-vim
@@ -300,16 +308,19 @@ let g:ale_linters={
 \}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" fzf (fuzzy finder (better than ctrl-p plugin))
+" fzf (fuzzy finder (better than ctrl-p plugin)) - best plugin ever!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:fzf_layout = { 'down': '~33%' }
+let g:fzf_layout = { 'down': '~25%' }
 
+" https://github.com/junegunn/fzf.vim
 " mappings for fzf plugin
 nnoremap <C-i> :Files<CR>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-h> :History<CR>
+nnoremap <C-l> :Lines<CR>
+nnoremap <C-c> :Commands<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ctrl-p (fuzzy search)
@@ -332,6 +343,7 @@ nnoremap <C-h> :History<CR>
 
 " the neocomplete auto complete should NOT hijack my enter key when
 " autocomplete menu is displayed
+inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
 inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 " Enabled?
@@ -342,10 +354,10 @@ let g:neocomplete#enable_refresh_always=0
 
 " if getting completion options is longer than this time than skip it.
 let g:neocomplete#skip_auto_completion_time="0.5"
-let g:neocomplete#auto_complete_delay=150
+let g:neocomplete#auto_complete_delay=100
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=16
-let g:neocomplete#sources#syntax#min_keyword_length=2
+let g:neocomplete#sources#syntax#min_keyword_length=1
 let g:neocomplete#enable_auto_close_preview=0
 " Define dictionary.
 " let g:neocomplete#sources#dictionary#dictionaries = {
@@ -372,7 +384,8 @@ endif
 
 let NERDTreeShowFiles=1
 let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '◇'
+" let g:NERDTreeDirArrowCollapsible = '◇'
+let g:NERDTreeDirArrowCollapsible = ''
 let NERDTreeMinimalUI=1
 let NERDTreeMouseMode=2
 let NERDTreeShowLineNumbers=0
@@ -487,9 +500,32 @@ let g:multi_cursor_exit_from_visual_mode=0
 " vim-signature settings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" Remove mappings which use `]` so that `:bn` mapping is faster.
+let g:SignatureMap = {
+      \ 'Leader'             :  "m",
+      \ 'PlaceNextMark'      :  "m",
+      \ 'ToggleMarkAtLine'   :  "",
+      \ 'PurgeMarksAtLine'   :  "",
+      \ 'DeleteMark'         :  "",
+      \ 'PurgeMarks'         :  "",
+      \ 'PurgeMarkers'       :  "",
+      \ 'GotoNextLineAlpha'  :  "",
+      \ 'GotoPrevLineAlpha'  :  "",
+      \ 'GotoNextSpotAlpha'  :  "",
+      \ 'GotoPrevSpotAlpha'  :  "",
+      \ 'GotoNextLineByPos'  :  "",
+      \ 'GotoPrevLineByPos'  :  "",
+      \ 'GotoNextSpotByPos'  :  "",
+      \ 'GotoPrevSpotByPos'  :  "",
+      \ 'GotoNextMarker'     :  "",
+      \ 'GotoPrevMarker'     :  "",
+      \ 'GotoNextMarkerAny'  :  "",
+      \ 'GotoPrevMarkerAny'  :  "",
+      \ 'ListBufferMarks'    :  "",
+      \ 'ListBufferMarkers'  :  ""
+      \ }
 let g:SignatureDeleteConfirmation=1
 let g:SignaturePurgeConfirmation=1
 
 "  Highlight signs of marks dynamically based upon state indicated by vim-gitgutter.
 let g:SignatureMarkTextHLDynamic=1
-

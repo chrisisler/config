@@ -56,6 +56,9 @@ if &background == "dark"
   if &filetype == "rust"
     call HighlightRustOneDark()
   endif
+  if &filetype == "java"
+    call HighlightJava()
+  endif
 
   if &filetype == "javascript" || &filetype == "typescript" || &filetype == "javascript.jsx"
     call HighlightJavaScriptOne()
@@ -82,6 +85,11 @@ endif
 autocmd BufEnter,BufRead,BufNewFile,FileType *.rs call HighlightRustOneDark()
 function! HighlightRustOneDark()
   source ~/.vim/rc/syntax-highlighting/onedark-rust.vim
+endfunction
+
+autocmd BufEnter,BufRead,BufNewFile,FileType *.java call HighlightJava()
+function! HighlightJava()
+  source ~/.vim/rc/syntax-highlighting/java.vim
 endfunction
 
 autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaScriptOne()

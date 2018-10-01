@@ -12,4 +12,8 @@ highlight rustModPath ctermfg=fg cterm=NONE
 highlight rustPubScope ctermfg=magenta cterm=bold
 
 
+highlight For ctermfg=9
+call matchadd("For", '\<for\>\ze\s\+\<\h\w*\>')
+
+
 " highlight rustFoldBraces ctermfg=magenta cterm=bold

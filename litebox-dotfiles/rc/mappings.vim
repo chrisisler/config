@@ -6,17 +6,32 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" keep selected text selected when fixing indentation
+vnoremap < <gv
+vnoremap > >gv
+
+" exit faster
+  inoremap <C-j> <ESC>
+  vnoremap <C-j> <ESC>
+" inoremap <Leader>j <ESC>
+" vnoremap <Leader>j <ESC>
+
 " vim full screen
 " https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
-noremap <silent> <C-m> <C-d>
+" noremap <silent> <C-m> <C-d>
+
+nnoremap `` ``zz
+
+" Go to next/previous buffer.
+nnoremap <silent> ] :silent bn<CR>
+nnoremap <silent> } :silent bp<CR>
+
+" Next buffer.
+nnoremap <silent> [ <C-w>w
 
 " pressing enter key when auto-complete (pop-up) menu is open will press enter
-inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
+" inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
 
-" misspelling
-inoremap cosnt const
-
-" niche
 vnoremap 3 5
 
 " <C-r> is hard to type, man.
@@ -24,21 +39,15 @@ nnoremap U <C-r>
 
 " Open nerdtree.
 nnoremap <silent> \ :NERDTreeToggle<CR>
+
 " Open nerdtree and keep cursor in editor.
 nnoremap <silent> \| :NERDTreeToggle<CR><C-w>l
-
-" Next window.
-nnoremap <silent> [ <C-w>w
 
 " Not highlighting things happens pretty often.
 nnoremap <silent> <space> :nohlsearch<CR>
 
 " keep cursor where it is when joining lines.
 " nnoremap J mzJ`z
-
-" Go to next/previous buffer.
-nnoremap <silent> ] :bn<CR>
-nnoremap <silent> } :bp<CR>
 
 " X is uncomfortable to type, ' is better.
 nnoremap ' X
@@ -47,6 +56,7 @@ nnoremap ' X
 nnoremap <F1> <nop>
 nnoremap Q <nop>
 nnoremap K <nop>
+nnoremap <C-u> <nop>
 
 " Tmux uses C-k
 noremap <C-k> <C-u>
@@ -62,11 +72,6 @@ nnoremap N Nzz
 " Wrapped lines go up/down to next row, not next line.
 noremap j gj
 noremap k gk
-
-" Avoid pressing escape. Avoid pressing <C-[>
-" inoremap ;; <ESC>l
-" vnoremap ;; <ESC>l
-" snoremap ;; <ESC>l
 
 " Best mapping ever.
 noremap ; :
@@ -85,7 +90,7 @@ nnoremap # #n
 nnoremap E 5kzz
 nnoremap D 5jzz
 
-nnoremap <C-a> ggVG
+" nnoremap <C-a> ggVG
 
 " (Experimental) Auto-indent pasted code (see `:h =`).
 nnoremap P P==
@@ -107,21 +112,16 @@ let g:maplocalleader=","
 
 nnoremap <Leader>u :let g:ale_open_list=
 
-nnoremap <silent> <Leader><Space> ``zzjk
-
 " repeat previous command
-nnoremap <silent> <Leader><Leader><CR> @:
+" nnoremap <silent> <Leader><Leader><CR> @:
 
 " Cool new thing: http://mlsamuelson.com/content/vim-search-word-under-cursor
 nnoremap <Leader>[ [I
 
-" Open ~/.vim/snippets/javascript.snippets quickly.
-" nnoremap <Leader>sn<CR> :e ~/.vim/snippets/javascript.snippets<CR>
-
 " Open ~/.vimrc quickly.
-nnoremap <Leader>v<CR> :e ~/.vimrc<CR>jk
+nnoremap <Leader>v<CR> :e ~/.vimrc<CR>
 
-" open onedarkjs syntax file quickly
+" open onejs syntax file quickly
 nnoremap <Leader>vs<CR> :e ~/.vim/rc/syntax-highlighting/one-javascript.vim<CR>
 
 " Horizontal and vertical resizing like my tmux key-bindings.
@@ -153,24 +153,13 @@ nnoremap <silent> <Leader>w :lclose<CR>:cclose<CR>:pclose<CR>
 nnoremap <silent> <Leader>5<CR> :w<CR>:so %<CR>
 nnoremap <silent> <Leader>4<CR> :so ~/.vimrc<CR>
 
-" Replace variable name with variable definition and delete variable.
-" Example (with cursor hovering N in 'names' on line 2):
-"       1. var names = people.map(person => person.name)
-"       2. doStuff(names, otherVar)
-"      Turns into:
-"          doStuff(people.map(person => person.name), otherVar);
-nnoremap <Leader>@ gd2wv$"xy"_ddn"_deh"xp
-" nnoremap <Leader>@ gd2wvf;h"xy"_ddn"_deh"xp
-
-nnoremap <Leader>import "xyiwggOimport<Space><ESC>"xp$a<Space>from<Space>''<Left><ESC>a
-
 " Copy the currently hovered word and console.log it on the next line.
 nnoremap <Leader>cl "xyiwoconsole.log(<ESC>"xpA)<ESC>
 " Same as above, except: console.log('variable is:', variable);
 nnoremap <Leader>clv "xyiwoconsole.log('<ESC>"xpa<Space>is:',<Space><ESC>"xpa)<ESC>
 
 " echo a cursor-hovered variable for shell scripts.
-nnoremap <Leader>en "xyiwoecho -n "${}"hh"xp
+nnoremap <Leader>en "xyiwoecho "${}"hh"xp
 
 " Make <C-x><C-l> (whole-line auto-completion) easier to type.
 inoremap <Leader>l <C-x><C-l>
@@ -181,34 +170,32 @@ inoremap <Leader>l <C-x><C-l>
 " vnoremap <Leader>t :Tab /
 
 " Remove trailing whitespace
-nnoremap <Leader>nows<CR> :%s/\s\+$//e<CR>:nohlsearch<CR>:w<CR>
+" nnoremap <Leader>nows<CR> :%s/\s\+$//e<CR>:nohlsearch<CR>:w<CR>
 
 " Change tab width/length.
 nnoremap <Leader>t2 :set shiftwidth=2<CR>:set tabstop=2<CR>
 nnoremap <Leader>t4 :set shiftwidth=4<CR>:set tabstop=4<CR>
 
 " switch to last open buffer
-nnoremap <Leader>b :b#<CR>
+nnoremap <Leader><Leader> :b#<CR>
 
 " Add a semi-colon to the end of the cursor's current line.
 " disabled/commented out for whole-line auto-completion
 " nnoremap <Leader>; A;<ESC>
 
-" Disable/Enable lots of things
-" nnoremap <Leader>1 :NeoCompleteEnable<CR>:set number<CR>:set laststatus=2<CR>:ALEDisable<CR>
-" nnoremap <Leader>2 :NeoCompleteDisable<CR>:set nonumber<CR>:set laststatus=0<CR>:ALEDisable<CR>
-
 nnoremap <Leader>z :NeoCompleteToggle<CR>
 nnoremap <Leader>g :GitGutterToggle<CR>
-nnoremap <Leader>x :ALEToggle<CR>kj
+nnoremap <Leader>x :ALEToggle<CR>
 
 " Linter mappings
 nnoremap <Leader>p :ALEPreviousWrap<CR>kj
 nnoremap <Leader>n :ALENextWrap<CR>kj
 nnoremap <Leader>a :ALELint<CR>kj
 
-nnoremap <silent> <Leader>I :set nocursorline<CR>:set nonumber<CR>:set showtabline=0<CR>
-nnoremap <silent> <Leader>i :set number<CR>:set showtabline=2<CR>
+nnoremap <silent> <Leader>I :set nocursorline<CR>
+nnoremap <silent> <Leader>i :set cursorline<CR>
+" nnoremap <silent> <Leader>I :set nocursorline<CR>:set nonumber<CR>
+" nnoremap <silent> <Leader>i :set cursorline<CR>:set number<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "

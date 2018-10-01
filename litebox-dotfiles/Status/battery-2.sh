@@ -28,5 +28,5 @@ if [ "${percent}" -ge 99 ]; then
   # printf "▣"
   # printf "✓"
 else
-  printf "${isChargingSymbol}${percent}"
+  printf " ${isChargingSymbol}${percent}"
 fi
