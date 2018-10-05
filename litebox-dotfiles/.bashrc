@@ -27,10 +27,10 @@ export HOMEBREW_UPGRADE_CLEANUP=1
 # Don't put duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 
-export TS_APP_CONSUMER_KEY="EZ6lPwbHp7Tuxr0YhRZjkNoUu"
-export TS_APP_CONSUMER_SECRET="sAdt3fGzG3sYRzVgxWrYkmBpa61MCxHL9oJpCnAVqWKfxyZbQb"
-export TS_APP_ACCESS_TOKEN="974700047517528065-4kRKjSnoQWwGmwwp6xjryu4ftNmVBIW"
-export TS_APP_ACCESS_TOKEN_SECRET="laGLMr6ZylfXhHoljmlzLMU6bHweVENaerhOiADmP73mP"
+# export TS_APP_CONSUMER_KEY="EZ6lPwbHp7Tuxr0YhRZjkNoUu"
+# export TS_APP_CONSUMER_SECRET="sAdt3fGzG3sYRzVgxWrYkmBpa61MCxHL9oJpCnAVqWKfxyZbQb"
+# export TS_APP_ACCESS_TOKEN="974700047517528065-4kRKjSnoQWwGmwwp6xjryu4ftNmVBIW"
+# export TS_APP_ACCESS_TOKEN_SECRET="laGLMr6ZylfXhHoljmlzLMU6bHweVENaerhOiADmP73mP"
 export openWeatherMapAPIKey="619a668af9d55d2377325ce0e407d9bc"
 
 # Ignore some controlling instructions
@@ -42,7 +42,7 @@ export EDITOR="vim"
 
 source ~/.bash_profile
 
-export PATH="/usr/local/opt/sqlite/bin:$PATH"
+# export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
 # add yarn(pkg) to PATH
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
@@ -164,6 +164,21 @@ alias thesaurus="node ${codeDir}/JS/Bin/thesaurus.js $@"
 alias clock='watch -t -n1 "date +%T|figlet"'
 
 # END ALIASES -----------------------------------------------------------------
+
+new_git_repo() {
+  if [[ "$#" -ne 2 ]]; then
+    echo "Usage: new_git_repo <username> <repository name>"
+    return 1
+  fi
+
+  local username="$1"
+  local repoName="$2"
+  # local description=
+  # https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br/10325316#10325316
+  # curl -u "$username" https://api.github.com/user/repos -d "{ "name": "$repoName" }"
+  # git remote add origin git@github.com:$username/$repoName.git
+  # git push origin master
+}
 
 alias github=gh
 gh() {
