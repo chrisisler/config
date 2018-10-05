@@ -21,10 +21,9 @@ cp ~/.config/cmus/autosave "${dotfilesDir}"
 
 cp -r ~/Code/JS/Dictionary "${dotfilesDir}"
 
-cp ~/*.terminfo "${dotfilesDir}"
+# cp ~/*.terminfo "${dotfilesDir}"
 
-# todo: check if this file exists first
-rm ./.DS_Store
+# rm ./.DS_Store
 
 git add "$(basename "${0}")"
 git add .
