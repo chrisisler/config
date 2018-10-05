@@ -37,7 +37,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'kshenoy/vim-signature'
 Plug 'airblade/vim-gitgutter'
 " Plug 'altercation/vim-colors-solarized'
-" Plug 'bling/vim-airline'
 " Plug 'docunext/closetag.vim'
 
 
@@ -55,7 +54,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
 Plug 'skywind3000/asyncrun.vim'
-" Plug 'ctrlpvim/ctrlp.vim'
 " Plug 'easymotion/vim-easymotion'
 " Plug 'jmcantrell/vim-diffchanges'
 " Plug 'prettier/vim-prettier'
@@ -70,7 +68,7 @@ Plug 'ternjs/tern_for_vim'
 
 
 " ----- Random -----
-Plug 'airblade/vim-rooter'
+" Plug 'airblade/vim-rooter'
 Plug 'EinfachToll/DidYouMean'
 " Plug 'godlygeek/tabular'
 " Plug 'metakirby5/codi.vim'
@@ -96,6 +94,16 @@ call plug#end()
 
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" auto-pairs
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" automaticaly add closure thingies in rust
+" autocmd FileType rust let g:AutoPairs['|']='|'
+" if &filetype == "rust"
+"     let g:AutoPairs['|']='|'
+" endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " java-complete2
@@ -125,15 +133,22 @@ autocmd FileType java setlocal omnifunc=javacomplete#Complete
 " let g:table_mode_corner_corner='+'
 " let g:table_mode_header_fillchar='='
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" rooter
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:rooter_silent_chdir = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " rustfmt
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " rust code auto-formatting via `rustfmt` (format upon saving file)
+let g:rustfmt_command = "rustfmt"
+" let g:rustfmt_command = "rustfmt +nightly"
 let g:rustfmt_autosave = 1
-let g:rustfmt_command = "rustfmt +nightly"
-
+let g:rustfmt_emit_files = 1
+let g:rustfmt_fail_silently = 0
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-racer (for rust auto-completion)
@@ -141,20 +156,6 @@ let g:rustfmt_command = "rustfmt +nightly"
 
 let g:racer_experimental_completer = 1
 let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-jsdoc settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" let g:jsdoc_allow_input_prompt=1
-" let g:jsdoc_input_description=1
-" let g:jsdoc_return=1
-" let g:jsdoc_return_type=1
-" let g:jsdoc_return_description=1
-" let g:jsdoc_underscore_private=1
-" let g:jsdoc_enable_es6=1
-" let g:jsdoc_param_description_separator=' - '
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -247,14 +248,16 @@ let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 " ale
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+let g:ale_lint_on_text_changed='always'
 " let g:ale_lint_on_text_changed='never'
 " let g:ale_lint_on_save = 0
 " let g:ale_lint_on_enter = 0
 
 let g:ale_enabled=1
 let g:ale_sign_error='✕'
+let g:ale_sign_warning='--'
 let g:ale_set_signs=1
-let g:ale_lint_delay=1000
+let g:ale_lint_delay=800
 let g:ale_fix_on_save=1
 let g:ale_open_list=0
 let g:ale_set_highlights=0
@@ -262,32 +265,11 @@ let g:ale_sign_column_always=1
 
 let g:ale_fixers = {}
 let g:ale_fixers['javascript'] = ['prettier']
+let g:ale_fixers['rust'] = ['rustfmt']
 
-" function! LintStatus() abort
-"   " let g:ale_statusline_format=['[%d Errors]', '[%d Warnings]', '']
-"   let l:counts = ale#statusline#Count(bufnr(''))
+" let g:ale_rust_cargo_use_check = 1
+" let g:ale_rust_cargo_check_all_targets = 1
 
-"   " @see `:vert h airline` -> search for `ale#statusline#Count`
-"   let l:all_errors = l:counts.error + l:counts.style_error
-"   let l:all_warnings = l:counts.warning + l:counts.style_warning
-"   " let l:all_infos = l:counts.info
-
-"         " \   '%dW %dE',
-"   return l:counts.total == 0 ? '' : printf(
-"         \   '[%d X] [%d !]',
-"         \   all_errors,
-"         \   all_warnings
-"         \)
-" endfunction
-" let g:airline_section_error='%{LintStatus()}'
-
-" let s:ale_running = 0
-" let l:stl .= '%{s:ale_running ? "[Linting...]" : ""}'
-" augroup ALEProgress
-"   autocmd!
-"   autocmd User ALELintPre  let s:ale_running = 1 | redrawstatus
-"   autocmd User ALELintPost let s:ale_running = 0 | redrawstatus
-" augroup end
 
 " suppress warnings when browsing files ignored by `.eslintignore` file
 let g:ale_javascript_eslint_suppress_eslintignore=1
@@ -301,11 +283,11 @@ let g:ale_javascript_eslint_suppress_eslintignore=1
 " let g:ale_echo_msg_warning_str=''
 " let g:ale_echo_msg_error_str=''
 let g:ale_echo_msg_format = '[%linter%] %s'
-let g:ale_linters={
-\   'javascript': ['eslint', 'flow'],
-\   'cpp': ['g++'],
-\   'rust': ['cargo', 'rls', 'rustc'],
-\}
+" let g:ale_linters={
+" \   'javascript': ['eslint', 'flow'],
+" \   'cpp': ['g++'],
+" \   'rust': ['cargo', 'rls', 'rustc'],
+" \}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf (fuzzy finder (better than ctrl-p plugin)) - best plugin ever!
@@ -319,20 +301,10 @@ nnoremap <C-i> :Files<CR>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-h> :History<CR>
-nnoremap <C-l> :Lines<CR>
+nnoremap <C-j> :Lines<CR>
 nnoremap <C-c> :Commands<CR>
+nnoremap <C-m> :Maps<CR>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ctrl-p (fuzzy search)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" let g:ctrlp_regexp=0
-" let g:ctrlp_custom_ignore='node_modules'
-" let g:ctrlp_show_hidden=1
-" let g:ctrlp_max_depth=2
-" let g:ctrlp_match_window='max:8'
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_cmd = 'CtrlPMixed'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neocomplete (language-agnostic autocompleter)
@@ -343,7 +315,7 @@ nnoremap <C-c> :Commands<CR>
 
 " the neocomplete auto complete should NOT hijack my enter key when
 " autocomplete menu is displayed
-inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
+" inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
 inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 " Enabled?
@@ -384,8 +356,8 @@ endif
 
 let NERDTreeShowFiles=1
 let g:NERDTreeDirArrowExpandable = '▸'
-" let g:NERDTreeDirArrowCollapsible = '◇'
-let g:NERDTreeDirArrowCollapsible = ''
+let g:NERDTreeDirArrowCollapsible = '◇'
+" let g:NERDTreeDirArrowCollapsible = ''
 let NERDTreeMinimalUI=1
 let NERDTreeMouseMode=2
 let NERDTreeShowLineNumbers=0
@@ -404,77 +376,6 @@ let NERDTreeAutoDeleteBuffer=1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:jsx_ext_required=0
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" airline (enhanced statusline plugin)
-" @see `:vert h airline`
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-let g:airline_theme='onedark'
-let g:airline#extensions#quickfix#quickfix_text = ''
-let g:airline#extensions#quickfix#location_text = ''
-" use N Buffer number.
-" use %F for full path to file in buffer
-let g:airline_powerline_fonts=0
-let g:airline_detect_iminsert=1
-let g:airline_skip_empty_sections=1
-let g:airline#extensions#ale#enabled=1
-" `tabline` from airline displays all buffers at top of vim
-let g:airline#extensions#tabline#enabled=1
-
-" Display buffer number
-let g:airline#extensions#tabline#buffer_nr_show=1
-" show buffer number before name
-let g:airline#extensions#tabline#buffer_nr_format = ' [%s] '
-
-" minimal ui
-let airline#extensions#tabline#middle_click_preserves_windows=1
-
-" how should buffer name be displayed? (see `help filename-modifiers`)
-let g:airline#extensions#tabline#fnamemod = ':t'
-
-let g:airline#extensions#tabline#buffers_label=''
-let g:airline#extensions#tabline#tabs_label=''
-
-let g:airline#extensions#wordcount#format=''
-let g:airline#extensions#tabline#tab_min_count = 0
-let g:airline_extensions = ['tabline']
-" let g:airline_extensions = ['tabline', 'ale']
-" let g:airline#extensions#fugitiveline#enabled = 1
-" let g:airline#extensions#branch#enabled = 1
-" let g:airline#extensions#hunks#enabled = 1
-
-let g:airline_section_a=''
-let g:airline_section_b=''
-
-" let g:airline_section_c=''
-" let g:airline_section_x=''
-let g:airline_section_c='%F'
-let g:airline_section_x='Ln %l Col %c'
-
-let g:airline_section_y=''
-let g:airline_section_z=''
-
-let g:airline_section_error=''
-let g:airline_section_warning=''
-
-" desired format:
-" actual format:
-" let airline#extensions#ale#error_symbol = 'E:'
-" let airline#extensions#ale#warning_symbol = 'W:'
-" let airline#extensions#ale#open_lnum_symbol = '(Ln '
-" let airline#extensions#ale#close_lnum_symbol = ')'
-
-" let g:airline_left_sep = ''
-" let g:airline_right_sep = ''
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-
-let g:airline#extensions#tabline#left_sep = ''
-let g:airline#extensions#tabline#left_alt_sep = ''
-let g:airline#extensions#tabline#right_sep = ''
-let g:airline#extensions#tabline#right_alt_sep = ''
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

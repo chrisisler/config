@@ -1,19 +1,12 @@
 call clearmatches()
 
 
-" todo: `mut`
-
-
 highlight rustArrowCharacter ctermfg=magenta
+call matchadd("rustArrowCharacter", '\s\+\zs=>\ze\s\+')
 highlight rustOperator ctermfg=cyan
-highlight rustModPath ctermfg=fg cterm=NONE
-
-
+highlight rustModPath ctermfg=blue cterm=NONE
+highlight rustModPathSep ctermfg=cyan
 highlight rustPubScope ctermfg=magenta cterm=bold
+highlight rustLifetime ctermfg=13
 
-
-highlight For ctermfg=9
-call matchadd("For", '\<for\>\ze\s\+\<\h\w*\>')
-
-
-" highlight rustFoldBraces ctermfg=magenta cterm=bold
+highlight Conditional ctermfg=9

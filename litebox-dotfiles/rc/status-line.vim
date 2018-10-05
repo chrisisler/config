@@ -23,16 +23,28 @@ function! BufferInfo() abort
   " return l:buffers == 1 ? '' : printf('[#%s of %s]', bufferNumber, buffers)
   " return l:buffers == 1 ? '' : printf('#%s of %s |', bufferNumber, buffers)
   " return l:buffers == 1 ? '' : printf('%s | #%s', buffers, bufferNumber)
-  return l:buffers == 1 ? '' : printf('#%s |', bufferNumber)
+  " return l:buffers == 1 ? '' : printf('#%s |', bufferNumber)
+  return l:buffers == 1 ? '' : printf('%s |', bufferNumber)
 endfunction
 
 function! Modified() abort
-  let l:modified = getbufvar(bufnr('%'), '&modified') ? ' | +' : ''
+  let l:modified = getbufvar(bufnr('%'), '&modified') ? ' ∴' : ''
+  " let l:modified = getbufvar(bufnr('%'), '&modified') ? ' ⊕' : ''
+  " let l:modified = getbufvar(bufnr('%'), '&modified') ? ' ●' : ''
+  " let l:modified = getbufvar(bufnr('%'), '&modified') ? ' | +' : ''
   return printf('%s', modified)
 endfunction
 
+" http://vim.wikia.com/wiki/Showing_syntax_highlight_group_in_statusline
+" function! SyntaxItem()
+"   let l:syntaxItem = synIDattr(synID(line("."),col("."),1),"name")
+"   return printf('%s | ', syntaxItem)
+" endfunction
+
 " clear it
 set statusline=
+
+" set statusline+=%{SyntaxItem()}
 
 set statusline+=%{BufferInfo()}
 
@@ -42,6 +54,7 @@ set statusline+=\ %t
 
 " space character and possibly a `+` if file is modified
 set statusline+=%{Modified()}
+" set statusline+=\ %M
 
 " statusline stuff after this will be on right side of statusline
 set statusline+=%=

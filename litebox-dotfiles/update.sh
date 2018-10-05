@@ -7,6 +7,7 @@ cp -r ~/Code/Bin/itermcolors "${dotfilesDir}"
 cp ~/.tmux.conf "${dotfilesDir}"
 cp ~/.tmux/tmuxline.conf "${dotfilesDir}"
 
+cp ~/.bash_profile "${dotfilesDir}"
 cp ~/.bashrc "${dotfilesDir}"
 cp ~/.inputrc "${dotfilesDir}"
 cp ~/.vimrc "${dotfilesDir}"

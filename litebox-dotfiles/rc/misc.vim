@@ -96,3 +96,10 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Follow Rust code style rules
+au BufNewFile,BufEnter,FileType rust set shiftwidth=4 tabstop=4
+" au Filetype rust source ~/.vim/scripts/spacetab.vim
+" au Filetype rust set colorcolumn=100
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

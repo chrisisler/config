@@ -42,6 +42,8 @@ export EDITOR="vim"
 
 source ~/.bash_profile
 
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
 # add yarn(pkg) to PATH
 # export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # export PATH="$HOME/.cargo/bin:$PATH"
@@ -125,6 +127,7 @@ alias cl="clear && ${lslaVar}"
 alias lc="clear && ${lslaVar}"
 alias ct="clear && tree"
 alias md="mkdir -pv"
+alias rm="safe-rm"
 alias rmi="rm -irv"
 alias rmf="rm -frv"
 alias rm="rm -rv"
