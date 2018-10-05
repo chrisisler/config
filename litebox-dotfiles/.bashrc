@@ -166,18 +166,63 @@ alias clock='watch -t -n1 "date +%T|figlet"'
 # END ALIASES -----------------------------------------------------------------
 
 new_git_repo() {
-  if [[ "$#" -ne 2 ]]; then
-    echo "Usage: new_git_repo <username> <repository name>"
-    return 1
+  # https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br/10325316#10325316
+  # `read -p` ???
+
+  # Import token and verify it exists.
+  source ~/.bash_private_stuff
+  if [ -z "$GithubPersonalAccessToken" ]; then
+    printf "\$GithubPersonalAccessToken does not exist!" 1>&2
+    return -1
   fi
 
-  local username="$1"
-  local repoName="$2"
-  # local description=
-  # https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br/10325316#10325316
-  # curl -u "$username" https://api.github.com/user/repos -d "{ "name": "$repoName" }"
-  # git remote add origin git@github.com:$username/$repoName.git
-  # git push origin master
+  printf "Creating new Github repository...\n"
+
+  printf "Github username: "
+  read username
+  [ "$username" = "" ] && new_git_repo
+
+  printf "Repository name: "
+  read repoName
+  [ "$repoName" = "" ] && new_git_repo
+
+  printf "Repository description: "
+  read repoDescription
+  [ "$repoDescription" = "" ] && new_git_repo
+
+  printf "License [MIT]: "
+  read repoLicense
+  [ "$repoDescription" = "" ] && repoDescription="MIT"
+
+  printf "Language template for .gitignore [NODE/Rust/etc.]: "
+  read repoGitignoreTemplate
+  [ "$repoGitignoreTemplate" = "" ] && repoGitignoreTemplate="Node"
+
+  printf "Private repository? [FALSE/true]: "
+  read repoIsPrivate
+  [[ "$repoIsPrivate" != "true" ]] && repoIsPrivate="false"
+  printf -- "- Access is %s.\n" $([ "$repoIsPrivate" = "true" ] && printf "Private" || printf "Public")
+
+  printf "\n"
+
+  # Hit the Github API via cURL to create the repository
+  curl -u "$username:$GithubPersonalAccessToken" https://api.github.com/user/repos -d "{ \"name\": \"$repoName\", \"description\": \"${repoDescription}\", \"private\": ${repoIsPrivate}, \"has_wiki\": false, \"license_template\": \"${repoLicense}\", \"has_downloads\": true }" 1>/dev/null
+
+  git init
+
+  git add .
+  printf "Added all files."
+
+  printf "Commit message [\"first commit\"]: "
+  read commitMessage
+  [ "$commitMessage" = "" ] && commitMessage="first commit"
+  git commit -m "$commitMessage"
+
+  # git remote add origin https://$username@github.com/$username/$repoName.git # HTTPS
+  git remote add origin git@github.com:$username/$repoName.git
+
+  # git push --set-upstream origin master # When is --set-upstream supposed to be used?
+  git push -u origin master
 }
 
 alias github=gh
