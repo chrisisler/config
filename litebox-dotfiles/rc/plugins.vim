@@ -31,7 +31,7 @@ Plug 'racer-rust/vim-racer'
 
 
 " ----- Interface -----
-Plug 'rakr/vim-one'
+" Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'kshenoy/vim-signature'
@@ -68,8 +68,8 @@ Plug 'ternjs/tern_for_vim'
 
 
 " ----- Random -----
-" Plug 'airblade/vim-rooter'
-Plug 'EinfachToll/DidYouMean'
+Plug 'airblade/vim-rooter'
+" Plug 'EinfachToll/DidYouMean'
 " Plug 'godlygeek/tabular'
 " Plug 'metakirby5/codi.vim'
 " Plug 'junegunn/goyo.vim'
@@ -283,11 +283,11 @@ let g:ale_javascript_eslint_suppress_eslintignore=1
 " let g:ale_echo_msg_warning_str=''
 " let g:ale_echo_msg_error_str=''
 let g:ale_echo_msg_format = '[%linter%] %s'
-" let g:ale_linters={
-" \   'javascript': ['eslint', 'flow'],
+let g:ale_linters={
+\   'javascript': ['eslint', 'flow'],
+\}
 " \   'cpp': ['g++'],
 " \   'rust': ['cargo', 'rls', 'rustc'],
-" \}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf (fuzzy finder (better than ctrl-p plugin)) - best plugin ever!
@@ -326,10 +326,10 @@ let g:neocomplete#enable_refresh_always=0
 
 " if getting completion options is longer than this time than skip it.
 let g:neocomplete#skip_auto_completion_time="0.5"
-let g:neocomplete#auto_complete_delay=100
+let g:neocomplete#auto_complete_delay=200
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=16
-let g:neocomplete#sources#syntax#min_keyword_length=1
+let g:neocomplete#sources#syntax#min_keyword_length=2
 let g:neocomplete#enable_auto_close_preview=0
 " Define dictionary.
 " let g:neocomplete#sources#dictionary#dictionaries = {

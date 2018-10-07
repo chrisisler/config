@@ -165,9 +165,8 @@ alias clock='watch -t -n1 "date +%T|figlet"'
 
 # END ALIASES -----------------------------------------------------------------
 
-new_git_repo() {
+repo() {
   # https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br/10325316#10325316
-  # `read -p` ???
 
   # Import token and verify it exists.
   source ~/.bash_private_stuff
@@ -176,53 +175,75 @@ new_git_repo() {
     return -1
   fi
 
-  printf "Creating new Github repository...\n"
+  # Idea: Could create README.md given the repo name and description.
+  # [ ! -f "README.md" ] && printf "No README.md found.\n"
+  # [ ! -f ".gitignore" ] && printf "No .gitignore found.\n"
 
-  printf "Github username: "
-  read username
-  [ "$username" = "" ] && new_git_repo
+  printf "Creating Github repository...\n"
 
-  printf "Repository name: "
+  local defaultUsername="$(git config user.name)"
+  if [ -z "$defaultUsername" ]; then
+    printf "Github username: "
+    read username
+    [ "$username" = "" ] && new_git_repo
+  else
+    printf "Github username [$defaultUsername]: "
+    read username
+    [ -z "$username" ] && username="$defaultUsername"
+  fi
+
+  local currentDirNameLowerCase="$(basename "$PWD" | tr '[:upper:]' '[:lower:]')"
+  printf "Repository name [$currentDirNameLowerCase]: "
   read repoName
-  [ "$repoName" = "" ] && new_git_repo
+  [ "$repoName" = "" ] && repoName="$currentDirNameLowerCase"
 
   printf "Repository description: "
   read repoDescription
-  [ "$repoDescription" = "" ] && new_git_repo
+  [ "$repoDescription" = "" ] && repoDescription=""
 
   printf "License [MIT]: "
   read repoLicense
   [ "$repoDescription" = "" ] && repoDescription="MIT"
 
-  printf "Language template for .gitignore [NODE/Rust/etc.]: "
+  printf "Language template for .gitignore [Node]: "
   read repoGitignoreTemplate
   [ "$repoGitignoreTemplate" = "" ] && repoGitignoreTemplate="Node"
+  if [ "$repoGitignoreTemplate" = "Node" ]; then
+    if [ ! -f ".gitignore" ]; then
+      printf "node_modules\n" > .gitignore
+      # printf -- "- Created .gitignore and added \`node_modules\` entry.\n"
+    else
+      printf "\nnode_modules\n" >> .gitignore
+      # printf -- "- Added \`node_modules\` entry to .gitignore.\n"
+    fi
+  fi
 
-  printf "Private repository? [FALSE/true]: "
+  printf "Private repository? [False/true]: "
   read repoIsPrivate
   [[ "$repoIsPrivate" != "true" ]] && repoIsPrivate="false"
   printf -- "- Access is %s.\n" $([ "$repoIsPrivate" = "true" ] && printf "Private" || printf "Public")
 
-  printf "\n"
-
   # Hit the Github API via cURL to create the repository
-  curl -u "$username:$GithubPersonalAccessToken" https://api.github.com/user/repos -d "{ \"name\": \"$repoName\", \"description\": \"${repoDescription}\", \"private\": ${repoIsPrivate}, \"has_wiki\": false, \"license_template\": \"${repoLicense}\", \"has_downloads\": true }" 1>/dev/null
+  curl --silent --user "$username:$GithubPersonalAccessToken" https://api.github.com/user/repos --data "{ \"name\": \"$repoName\", \"description\": \"${repoDescription}\", \"private\": ${repoIsPrivate}, \"has_wiki\": false, \"license_template\": \"${repoLicense}\", \"has_downloads\": true, \"gitignore_template\": \"${repoGitignoreTemplate}\" }" >/dev/null
 
-  git init
+  git init >/dev/null
+  printf "Initialized new repository.\n"
 
   git add .
-  printf "Added all files."
+  printf "Added files.\n"
 
   printf "Commit message [\"first commit\"]: "
   read commitMessage
   [ "$commitMessage" = "" ] && commitMessage="first commit"
-  git commit -m "$commitMessage"
+  
+  git commit -qm "$commitMessage"
 
   # git remote add origin https://$username@github.com/$username/$repoName.git # HTTPS
   git remote add origin git@github.com:$username/$repoName.git
 
-  # git push --set-upstream origin master # When is --set-upstream supposed to be used?
-  git push -u origin master
+  printf "Pushing...\n"
+  git push -qu origin master
+  printf "Done! https://github.com/$username/$repoName"
 }
 
 alias github=gh

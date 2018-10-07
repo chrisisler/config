@@ -13,8 +13,11 @@ let url
   // + '&q=Minneapolis'
   + '&APPID=' + process.env.openWeatherMapAPIKey
 
-let fetchWeather = timeRestricted({ minutes: 8 }, async () => {
+let minutes = 1
+
+let fetchWeather = timeRestricted({ minutes }, async () => {
   try {
+    minutes = 30
     let response = await fetch(url)
 
     if (response.ok) {
@@ -24,7 +27,7 @@ let fetchWeather = timeRestricted({ minutes: 8 }, async () => {
       // const min = Math.round(data.main.temp_min)
       // const tempRange = `${max}-${min}°F`
       // const temperature = Math.round(data.main.temp) + '°F'
-      let temperature = Math.round(data.main.temp) + 'F'
+      let temperature = Math.round(data.main.temp) + '°F'
 
       let description = data.weather.map(_ => _.main)
       if (description.includes('Mist') && description.includes('Rain')) {
@@ -57,6 +60,7 @@ let fetchWeather = timeRestricted({ minutes: 8 }, async () => {
       return result
     } 
   } catch (error) {
+    minutes = 1
     // console.error('Error: ' + error.message)
     // process.exit(-1)
     return 'Error: ' + error.message

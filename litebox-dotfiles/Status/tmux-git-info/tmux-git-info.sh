@@ -46,8 +46,8 @@ unaddedChanges() {
 }
 
 branchName() {
-  # local branchName="$(git branch | grep "*" | awk '{ print $2 }')"
-  local branchName="$(git name-rev --name-only HEAD)"
+  local branchName="$(git branch | grep "*" | awk '{ print $2 }')"
+  # local branchName="$(git name-rev --name-only HEAD)"
 
   printf "$branchName"
 }

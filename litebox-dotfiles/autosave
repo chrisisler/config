@@ -1,4 +1,4 @@
-set aaa_mode=album
+set aaa_mode=all
 set altformat_current= %F 
 set altformat_playlist= %f%= %d 
 set altformat_title=%f
@@ -64,13 +64,13 @@ set format_treewin=  %l
 set format_treewin_artist=%a
 set icecast_default_charset=ISO-8859-1
 set id3_default_charset=ISO-8859-1
-set lib_sort=albumartist date album discnumber tracknumber title filename play_count
+set lib_sort=-play_count
 set mouse=true
 set output_plugin=ao
 set passwd=
 set pl_sort=
 set play_library=true
-set play_sorted=true
+set play_sorted=false
 set repeat=false
 set repeat_current=false
 set replaygain=disabled
