@@ -13,8 +13,8 @@ let url
   // + '&q=Minneapolis'
   + '&APPID=' + process.env.openWeatherMapAPIKey
 
-let minutes = 1
 
+let minutes = 30
 let fetchWeather = timeRestricted({ minutes }, async () => {
   try {
     minutes = 30
@@ -63,11 +63,15 @@ let fetchWeather = timeRestricted({ minutes }, async () => {
     minutes = 1
     // console.error('Error: ' + error.message)
     // process.exit(-1)
-    return 'Error: ' + error.message
+    return '✕'
+    // return 'Error: ' + error.message
   }
 })
 
 async function main() {
+  // if (execa('../internet') !== '') {
+  //   return
+  // }
   let weather = await fetchWeather()
   console.log(weather)
 }

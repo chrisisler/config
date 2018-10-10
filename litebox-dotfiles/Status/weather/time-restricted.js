@@ -12,7 +12,7 @@ if (Object.keys(cache).length === 0) {
   cacheWrite(new Date(), 'genesis property')
 }
 
-module.exports = function timeRestricted({ minutes = 10 }, fn) {
+module.exports = function timeRestricted({ minutes = 30 }, fn) {
   return async function timeRestrictedAsyncFn() {
     let times = Object.keys(cache)
     // Relies on Node V8 engine keeping JSON keys ordered.

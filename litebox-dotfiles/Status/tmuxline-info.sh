@@ -15,8 +15,9 @@ main() {
   #   sessions=""
   # fi
 
+  printf "$windows"
   # if [[ ! "$windows" == "1W" && ! "$sessions" == "1S" ]]; then
-    printf "$windows $sessions"
+    # printf "$windows $sessions"
   # else
     # printf "$windows$sessions"
   # fi

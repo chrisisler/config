@@ -297,13 +297,13 @@ let g:fzf_layout = { 'down': '~25%' }
 
 " https://github.com/junegunn/fzf.vim
 " mappings for fzf plugin
-nnoremap <C-i> :Files<CR>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-h> :History<CR>
 nnoremap <C-j> :Lines<CR>
 nnoremap <C-c> :Commands<CR>
-nnoremap <C-m> :Maps<CR>
+nnoremap <Leader>i :Files<CR>
+nnoremap <Leader>m :Maps<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

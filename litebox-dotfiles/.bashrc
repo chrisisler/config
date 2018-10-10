@@ -59,6 +59,7 @@ codeDir="${HOME}/Code"
 
 # START ALIASES ----------------------------------------------------------------------
 
+alias irc="weechat"
 alias status="cd ${codeDir}/Status && ${lslaVar}"
 alias desk="cd ~/Desktop"
 alias back="cd -"
@@ -80,8 +81,7 @@ alias ssherxi='ssh -i ~/.ssh/id_rsa_alex erxi@jess.coffee'
 alias mute='osascript -e "set Volume 0"'
 alias dc="cd"
 alias pipes="pipes.sh -p 10 -R -t 6"
-alias browser="open /Applications/Brave-Browser-Dev.app"
-# alias chrome="open /Volumes/Macintosh\ HD/Applications/Google\ Chrome.app $@"
+alias brave="open /Applications/Brave-Browser-Beta.app \"$@\""
 # alias nochrome="killall -9 Google\ Chrome"
 # alias path="echo $PATH | tr ':' '\n'"
 alias tkill="tmux kill-pane -t $@"
@@ -132,6 +132,7 @@ alias rmi="rm -irv"
 alias rmf="rm -frv"
 alias rm="rm -rv"
 alias mv="mv -iv"
+alias weeconf="vim ~/.weechat/weechat.conf"
 alias brc="vim ~/.bashrc"
 alias sbrc="clear && source ~/.bashrc"
 alias vrc="vim ~/.vimrc"
@@ -165,8 +166,8 @@ alias clock='watch -t -n1 "date +%T|figlet"'
 
 # END ALIASES -----------------------------------------------------------------
 
+# https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br/10325316#10325316
 repo() {
-  # https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br/10325316#10325316
 
   # Import token and verify it exists.
   source ~/.bash_private_stuff
@@ -201,22 +202,26 @@ repo() {
   read repoDescription
   [ "$repoDescription" = "" ] && repoDescription=""
 
-  printf "License [MIT]: "
-  read repoLicense
-  [ "$repoDescription" = "" ] && repoDescription="MIT"
+  ## Removed License and Gitignore because they cause problems with initial push.
 
-  printf "Language template for .gitignore [Node]: "
-  read repoGitignoreTemplate
-  [ "$repoGitignoreTemplate" = "" ] && repoGitignoreTemplate="Node"
-  if [ "$repoGitignoreTemplate" = "Node" ]; then
-    if [ ! -f ".gitignore" ]; then
-      printf "node_modules\n" > .gitignore
-      # printf -- "- Created .gitignore and added \`node_modules\` entry.\n"
-    else
-      printf "\nnode_modules\n" >> .gitignore
-      # printf -- "- Added \`node_modules\` entry to .gitignore.\n"
-    fi
-  fi
+  # printf "License [MIT]: "
+  # read repoLicense
+  # [ "$repoLicense" = "" ] && repoLicense="MIT"
+
+  # if [ ! -f ".gitignore" ]; then
+  #   printf "Language template for .gitignore [Node]: "
+  #   read repoGitignoreTemplate
+  #   [ "$repoGitignoreTemplate" = "" ] && repoGitignoreTemplate="Node"
+  #   if [ "$repoGitignoreTemplate" = "Node" ]; then
+  #     if [ ! -f ".gitignore" ]; then
+  #       printf "node_modules\n" > .gitignore
+  #       # printf -- "- Created .gitignore and added \`node_modules\` entry.\n"
+  #     else
+  #       printf "\nnode_modules\n" >> .gitignore
+  #       # printf -- "- Added \`node_modules\` entry to .gitignore.\n"
+  #     fi
+  #   fi
+  # fi
 
   printf "Private repository? [False/true]: "
   read repoIsPrivate
@@ -224,13 +229,14 @@ repo() {
   printf -- "- Access is %s.\n" $([ "$repoIsPrivate" = "true" ] && printf "Private" || printf "Public")
 
   # Hit the Github API via cURL to create the repository
-  curl --silent --user "$username:$GithubPersonalAccessToken" https://api.github.com/user/repos --data "{ \"name\": \"$repoName\", \"description\": \"${repoDescription}\", \"private\": ${repoIsPrivate}, \"has_wiki\": false, \"license_template\": \"${repoLicense}\", \"has_downloads\": true, \"gitignore_template\": \"${repoGitignoreTemplate}\" }" >/dev/null
+  curl --silent --user "$username:$GithubPersonalAccessToken" https://api.github.com/user/repos --data "{ \"name\": \"$repoName\", \"description\": \"${repoDescription}\", \"private\": ${repoIsPrivate}, \"has_wiki\": false, \"has_downloads\": true }" >/dev/null
+  # curl --silent --user "$username:$GithubPersonalAccessToken" https://api.github.com/user/repos --data "{ \"name\": \"$repoName\", \"description\": \"${repoDescription}\", \"private\": ${repoIsPrivate}, \"has_wiki\": false, \"license_template\": \"${repoLicense}\", \"has_downloads\": true, \"gitignore_template\": \"${repoGitignoreTemplate}\" }" >/dev/null
 
   git init >/dev/null
-  printf "Initialized new repository.\n"
+  printf -- "- Initialized new repository.\n"
 
   git add .
-  printf "Added files.\n"
+  printf -- "- Added files.\n"
 
   printf "Commit message [\"first commit\"]: "
   read commitMessage
@@ -241,7 +247,7 @@ repo() {
   # git remote add origin https://$username@github.com/$username/$repoName.git # HTTPS
   git remote add origin git@github.com:$username/$repoName.git
 
-  printf "Pushing...\n"
+  printf -- "- Pushing...\n"
   git push -qu origin master
   printf "Done! https://github.com/$username/$repoName"
 }

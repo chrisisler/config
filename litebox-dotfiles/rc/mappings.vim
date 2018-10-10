@@ -192,8 +192,8 @@ nnoremap <Leader>p :ALEPreviousWrap<CR>kj
 nnoremap <Leader>n :ALENextWrap<CR>kj
 nnoremap <Leader>a :ALELint<CR>kj
 
-nnoremap <silent> <Leader>I :set nocursorline<CR>
-nnoremap <silent> <Leader>i :set cursorline<CR>
+" nnoremap <silent> <Leader>I :set nocursorline<CR>
+" nnoremap <silent> <Leader>i :set cursorline<CR>
 " nnoremap <silent> <Leader>I :set nocursorline<CR>:set nonumber<CR>
 " nnoremap <silent> <Leader>i :set cursorline<CR>:set number<CR>
 
