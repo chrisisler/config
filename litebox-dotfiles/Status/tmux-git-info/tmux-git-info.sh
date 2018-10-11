@@ -64,10 +64,13 @@ main() {
   # Execute all further (sub)commands in the directory of the currently active terminal.
   cd "$(tmux display-message -p "#{pane_current_path}")"
 
+  # If not in a git directory then dip out.
+  [ ! -d .git ] && return 1
+
   local branchName="$(branchName)"
 
   # If current working directory is not a git repository then exit now.
-  [[ "$branchName" == "" ]] && exit 0
+  # [[ "$branchName" == "" ]] && exit 0
 
   # local repoName="$(basename "$(git rev-parse --show-toplevel)")"
   # local isPrivate="$(./git-repo-is-private.sh "$author/$repoName")"

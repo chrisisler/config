@@ -1,0 +1,13 @@
+{
+  "name": "network-wifi",
+  "version": "0.1.0",
+  "description": "get ssidstring from macos",
+  "main": "network-wifi.js",
+  "repository": "https://github.com/chrisisler/config",
+  "author": "Chris Isler",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "execa": "^1.0.0"
+  }
+}

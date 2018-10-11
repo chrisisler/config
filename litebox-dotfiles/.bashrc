@@ -1,3 +1,7 @@
+################################################################################
+# Misc #########################################################################
+################################################################################
+
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
@@ -16,7 +20,9 @@ bind "TAB:menu-complete"
 bind "set show-all-if-ambiguous on"
 # bind "set menu-complete-display-prefix on"
 
-# export LS_COLORS="di=1:fi=0:ln=31:pi=5:so=5:bd=5:cd=5:or=31:mi=0:ex=35:*.rpm=90"
+################################################################################
+# Exports ######################################################################
+################################################################################
 
 # Prepend datetime of command to command itself in ~/.bash_history file
 export HISTTIMEFORMAT="%y-%m-%d %T "
@@ -27,12 +33,6 @@ export HOMEBREW_UPGRADE_CLEANUP=1
 # Don't put duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 
-# export TS_APP_CONSUMER_KEY="EZ6lPwbHp7Tuxr0YhRZjkNoUu"
-# export TS_APP_CONSUMER_SECRET="sAdt3fGzG3sYRzVgxWrYkmBpa61MCxHL9oJpCnAVqWKfxyZbQb"
-# export TS_APP_ACCESS_TOKEN="974700047517528065-4kRKjSnoQWwGmwwp6xjryu4ftNmVBIW"
-# export TS_APP_ACCESS_TOKEN_SECRET="laGLMr6ZylfXhHoljmlzLMU6bHweVENaerhOiADmP73mP"
-export openWeatherMapAPIKey="619a668af9d55d2377325ce0e407d9bc"
-
 # Ignore some controlling instructions
 # HISTIGNORE is a colon-delimited list of patterns which should be excluded.
 # The '&' is a special pattern which suppresses duplicate entries.
@@ -40,66 +40,64 @@ export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 
 export EDITOR="vim"
 
+# Add sqlite to path
+export PATH="/usr/local/opt/sqlite/bin:$PATH"
+
+################################################################################
+# Sources ######################################################################
+################################################################################
+
 source ~/.bash_profile
+source ~/.functions
+source ~/.bash_private_stuff
 
-# export PATH="/usr/local/opt/sqlite/bin:$PATH"
-
-# add yarn(pkg) to PATH
-# export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-# export PATH="$HOME/.cargo/bin:$PATH"
+################################################################################
+# Variables#####################################################################
+################################################################################
 
 # lslaVar="ls -oFGHhA" # Can remove H
 # lslaVar="ls -AGF"
 # lslaVar="ls -AGFlh"
 lslaVar="exa --all --long --header --git --group-directories-first"
-
 mainDir="${HOME}/Main"
 academicDir="${mainDir}/Uni"
 codeDir="${HOME}/Code"
 
-# START ALIASES ----------------------------------------------------------------------
+################################################################################
+# Aliases ######################################################################
+################################################################################
 
+alias ll="exa --all --header --git --group-directories-first"
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias weeconf="vim ~/.weechat/weechat.conf"
 alias irc="weechat"
 alias status="cd ${codeDir}/Status && ${lslaVar}"
 alias desk="cd ~/Desktop"
 alias back="cd -"
-alias song="~/Code/Status/cmus.sh || ~/Code/Status/pianobar.sh"
-alias goodnight="lock"
 alias discreet="$@ ; history -d $(history 1)"
-alias babel="open /Volumes/Macintosh\ HD/Applications/Google\ Chrome.app https://babeljs.io/repl"
-alias js="cd ${codeDir}/JS/Bin && ${lslaVar}"
 alias clean='killall -9 JavaUpdater iTunesHelper'
 alias sandbox="cd ${codeDir}/JS/Bin/Sandbox/ && vim ./sandbox.js"
-alias cs='cd'
 alias datefmt='date "+%Y-%m-%d_%H:%M"'
 alias brew-latest="brew update && brew upgrade --cleanup --fetch-HEAD && brew cleanup -s"
-# alias ll="ls -AGFh | column" # exclude details then compact
-alias ll="exa --all --header --git --group-directories-first"
 alias w="cd ${codeDir}/Git/wavematch && ${lslaVar}"
-alias ssherxi='ssh -i ~/.ssh/id_rsa_alex erxi@jess.coffee'
-# alias doing="printf ${@} > ~/Code/Status/what-am-i-doing.txt"
 alias mute='osascript -e "set Volume 0"'
 alias dc="cd"
 alias pipes="pipes.sh -p 10 -R -t 6"
 alias brave="open /Applications/Brave-Browser-Beta.app \"$@\""
-# alias nochrome="killall -9 Google\ Chrome"
-# alias path="echo $PATH | tr ':' '\n'"
+alias browser="brave"
+alias babel-repl="browser https://babeljs.io/repl"
+alias path="echo $PATH | tr ':' '\n'"
 alias tkill="tmux kill-pane -t $@"
-alias rsync="/usr/local/Cellar/rsync/3.1.3_1/bin/rsync"
-alias u="cd ${academicDir} && ${lslaVar}"
-alias downloads="cd ~/Downloads && ${lslaVar}"
+alias downloads="cd ~/Downloads && ${lslaVar} | head -30"
 alias uni="cd ${academicDir} && ${lslaVar}"
-alias today="date '+%Y-%m-%d'"
-# alias getFiletypes="ls -1F | sed 's/^.*//g' | grep -vE '/$' | tr -d '*' | sort | uniq"
 alias g="cd ${HOME}/Code/Git"
 alias tm="clear ; ps xc | awk '{ print \$1, \$5 }' | sed 1d | sort -fk 2 | column -t | column"
 alias gs="git status"
 alias bad="cd ~/Main/Bin/Bad && ${lslaVar}"
 alias q="exit"
-# careful of the "*" here in this vim alias.
 alias vim="/usr/local/Cellar/vim/*/bin/vim $@"
 alias v="vim"
-# alias rcconf="vim ~/.config/ranger/rc.conf"
+alias rcconf="vim ~/.config/ranger/rc.conf"
 alias safe="md /tmp/safe && cd /tmp/safe && ${lslaVar}"
 alias cd..="cd .."
 alias ..="cd .. && ${lslaVar}"
@@ -107,12 +105,8 @@ alias ...="cd ../.. && ${lslaVar}"
 alias ....="cd ../../.. && ${lslaVar}"
 alias .....="cd ../../../.. && ${lslaVar}"
 alias ......="cd ../../../../.. && ${lslaVar}"
-alias hs="vim ${codeDir}/Haskell/Test.hs"
 alias test="cd ${codeDir}/Test && vim ./Test.js"
-alias cpp="vim ${codeDir}/Cpp/Test.cpp"
 alias main="cd ${mainDir} && ${lslaVar}"
-alias ed="cd ${codeDir}/Git/erxidesk && ${lslaVar}"
-alias e2="cd ${codeDir}/Git/e2 && ${lslaVar}"
 alias conf="cd ${codeDir}/Git/config && ${lslaVar}"
 alias parse="cd ${codeDir}/Status && ${lslaVar}"
 alias get="brew install"
@@ -122,7 +116,6 @@ alias c="clear"
 alias l="${lslaVar}"
 alias tree="${lslaVar} --tree"
 alias lt="${lslaVar} --tree"
-# alias tree="tree -I *node_modules*"
 alias cl="clear && ${lslaVar}"
 alias lc="clear && ${lslaVar}"
 alias ct="clear && tree"
@@ -132,7 +125,6 @@ alias rmi="rm -irv"
 alias rmf="rm -frv"
 alias rm="rm -rv"
 alias mv="mv -iv"
-alias weeconf="vim ~/.weechat/weechat.conf"
 alias brc="vim ~/.bashrc"
 alias sbrc="clear && source ~/.bashrc"
 alias vrc="vim ~/.vimrc"
@@ -144,169 +136,44 @@ alias tt="tmuxtemp"
 alias t="clear ; tmux attach -t All $@ &>/dev/null || tmux new -s All $@"
 alias tmus="clear ; tmux attach -t Music &>/dev/null || tmux new -s Music -c ~"
 alias weather="curl wttr.in/boston"
-# alias spamrandom="cat /dev/urandom | tr -cd '01'"
 alias vi="vim"
 alias pandora="echo \"\" > ~/.config/pianobar/custom-out && clear && pianobar 2>/dev/null | tee ~/.config/pianobar/custom-out"
 alias cellar="cd /usr/local/Cellar"
 alias p="clear; more ./package.json | jq $@"
-alias start="open"
 alias dir="open ."
-alias mainbox="cd /Volumes/Users/Christopher/Desktop/Main"
 alias lock="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
-alias lokc="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
-alias lcok="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
-# alias mpv="\\mpv --loop=inf $@ &>/dev/null"
-# alias mpvfit="\\mpv --loop=inf --autofit-smaller=800x800 --autofit-larger=800x00 $@ &>/dev/null"
+alias lokc="lock"
+alias lcok="lock"
 alias eject="diskutil unmount $@"
 alias chips="cd ${codeDir}/Git/chips && ${lslaVar}"
 alias btc="curl -sSL https://coinbase.com/api/v1/prices/historical | head -n 1 | sed \"s|^.*,|$|\" | sed \"s|\(\.[0-9]$\)|\10|\""
-alias thesaurus="node ${codeDir}/JS/Bin/thesaurus.js $@"
-# alias snakecase="rename 'y/[ _]/-/' $1"
 alias clock='watch -t -n1 "date +%T|figlet"'
+# alias e2="cd ${codeDir}/Git/e2 && ${lslaVar}"
+# alias tree="tree -I *node_modules*"
+# alias mainbox="cd /Volumes/Users/Christopher/Desktop/Main"
+# alias mpv="\\mpv --loop=inf $@ &>/dev/null"
+# alias mpvfit="\\mpv --loop=inf --autofit-smaller=800x800 --autofit-larger=800x00 $@ &>/dev/null"
+# alias thesaurus="node ${codeDir}/JS/Bin/thesaurus.js $@"
+# alias snakecase="rename 'y/[ _]/-/' $1"
+# alias song="~/Code/Status/cmus.sh || ~/Code/Status/pianobar.sh"
+# alias ll="ls -AGFh | column" # exclude details then compact
+# alias ssherxi='ssh -i ~/.ssh/id_rsa_alex erxi@jess.coffee'
+# alias doing="printf ${@} > ~/Code/Status/what-am-i-doing.txt"
+# alias nochrome="killall -9 Google\ Chrome"
+# alias today="date '+%Y-%m-%d'"
+# alias getFiletypes="ls -1F | sed 's/^.*//g' | grep -vE '/$' | tr -d '*' | sort | uniq"
+# alias spamrandom="cat /dev/urandom | tr -cd '01'"
 
-# END ALIASES -----------------------------------------------------------------
 
-# https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br/10325316#10325316
-repo() {
-
-  # Import token and verify it exists.
-  source ~/.bash_private_stuff
-  if [ -z "$GithubPersonalAccessToken" ]; then
-    printf "\$GithubPersonalAccessToken does not exist!" 1>&2
-    return -1
-  fi
-
-  # Idea: Could create README.md given the repo name and description.
-  # [ ! -f "README.md" ] && printf "No README.md found.\n"
-  # [ ! -f ".gitignore" ] && printf "No .gitignore found.\n"
-
-  printf "Creating Github repository...\n"
-
-  local defaultUsername="$(git config user.name)"
-  if [ -z "$defaultUsername" ]; then
-    printf "Github username: "
-    read username
-    [ "$username" = "" ] && new_git_repo
-  else
-    printf "Github username [$defaultUsername]: "
-    read username
-    [ -z "$username" ] && username="$defaultUsername"
-  fi
-
-  local currentDirNameLowerCase="$(basename "$PWD" | tr '[:upper:]' '[:lower:]')"
-  printf "Repository name [$currentDirNameLowerCase]: "
-  read repoName
-  [ "$repoName" = "" ] && repoName="$currentDirNameLowerCase"
-
-  printf "Repository description: "
-  read repoDescription
-  [ "$repoDescription" = "" ] && repoDescription=""
-
-  ## Removed License and Gitignore because they cause problems with initial push.
-
-  # printf "License [MIT]: "
-  # read repoLicense
-  # [ "$repoLicense" = "" ] && repoLicense="MIT"
-
-  # if [ ! -f ".gitignore" ]; then
-  #   printf "Language template for .gitignore [Node]: "
-  #   read repoGitignoreTemplate
-  #   [ "$repoGitignoreTemplate" = "" ] && repoGitignoreTemplate="Node"
-  #   if [ "$repoGitignoreTemplate" = "Node" ]; then
-  #     if [ ! -f ".gitignore" ]; then
-  #       printf "node_modules\n" > .gitignore
-  #       # printf -- "- Created .gitignore and added \`node_modules\` entry.\n"
-  #     else
-  #       printf "\nnode_modules\n" >> .gitignore
-  #       # printf -- "- Added \`node_modules\` entry to .gitignore.\n"
-  #     fi
-  #   fi
-  # fi
-
-  printf "Private repository? [False/true]: "
-  read repoIsPrivate
-  [[ "$repoIsPrivate" != "true" ]] && repoIsPrivate="false"
-  printf -- "- Access is %s.\n" $([ "$repoIsPrivate" = "true" ] && printf "Private" || printf "Public")
-
-  # Hit the Github API via cURL to create the repository
-  curl --silent --user "$username:$GithubPersonalAccessToken" https://api.github.com/user/repos --data "{ \"name\": \"$repoName\", \"description\": \"${repoDescription}\", \"private\": ${repoIsPrivate}, \"has_wiki\": false, \"has_downloads\": true }" >/dev/null
-  # curl --silent --user "$username:$GithubPersonalAccessToken" https://api.github.com/user/repos --data "{ \"name\": \"$repoName\", \"description\": \"${repoDescription}\", \"private\": ${repoIsPrivate}, \"has_wiki\": false, \"license_template\": \"${repoLicense}\", \"has_downloads\": true, \"gitignore_template\": \"${repoGitignoreTemplate}\" }" >/dev/null
-
-  git init >/dev/null
-  printf -- "- Initialized new repository.\n"
-
-  git add .
-  printf -- "- Added files.\n"
-
-  printf "Commit message [\"first commit\"]: "
-  read commitMessage
-  [ "$commitMessage" = "" ] && commitMessage="first commit"
-  
-  git commit -qm "$commitMessage"
-
-  # git remote add origin https://$username@github.com/$username/$repoName.git # HTTPS
-  git remote add origin git@github.com:$username/$repoName.git
-
-  printf -- "- Pushing...\n"
-  git push -qu origin master
-  printf "Done! https://github.com/$username/$repoName"
-}
-
-alias github=gh
-gh() {
-  if [ ! -d .git ]; then
-    echo "ERROR: Not a git directory"
-    return 1
-  fi
-  gitUrl="$(git config --get remote.origin.url | sed -e 's/^git@/https:\/\//g' -e 's/com:/com\//g')"
-  if [[ $gitUrl != https://github* ]]; then
-    echo "ERROR: Remote origin invalid"
-    return 1
-  fi
-  open $gitUrl
-}
-
-mcd() {
-  mkdir -pv "$1" && cd "$1"
-}
-
-displayAdvice() {
-  # https://stackoverflow.com/questions/11393817/bash-read-lines-in-file-into-an-array
-  IFS=$'\r\n' GLOBIGNORE='*' command eval 'arr=($(cat ~/Main/Bin/pragmatic-programmer.txt))'
-  printf "${arr["$[RANDOM % ${#arr[@]}]"]}"
-}
-# displayAdvice
-
-getNewMacAddress() {
-  openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
-}
-
-ip() {
-  externalIP=`curl -s "http://whatismijnip.nl" | cut -d " " -f 5`
-  if [[ "${externalIP}" != "" ]]; then
-    echo -n "${externalIP}"
-  fi
-}
-
-## Colors
-# red() {
-#   printf "%s%s%s" "\033[1;31m" $1 "\033[0m"
-# }
-# green() {
-#   printf "%s%s%s" "\033[1;32m" $1 "\033[0m"
-# }
-# blue() {
-#   printf "%s%s%s" "\033[1;34m" $1 "\033[0m"
-# }
-
-# START PROMPT STRING ----------------------------------------------------------
+################################################################################
+# Prompt #######################################################################
+################################################################################
 
 _currentDirectory="\w"
 
 # ${orange}¤${colEnd} "
 
 # if [[ -z "$TMUX" ]]; then
-# else
 # fi
 
 # red="\[\e[0;31m\]"
@@ -321,5 +188,5 @@ export PS1="\n${cyan}${_currentDirectory}${colEnd} "
 
 # https://github.com/ryanoasis/powerline-extra-symbols
 
-# save
+# save:
 # export PS1="\n${red}${_currentDirectory}${colEnd} ${orange}»»${colEnd} "
