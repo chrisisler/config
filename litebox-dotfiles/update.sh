@@ -12,6 +12,7 @@ cp ~/.bash_profile "${dotfilesDir}"
 cp ~/.bashrc "${dotfilesDir}"
 cp ~/.inputrc "${dotfilesDir}"
 cp ~/.vimrc "${dotfilesDir}"
+cp ~/.cvimrc "${dotfilesDir}"
 
 cp -r ~/.vim/rc "${dotfilesDir}"
 

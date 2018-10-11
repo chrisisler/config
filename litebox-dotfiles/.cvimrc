@@ -1,0 +1,27 @@
+" ----- Settings
+
+let completionengines = ["duckduckgo", "wikipedia"]
+" let defaultengine = "duckduckgo"
+let defaultengine = "qwant"
+let scrollduration = 350
+let scrollstep = 100
+let mapleader = ","
+let configpath = '/Users/litebox/.cvimrc'
+
+let @@youtube_home = 'https://www.youtube.com/feed/subscriptions'
+let blacklists = ["https://www.google.com/"]
+
+" set autoupdategist
+set noautofocus
+set smoothscroll
+set localconfig
+
+" ----- Mappings
+
+map R reloadTabUncached
+map <Leader>rc :source /Users/litebox/.cvimrc
+map ; :
+map : ;
+map ' X
+
+map yt :tabnew @@youtube_home<CR>
