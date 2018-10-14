@@ -3,8 +3,9 @@
 set -e
 
 available() {
-  local avail="$(df -kHl | tail -1 | awk '{ print $4 }')"
-  printf " ${avail}"
+  local avail="$(df -kHl | grep disk1 | awk '{ print $4 }')"
+  printf "${avail} "
+  # printf " ${avail}"
 }
 
 main() {

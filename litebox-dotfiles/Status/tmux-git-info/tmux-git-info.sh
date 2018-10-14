@@ -6,14 +6,6 @@
 # Error if any subcommand fails.
 set -e
 
-isPrivate() {
-  # Requires $1 to be: "autherName/repoName"
-  # Usage: isPrivate facebook/react
-
-  url="$1"
-  wget --quiet --output-document=/dev/null "https://github.com/$url" && printf "" || printf " "
-}
-
 addedChanges() {
   local status="$1"
   local addedChanges=""
@@ -60,6 +52,14 @@ branchName() {
   printf "$branchName"
 }
 
+isPrivate() {
+  # Requires $1 to be: "autherName/repoName"
+  # Usage: isPrivate facebook/react
+
+  url="$1"
+  wget --quiet --output-document=/dev/null "https://github.com/$url" && printf "" || printf " "
+}
+
 main() {
   # Execute all further (sub)commands in the directory of the currently active terminal.
   cd "$(tmux display-message -p "#{pane_current_path}")"
@@ -72,10 +72,12 @@ main() {
   # If current working directory is not a git repository then exit now.
   # [[ "$branchName" == "" ]] && exit 0
 
-  # local repoName="$(basename "$(git rev-parse --show-toplevel)")"
-  # local isPrivate="$(./git-repo-is-private.sh "$author/$repoName")"
-  local authorAndRepoName="$(git config --get remote.origin.url | sed -e "s/^.*://g")" # assumes git@github.com, not https
-  local isPrivate="$(isPrivate "$authorAndRepoName")"
+  # Deprecated:
+  #   local repoName="$(basename "$(git rev-parse --show-toplevel)")"
+  #   local isPrivate="$(./git-repo-is-private.sh "$author/$repoName")"
+
+  # local authorAndRepoName="$(git config --get remote.origin.url | sed -e "s/^.*://g")" # assumes git@github.com, not https
+  # local isPrivate="$(isPrivate "$authorAndRepoName")"
 
   local porcelainStatus="$(git status --porcelain)"
   local changes="$(addedChanges "$porcelainStatus")$(unaddedChanges "$porcelainStatus")"
@@ -83,7 +85,8 @@ main() {
   # http://vim.wikia.com/wiki/Entering_special_characters
   # local gitInfo=" $branchName$changes"
   # local gitInfo="[$branchName$changes]"
-  local gitInfo=" $isPrivate$branchName$changes"
+  # local gitInfo=" $isPrivate$branchName$changes"
+  local gitInfo=" $branchName$changes"
   
   printf "$gitInfo"
 }

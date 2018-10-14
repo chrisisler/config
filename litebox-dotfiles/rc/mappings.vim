@@ -10,12 +10,6 @@
 vnoremap < <gv
 vnoremap > >gv
 
-" exit faster
-  inoremap <C-j> <ESC>
-  vnoremap <C-j> <ESC>
-" inoremap <Leader>j <ESC>
-" vnoremap <Leader>j <ESC>
-
 " vim full screen
 " https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
 " noremap <silent> <C-m> <C-d>
@@ -143,6 +137,9 @@ nnoremap <silent> <Leader>o <C-w>t <C-w>H
 " Delete current buffer.
 nnoremap <silent> <Leader>q<CR> :bdelete %<CR>
 
+" Close current window without closing current buffer.
+nnoremap <silent> <Leader><Leader>q<CR> <C-w>q
+
 " Set ruler.
 nnoremap <silent> <Leader>r :set cc=
 
@@ -192,8 +189,8 @@ nnoremap <Leader>p :ALEPreviousWrap<CR>kj
 nnoremap <Leader>n :ALENextWrap<CR>kj
 nnoremap <Leader>a :ALELint<CR>kj
 
-" nnoremap <silent> <Leader>I :set nocursorline<CR>
-" nnoremap <silent> <Leader>i :set cursorline<CR>
+nnoremap <silent> <Leader>; :set nocursorline<CR>
+nnoremap <silent> <Leader>: :set cursorline<CR>
 " nnoremap <silent> <Leader>I :set nocursorline<CR>:set nonumber<CR>
 " nnoremap <silent> <Leader>i :set cursorline<CR>:set number<CR>
 

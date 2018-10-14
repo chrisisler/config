@@ -302,8 +302,10 @@ nnoremap <C-b> :Buffers<CR>
 nnoremap <C-h> :History<CR>
 nnoremap <C-j> :Lines<CR>
 nnoremap <C-c> :Commands<CR>
-nnoremap <Leader>i :Files<CR>
-nnoremap <Leader>m :Maps<CR>
+nnoremap <C-i> :Files<CR>
+nnoremap <C-m> :Maps<CR>
+" nnoremap <Leader>i :Files<CR>
+" nnoremap <Leader>m :Maps<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -326,7 +328,7 @@ let g:neocomplete#enable_refresh_always=0
 
 " if getting completion options is longer than this time than skip it.
 let g:neocomplete#skip_auto_completion_time="0.5"
-let g:neocomplete#auto_complete_delay=200
+let g:neocomplete#auto_complete_delay=150
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=16
 let g:neocomplete#sources#syntax#min_keyword_length=2

@@ -1,8 +1,7 @@
 " ----- Settings
 
 let completionengines = ["duckduckgo", "wikipedia"]
-" let defaultengine = "duckduckgo"
-let defaultengine = "qwant"
+let defaultengine = "duckduckgo"
 let scrollduration = 350
 let scrollstep = 100
 let mapleader = ","
@@ -24,4 +23,5 @@ map ; :
 map : ;
 map ' X
 
-map yt :tabnew @@youtube_home<CR>
+map <Leader>yt<CR> :tabnew @@youtube_home<CR>
+map <Leader>yts<CR> :tabnew 'https://www.youtube.com/results?=search_query='

@@ -1,7 +1,12 @@
 let { writeFileSync, readFileSync } = require('fs')
 
 let cachePath = `${__dirname}/time-cache.json`
-let cache = JSON.parse(readFileSync(cachePath))
+let cache
+try {
+  cache = JSON.parse(readFileSync(cachePath))
+} catch (error) {
+  console.log('JSON Parse:', error.name)
+}
 
 let cacheWrite = (key, value) => {
   cache[key] = value

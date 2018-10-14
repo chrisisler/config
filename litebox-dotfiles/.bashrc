@@ -24,6 +24,9 @@ bind "set show-all-if-ambiguous on"
 # Exports ######################################################################
 ################################################################################
 
+# CS451 - Compilers `$j`
+export j="$HOME/Main/Uni/Compilers/Project-2"
+
 # Prepend datetime of command to command itself in ~/.bash_history file
 export HISTTIMEFORMAT="%y-%m-%d %T "
 
@@ -43,6 +46,8 @@ export EDITOR="vim"
 # Add sqlite to path
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
+export MAIL="$HOME/Mail/4444cisler4444"
+
 ################################################################################
 # Sources ######################################################################
 ################################################################################
@@ -52,7 +57,7 @@ source ~/.functions
 source ~/.bash_private_stuff
 
 ################################################################################
-# Variables#####################################################################
+# Variables ####################################################################
 ################################################################################
 
 # lslaVar="ls -oFGHhA" # Can remove H
@@ -67,6 +72,7 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias wifi="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport \"$@\""
 alias ll="exa --all --header --git --group-directories-first"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias weeconf="vim ~/.weechat/weechat.conf"
@@ -83,7 +89,7 @@ alias w="cd ${codeDir}/Git/wavematch && ${lslaVar}"
 alias mute='osascript -e "set Volume 0"'
 alias dc="cd"
 alias pipes="pipes.sh -p 10 -R -t 6"
-alias brave="open /Applications/Brave-Browser-Beta.app \"$@\""
+alias brave='open "/Applications/Brave Browser Beta.app" "$@"'
 alias browser="brave"
 alias babel-repl="browser https://babeljs.io/repl"
 alias path="echo $PATH | tr ':' '\n'"
@@ -109,8 +115,6 @@ alias test="cd ${codeDir}/Test && vim ./Test.js"
 alias main="cd ${mainDir} && ${lslaVar}"
 alias conf="cd ${codeDir}/Git/config && ${lslaVar}"
 alias parse="cd ${codeDir}/Status && ${lslaVar}"
-alias get="brew install"
-alias remove="brew uninstall"
 alias r="ranger"
 alias c="clear"
 alias l="${lslaVar}"
@@ -125,6 +129,7 @@ alias rmi="rm -irv"
 alias rmf="rm -frv"
 alias rm="rm -rv"
 alias mv="mv -iv"
+alias cvimrc="vim ~/.cvimrc"
 alias brc="vim ~/.bashrc"
 alias sbrc="clear && source ~/.bashrc"
 alias vrc="vim ~/.vimrc"
