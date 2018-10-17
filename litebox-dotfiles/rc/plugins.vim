@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 
 " ----- Language -----
+Plug 'ekalinin/dockerfile.vim'
 Plug 'artur-shaik/vim-javacomplete2'
 Plug 'othree/yajs.vim'
 Plug 'othree/es.next.syntax.vim'
@@ -110,6 +111,10 @@ let g:javascript_plugin_jsdoc = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+let g:JavaComplete_EnableDefaultMappings = 0 
+let g:JavaComplete_LibsPath = "/Users/litebox/Main/Uni/Compilers/Project-2/j--/lib"
+let g:JavaComplete_SourcesPath = "/Users/litebox/Main/Uni/Compilers/Project-2/j--/src/jminusminus"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Goyo (distraction free)
@@ -285,6 +290,7 @@ let g:ale_javascript_eslint_suppress_eslintignore=1
 let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_linters={
 \   'javascript': ['eslint', 'flow'],
+\   'java': ['javac'],
 \}
 " \   'cpp': ['g++'],
 " \   'rust': ['cargo', 'rls', 'rustc'],
@@ -303,9 +309,7 @@ nnoremap <C-h> :History<CR>
 nnoremap <C-j> :Lines<CR>
 nnoremap <C-c> :Commands<CR>
 nnoremap <C-i> :Files<CR>
-nnoremap <C-m> :Maps<CR>
-" nnoremap <Leader>i :Files<CR>
-" nnoremap <Leader>m :Maps<CR>
+nnoremap <C-o> :Maps<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

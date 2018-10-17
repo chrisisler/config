@@ -49,7 +49,8 @@ set statusline=
 set statusline+=%{BufferInfo()}
 
 " space character and full path to file
-set statusline+=\ %t
+set statusline+=\ %f
+" set statusline+=\ %t
 " set statusline+=\ %F
 
 " space character and possibly a `+` if file is modified

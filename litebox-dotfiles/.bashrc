@@ -25,7 +25,7 @@ bind "set show-all-if-ambiguous on"
 ################################################################################
 
 # CS451 - Compilers `$j`
-export j="$HOME/Main/Uni/Compilers/Project-2"
+# export j="$HOME/Main/Uni/Compilers/Project-2"
 
 # Prepend datetime of command to command itself in ~/.bash_history file
 export HISTTIMEFORMAT="%y-%m-%d %T "
@@ -72,6 +72,7 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias docker-clean-images=" docker images -a | grep \"<none>\" | awk '{ print \$3 }' | xargs docker rmi -f"
 alias wifi="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport \"$@\""
 alias ll="exa --all --header --git --group-directories-first"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"

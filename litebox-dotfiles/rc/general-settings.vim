@@ -73,7 +73,8 @@ set nocursorline  " highlight current line?
 
 set hlsearch    " search highlighting
 set ttyfast     " assume fast terminal
-set noshowmatch " do not jump to matching brackets/parens when typing
+set showmatch " do not jump to matching brackets/parens when typing
+set matchtime=2
 set noshowmode  " do not show me which mode im in
 set timeout
 set timeoutlen=250

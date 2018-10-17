@@ -10,10 +10,6 @@
 vnoremap < <gv
 vnoremap > >gv
 
-" vim full screen
-" https://vi.stackexchange.com/questions/358/how-to-full-screen-browse-vim-help
-" noremap <silent> <C-m> <C-d>
-
 nnoremap `` ``zz
 
 " Go to next/previous buffer.
@@ -293,8 +289,8 @@ nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
 " nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
 
 " Java
-" nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
-" nnoremap <Leader>j2<CR> :w<CR>:AsyncRun java %:t:r<CR>:copen<CR>:wincmd k<CR>
+nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
+nnoremap <Leader>j2<CR> :w<CR>:AsyncRun java %:t:r<CR>:copen<CR>:wincmd k<CR>
 
 " C#
 " nnoremap <Leader>cs<CR> :w<CR>:AsyncRun csc /nologo /t:exe %<CR>:copen<CR>:wincmd k<CR>
