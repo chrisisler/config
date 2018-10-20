@@ -59,10 +59,7 @@ $if Bash
 
   # Filename completion/expansion
   set completion-ignore-case on
-  #set show-all-if-ambiguous on
-
-  # Expand homedir name
-  #set expand-tilde on
+  set show-all-if-ambiguous on
 
   # Append "/" to all dirnames
   set mark-directories on
@@ -71,10 +68,14 @@ $if Bash
   # Match all files
   set match-hidden-files on
 
+  # https://stackoverflow.com/questions/29823366/bash-auto-completion-highlighting
+  # set completion-prefix-display-length 2
+
   # set editing-mode vi
-  # set colored-completion-prefix on
-  # set colored-stats on
-  # set completion-ignore-case on
+
+  # Bash 4.4 features
+  set colored-completion-prefix on
+  set colored-stats on
 
   # 'Magic Space'
   # Insert a space character then performs

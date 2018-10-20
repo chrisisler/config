@@ -1,42 +1,29 @@
 #!/usr/bin/env bash
 
-exitIfPianobarIsNotRunning() {
-    # Awk quotes must be single quotes.
-    local pianobarIsRunning="$(ps | awk '{ print $4 }' | grep -Eq "^pianobar$" &>/dev/null && echo "true" || echo "false")"
+# Error if any subcommand fails.
+set -e
 
-    if [[ "${pianobarIsRunning}" == "false" ]]; then
-        exit -1
-    fi
+getPandoraInfo() {
+  local state="$(cat ~/.config/pianobar/custom-out | tr "\r" "\n")"
+  local playing="$(printf "$state" | grep -E "\[Playing\] .* - .*" | tail -1)"
+
+  local artist="$(printf "$playing" | sed -e "s/^.* - //")"
+  local song="$(printf "$playing" | sed -e "s/ - .*$//" -e "s/^.*\[Playing\]//")"
+  # local songNoParens="$(printf "$song" | sed -e "s/(.*)//" -e "s/\[.*\]//" -e "s/[^0-9A-Za-z_ ]//")"
+
+  local position="$(printf "$state" | grep "[Time]" | tail -1 | sed -e "s/^.* -//" -e "s/^0//" -e "s/\/0/\//")"
+
+  # local output="$song - $artist [$position]"
+  local output="$artist"
+
+  printf "$output "
 }
 
-parsePianobarOutput() {
-    local allPianobarOutput="$(cat ~/.config/pianobar/custom-out | tr "\r" "\n")"
+main() {
+  # Exit if Pianobar isn't running.
+  ps xc | grep -qi "pianobar" || exit -1
 
-    local currentSongInfo="$(printf "${allPianobarOutput}" | grep -E "^.*\|>" | grep -E ".* by .* on .*" | tail -1)"
-
-    local songName="$(printf "${currentSongInfo}" | sed -e "s/ by .*$//g" -e "s/\[2K\|\>  //g" | tr -d "\"")"
-
-    # Update 2017-10-08: Remove non-alphanumeric characters.
-    local songNameNoParens="$(printf "${songName}" | sed -e "s/(.*)//g" -e "s/\[.*\]//g" -e "s/[^0-9A-Za-z_ ]//g")"
-
-    local artist="$(printf "${currentSongInfo}" | sed -e "s/ on .*$//g" -e "s/^.* by //g" | tr -d "\"")"
-
-    local songIsLiked="$(printf "${currentSongInfo}" | grep -qE "<3" &>/dev/null && echo " ♡ " || echo "")"
-
-    local positionInfo="$(printf "${allPianobarOutput}" | grep -E "^.*#" | tail -1 | sed -e "s/^.* -//g" -e "s/^0//g" | sed -e "s/\/0/\//g")"
-
-    # shortened
-    # local positionInfo="$(printf "${allPianobarOutput}" | grep -E "^.*#" | tail -1 | sed -e "s/^.* -//g" -e "s/^0//g" | sed -e "s/\/0/\//g" | sed "s/\/.*$//g")"
-
-    # different versions
-    # local result="${artist} - ${songNameNoParens}${songIsLiked}"
-    # local result="${artist} - ${songNameNoParens}${songIsLiked} ${positionInfo}"
-    # local result="${artist} - ${songNameNoParens} ${positionInfo}"
-    # local result="${artist} - ${songNameNoParens}"
-    # local result="${artist} - ${positionInfo}"
-    local result="${artist}"
-    printf "${result} "
+  getPandoraInfo
 }
 
-exitIfPianobarIsNotRunning
-parsePianobarOutput
+main

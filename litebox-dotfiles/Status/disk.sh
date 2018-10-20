@@ -3,7 +3,7 @@
 set -e
 
 available() {
-  local avail="$(df -kHl | grep disk1 | awk '{ print $4 }')"
+  local avail="$(df -kHl | grep "/$" | awk '{ print $4 }')"
   printf "${avail} "
   # printf " ${avail}"
 }

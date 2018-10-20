@@ -3,7 +3,11 @@
 ################################################################################
 
 # If not running interactively, don't do anything
-[[ "$-" != *i* ]] && return
+# [[ "$-" != *i* ]] && return
+case $- in
+  *i*) ;;
+  *) return;;
+esac
 
 # Use case-insensitive filename globbing
 shopt -s nocaseglob
@@ -14,6 +18,10 @@ shopt -s histappend
 # When changing directory small typos can be ignored by bash
 # for example, cd /vr/lgo/apaache would find /var/log/apache
 shopt -s cdspell
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
 
 # # https://unix.stackexchange.com/questions/55203
 bind "TAB:menu-complete"
@@ -29,6 +37,10 @@ bind "set show-all-if-ambiguous on"
 
 # Prepend datetime of command to command itself in ~/.bash_history file
 export HISTTIMEFORMAT="%y-%m-%d %T "
+
+# history length
+HISTSIZE=1000
+HISTFILESIZE=2000
 
 # Always remove previously installed software when updating said software
 export HOMEBREW_UPGRADE_CLEANUP=1
@@ -53,8 +65,14 @@ export MAIL="$HOME/Mail/4444cisler4444"
 ################################################################################
 
 source ~/.bash_profile
-source ~/.functions
-source ~/.bash_private_stuff
+
+# Custom
+source ~/.bash_functions
+source ~/.bash_aliases
+
+if [ -f ~/.bash_private_stuff ]; then
+  source ~/.bash_private_stuff
+fi
 
 ################################################################################
 # Variables ####################################################################
@@ -63,7 +81,7 @@ source ~/.bash_private_stuff
 # lslaVar="ls -oFGHhA" # Can remove H
 # lslaVar="ls -AGF"
 # lslaVar="ls -AGFlh"
-lslaVar="exa --all --long --header --git --group-directories-first"
+lslaVar="exa --all --long --header --git --group-directories-first --colour-scale"
 mainDir="${HOME}/Main"
 academicDir="${mainDir}/Uni"
 codeDir="${HOME}/Code"
@@ -72,6 +90,7 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias dockerd='open /Applications/Docker.app "$@"'
 alias docker-clean-images=" docker images -a | grep \"<none>\" | awk '{ print \$3 }' | xargs docker rmi -f"
 alias wifi="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport \"$@\""
 alias ll="exa --all --header --git --group-directories-first"
@@ -143,7 +162,8 @@ alias t="clear ; tmux attach -t All $@ &>/dev/null || tmux new -s All $@"
 alias tmus="clear ; tmux attach -t Music &>/dev/null || tmux new -s Music -c ~"
 alias weather="curl wttr.in/boston"
 alias vi="vim"
-alias pandora="echo \"\" > ~/.config/pianobar/custom-out && clear && pianobar 2>/dev/null | tee ~/.config/pianobar/custom-out"
+# alias pandora="> ~/.config/pianobar/custom-out ; clear ; pianobar 2>/dev/null | tee ~/.config/pianobar/custom-out"
+alias pandora='> ~/.config/pianobar/custom-out ; clear ; pianobar | tee ~/.config/pianobar/custom-out'
 alias cellar="cd /usr/local/Cellar"
 alias p="clear; more ./package.json | jq $@"
 alias dir="open ."
@@ -175,24 +195,27 @@ alias clock='watch -t -n1 "date +%T|figlet"'
 # Prompt #######################################################################
 ################################################################################
 
-_currentDirectory="\w"
+dir="\w"
+time24h="\A"
 
-# ${orange}¤${colEnd} "
+# ${orange}¤${reset} "
 
 # if [[ -z "$TMUX" ]]; then
 # fi
 
 # red="\[\e[0;31m\]"
-# yellow="\[\e[0;32m\]"
+# yellow="\[\e[0;33m\]"
 # magenta="\[\e[0;35m\]"
 cyan="\[\e[0;36m\]"
-# blueBg="\[\e[0;30;44m\]" # bg
-# blue="\[\e[0;34m\]"
-colEnd="\[\e[0m\]"
-# export PS1="\n${blueBg} ${_currentDirectory} ${blue}${colEnd} "
-export PS1="\n${cyan}${_currentDirectory}${colEnd} "
+blueBg="\[\e[0;30;44m\]" # bg
+blue="\[\e[0;34m\]"
+reset="\[\e[0m\]"
+# export PS1="\n${blueBg} ${time24h} ${dir} ${blue}${reset} "
+export PS1="\n${cyan}${dir}${reset} "
+# export PS1="\n${blue}[${reset}${time24h}${blue}] ${cyan}${dir}${reset} "
+# export PS1="\n${time24h} ${cyan}${dir}${reset} "
 
 # https://github.com/ryanoasis/powerline-extra-symbols
 
 # save:
-# export PS1="\n${red}${_currentDirectory}${colEnd} ${orange}»»${colEnd} "
+# export PS1="\n${red}${dir}${reset} ${orange}»»${reset} "

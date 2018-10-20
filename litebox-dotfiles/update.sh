@@ -10,6 +10,7 @@ cp ~/.tmux/tmuxline.conf "${dotfilesDir}"
 
 cp ~/.bash_profile "${dotfilesDir}"
 cp ~/.bashrc "${dotfilesDir}"
+cp ~/.functions "${dotfilesDir}"
 cp ~/.inputrc "${dotfilesDir}"
 cp ~/.vimrc "${dotfilesDir}"
 cp ~/.cvimrc "${dotfilesDir}"

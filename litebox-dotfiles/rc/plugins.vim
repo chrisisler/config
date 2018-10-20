@@ -48,7 +48,7 @@ Plug 'w0rp/ale'             " async linter
 
 
 " ----- Commands -----
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin >/dev/null' }
 Plug 'junegunn/fzf.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
@@ -188,7 +188,7 @@ let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
 " gitgutter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:gitgutter_enabled=1
+let g:gitgutter_enabled=0
 " you think you can just walk into my house and add configuration? oh heck no.
 let g:gitgutter_map_keys=0
 
@@ -306,10 +306,16 @@ let g:fzf_layout = { 'down': '~25%' }
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-b> :Buffers<CR>
 nnoremap <C-h> :History<CR>
-nnoremap <C-j> :Lines<CR>
 nnoremap <C-c> :Commands<CR>
+
+" difficult to find good mappings for these (case-insensitive!):
+" <C-m> is a native alias for <Enter>
+" <C-[> is a native alias for <ESC>
+" <C-l> is a native alias for screen refresh
+" <C-o> is a native alias for jumping to latest edited file && location
 nnoremap <C-i> :Files<CR>
-nnoremap <C-o> :Maps<CR>
+nnoremap <C-x> :Lines<CR>
+nnoremap <C-v> :Maps<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
