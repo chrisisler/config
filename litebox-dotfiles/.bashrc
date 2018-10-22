@@ -90,6 +90,7 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias cat="bat"
 alias dockerd='open /Applications/Docker.app "$@"'
 alias docker-clean-images=" docker images -a | grep \"<none>\" | awk '{ print \$3 }' | xargs docker rmi -f"
 alias wifi="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport \"$@\""

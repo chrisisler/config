@@ -1,7 +1,4 @@
-#!/bin/bash
-
-# Import functions defined in this script file.
-# source ~/Code/Status/git.sh
+#!/usr/bin/env bash
 
 # Error if any subcommand fails.
 set -e
@@ -69,18 +66,17 @@ main() {
 
   local branchName="$(branchName)"
 
-  # If current working directory is not a git repository then exit now.
-  # [[ "$branchName" == "" ]] && exit 0
-
-  # Deprecated:
-  #   local repoName="$(basename "$(git rev-parse --show-toplevel)")"
-  #   local isPrivate="$(./git-repo-is-private.sh "$author/$repoName")"
-
   # local authorAndRepoName="$(git config --get remote.origin.url | sed -e "s/^.*://g")" # assumes git@github.com, not https
   # local isPrivate="$(isPrivate "$authorAndRepoName")"
 
   local porcelainStatus="$(git status --porcelain)"
-  local changes="$(addedChanges "$porcelainStatus")$(unaddedChanges "$porcelainStatus")"
+  local added="$(addedChanges "$porcelainStatus")"
+  local unadded="$(unaddedChanges "$porcelainStatus")"
+  if [[ "$added" != "" && "$unadded" != "" ]]; then
+    local changes="${added} |${unadded}"
+  else
+    local changes="${added}${unadded}"
+  fi
 
   # http://vim.wikia.com/wiki/Entering_special_characters
   # local gitInfo=" $branchName$changes"
