@@ -188,7 +188,7 @@ let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
 " gitgutter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:gitgutter_enabled=0
+let g:gitgutter_enabled=1
 " you think you can just walk into my house and add configuration? oh heck no.
 let g:gitgutter_map_keys=0
 
@@ -313,9 +313,11 @@ nnoremap <C-c> :Commands<CR>
 " <C-[> is a native alias for <ESC>
 " <C-l> is a native alias for screen refresh
 " <C-o> is a native alias for jumping to latest edited file && location
+" <C-v> is a native alias for visual-block mode
+" <C-z> is a native alias for background
 nnoremap <C-i> :Files<CR>
 nnoremap <C-x> :Lines<CR>
-nnoremap <C-v> :Maps<CR>
+nnoremap <C-y> :Maps<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

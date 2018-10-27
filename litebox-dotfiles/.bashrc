@@ -60,15 +60,24 @@ export PATH="/usr/local/opt/sqlite/bin:$PATH"
 
 export MAIL="$HOME/Mail/4444cisler4444"
 
+# Prefer /usr/local/bin/ binaries over /usr/bin/ binaries.
+export PATH="/usr/local/bin:$PATH"
+
+# Cleanse
+export PATH="$(echo "$PATH" | tr ":" "\n" | sort | uniq | tr "\n" ":")"
+
 ################################################################################
 # Sources ######################################################################
 ################################################################################
+
+# For `devbox` command (to pop into the devbox):
+# source ~/Code/Docker/devbox/dotfiles/devbox-scripts.sh
 
 source ~/.bash_profile
 
 # Custom
 source ~/.bash_functions
-source ~/.bash_aliases
+# source ~/.bash_aliases
 
 if [ -f ~/.bash_private_stuff ]; then
   source ~/.bash_private_stuff

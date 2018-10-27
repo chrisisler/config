@@ -80,9 +80,11 @@ main() {
 
   # http://vim.wikia.com/wiki/Entering_special_characters
   # local gitInfo=" $branchName$changes"
+  # local gitInfo="| $branchName$changes"
+  local gitInfo="[$branchName]$changes"
   # local gitInfo="[$branchName$changes]"
   # local gitInfo=" $isPrivate$branchName$changes"
-  local gitInfo=" $branchName$changes"
+  # local gitInfo=" $branchName$changes"
   
   printf "$gitInfo"
 }
