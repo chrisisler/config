@@ -100,8 +100,9 @@ codeDir="${HOME}/Code"
 ################################################################################
 
 alias cat="bat"
+alias nodocker=''
 alias dockerd='open /Applications/Docker.app "$@"'
-alias docker-clean-images=" docker images -a | grep \"<none>\" | awk '{ print \$3 }' | xargs docker rmi -f"
+alias docker-clean-images="docker images -a | grep \"<none>\" | awk '{ print \$3 }' | xargs docker rmi -f"
 alias wifi="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport \"$@\""
 alias ll="exa --all --header --git --group-directories-first"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"

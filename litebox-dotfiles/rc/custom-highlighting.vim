@@ -27,6 +27,9 @@ set background=dark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" 3 is golden/yellow, 4 is blue
+" highlight PmenuSel ctermfg=4 ctermbg=bg
+
 " make background of statusline transparent (same as background)
 highlight StatusLine ctermfg=fg ctermbg=bg
 highlight StatusLineNC ctermfg=15 ctermbg=bg

@@ -186,6 +186,7 @@ nnoremap <Leader>n :ALENextWrap<CR>kj
 nnoremap <Leader>a :ALELint<CR>kj
 
 nnoremap <silent> <Leader>: :set cursorline!<CR>
+nnoremap <silent> <Leader>; :set relativenumber!<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -304,3 +305,4 @@ nnoremap <Leader>j2<CR> :w<CR>:AsyncRun java %:t:r<CR>:copen<CR>:wincmd k<CR>
 
 " C++
 " nnoremap <Leader>cpp :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<CR>
+"

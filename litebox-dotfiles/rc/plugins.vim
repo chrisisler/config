@@ -8,13 +8,13 @@ call plug#begin('~/.vim/plugged')
 
 
 " ----- Language -----
-Plug 'ekalinin/dockerfile.vim'
-Plug 'artur-shaik/vim-javacomplete2'
-Plug 'othree/yajs.vim'
-Plug 'othree/es.next.syntax.vim'
-Plug 'mxw/vim-jsx'
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
+Plug 'ekalinin/dockerfile.vim', { 'for': 'Dockerfile' }
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+Plug 'othree/yajs.vim', { 'for': 'javascript.jsx' }
+Plug 'othree/es.next.syntax.vim', { 'for': 'javascript.jsx' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 " Plug 'pangloss/vim-javascript'
 " Plug 'jparise/vim-graphql'
 " Plug 'posva/vim-vue'
@@ -34,7 +34,7 @@ Plug 'racer-rust/vim-racer'
 " ----- Interface -----
 " Plug 'rakr/vim-one'
 Plug 'joshdick/onedark.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'kshenoy/vim-signature'
 Plug 'airblade/vim-gitgutter'
 " Plug 'altercation/vim-colors-solarized'
@@ -65,14 +65,14 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
 Plug 'shougo/neocomplete.vim'
 Plug 'sirver/ultisnips'
-Plug 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript.jsx' }
 
 
 " ----- Random -----
 Plug 'airblade/vim-rooter'
 " Plug 'EinfachToll/DidYouMean'
 " Plug 'godlygeek/tabular'
-" Plug 'metakirby5/codi.vim'
+Plug 'metakirby5/codi.vim', { 'for': 'javascript.jsx' }
 " Plug 'junegunn/goyo.vim'
 " Plug 'yggdroot/indentline'
 " Plug 'severin-lemaignan/vim-minimap'
@@ -176,13 +176,13 @@ let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
 " codi (live/inline evaluation)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" let g:codi#rightsplit=1
-" let g:codi#rightalign=0
-" let g:codi#width=60
+let g:codi#rightsplit=1
+let g:codi#rightalign=0
+let g:codi#width=60
 
-" let g:codi#aliases = {
-"       \ 'javascript.jsx': 'javascript',
-"       \ }
+let g:codi#aliases = {
+      \ 'javascript.jsx': 'javascript',
+      \ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " gitgutter
@@ -309,12 +309,13 @@ nnoremap <C-h> :History<CR>
 nnoremap <C-c> :Commands<CR>
 
 " difficult to find good mappings for these (case-insensitive!):
-" <C-m> is a native alias for <Enter>
+" <C-m>, <C-y(?)> are native aliases for <Enter>
 " <C-[> is a native alias for <ESC>
 " <C-l> is a native alias for screen refresh
 " <C-o> is a native alias for jumping to latest edited file && location
 " <C-v> is a native alias for visual-block mode
 " <C-z> is a native alias for background
+" <C-u> seems to be a no-op
 nnoremap <C-i> :Files<CR>
 nnoremap <C-x> :Lines<CR>
 nnoremap <C-y> :Maps<CR>
@@ -339,7 +340,7 @@ let g:neocomplete#enable_at_startup=1
 let g:neocomplete#enable_refresh_always=0
 
 " if getting completion options is longer than this time than skip it.
-let g:neocomplete#skip_auto_completion_time="0.5"
+let g:neocomplete#skip_auto_completion_time="0.3"
 let g:neocomplete#auto_complete_delay=150
 let g:neocomplete#enable_smart_case=1
 let g:neocomplete#max_list=16
@@ -371,7 +372,6 @@ endif
 let NERDTreeShowFiles=1
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '◇'
-" let g:NERDTreeDirArrowCollapsible = ''
 let NERDTreeMinimalUI=1
 let NERDTreeMouseMode=2
 let NERDTreeShowLineNumbers=0
@@ -442,5 +442,5 @@ let g:SignatureMap = {
 let g:SignatureDeleteConfirmation=1
 let g:SignaturePurgeConfirmation=1
 
-"  Highlight signs of marks dynamically based upon state indicated by vim-gitgutter.
-let g:SignatureMarkTextHLDynamic=1
+"  Highlight signs of marks dynamically based upon state indicated by vim-gitgutter?
+let g:SignatureMarkTextHLDynamic=0

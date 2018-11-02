@@ -51,7 +51,7 @@ set dsp.ao.wav_counter=1
 set dsp.ao.wav_dir=/Users/litebox
 set dsp.jack.resampling_quality=2
 set dsp.jack.server_name=
-set follow=true
+set follow=false
 set format_current= %a - %l - %t%= %y 
 set format_playlist= %-21%a %3n. %t%= %y %d %{?X!=0?%3X ?    }
 set format_playlist_va= %-21%A %3n. %t (%a)%= %y %d %{?X!=0?%3X ?    }
@@ -89,7 +89,7 @@ set shuffle=false
 set skip_track_info=false
 set smart_artist_sort=true
 set softvol=true
-set softvol_state=70 70
+set softvol_state=60 60
 set status_display_program=
 set wrap_search=true
 bind browser backspace browser-up

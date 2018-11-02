@@ -20,11 +20,10 @@ endfunction
 function! BufferInfo() abort
   let l:buffers = len(getbufinfo({'buflisted':1}))
   let l:bufferNumber = bufnr('%')
-  " return l:buffers == 1 ? '' : printf('[#%s of %s]', bufferNumber, buffers)
-  " return l:buffers == 1 ? '' : printf('#%s of %s |', bufferNumber, buffers)
+  return l:buffers == 1 ? '' : printf('#%s of %s |', bufferNumber, buffers)
   " return l:buffers == 1 ? '' : printf('%s | #%s', buffers, bufferNumber)
   " return l:buffers == 1 ? '' : printf('#%s |', bufferNumber)
-  return l:buffers == 1 ? '' : printf('%s |', bufferNumber)
+  " return l:buffers == 1 ? '' : printf('%s |', bufferNumber)
 endfunction
 
 function! Modified() abort
@@ -33,6 +32,12 @@ function! Modified() abort
   " let l:modified = getbufvar(bufnr('%'), '&modified') ? ' ●' : ''
   " let l:modified = getbufvar(bufnr('%'), '&modified') ? ' | +' : ''
   return printf('%s', modified)
+endfunction
+
+function! Spaces() abort
+  let l:spaces = getbufvar(bufnr('%'), '&shiftwidth')
+  return printf('S:%s', spaces)
+  " return printf('S %s', spaces)
 endfunction
 
 " http://vim.wikia.com/wiki/Showing_syntax_highlight_group_in_statusline
@@ -46,7 +51,7 @@ set statusline=
 
 " set statusline+=%{SyntaxItem()}
 
-set statusline+=%{BufferInfo()}
+" set statusline+=%{BufferInfo()}
 
 " space character and full path to file
 set statusline+=\ %f
@@ -65,4 +70,5 @@ set statusline+=%{LintStatus()}
 
 " Show line and column numbers (padded with spaces)
 " set statusline+=L%l\ C%c\ 
-set statusline+=Ln\ %l\ Col\ %c\ 
+" set statusline+=%{Spaces()}\ 
+" set statusline+=Ln\ %l\ Col\ %c\ 

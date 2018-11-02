@@ -63,7 +63,7 @@ let fetchWeather = timeRestricted({ minutes }, async () => {
     minutes = 1
     // console.error('Error: ' + error.message)
     // process.exit(-1)
-    return '✕'
+    return ''
     // return 'Error: ' + error.message
   }
 })
