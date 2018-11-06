@@ -69,6 +69,5 @@ set statusline+=%=
 set statusline+=%{LintStatus()}
 
 " Show line and column numbers (padded with spaces)
-" set statusline+=L%l\ C%c\ 
-" set statusline+=%{Spaces()}\ 
-" set statusline+=Ln\ %l\ Col\ %c\ 
+set statusline+=%{Spaces()}\ 
+set statusline+=Ln\ %l\ Col\ %c\ 

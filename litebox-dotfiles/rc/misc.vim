@@ -2,7 +2,7 @@
 
 
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
-au FileType qf call AdjustWindowHeight(3, 12)
+au FileType qf call AdjustWindowHeight(2, 12)
 function! AdjustWindowHeight(minheight, maxheight)
     exe max([min([line('$')+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
@@ -102,8 +102,10 @@ autocmd  FileType fzf set laststatus=0 noshowmode noruler
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+au BufRead,BufNewFile,BufEnter,FileType *.java set shiftwidth=4 tabstop=4 cursorline
+
 " Follow Rust code style rules
-au BufNewFile,BufEnter,FileType rust set shiftwidth=4 tabstop=4
+au BufRead,BufNewFile,BufEnter,FileType rust set shiftwidth=4 tabstop=4
 " au Filetype rust source ~/.vim/scripts/spacetab.vim
 " au Filetype rust set colorcolumn=100
 

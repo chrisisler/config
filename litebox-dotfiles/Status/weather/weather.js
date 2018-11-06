@@ -51,10 +51,10 @@ let fetchWeather = timeRestricted({ minutes }, async () => {
       }
       */
 
-      let windSpeedMPH = Math.round(data.wind.speed)
-      if (windSpeedMPH > 20) {
-        result += ` ${windSpeedMPH}mph`
-      }
+      // let windSpeedMPH = Math.round(data.wind.speed)
+      // if (windSpeedMPH > 20) {
+      //   result += ` ${windSpeedMPH}mph`
+      // }
 
       // process.stdout.write(result)
       return result

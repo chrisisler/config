@@ -55,8 +55,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
 Plug 'skywind3000/asyncrun.vim'
+Plug 'jmcantrell/vim-diffchanges'
+Plug 'rhysd/clever-f.vim'
 " Plug 'easymotion/vim-easymotion'
-" Plug 'jmcantrell/vim-diffchanges'
 " Plug 'prettier/vim-prettier'
 
 
@@ -105,6 +106,12 @@ let g:javascript_plugin_jsdoc = 1
 " if &filetype == "rust"
 "     let g:AutoPairs['|']='|'
 " endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" minimap
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" let g:minimap_highlight='Special'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " java-complete2
@@ -168,8 +175,9 @@ let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " let g:indentLine_enabled=1
+" let g:indentLine_char='┊'
 " let g:indentLine_char='│'
-" let g:indentLine_char='・'
+" let g:indentLine_faster=1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -191,6 +199,7 @@ let g:codi#aliases = {
 let g:gitgutter_enabled=1
 " you think you can just walk into my house and add configuration? oh heck no.
 let g:gitgutter_map_keys=0
+let g:gitgutter_grep = 'rg'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " haskell-vim
@@ -220,14 +229,15 @@ let g:gitgutter_map_keys=0
 
 " avoid loading match parenthesis syntax plugin?
 " (may slow down vim if enabled)
-let loaded_matchparen = 0
+let loaded_matchparen = 1
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tern (js auto-completion)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:tern#is_show_argument_hints_enabled=1
+let g:tern_map_keys=1
+" let g:tern#is_show_argument_hints_enabled=1
 let g:tern_show_argument_hints=1
 let g:tern_show_signature_in_pum=1
 

@@ -142,6 +142,7 @@ call matchadd("FunctionSyntax", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=[^{.<>]\+=>')
 " function definition as a method on something but not in an object instantiation
 " example: Person.staticMethod = () => {}
 call matchadd("FunctionSyntax",        '.\+\.\zs\<\h\w*\>\ze\s\+=[^{.<>]\+=>') 
+call matchadd("FunctionSyntax",        '.\+\.\zs\<\h\w*\>\ze\s\+=[^{.<>]function') 
 
 " function definition as an arrow method: `onClick = event => { ... }`
 " call matchadd("FunctionSyntax", '\s\+\zs\<\h\w*\>\ze\s\+=[^{.<>]\+=>') 

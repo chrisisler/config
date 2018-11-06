@@ -100,7 +100,7 @@ codeDir="${HOME}/Code"
 ################################################################################
 
 alias cat="bat"
-alias nodocker=''
+alias nodocker='killall -9 Docker'
 alias dockerd='open /Applications/Docker.app "$@"'
 alias docker-clean-images="docker images -a | grep \"<none>\" | awk '{ print \$3 }' | xargs docker rmi -f"
 alias wifi="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport \"$@\""
@@ -167,7 +167,7 @@ alias vrc="vim ~/.vimrc"
 alias tmuxconf="vim ~/.tmux.conf"
 alias tmuxline="vim ~/.tmux/tmuxline.conf"
 alias rangerrc="vim ~/.config/ranger/rc.conf"
-alias tmuxtemp="clear ; tmux attach -t Temp $@ &>/dev/null || tmux new -s Temp $@"
+alias tmuxtemp="clear ; tmux attach -t Temp $* &>/dev/null || tmux new -s Temp $*"
 alias tt="tmuxtemp"
 alias t="clear ; tmux attach -t All $@ &>/dev/null || tmux new -s All $@"
 alias tmus="clear ; tmux attach -t Music &>/dev/null || tmux new -s Music -c ~"
