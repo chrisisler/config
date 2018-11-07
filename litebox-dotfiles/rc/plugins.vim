@@ -199,7 +199,6 @@ let g:codi#aliases = {
 let g:gitgutter_enabled=1
 " you think you can just walk into my house and add configuration? oh heck no.
 let g:gitgutter_map_keys=0
-let g:gitgutter_grep = 'rg'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " haskell-vim

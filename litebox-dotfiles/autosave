@@ -70,7 +70,7 @@ set output_plugin=ao
 set passwd=
 set pl_sort=
 set play_library=true
-set play_sorted=false
+set play_sorted=true
 set repeat=false
 set repeat_current=false
 set replaygain=disabled
@@ -89,7 +89,7 @@ set shuffle=false
 set skip_track_info=false
 set smart_artist_sort=true
 set softvol=true
-set softvol_state=70 70
+set softvol_state=80 80
 set status_display_program=
 set wrap_search=true
 bind browser backspace browser-up

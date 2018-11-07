@@ -214,15 +214,10 @@ time24h="\A"
 # if [[ -z "$TMUX" ]]; then
 # fi
 
-# red="\[\e[0;31m\]"
-# yellow="\[\e[0;33m\]"
-# magenta="\[\e[0;35m\]"
-cyan="\[\e[0;36m\]"
-blueBg="\[\e[0;30;44m\]" # bg
-blue="\[\e[0;34m\]"
+color="\[\e[0;35m\]"
 reset="\[\e[0m\]"
+export PS1="\n${color}${dir}${reset} "
 # export PS1="\n${blueBg} ${time24h} ${dir} ${blue}${reset} "
-export PS1="\n${cyan}${dir}${reset} "
 # export PS1="\n${blue}[${reset}${time24h}${blue}] ${cyan}${dir}${reset} "
 # export PS1="\n${time24h} ${cyan}${dir}${reset} "
 
