@@ -325,9 +325,10 @@ nnoremap <C-c> :Commands<CR>
 " <C-v> is a native alias for visual-block mode
 " <C-z> is a native alias for background
 " <C-u> seems to be a no-op
+" <C-i> is a native alias for <Tab>
 nnoremap <C-i> :Files<CR>
-nnoremap <C-x> :Lines<CR>
-nnoremap <C-y> :Maps<CR>
+nnoremap <C-]> :Lines<CR>
+nnoremap <C-m> :Maps<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

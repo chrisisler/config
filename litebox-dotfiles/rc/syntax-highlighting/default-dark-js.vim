@@ -66,9 +66,9 @@ let parens = '[()]'
 call matchadd("Bananas", parens)
 
 " if &background == "light"
-  highlight javascriptFuncArg ctermfg=red cterm=italic
+  " highlight javascriptFuncArg ctermfg=red cterm=italic
   let thisKeyword = '\<this\>'
-  call matchadd("javascriptFuncArg", thisKeyword)
+  call matchadd("Type", thisKeyword)
 " endif
 
 " Builtins --------------------------------------------------------------------
@@ -79,9 +79,13 @@ highlight javascriptOperator ctermfg=magenta
 highlight javascriptClassKeyword ctermfg=magenta cterm=italic
 highlight javascriptClassExtends ctermfg=magenta cterm=italic
 highlight javascriptImport ctermfg=magenta cterm=italic
+highlight javascriptReturn ctermfg=darkmagenta cterm=italic,underline
+
+highlight javascriptAwaitFuncKeyword ctermfg=3 cterm=italic
+call matchadd("Type", '\<async\>\ze\s\+')
 
 " THIS
-" highlight javascriptIdentifier ctermfg=red cterm=italic
+" highlight javascriptIdentifier ctermfg=magenta cterm=italic
 
 " LET CONST
 highlight javascriptVariable ctermfg=magenta cterm=italic
@@ -98,5 +102,11 @@ call matchadd("javascriptVariable", arrow)
 let voidKeyword = '[^>:]\s\+\zs\<void\>'
 call matchadd("javascriptVariable", voidKeyword)
 
-let reservedValues = '\(true\|false\|null\|this\)'
+let reservedValues = '\(true\|false\|null\)'
 call matchadd("javascriptVariable", reservedValues)
+
+" Comments --------------------------------------------------------------------
+
+highlight Comments ctermfg=white
+call matchadd("Comments", '^//\zs.*')
+call matchadd("Comments", '\s\+//\zs.*')
