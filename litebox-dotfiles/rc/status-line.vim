@@ -1,5 +1,7 @@
 " https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
 
+" Functions -------------------------------------------------------------------
+
 function! LintStatus() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:all_errors = l:counts.error + l:counts.style_error
@@ -16,7 +18,6 @@ function! LintStatus() abort
   return l:all_errors == 0 && l:all_warnings == 0 && l:all_infos == 0 ? '' : printf('%s%s%s| ', errors_message, warnings_message, infos_message)
 endfunction
 
-
 function! BufferInfo() abort
   let l:buffers = len(getbufinfo({'buflisted':1}))
   let l:bufferNumber = bufnr('%')
@@ -27,7 +28,7 @@ function! BufferInfo() abort
 endfunction
 
 function! Modified() abort
-  let l:modified = getbufvar(bufnr('%'), '&modified') ? ' ∴' : ''
+  let l:modified = getbufvar(bufnr('%'), '&modified') ? ' ∴ ' : ''
   " let l:modified = getbufvar(bufnr('%'), '&modified') ? ' ⊕' : ''
   " let l:modified = getbufvar(bufnr('%'), '&modified') ? ' ●' : ''
   " let l:modified = getbufvar(bufnr('%'), '&modified') ? ' | +' : ''
@@ -40,11 +41,21 @@ function! Spaces() abort
   " return printf('S %s', spaces)
 endfunction
 
+function! TagbarCurrentFunction() abort
+  let l:tag = tagbar#currenttag('%s','')
+  if &filetype == "java"
+    return printf(' | %s', tag)
+  endif
+  return printf('')
+endfunction
+
 " http://vim.wikia.com/wiki/Showing_syntax_highlight_group_in_statusline
 " function! SyntaxItem()
 "   let l:syntaxItem = synIDattr(synID(line("."),col("."),1),"name")
 "   return printf('%s | ', syntaxItem)
 " endfunction
+
+" Statusline ------------------------------------------------------------------
 
 " clear it
 set statusline=
@@ -61,6 +72,8 @@ set statusline+=\ %f
 " space character and possibly a `+` if file is modified
 set statusline+=%{Modified()}
 " set statusline+=\ %M
+
+set statusline+=%{TagbarCurrentFunction()}
 
 " statusline stuff after this will be on right side of statusline
 set statusline+=%=
