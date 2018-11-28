@@ -134,7 +134,7 @@ nnoremap <silent> <Leader>o <C-w>t <C-w>H
 nnoremap <silent> <Leader>q<CR> :bdelete %<CR>
 
 " Close current window without closing current buffer.
-nnoremap <silent> <Leader><Leader>q<CR> <C-w>q
+" nnoremap <silent> <Leader><Leader>q<CR> <C-w>q
 
 " Set ruler.
 nnoremap <silent> <Leader>r :set cc=
@@ -179,7 +179,7 @@ nnoremap <Leader>x :ALEToggle<CR>
 " Linter mappings
 nnoremap <silent> <Leader>p :ALEPreviousWrap<CR>kj
 nnoremap <silent> <Leader>n :ALENextWrap<CR>kj
-nnoremap <silent> <Leader>a :ALELint<CR>kj
+" nnoremap <silent> <Leader>a :ALELint<CR>kj
 
 nnoremap <silent> <Leader>: :set cursorline!<CR>
 nnoremap <silent> <Leader>; :set relativenumber!<CR>

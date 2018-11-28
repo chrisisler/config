@@ -57,8 +57,8 @@ call matchadd("Type", flowChecksKeyword)
 let generic = '<\zs\<' . '[a-zA-Z_][a-zA-Z0-9_$]*' . '\>\ze>'
 call matchadd("Type", generic)
 
-let prototype = identifier . '\ze\.\<prototype\>'
-call matchadd("Type", prototype)
+" let prototype = identifier . '\zs\.\<prototype\>'
+" call matchadd("Fn", prototype)
 
 highlight Bananas ctermfg=blue
 
@@ -78,8 +78,8 @@ highlight javascriptBraces ctermfg=green
 highlight javascriptOperator ctermfg=magenta
 highlight javascriptClassKeyword ctermfg=magenta cterm=italic
 highlight javascriptClassExtends ctermfg=magenta cterm=italic
-highlight javascriptImport ctermfg=magenta cterm=italic
 highlight javascriptReturn ctermfg=darkmagenta cterm=italic,underline
+" highlight javascriptImport ctermfg=magenta cterm=italic
 
 highlight javascriptAwaitFuncKeyword ctermfg=3 cterm=italic
 call matchadd("Type", '\<async\>\ze\s\+')

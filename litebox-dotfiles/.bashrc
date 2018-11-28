@@ -32,9 +32,6 @@ bind "set show-all-if-ambiguous on"
 # Exports ######################################################################
 ################################################################################
 
-# CS451 - Compilers `$j`
-# export j="$HOME/Main/Uni/Compilers/Project-2"
-
 # Prepend datetime of command to command itself in ~/.bash_history file
 export HISTTIMEFORMAT="%y-%m-%d %T "
 
@@ -99,6 +96,7 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias map="telnet mapscii.me"
 alias cat="bat"
 alias nodocker='killall -9 Docker'
 alias dockerd='open /Applications/Docker.app "$@"'

@@ -7,7 +7,6 @@ function! AdjustWindowHeight(minheight, maxheight)
     exe max([min([line('$')+1, a:maxheight]), a:minheight]) . "wincmd _"
 endfunction
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Exclude quickfix window from `:bn[ext]` and `:bp[revious]` commands.
@@ -19,7 +18,6 @@ augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.

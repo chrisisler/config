@@ -57,7 +57,7 @@ let fetchWeather = timeRestricted({ minutes }, async () => {
       // }
 
       // process.stdout.write(result)
-      return result
+      return ' ' + result
     } 
   } catch (error) {
     minutes = 1
