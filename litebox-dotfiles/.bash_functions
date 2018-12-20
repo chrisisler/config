@@ -1,3 +1,8 @@
+restart_camera() {
+  # sudo killall VDCAssistant
+  printf "TODO\n"
+}
+
 # (Jess Frazelle) Make a temporary directory and enter it
 tempdir() {
   local dir=
