@@ -102,7 +102,7 @@ call matchadd("javascriptVariable", arrow)
 let voidKeyword = '[^>:]\s\+\zs\<void\>'
 call matchadd("javascriptVariable", voidKeyword)
 
-let reservedValues = '\(true\|false\|null\)'
+let reservedValues = '\(\<true\>\|\<false\>\|\<null\>\)'
 call matchadd("javascriptVariable", reservedValues)
 
 " Comments --------------------------------------------------------------------

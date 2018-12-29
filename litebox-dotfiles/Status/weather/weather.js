@@ -9,8 +9,8 @@ let url
   + 'api.openweathermap.org/data/2.5/weather'
   + '?mode=json'
   + '&units=imperial'
-  + '&q=Boston'
-  // + '&q=Minneapolis'
+  // + '&q=Boston'
+  + '&q=Minneapolis'
   + '&APPID=' + process.env.openWeatherMapAPIKey
 
 

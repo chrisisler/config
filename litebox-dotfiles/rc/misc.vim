@@ -107,6 +107,8 @@ au BufRead,BufNewFile,BufEnter,FileType rust set shiftwidth=4 tabstop=4
 " au Filetype rust source ~/.vim/scripts/spacetab.vim
 " au Filetype rust set colorcolumn=100
 
+au BufRead,BufNewFile,BufEnter,FileType *.txt set nocursorline nonumber
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " https://stackoverflow.com/questions/2378004/how-to-block-column-paste-in-vim
