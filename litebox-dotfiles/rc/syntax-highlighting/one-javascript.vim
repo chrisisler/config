@@ -26,7 +26,7 @@ highlight javascriptTry ctermfg=magenta cterm=italic
 
 highlight javascriptClassExtends ctermfg=darkmagenta cterm=italic
 highlight javascriptImport ctermfg=darkmagenta cterm=italic
-highlight javascriptReturn ctermfg=darkmagenta cterm=italic,underline
+highlight javascriptReturn ctermfg=magenta cterm=italic,underline
 
 " keywords: default, export
 highlight javascriptExport ctermfg=darkmagenta cterm=italic
@@ -34,6 +34,7 @@ highlight javascriptExport ctermfg=darkmagenta cterm=italic
 " object keys (not es6 key/val sorthand)
 highlight javaScriptObjectLabel ctermfg=darkmagenta
 
+highlight javascriptBraces ctermfg=10
 
 " highlight javascriptComma ctermfg=cyan
 " spread/rest operator
@@ -126,6 +127,11 @@ call matchadd("Golden", '\<window\>')
 " call matchadd("Golden", '<\zs\<\u\w*\>')
 " call matchadd("Golden", '\<__dirname\>')
 " call matchadd("Golden", '\<__filename\>')
+
+highlight Bananas ctermfg=blue
+
+let parens = '[()]'
+call matchadd("Bananas", parens)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

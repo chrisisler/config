@@ -41,6 +41,7 @@ HISTFILESIZE=2000
 
 # Always remove previously installed software when updating said software
 export HOMEBREW_UPGRADE_CLEANUP=1
+export HOMEBREW_INSTALL_CLEANUP=1
 
 # Don't put duplicate lines in the history.
 export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
@@ -96,7 +97,11 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
-alias map="telnet mapscii.me"
+alias volume-0.001='osascript -e "set Volume 0.001"'
+alias volume-0.01='osascript -e "set Volume 0.01"'
+alias volume-0.1='osascript -e "set Volume 0.1"'
+alias mute='osascript -e "set Volume 0"'
+# alias map="telnet mapscii.me"
 alias cat="bat"
 alias nodocker='killall -9 Docker'
 alias dockerd='open /Applications/Docker.app "$@"'
@@ -115,7 +120,6 @@ alias sandbox="cd ${codeDir}/JS/Bin/Sandbox/ && vim ./sandbox.js"
 alias datefmt='date "+%Y-%m-%d_%H:%M"'
 alias brew-latest="brew update && brew upgrade --cleanup --fetch-HEAD && brew cleanup -s"
 alias w="cd ${codeDir}/Git/wavematch && ${lslaVar}"
-alias mute='osascript -e "set Volume 0"'
 alias dc="cd"
 alias pipes="pipes.sh -p 10 -R -t 6"
 alias brave='open "/Applications/Brave Browser Beta.app" "$@"'
