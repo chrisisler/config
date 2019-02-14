@@ -15,6 +15,7 @@ Plug 'othree/es.next.syntax.vim', { 'for': 'javascript.jsx' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
+Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
 " Plug 'pangloss/vim-javascript'
 " Plug 'jparise/vim-graphql'
 " Plug 'posva/vim-vue'
@@ -121,6 +122,11 @@ let g:tagbar_status_func = 'TagbarStatusFunc'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " auto-pairs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" disable auto closing quotes for `.rkt` filetypes
+if &filetype == "racket"
+  let g:AutoPairsLoaded=0
+endif
 
 " automaticaly add closure thingies in rust
 " autocmd FileType rust let g:AutoPairs['|']='|'

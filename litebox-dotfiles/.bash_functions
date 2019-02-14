@@ -231,3 +231,17 @@ wifi_join() {
 thirdline() {
   awk '{ if (NR % 3 == 0) { print "\033[32m" $0 "\033[0m" } else { print } }'
 }
+
+setFlux() {
+  # https://apple.stackexchange.com/questions/12719/how-can-i-adjust-the-apparent-color-temperature-of-my-display-in-os-x/12742
+  if [[ ! -z "$1" && "$1" -ge 2700 && "$1" -le 6500 ]]; then
+    defaults write org.herf.Flux dayColorTemp -int "$1"
+    defaults write org.herf.Flux nightColorTemp -int "$1"
+    killall Flux
+    open /Applications/Flux.app
+    defaults write org.herf.Flux dayColorTemp -int "$1"
+    defaults write org.herf.Flux nightColorTemp -int "$1"
+  else
+    printf "Expected a temperature number between 2700 and 6500 (rounded to nearest 100).\n"
+  fi
+}

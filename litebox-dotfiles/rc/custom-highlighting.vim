@@ -60,6 +60,11 @@ if &background == "dark"
   if &filetype == "rust"
     call HighlightRustOneDark()
   endif
+
+  " if &filetype == "racket"
+  "   call HighlightRacketOne()
+  " endif
+
   if &filetype == "java"
     call HighlightJava()
   endif
@@ -85,6 +90,10 @@ elseif &background == "light"
   endif
 endif
 
+" autocmd BufEnter,BufRead,BufNewFile,FileType *.rkt call HighlightRacketOne()
+" function! HighlightRacketOne()
+"   source ~/.vim/rc/syntax-highlighting/one-racket.vim
+" endfunction
 
 autocmd BufEnter,BufRead,BufNewFile,FileType *.rs call HighlightRustOneDark()
 function! HighlightRustOneDark()
@@ -98,8 +107,8 @@ endfunction
 
 autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaScriptOne()
 function! HighlightJavaScriptOne()
-  " source ~/.vim/rc/syntax-highlighting/default-dark-js.vim
-  source ~/.vim/rc/syntax-highlighting/one-javascript.vim
+  source ~/.vim/rc/syntax-highlighting/default-dark-js.vim
+  " source ~/.vim/rc/syntax-highlighting/one-javascript.vim
 endfunction
 
 autocmd BufEnter,BufRead,BufNewFile,FileType *.ts,tsx call SetFT()

@@ -82,6 +82,6 @@ set statusline+=%{LintStatus()}
 set statusline+=%{TagbarCurrentFunction()}
 
 " Show line and column numbers (padded with spaces)
-" set statusline+=Ln\ %l\ Col\ %c\ 
+set statusline+=Ln\ %l\ Col\ %c\ 
 " set statusline+=%l:%c\ 
 " set statusline+=%{Spaces()}\ 

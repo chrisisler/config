@@ -277,6 +277,9 @@ nnoremap <Leader>d<CR> :Dispatch
 " nnoremap <Leader>js<CR> :w<CR>:Dispatch! node %<CR>:cw<CR>:wincmd k<CR>
 nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
 
+" Racket
+nnoremap <Leader>rkt<CR> :w<CR>:Dispatch racket %<CR>
+
 " Haskell
 " nnoremap <Leader>hs<CR> :w<CR>:Dispatch ghc -o ./%:t:r % && ./%:t:r<CR>
 

@@ -40,7 +40,7 @@ HISTSIZE=1000
 HISTFILESIZE=2000
 
 # Always remove previously installed software when updating said software
-export HOMEBREW_UPGRADE_CLEANUP=1
+# export HOMEBREW_UPGRADE_CLEANUP=1
 export HOMEBREW_INSTALL_CLEANUP=1
 
 # Don't put duplicate lines in the history.
@@ -97,6 +97,8 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias nocamera='sudo killall VDCAssistant ; echo "Cool. Now do $ sudo reboot"'
+alias nocmus='kill -9 "$(pgrep cmus)"'
 alias volume-0.001='osascript -e "set Volume 0.001"'
 alias volume-0.01='osascript -e "set Volume 0.01"'
 alias volume-0.1='osascript -e "set Volume 0.1"'
@@ -118,7 +120,7 @@ alias discreet="$@ ; history -d $(history 1)"
 alias clean='killall -9 JavaUpdater iTunesHelper'
 alias sandbox="cd ${codeDir}/JS/Bin/Sandbox/ && vim ./sandbox.js"
 alias datefmt='date "+%Y-%m-%d_%H:%M"'
-alias brew-latest="brew update && brew upgrade --cleanup --fetch-HEAD && brew cleanup -s"
+alias brew-latest="brew update && brew upgrade --fetch-HEAD && brew cleanup -s"
 alias w="cd ${codeDir}/Git/wavematch && ${lslaVar}"
 alias dc="cd"
 alias pipes="pipes.sh -p 10 -R -t 6"
