@@ -77,11 +77,11 @@ set statusline+=%{Modified()}
 set statusline+=%=
 
 " lint errors and warnings separately and with space padding
-set statusline+=%{LintStatus()}
+" set statusline+=%{LintStatus()}
 
-set statusline+=%{TagbarCurrentFunction()}
+" set statusline+=%{TagbarCurrentFunction()}
 
 " Show line and column numbers (padded with spaces)
-set statusline+=Ln\ %l\ Col\ %c\ 
+" set statusline+=Ln\ %l\ Col\ %c\ 
 " set statusline+=%l:%c\ 
 " set statusline+=%{Spaces()}\ 
