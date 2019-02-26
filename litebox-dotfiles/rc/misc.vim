@@ -100,7 +100,7 @@ au FileType nerdtree setlocal nocursorline statusline=Explorer
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-au BufRead,BufNewFile,BufEnter,FileType *.java set shiftwidth=4 tabstop=4 cursorline
+au BufRead,BufNewFile,BufEnter,FileType *.java set shiftwidth=4 tabstop=4
 
 " Follow Rust code style rules
 au BufRead,BufNewFile,BufEnter,FileType rust set shiftwidth=4 tabstop=4

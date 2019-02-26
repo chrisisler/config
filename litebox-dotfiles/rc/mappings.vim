@@ -265,8 +265,8 @@ nnoremap <silent> <Leader>' :set number!<CR>
 
 " Rust (if you want _less_ output, switch to `Dispatch`.)
 " nnoremap <silent> <Leader>rs<CR> :w<CR>:AsyncRun cargo run % --color=never --quiet<CR> :copen<CR>:wincmd k<CR>
-nnoremap <silent> <Leader>rs1 :w<CR>:AsyncRun rustc %<CR>:copen<CR>:wincmd k<CR>
-nnoremap <silent> <Leader>rs2 :w<CR>:AsyncRun %:p:r<CR>:copen<CR>:wincmd k<CR>
+nnoremap <silent> <Leader>rs1 :w<CR>:Dispatch rustc % --out-dir %:p:h<CR>
+nnoremap <silent> <Leader>rs2 :w<CR>:Dispatch %:p:r<CR>
 nnoremap <silent> <Leader>rst :w<CR>:AsyncRun cargo test --color=never<CR>:copen<CR>:wincmd k<CR>
 
 " Custom dispatch call
@@ -285,7 +285,8 @@ nnoremap <Leader>rkt<CR> :w<CR>:Dispatch racket %<CR>
 
 " Python
 " nnoremap <Leader>py<CR> :w<CR>:AsyncRun python %<CR>:copen<CR>:wincmd k<CR>
-" nnoremap <Leader>py<CR> :w<CR>:Dispatch python3 %<CR>
+nnoremap <Leader>py3<CR> :w<CR>:Dispatch python3 %<CR>
+nnoremap <Leader>py2<CR> :w<CR>:Dispatch python2.7 %<CR>
 
 " Java
 nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>

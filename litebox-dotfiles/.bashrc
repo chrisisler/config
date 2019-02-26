@@ -230,3 +230,5 @@ export PS1="\n${color}${dir}${reset} "
 
 # save:
 # export PS1="\n${red}${dir}${reset} ${orange}»»${reset} "
+
+# exec fish

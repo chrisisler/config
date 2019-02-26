@@ -245,3 +245,9 @@ setFlux() {
     printf "Expected a temperature number between 2700 and 6500 (rounded to nearest 100).\n"
   fi
 }
+
+devbox() {
+  ps xc | grep -i docker &>/dev/null || open /Applications/Docker.app
+
+  cd $HOME/Code/Docker/devbox && make run
+}
