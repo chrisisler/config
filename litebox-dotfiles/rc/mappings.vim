@@ -181,9 +181,10 @@ nnoremap <silent> <Leader>p :ALEPreviousWrap<CR>kj
 nnoremap <silent> <Leader>n :ALENextWrap<CR>kj
 " nnoremap <silent> <Leader>a :ALELint<CR>kj
 
-nnoremap <silent> <Leader>: :set cursorline!<CR>
-nnoremap <silent> <Leader>; :set relativenumber!<CR>
+nnoremap <silent> <Leader>; :set cursorline!<CR>
+nnoremap <silent> <Leader>: :set laststatus=
 nnoremap <silent> <Leader>' :set number!<CR>
+nnoremap <silent> <Leader>" :set relativenumber!<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

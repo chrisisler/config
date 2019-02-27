@@ -74,6 +74,7 @@ Plug 'ternjs/tern_for_vim', { 'for': 'javascript.jsx' }
 " ----- Random -----
 Plug 'airblade/vim-rooter'
 Plug 'metakirby5/codi.vim', { 'for': 'javascript.jsx' }
+Plug 'machakann/vim-highlightedyank'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'EinfachToll/DidYouMean'
 " Plug 'godlygeek/tabular'

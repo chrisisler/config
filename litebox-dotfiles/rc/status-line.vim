@@ -15,17 +15,18 @@ function! LintStatus() abort
   let l:warnings_message = l:all_warnings == 0 ? '' : l:all_warnings == 1 ? '1 Warning ' : printf('%s Warnings ', all_warnings)
   let l:infos_message = l:all_infos == 0 ? '' : printf('%d i ', all_infos)
 
-  return l:all_errors == 0 && l:all_warnings == 0 && l:all_infos == 0 ? '' : printf('%s%s%s ', errors_message, warnings_message, infos_message)
+  return l:all_errors == 0 && l:all_warnings == 0 && l:all_infos == 0 ? '' : printf('%s%s%s', errors_message, warnings_message, infos_message)
   " return l:all_errors == 0 && l:all_warnings == 0 && l:all_infos == 0 ? '' : printf('%s%s%s| ', errors_message, warnings_message, infos_message)
 endfunction
 
 function! BufferInfo() abort
   let l:buffers = len(getbufinfo({'buflisted':1}))
   let l:bufferNumber = bufnr('%')
-  return l:buffers == 1 ? '' : printf('#%s of %s |', bufferNumber, buffers)
+  " return l:buffers == 1 ? '' : printf('#%s of %s |', bufferNumber, buffers)
   " return l:buffers == 1 ? '' : printf('%s | #%s', buffers, bufferNumber)
   " return l:buffers == 1 ? '' : printf('#%s |', bufferNumber)
-  " return l:buffers == 1 ? '' : printf('%s |', bufferNumber)
+  " return l:buffers == 1 ? '' : printf('#%s', bufferNumber)
+  return l:buffers == 1 ? '' : printf('| Buf %s', bufferNumber)
 endfunction
 
 function! Modified() abort
@@ -57,31 +58,31 @@ endfunction
 
 " Statusline ------------------------------------------------------------------
 
-" clear it
+" Clear
 set statusline=
 
 " set statusline+=%{SyntaxItem()}
 
-" set statusline+=%{BufferInfo()}
-
-" space character and full path to file
+" Whitespace and path to file
 set statusline+=\ %f
 " set statusline+=\ %t
 " set statusline+=\ %F
 
-" space character and possibly a `+` if file is modified
+" Special symbol if file is modified
 set statusline+=%{Modified()}
 " set statusline+=\ %M
 
-" statusline stuff after this will be on right side of statusline
+" Statusline info after this will be on the right side
 set statusline+=%=
 
-" lint errors and warnings separately and with space padding
-" set statusline+=%{LintStatus()}
+" Errors and warnings
+set statusline+=%{LintStatus()}
 
-" set statusline+=%{TagbarCurrentFunction()}
+" Scope
+set statusline+=%{TagbarCurrentFunction()}
 
-" Show line and column numbers (padded with spaces)
-" set statusline+=Ln\ %l\ Col\ %c\ 
+" Show line and column numbers
+set statusline+=Ln\ %l\ Col\ %c\ %{BufferInfo()}
+" set statusline+=Ln\ %l\ Col\ %c\
 " set statusline+=%l:%c\ 
 " set statusline+=%{Spaces()}\ 

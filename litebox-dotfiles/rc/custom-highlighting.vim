@@ -51,7 +51,8 @@ highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 " do not show split separators
 highlight VertSplit ctermfg=bg ctermbg=bg
 
-highlight MatchParen ctermfg=bg ctermbg=12
+highlight MatchParen ctermbg=bg ctermfg=NONE cterm=underline,bold
+" highlight MatchParen ctermfg=bg ctermbg=12
 " highlight MatchParen cterm=bold,underline ctermfg=3 ctermbg=bg
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -61,9 +62,9 @@ if &background == "dark"
     call HighlightRustOneDark()
   endif
 
-  " if &filetype == "racket"
-  "   call HighlightRacketOne()
-  " endif
+  if &filetype == "racket"
+    call HighlightRacketOne()
+  endif
 
   if &filetype == "java"
     call HighlightJava()
@@ -90,10 +91,10 @@ elseif &background == "light"
   endif
 endif
 
-" autocmd BufEnter,BufRead,BufNewFile,FileType *.rkt call HighlightRacketOne()
-" function! HighlightRacketOne()
-"   source ~/.vim/rc/syntax-highlighting/one-racket.vim
-" endfunction
+autocmd BufEnter,BufRead,BufNewFile,FileType *.rkt call HighlightRacketOne()
+function! HighlightRacketOne()
+  source ~/.vim/rc/syntax-highlighting/one-racket.vim
+endfunction
 
 autocmd BufEnter,BufRead,BufNewFile,FileType *.rs call HighlightRustOneDark()
 function! HighlightRustOneDark()

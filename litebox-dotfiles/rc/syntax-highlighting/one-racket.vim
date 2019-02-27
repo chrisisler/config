@@ -1,5 +1,7 @@
 call clearmatches()
 
+set nocursorline nonumber laststatus=1
+
 let word = '[a-zA-Z0-9:_\-]\+'
 
 " highlight Red ctermfg=red
@@ -26,3 +28,6 @@ call matchadd("Parens2", '[\[\]]')
 highlight Comment ctermfg=15
 call matchadd("Comment", '#|\zs.*\ze|#$')
 call matchadd("Comment", '^\s*;\zs.*')
+
+highlight Args ctermfg=red
+call matchadd("Args", '(define\s\+(\S\+\s\+\zs[a-zA-Z0-9 :_\-]\+')
