@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Error if any subcommand fails.
-set -e
+set -eu
 
 addedChanges() {
   local status="$1"
@@ -69,14 +69,14 @@ main() {
   # local authorAndRepoName="$(git config --get remote.origin.url | sed -e "s/^.*://g")" # assumes git@github.com, not https
   # local isPrivate="$(isPrivate "$authorAndRepoName")"
 
-  # local porcelainStatus="$(git status --porcelain)"
-  # local added="$(addedChanges "$porcelainStatus")"
-  # local unadded="$(unaddedChanges "$porcelainStatus")"
-  # if [[ "$added" != "" && "$unadded" != "" ]]; then
-  #   local changes="${added} |${unadded}"
-  # else
-  #   local changes="${added}${unadded}"
-  # fi
+  local porcelainStatus="$(git status --porcelain)"
+  local added="$(addedChanges "$porcelainStatus")"
+  local unadded="$(unaddedChanges "$porcelainStatus")"
+  if [[ "$added" != "" && "$unadded" != "" ]]; then
+    local changes="${added} |${unadded}"
+  else
+    local changes="${added}${unadded}"
+  fi
 
   # http://vim.wikia.com/wiki/Entering_special_characters
   # local gitInfo=" $branchName$changes"
@@ -85,7 +85,8 @@ main() {
   # local gitInfo="[$branchName$changes]"
   # local gitInfo=" $isPrivate$branchName$changes"
   # local gitInfo=" $branchName$changes"
-  local gitInfo="$branchName"
+  local gitInfo="$branchName$changes"
+  # local gitInfo="$branchName"
   
   printf "$gitInfo"
 }

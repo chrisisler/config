@@ -247,7 +247,7 @@ setFlux() {
 }
 
 devbox() {
-  ps xc | grep -i docker &>/dev/null || open /Applications/Docker.app
+  ps xc | grep -i docker &>/dev/null || open /Applications/Docker.app &>/dev/null && printf "\nStarting Docker...\n"
 
   cd $HOME/Code/Docker/devbox && make run
 }

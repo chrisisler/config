@@ -1,7 +1,5 @@
 call clearmatches()
 
-set nocursorline nonumber laststatus=1
-
 let word = '[a-zA-Z0-9:_\-]\+'
 
 " highlight Red ctermfg=red
@@ -20,14 +18,14 @@ highlight Native ctermfg=4
 call matchadd("Native", '(\zsdefine\>')
 call matchadd("Native", '(\zslambda\>')
 
-highlight Parens ctermfg=12
-call matchadd("Parens", '[()]')
-highlight Parens2 ctermfg=magenta
-call matchadd("Parens2", '[\[\]]')
+" highlight Parens ctermfg=12
+" call matchadd("Parens", '[()]')
+" highlight Parens2 ctermfg=magenta
+" call matchadd("Parens2", '[\[\]]')
+
+highlight Args ctermfg=red
+call matchadd("Args", '(define\s\+(\S\+\s\+\zs[a-zA-Z0-9 :_\-]\+')
 
 highlight Comment ctermfg=15
 call matchadd("Comment", '#|\zs.*\ze|#$')
 call matchadd("Comment", '^\s*;\zs.*')
-
-highlight Args ctermfg=red
-call matchadd("Args", '(define\s\+(\S\+\s\+\zs[a-zA-Z0-9 :_\-]\+')

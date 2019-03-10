@@ -1,4 +1,4 @@
-call clearmatches()
+" call clearmatches()
 
 
 highlight rustArrowCharacter ctermfg=magenta

@@ -79,9 +79,14 @@ Plug 'machakann/vim-highlightedyank'
 " Plug 'EinfachToll/DidYouMean'
 " Plug 'godlygeek/tabular'
 " Plug 'junegunn/goyo.vim'
-" Plug 'yggdroot/indentline'
+Plug 'yggdroot/indentline'
 " Plug 'severin-lemaignan/vim-minimap'
 
+
+Plug 'amdt/vim-niji'
+
+" Niji breaks JavaScript
+let g:niji_matching_filetypes = ['racket']
 
 " ----- Broken plugins; these do NOT work -----
 " Plug 'junegunn/rainbow_parentheses.vim'
@@ -110,12 +115,6 @@ let g:tagbar_compact = 1
 nnoremap <silent> ,a :TagbarToggle<CR>
 
 function! TagbarStatusFunc(current, sort, fname, flags, ...) abort
-  " let colour = a:current ? '%#StatusLine#' : '%#StatusLineNC#'
-  " let flagstr = join(flags, '')
-  " if flagstr != ''
-  "   let flagstr = '[' . flagstr . '] '
-  " endif
-  " return colour . '[' . sort . '] ' . flagstr . fname
   return 'Overview'
 endfunction
 let g:tagbar_status_func = 'TagbarStatusFunc'
@@ -124,12 +123,12 @@ let g:tagbar_status_func = 'TagbarStatusFunc'
 " auto-pairs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" disable auto closing quotes for `.rkt` filetypes
+" TODO: disable auto closing quotes for `.rkt` filetypes
 if &filetype == "racket"
   let g:AutoPairsLoaded=0
 endif
 
-" automaticaly add closure thingies in rust
+" TODO: automaticaly add closure thingies in rust
 " autocmd FileType rust let g:AutoPairs['|']='|'
 " if &filetype == "rust"
 "     let g:AutoPairs['|']='|'
@@ -204,19 +203,23 @@ let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
 
 " hi IndentGuidesOdd  ctermbg=white
 " hi IndentGuidesEven ctermbg=white
-" let g:indent_guides_enable_on_vim_startup = 1
-" let g:indent_guides_guide_size = 1
-" let g:indent_guides_start_level = 2
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_guide_size = 1
+let g:indent_guides_start_level = 2
+let g:indent_guides_indent_levels = 10
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " indentline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" let g:indentLine_enabled=1
-" let g:indentLine_char='┊'
+let g:indentLine_enabled=1
+let g:indentLine_char='┊'
+let g:indentLine_first_char='┊'
 " let g:indentLine_char='│'
 " let g:indentLine_faster=1
-
+let g:indentLine_showFirstIndentLevel=1
+let g:indentLine_bufTypeExclude = ['help', 'terminal', 'json', 'racket', 'tagbar', 'markdown', 'Dockerfile']
+let g:vim_json_syntax_conceal = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " codi (live/inline evaluation)
@@ -309,7 +312,7 @@ let g:ale_enabled=1
 let g:ale_sign_error='✕'
 let g:ale_sign_warning='--'
 let g:ale_set_signs=1
-let g:ale_lint_delay=800
+let g:ale_lint_delay=1200
 let g:ale_fix_on_save=1
 let g:ale_open_list=0
 let g:ale_set_highlights=0

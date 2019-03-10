@@ -4,7 +4,7 @@
 " - RegExp
 " - Generics
 
-call clearmatches()
+" call clearmatches()
 
 let identifier = '\<\h\w*\>'
 " let beforeArrow = '(\_[^()]*)[^()]*\_s*=>'

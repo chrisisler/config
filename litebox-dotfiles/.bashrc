@@ -97,6 +97,7 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias text="node $HOME/Code/JS/Bin/text-cli/index.js"
 alias nocamera='sudo killall VDCAssistant ; echo "Cool. Now do $ sudo reboot"'
 alias nocmus='kill -9 "$(pgrep cmus)"'
 alias volume-0.001='osascript -e "set Volume 0.001"'

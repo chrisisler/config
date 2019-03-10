@@ -90,3 +90,10 @@ set lazyredraw
 " Make :Q and :W work like :q and :w
 command! W w
 command! Q q
+
+" See: http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+" See: https://youtu.be/ycMiMDHopNc?t=1294
+if executable('rg')
+  set grepprg=rg\ --no-heading\ --vimgrep
+  set grepformat=%f:%l:%c:%m
+endif

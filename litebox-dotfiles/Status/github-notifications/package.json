@@ -1,0 +1,20 @@
+{
+  "name": "github-notifications",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "semi": false,
+    "arrowParens": "avoid"
+  },
+  "dependencies": {
+    "execa": "^1.0.0",
+    "wavematch": "^1.2.0"
+  },
+  "devDependencies": {
+    "prettier": "^1.16.4"
+  }
+}

@@ -76,7 +76,7 @@ set statusline+=%{Modified()}
 set statusline+=%=
 
 " Errors and warnings
-set statusline+=%{LintStatus()}
+" set statusline+=%{LintStatus()}
 
 " Scope
 set statusline+=%{TagbarCurrentFunction()}

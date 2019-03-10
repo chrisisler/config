@@ -1,4 +1,4 @@
-call clearmatches()
+" call clearmatches()
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -6,7 +6,7 @@ call clearmatches()
 
 " keyword: this
 highlight javascriptIdentifier ctermfg=3 cterm=italic
-" highlight javascriptFuncArg ctermfg=6 cterm=italic
+highlight javascriptFuncArg ctermfg=6 cterm=italic
 
 
 highlight javascriptIdentifierName ctermfg=9
@@ -34,7 +34,6 @@ highlight javascriptExport ctermfg=darkmagenta cterm=italic
 " object keys (not es6 key/val sorthand)
 highlight javaScriptObjectLabel ctermfg=darkmagenta
 
-highlight javascriptBraces ctermfg=10
 
 " highlight javascriptComma ctermfg=cyan
 " spread/rest operator
@@ -132,6 +131,7 @@ highlight Bananas ctermfg=blue
 
 let parens = '[()]'
 call matchadd("Bananas", parens)
+highlight javascriptBraces ctermfg=10
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

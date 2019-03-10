@@ -13,8 +13,8 @@ getPandoraInfo() {
 
   local position="$(printf "$state" | grep "[Time]" | tail -1 | sed -e "s/^.* -//" -e "s/^0//" -e "s/\/0/\//")"
 
-  # local output="$song - $artist [$position]"
-  local output="$artist"
+  local output="$song - $artist [$position]"
+  # local output="$artist"
 
   printf "$output "
 }

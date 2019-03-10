@@ -51,7 +51,7 @@ highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 " do not show split separators
 highlight VertSplit ctermfg=bg ctermbg=bg
 
-highlight MatchParen ctermbg=bg ctermfg=NONE cterm=underline,bold
+highlight MatchParen ctermbg=bg ctermfg=red cterm=underline,reverse
 " highlight MatchParen ctermfg=bg ctermbg=12
 " highlight MatchParen cterm=bold,underline ctermfg=3 ctermbg=bg
 

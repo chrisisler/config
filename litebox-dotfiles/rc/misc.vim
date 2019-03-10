@@ -2,9 +2,12 @@
 
 
 " http://vim.wikia.com/wiki/Automatically_fitting_a_quickfix_window_height
-au FileType qf call AdjustWindowHeight(2, 12)
+
+au FileType qf call AdjustWindowHeight(2, 10)
 function! AdjustWindowHeight(minheight, maxheight)
-    exe max([min([line('$')+1, a:maxheight]), a:minheight]) . "wincmd _"
+    if !g:ale_open_list
+        exe max([min([line('$')+1, a:maxheight]), a:minheight]) . "wincmd _"
+    endif
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -75,22 +78,12 @@ endif
 autocmd BufEnter * if (winnr("$") ==1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-" runtime macros/matchit.vim
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
 au FileType qf setlocal wrap nonumber nocursorline colorcolumn= statusline=Info
 au FileType nerdtree setlocal nocursorline statusline=Explorer
-
-" https://github.com/junegunn/fzf/blob/master/README-VIM.md#hide-statusline
-" autocmd! FileType fzf
-" autocmd  FileType fzf set laststatus=0 noshowmode noruler
-"   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 
 " TODO
