@@ -73,7 +73,7 @@ call matchadd("Bananas", parens)
 
 " Builtins --------------------------------------------------------------------
 
-highlight javaScriptObjectLabel ctermfg=2
+" highlight javaScriptObjectLabel ctermfg=2
 " highlight javascriptFuncArg ctermfg=6 cterm=italic
 highlight Identifier ctermfg=magenta cterm=italic
 highlight javascriptBraces ctermfg=green

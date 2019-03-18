@@ -286,7 +286,7 @@ nnoremap <Leader>rkt<CR> :w<CR>:Dispatch racket %<CR>
 " Python
 " nnoremap <Leader>py<CR> :w<CR>:AsyncRun python %<CR>:copen<CR>:wincmd k<CR>
 nnoremap <Leader>py3<CR> :w<CR>:Dispatch python3 %<CR>
-nnoremap <Leader>py2<CR> :w<CR>:Dispatch python2.7 %<CR>
+nnoremap <Leader>py2<CR> :w<CR>:Dispatch python2 %<CR>
 
 " Java
 nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>

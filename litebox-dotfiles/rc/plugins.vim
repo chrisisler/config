@@ -57,8 +57,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
 Plug 'skywind3000/asyncrun.vim'
-Plug 'jmcantrell/vim-diffchanges'
-Plug 'rhysd/clever-f.vim'
+" Plug 'jmcantrell/vim-diffchanges'
+" Plug 'rhysd/clever-f.vim'
 " Plug 'easymotion/vim-easymotion'
 " Plug 'prettier/vim-prettier'
 
@@ -73,17 +73,17 @@ Plug 'ternjs/tern_for_vim', { 'for': 'javascript.jsx' }
 
 " ----- Random -----
 Plug 'airblade/vim-rooter'
-Plug 'metakirby5/codi.vim', { 'for': 'javascript.jsx' }
+" Plug 'metakirby5/codi.vim', { 'for': 'javascript.jsx' }
 Plug 'machakann/vim-highlightedyank'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'EinfachToll/DidYouMean'
 " Plug 'godlygeek/tabular'
 " Plug 'junegunn/goyo.vim'
-Plug 'yggdroot/indentline'
+" Plug 'yggdroot/indentline'
 " Plug 'severin-lemaignan/vim-minimap'
 
 
-Plug 'amdt/vim-niji'
+Plug 'amdt/vim-niji', { 'for': 'racket' }
 
 " Niji breaks JavaScript
 let g:niji_matching_filetypes = ['racket']

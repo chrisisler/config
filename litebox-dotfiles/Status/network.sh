@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e
+set -eu
 
 # printf " ⑇${qualityPercentage}"
 # ⋅⋮○●
@@ -11,8 +11,6 @@ wifi() {
   local qualityPercentage="$(printf "$wifiConfig" | grep "link quality" | sed -e "s/^.*://" | awk '{ print $1 }' | tr -d ' ')"
 
   local cwd="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-  # after feeling super cool writing this dank js script, alas: https://apple.stackexchange.com/a/238722
-  # local networkName="$(node "$cwd/network-wifi/network-wifi.js")"
   local networkWifiInfo="$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -I)"
   local networkName="$(printf "$networkWifiInfo" | grep -E "\bSSID\b" | awk '{ print $2 }')"
   local networkSpeed="$(printf "$networkWifiInfo" | grep -i "lastTxRate" | awk '{ print $2 }' | sed -e "s/$/Mbps/")"

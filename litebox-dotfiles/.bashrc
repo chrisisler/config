@@ -97,6 +97,7 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias nobrave='killall -9 "Brave Browser Beta"'
 alias text="node $HOME/Code/JS/Bin/text-cli/index.js"
 alias nocamera='sudo killall VDCAssistant ; echo "Cool. Now do $ sudo reboot"'
 alias nocmus='kill -9 "$(pgrep cmus)"'
