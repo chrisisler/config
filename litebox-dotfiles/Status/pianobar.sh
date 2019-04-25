@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# Error if any subcommand fails.
-set -e
+set -eu
 
 getPandoraInfo() {
   local state="$(cat ~/.config/pianobar/custom-out | tr "\r" "\n")"
@@ -12,10 +11,11 @@ getPandoraInfo() {
   # local songNoParens="$(printf "$song" | sed -e "s/(.*)//" -e "s/\[.*\]//" -e "s/[^0-9A-Za-z_ ]//")"
   local song="$(printf "$song" | sed -e "s/(.*)//" -e "s/\[.*\]//" -e "s/[^0-9A-Za-z/_ ]//" | xargs)"
 
-  # local position="$(printf "$state" | grep "[Time]" | tail -1 | sed -e "s/^.* -//" -e "s/^0//" -e "s/\/0/\//")"
+  local position="$(printf "$state" | grep "[Time]" | tail -1 | sed -e "s/^.* -//" -e "s/^0//" -e "s/\/0/\//")"
 
   # local output="$song - $artist [$position]"
-  local output="$song - $artist"
+  local output="$song"
+  # local output="$song - $artist"
   # local output="$artist"
 
   printf "$output "

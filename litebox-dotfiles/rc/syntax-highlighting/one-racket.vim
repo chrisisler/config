@@ -24,7 +24,7 @@ call matchadd("Native", '(\zslambda\>')
 " call matchadd("Parens2", '[\[\]]')
 
 highlight Args ctermfg=red
-call matchadd("Args", '(define\s\+(\S\+\s\+\zs[a-zA-Z0-9 :_\-]\+')
+call matchadd("Args", '(define\(\/\w\+\)\?\s\+(\S\+\s\+\zs[a-zA-Z0-9 :_\-]\+')
 
 highlight Comment ctermfg=15
 call matchadd("Comment", '#|\zs.*\ze|#$')

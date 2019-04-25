@@ -2,16 +2,17 @@
 
 const date = new Date()
 
-const abbreviatedWeekday = () => abbreviate(dayNumberToName(date.getDay()))
+const weekday = () => abbreviate(dayNumberToName(date.getDay()))
 const dayOfMonth = () => date.getDate()
 const monthName = () => abbreviate(monthNumberToName(date.getMonth()))
 const militaryHoursAndMinutes = () => getHours() + ':' + getMinutes()
 
 function main () {
   const currentTime
-    = abbreviatedWeekday()
+    = ''
+    + dayOfMonth()
     // + ' ' + monthName()
-    + ' ' + dayOfMonth()
+    + ' ' + weekday()
     + ' ' + militaryHoursAndMinutes()
   console.log(currentTime)
 }

@@ -11,7 +11,11 @@ highlight Typedef ctermfg=11 cterm=italic
 " `new` keyword
 highlight Operator ctermfg=magenta
 
-call matchadd("Operator", '\<null\>')
+" call matchadd("Operator", '\<null\>')
+call matchadd("Operator", '\<try\>\|\<catch\>\|\<while\>\|\<for\>')
+
+call matchadd("Number", '\<null\>')
+
 
 " Return Keyword --------------------------------------------------------------
 
@@ -31,6 +35,9 @@ highlight TypeName ctermfg=3 cterm=italic
 " " TypeName :: \zs\<\h\w*\>\ze\(<\<\h\w*\>>\)\?
 " "                --------- => the TypeNameImage
 " "                            ----------------- => Optional polymorphic param
+
+let exceptionPosition = 'catch\s\+(\zs\<\h\w\+\>\ze\s\+'
+call matchadd("TypeName", exceptionPosition)
 
 let instanceOfPosition = '\<instanceof\>\s\+\zs\<\h\w*\>'
 call matchadd("TypeName", instanceOfPosition)
@@ -114,4 +121,3 @@ highlight Comments ctermfg=white cterm=italic
 call matchadd("Comments", '^//\zs.*')
 call matchadd("Comments", '\s\+//\zs.*')
 call matchadd("Comments", '^\s\+\*\s\+\zs[^{@].*')
-

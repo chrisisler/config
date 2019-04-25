@@ -15,7 +15,7 @@ Plug 'othree/es.next.syntax.vim', { 'for': 'javascript.jsx' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-Plug 'wlangstroth/vim-racket', { 'for': 'racket' }
+Plug 'wlangstroth/vim-racket', { 'for': 'racket', 'commit': '365a2aff8fa1d08fc8ab4ab9b1cff27d87d86fbf' }
 " Plug 'pangloss/vim-javascript'
 " Plug 'jparise/vim-graphql'
 " Plug 'posva/vim-vue'
@@ -56,9 +56,9 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
-Plug 'skywind3000/asyncrun.vim'
+Plug 'rhysd/clever-f.vim'
+" Plug 'skywind3000/asyncrun.vim'
 " Plug 'jmcantrell/vim-diffchanges'
-" Plug 'rhysd/clever-f.vim'
 " Plug 'easymotion/vim-easymotion'
 " Plug 'prettier/vim-prettier'
 
@@ -66,7 +66,8 @@ Plug 'skywind3000/asyncrun.vim'
 " ----- Completion -----
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
-Plug 'shougo/neocomplete.vim'
+" Plug 'shougo/neocomplete.vim'
+" Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'sirver/ultisnips'
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript.jsx' }
 
@@ -83,7 +84,12 @@ Plug 'machakann/vim-highlightedyank'
 " Plug 'severin-lemaignan/vim-minimap'
 
 
+" A rainbow parenthesis plugin that finally works!
 Plug 'amdt/vim-niji', { 'for': 'racket' }
+
+" if &filetype == "scheme"
+"   set filetype=racket
+" endif
 
 " Niji breaks JavaScript
 let g:niji_matching_filetypes = ['racket']
@@ -106,6 +112,9 @@ call plug#end()
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 
+
+let g:highlightedyank_highlight_duration = 500
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -123,10 +132,7 @@ let g:tagbar_status_func = 'TagbarStatusFunc'
 " auto-pairs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" TODO: disable auto closing quotes for `.rkt` filetypes
-if &filetype == "racket"
-  let g:AutoPairsLoaded=0
-endif
+" TODO: disable auto closing single-quotes for `.rkt` filetypes
 
 " TODO: automaticaly add closure thingies in rust
 " autocmd FileType rust let g:AutoPairs['|']='|'
@@ -147,8 +153,8 @@ endif
 autocmd FileType java setlocal omnifunc=javacomplete#Complete
 
 let g:JavaComplete_EnableDefaultMappings = 0 
-let g:JavaComplete_LibsPath = "/Users/litebox/Main/Uni/Compilers/Project-2/j--/lib"
-let g:JavaComplete_SourcesPath = "/Users/litebox/Main/Uni/Compilers/Project-2/j--/src/jminusminus"
+" let g:JavaComplete_LibsPath = "/Users/litebox/Main/Uni/Compilers/Project-2/j--/lib"
+" let g:JavaComplete_SourcesPath = "/Users/litebox/Main/Uni/Compilers/Project-2/j--/src/jminusminus"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Goyo (distraction free)
@@ -194,7 +200,7 @@ let g:rustfmt_fail_silently = 0
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:racer_experimental_completer = 1
-let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
+" let g:racer_cmd = "/Users/litebox/.cargo/bin/racer"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -312,7 +318,7 @@ let g:ale_enabled=1
 let g:ale_sign_error='✕'
 let g:ale_sign_warning='--'
 let g:ale_set_signs=1
-let g:ale_lint_delay=1200
+let g:ale_lint_delay=2000
 let g:ale_fix_on_save=1
 let g:ale_open_list=0
 let g:ale_set_highlights=0
@@ -349,7 +355,7 @@ let g:ale_linters={
 " fzf (fuzzy finder (better than ctrl-p plugin)) - best plugin ever!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:fzf_layout = { 'down': '~25%' }
+let g:fzf_layout = { 'down': '~35%' }
 
 " https://github.com/junegunn/fzf.vim
 " mappings for fzf plugin
@@ -385,16 +391,16 @@ nnoremap <C-m> :Maps<CR>
 inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 " Enabled?
-let g:neocomplete#enable_at_startup=1
+let g:neocomplete#enable_at_startup=0
 
 " refreshes candidates automatically, setting to 1 increases screen flicker
 let g:neocomplete#enable_refresh_always=0
 
 " if getting completion options is longer than this time than skip it.
 let g:neocomplete#skip_auto_completion_time="0.3"
-let g:neocomplete#auto_complete_delay=150
+let g:neocomplete#auto_complete_delay=100
 let g:neocomplete#enable_smart_case=1
-let g:neocomplete#max_list=16
+let g:neocomplete#max_list=12
 let g:neocomplete#sources#syntax#min_keyword_length=2
 let g:neocomplete#enable_auto_close_preview=0
 " Define dictionary.

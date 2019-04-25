@@ -115,13 +115,13 @@ call matchadd("Red", '\<\h\w*\>\.\zs\<\h\w*\>')
 call matchadd("Red", ']\.\zs\<\h\w*\>')
 
 
-highlight GoldenItalic ctermfg=3 cterm=italic
-call matchadd("GoldenItalic", '\<self\>')
+" highlight GoldenItalic ctermfg=3 cterm=italic
+" call matchadd("GoldenItalic", '\<self\>')
 
 
-highlight Golden ctermfg=3
-call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
-call matchadd("Golden", '\<window\>')
+" highlight Golden ctermfg=3
+" call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
+" call matchadd("Golden", '\<window\>')
 " jsx customs
 " call matchadd("Golden", '<\zs\<\u\w*\>')
 " call matchadd("Golden", '\<__dirname\>')

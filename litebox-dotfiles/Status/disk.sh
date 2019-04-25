@@ -5,7 +5,9 @@ set -eu
 available() {
   local avail="$(df -kHl | grep "/$" | awk '{ print $4 }')"
 
-  [[ "$(printf "$avail" | sed -e "s/[a-zA-Z]//g")" -gt 5 ]] && exit 0
+  # If more than `N` gigs left, don't print anything
+  local N="5"
+  [[ "$(printf "$avail" | sed -e "s/[a-zA-Z]//g" | sed -e "s/\..*//g")" -gt "$N" ]] && exit 0
 
   printf "$avail "
 }

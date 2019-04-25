@@ -16,10 +16,10 @@ wifi() {
   local networkSpeed="$(printf "$networkWifiInfo" | grep -i "lastTxRate" | awk '{ print $2 }' | sed -e "s/$/Mbps/")"
 
   if [[ "$qualityPercentage" -eq "100" ]]; then
-    printf " ${networkName}"
-    # printf " ${networkName}|${networkSpeed}"
+    printf "$networkName"
+    # printf "$networkName|$networkSpeed"
   else
-    printf " ${networkName}|${qualityPercentage}|${networkSpeed}"
+    printf "$networkName|$qualityPercentage|$networkSpeed"
   fi
 }
 

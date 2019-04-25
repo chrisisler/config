@@ -51,7 +51,7 @@ export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # The '&' is a special pattern which suppresses duplicate entries.
 export HISTIGNORE=$'[ \t]*:&:[fb]g:exit:ls' # Ignore the ls command as well
 
-export EDITOR="vim"
+export EDITOR="/usr/local/Cellar/vim/*/bin/vim"
 
 # Add sqlite to path
 export PATH="/usr/local/opt/sqlite/bin:$PATH"
@@ -97,6 +97,9 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias cs="cd $HOME/Main/Uni/CS-450 && $lslaVar"
+alias mplay='mplayer -slices -loop 0 -really-quiet -lavdopts fast:threads=16 -ao coreaudio -vo caca "$1"'
+alias stats='glances --fahrenheit --disable-check-update --process-short-name'
 alias nobrave='killall -9 "Brave Browser Beta"'
 alias text="node $HOME/Code/JS/Bin/text-cli/index.js"
 alias nocamera='sudo killall VDCAssistant ; echo "Cool. Now do $ sudo reboot"'
@@ -109,18 +112,18 @@ alias mute='osascript -e "set Volume 0"'
 alias cat="bat"
 alias nodocker='killall -9 Docker'
 alias dockerd='open /Applications/Docker.app "$@"'
-alias docker-clean-images="docker images -a | grep \"<none>\" | awk '{ print \$3 }' | xargs docker rmi -f"
+alias docker-clean-images="docker images -a | grep \"<none>\" | awk '{ print \$3 }' | xargs docker rmi -f 2>/dev/null"
 alias wifi="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport \"$@\""
 alias ll="exa --all --header --git --group-directories-first"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
-alias weeconf="vim ~/.weechat/weechat.conf"
+alias weeconf="${EDITOR} ~/.weechat/weechat.conf"
 alias irc="weechat"
 alias status="cd ${codeDir}/Status && ${lslaVar}"
 alias desk="cd ~/Desktop"
 alias back="cd -"
 alias discreet="$@ ; history -d $(history 1)"
 alias clean='killall -9 JavaUpdater iTunesHelper'
-alias sandbox="cd ${codeDir}/JS/Bin/Sandbox/ && vim ./sandbox.js"
+alias sandbox="cd ${codeDir}/JS/Bin/Sandbox/ && ${EDITOR} ./sandbox.js"
 alias datefmt='date "+%Y-%m-%d_%H:%M"'
 alias brew-latest="brew update && brew upgrade --fetch-HEAD && brew cleanup -s"
 alias w="cd ${codeDir}/Git/wavematch && ${lslaVar}"
@@ -140,7 +143,7 @@ alias bad="cd ~/Main/Bin/Bad && ${lslaVar}"
 alias q="exit"
 alias vim="/usr/local/Cellar/vim/*/bin/vim $@"
 alias v="vim"
-alias rcconf="vim ~/.config/ranger/rc.conf"
+# alias rcconf="${EDITOR} ~/.config/ranger/rc.conf"
 alias safe="md /tmp/safe && cd /tmp/safe && ${lslaVar}"
 alias cd..="cd .."
 alias ..="cd .. && ${lslaVar}"
@@ -148,7 +151,7 @@ alias ...="cd ../.. && ${lslaVar}"
 alias ....="cd ../../.. && ${lslaVar}"
 alias .....="cd ../../../.. && ${lslaVar}"
 alias ......="cd ../../../../.. && ${lslaVar}"
-alias test="cd ${codeDir}/Test && vim ./Test.js"
+alias test="cd ${codeDir}/Test && ${EDITOR} ./Test.js"
 alias main="cd ${mainDir} && ${lslaVar}"
 alias conf="cd ${codeDir}/Git/config && ${lslaVar}"
 alias parse="cd ${codeDir}/Status && ${lslaVar}"
@@ -166,13 +169,13 @@ alias rmi="rm -irv"
 alias rmf="rm -frv"
 alias rm="rm -rv"
 alias mv="mv -iv"
-alias cvimrc="vim ~/.cvimrc"
-alias brc="vim ~/.bashrc"
+alias cvimrc="${EDITOR} ~/.cvimrc"
+alias brc="${EDITOR} ~/.bashrc"
 alias sbrc="clear && source ~/.bashrc"
-alias vrc="vim ~/.vimrc"
-alias tmuxconf="vim ~/.tmux.conf"
-alias tmuxline="vim ~/.tmux/tmuxline.conf"
-alias rangerrc="vim ~/.config/ranger/rc.conf"
+alias vrc="${EDITOR} ~/.vimrc"
+alias tmuxconf="${EDITOR} ~/.tmux.conf"
+alias tmuxline="${EDITOR} ~/.tmux/tmuxline.conf"
+alias rangerrc="${EDITOR} ~/.config/ranger/rc.conf"
 alias tmuxtemp="clear ; tmux attach -t Temp $* &>/dev/null || tmux new -s Temp $*"
 alias tt="tmuxtemp"
 alias t="clear ; tmux attach -t All $@ &>/dev/null || tmux new -s All $@"
@@ -224,7 +227,7 @@ time24h="\A"
 color="\[\e[0;35m\]"
 reset="\[\e[0m\]"
 export PS1="\n${color}${dir}${reset} "
-# export PS1="\n${blueBg} ${time24h} ${dir} ${blue}${reset} "
+# export PS1="\n${blueBg} ${dir} ${blue}${reset} "
 # export PS1="\n${blue}[${reset}${time24h}${blue}] ${cyan}${dir}${reset} "
 # export PS1="\n${time24h} ${cyan}${dir}${reset} "
 

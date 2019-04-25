@@ -6,9 +6,16 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" https://vimrcfu.com/snippet/77
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 " keep selected text selected when fixing indentation
 vnoremap < <gv
 vnoremap > >gv
+
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <LT>gv
 
 nnoremap `` ``zz
 
@@ -127,8 +134,10 @@ nnoremap <silent> <Leader>k :wincmd k<CR>
 nnoremap <silent> <Leader>l :wincmd l<CR>
 
 " Move horizontal splits to vertical splits
-nnoremap <silent> <Leader>O <C-w>t <C-w>K
-nnoremap <silent> <Leader>o <C-w>t <C-w>H
+nnoremap <silent> <Leader>O <C-w>K
+nnoremap <silent> <Leader>o <C-w>H
+" nnoremap <silent> <Leader>O <C-w>t <C-w>K
+" nnoremap <silent> <Leader>o <C-w>t <C-w>H
 
 " Delete current buffer.
 nnoremap <silent> <Leader>q<CR> :bdelete %<CR>
@@ -267,7 +276,7 @@ nnoremap <silent> <Leader>" :set relativenumber!<CR>
 " nnoremap <silent> <Leader>rs<CR> :w<CR>:AsyncRun cargo run % --color=never --quiet<CR> :copen<CR>:wincmd k<CR>
 nnoremap <silent> <Leader>rs1 :w<CR>:Dispatch rustc % --out-dir %:p:h<CR>
 nnoremap <silent> <Leader>rs2 :w<CR>:Dispatch %:p:r<CR>
-nnoremap <silent> <Leader>rst :w<CR>:AsyncRun cargo test --color=never<CR>:copen<CR>:wincmd k<CR>
+" nnoremap <silent> <Leader>rst :w<CR>:AsyncRun cargo test --color=never<CR>:copen<CR>:wincmd k<CR>
 
 " Custom dispatch call
 nnoremap <Leader>d<CR> :Dispatch 
@@ -289,8 +298,10 @@ nnoremap <Leader>py3<CR> :w<CR>:Dispatch python3 %<CR>
 nnoremap <Leader>py2<CR> :w<CR>:Dispatch python2 %<CR>
 
 " Java
-nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
-nnoremap <Leader>j2<CR> :w<CR>:AsyncRun java %:t:r<CR>:copen<CR>:wincmd k<CR>
+nnoremap <Leader>j1<CR> :w<CR>:Dispatch javac %<CR>:copen<CR>
+nnoremap <Leader>j2<CR> :w<CR>:Dispatch java %:t:r<CR>:copen<CR>
+" nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
+" nnoremap <Leader>j2<CR> :w<CR>:AsyncRun java %:t:r<CR>:copen<CR>:wincmd k<CR>
 
 " C#
 " nnoremap <Leader>cs<CR> :w<CR>:AsyncRun csc /nologo /t:exe %<CR>:copen<CR>:wincmd k<CR>
