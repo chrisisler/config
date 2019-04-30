@@ -68,9 +68,6 @@ export PATH="$(echo "$PATH" | tr ":" "\n" | sort | uniq | tr "\n" ":")"
 # Sources ######################################################################
 ################################################################################
 
-# For `devbox` command (to pop into the devbox):
-# source ~/Code/Docker/devbox/dotfiles/devbox-scripts.sh
-
 source ~/.bash_profile
 
 # Custom
@@ -97,8 +94,9 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
-alias cs="cd $HOME/Main/Uni/CS-450 && $lslaVar"
+alias mplay2='mplayer -loop 0 -really-quiet -lavdopts fast:threads=16 -ao NONE -vo caca "$1"'
 alias mplay='mplayer -slices -loop 0 -really-quiet -lavdopts fast:threads=16 -ao coreaudio -vo caca "$1"'
+alias cs="cd $HOME/Main/Uni/CS-450 && $lslaVar"
 alias stats='glances --fahrenheit --disable-check-update --process-short-name'
 alias nobrave='killall -9 "Brave Browser Beta"'
 alias text="node $HOME/Code/JS/Bin/text-cli/index.js"

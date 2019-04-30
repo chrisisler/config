@@ -74,7 +74,7 @@ Plug 'ternjs/tern_for_vim', { 'for': 'javascript.jsx' }
 
 " ----- Random -----
 Plug 'airblade/vim-rooter'
-" Plug 'metakirby5/codi.vim', { 'for': 'javascript.jsx' }
+Plug 'metakirby5/codi.vim', { 'for': 'javascript.jsx' }
 Plug 'machakann/vim-highlightedyank'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'EinfachToll/DidYouMean'
@@ -85,14 +85,14 @@ Plug 'machakann/vim-highlightedyank'
 
 
 " A rainbow parenthesis plugin that finally works!
-Plug 'amdt/vim-niji', { 'for': 'racket' }
+Plug 'amdt/vim-niji', { 'for': ['javascript', 'racket'] }
 
 " if &filetype == "scheme"
 "   set filetype=racket
 " endif
 
 " Niji breaks JavaScript
-let g:niji_matching_filetypes = ['racket']
+let g:niji_matching_filetypes = ['racket', 'javascript']
 
 " ----- Broken plugins; these do NOT work -----
 " Plug 'junegunn/rainbow_parentheses.vim'
