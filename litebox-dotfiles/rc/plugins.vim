@@ -66,7 +66,7 @@ Plug 'rhysd/clever-f.vim'
 " ----- Completion -----
 Plug 'jiangmiao/auto-pairs'
 Plug 'ervandew/supertab'
-" Plug 'shougo/neocomplete.vim'
+Plug 'shougo/neocomplete.vim'
 " Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'sirver/ultisnips'
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript.jsx' }
@@ -309,8 +309,8 @@ let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 " ale
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:ale_lint_on_text_changed='always'
-" let g:ale_lint_on_text_changed='never'
+" let g:ale_lint_on_text_changed='always'
+let g:ale_lint_on_text_changed='never'
 " let g:ale_lint_on_save = 0
 " let g:ale_lint_on_enter = 0
 
@@ -391,7 +391,7 @@ nnoremap <C-m> :Maps<CR>
 inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 " Enabled?
-let g:neocomplete#enable_at_startup=0
+let g:neocomplete#enable_at_startup=1
 
 " refreshes candidates automatically, setting to 1 increases screen flicker
 let g:neocomplete#enable_refresh_always=0

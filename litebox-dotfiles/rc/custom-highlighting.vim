@@ -96,6 +96,11 @@ function! HighlightRacketOne()
   source ~/.vim/rc/syntax-highlighting/one-racket.vim
 endfunction
 
+autocmd BufEnter,BufRead,BufNewFile,FileType *.py call HighlightPython()
+function! HighlightPython()
+  source ~/.vim/rc/syntax-highlighting/custom-python.vim
+endfunction
+
 autocmd BufEnter,BufRead,BufNewFile,FileType *.rs call HighlightRustOneDark()
 function! HighlightRustOneDark()
   source ~/.vim/rc/syntax-highlighting/onedark-rust.vim

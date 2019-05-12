@@ -1,4 +1,4 @@
-call clearmatches()
+" call clearmatches()
 
 let identifier = '\<\h\w*\>'
 

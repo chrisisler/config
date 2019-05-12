@@ -6,6 +6,7 @@ set nocompatible
 set tabstop=2
 set shiftwidth=2
 
+set synmaxcol=300
 set belloff+=ctrlg " If Vim beeps during completion
 set softtabstop=0
 set autoindent                 " auto indent new lines
@@ -27,8 +28,6 @@ set nojoinspaces               " prevents inserting 2 spaces when joining
 set splitright                 " put new vertically split windows to the right of current
 set splitbelow                 " put new split windows to bottom of current
 autocmd VimEnter * set laststatus=2 " force set 0 on start. display status line always?
-
-set showtabline=0              " Display list of buffers at the top
 
 set shortmess+=c
 set showfulltag                " display more info when auto-completing

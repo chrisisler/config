@@ -94,6 +94,8 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias arc="$EDITOR $HOME/.config/alacritty/alacritty.yml"
+alias commits="git reflog | head - 20"
 alias mplay2='mplayer -loop 0 -really-quiet -lavdopts fast:threads=16 -ao NONE -vo caca "$1"'
 alias mplay='mplayer -slices -loop 0 -really-quiet -lavdopts fast:threads=16 -ao coreaudio -vo caca "$1"'
 alias cs="cd $HOME/Main/Uni/CS-450 && $lslaVar"

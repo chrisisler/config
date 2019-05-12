@@ -53,7 +53,8 @@ parseCmusOutput()
     local isShuffle="$(getDataFromCmus "$cmusData" "set shuffle")"
     local isRepeat="$(getDataFromCmus "$cmusData" "set repeat")"
 
-    printf "$songTitle "
+    # printf "$songTitle "
+    printf "$songTitle $songPositionFormatted/$songDurationFormatted "
     # printf "$artistName "
     # printf "$artistName - $songTitle "
     # printf "$artistName - $songTitle $songPositionFormatted/$songDurationFormatted "

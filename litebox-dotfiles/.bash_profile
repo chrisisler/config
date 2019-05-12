@@ -12,3 +12,4 @@
 export PATH="/Library/Frameworks/Python.framework/Versions/3.6/bin:${PATH}"export PATH="/usr/local/opt/openssl/bin:$PATH"
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="/usr/local/opt/node@10/bin:$PATH"

@@ -7,8 +7,9 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " https://vimrcfu.com/snippet/77
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
+" Move highlighted blocks up and down
+vnoremap J :m '>+1<CR>gv
+vnoremap K :m '<-2<CR>gv
 
 " keep selected text selected when fixing indentation
 vnoremap < <gv
@@ -18,6 +19,12 @@ vnoremap <Tab> >gv
 vnoremap <S-Tab> <LT>gv
 
 nnoremap `` ``zz
+
+" (Experimental) Auto-indent pasted code (see `:h =`).
+nnoremap P P==
+nnoremap p p==
+vnoremap P P=
+vnoremap p p=
 
 " Go to next/previous buffer.
 nnoremap <silent> ] :silent bn<CR>
@@ -88,12 +95,6 @@ nnoremap E 5kzz
 nnoremap D 5jzz
 
 " nnoremap <C-a> ggVG
-
-" (Experimental) Auto-indent pasted code (see `:h =`).
-nnoremap P P==
-nnoremap p p==
-vnoremap P P=
-vnoremap p p=
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "

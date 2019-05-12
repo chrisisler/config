@@ -20,13 +20,13 @@ function! LintStatus() abort
 endfunction
 
 function! BufferInfo() abort
-  let l:buffers = len(getbufinfo({'buflisted':1}))
+  let l:buffers = len(getbufinfo({ 'buflisted': 1 }))
   let l:bufferNumber = bufnr('%')
   " return l:buffers == 1 ? '' : printf('#%s of %s |', bufferNumber, buffers)
   " return l:buffers == 1 ? '' : printf('%s | #%s', buffers, bufferNumber)
   " return l:buffers == 1 ? '' : printf('#%s |', bufferNumber)
   " return l:buffers == 1 ? '' : printf('#%s', bufferNumber)
-  return l:buffers == 1 ? '' : printf('| Buf %s', bufferNumber)
+  return l:buffers == 1 ? '' : printf('Buf %s', bufferNumber)
 endfunction
 
 function! Modified() abort
@@ -82,7 +82,16 @@ set statusline+=%=
 " set statusline+=%{TagbarCurrentFunction()}
 
 " Show line and column numbers
-" set statusline+=Ln\ %l\ Col\ %c\ %{BufferInfo()}
+set statusline+=Ln\ %l\ Col\ %c
 " set statusline+=Ln\ %l\ Col\ %c\
 " set statusline+=%l:%c\ 
 " set statusline+=%{Spaces()}\ 
+
+" Tabline (Status bar at top) -------------------------------------------------
+
+set showtabline=0
+
+" " Clear
+set tabline=
+
+" set tabline+=\ %f

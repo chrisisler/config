@@ -16,7 +16,7 @@ highlight javascriptIdentifierName ctermfg=9
 highlight javascriptVariable ctermfg=magenta cterm=italic
 
 " async/await
-highlight javascriptAwaitFuncKeyword ctermfg=3 cterm=italic
+highlight javascriptAwaitFuncKeyword ctermfg=magenta
 call matchadd("javascriptAwaitFuncKeyword", '\<async\>\ze\s\+')
 
 highlight javascriptClassKeyword ctermfg=magenta cterm=italic
@@ -24,9 +24,10 @@ highlight javascriptTry ctermfg=magenta cterm=italic
 " highlight javascriptArrowFunc ctermfg=magenta
 
 
-highlight javascriptClassExtends ctermfg=darkmagenta cterm=italic
+highlight javascriptClassExtends ctermfg=magenta cterm=italic
 highlight javascriptImport ctermfg=darkmagenta cterm=italic
 highlight javascriptReturn ctermfg=magenta cterm=italic,underline
+call matchadd("javascriptReturn", '\<throw\>\ze\s\+')
 
 " keywords: default, export
 highlight javascriptExport ctermfg=darkmagenta cterm=italic
@@ -119,7 +120,8 @@ call matchadd("Red", ']\.\zs\<\h\w*\>')
 " call matchadd("GoldenItalic", '\<self\>')
 
 
-" highlight Golden ctermfg=3
+highlight Golden ctermfg=3
+call matchadd("Golden", 'const \zs\<\h\w\+\>\ze = require(')
 " call matchadd("Golden", 'new\s\+\zs\<[A-Z]\w*\>\ze(')
 " call matchadd("Golden", '\<window\>')
 " jsx customs
@@ -127,11 +129,11 @@ call matchadd("Red", ']\.\zs\<\h\w*\>')
 " call matchadd("Golden", '\<__dirname\>')
 " call matchadd("Golden", '\<__filename\>')
 
-highlight Bananas ctermfg=blue
+" highlight Bananas ctermfg=blue
 
-let parens = '[()]'
-call matchadd("Bananas", parens)
-highlight javascriptBraces ctermfg=10
+" let parens = '[()]'
+" call matchadd("Bananas", parens)
+" highlight javascriptBraces ctermfg=10
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
