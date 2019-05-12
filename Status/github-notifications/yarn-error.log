@@ -1,0 +1,43 @@
+Arguments: 
+  /usr/local/Cellar/node/11.10.0/bin/node /usr/local/Cellar/yarn/1.13.0/libexec/bin/yarn.js add execa
+
+PATH: 
+  /Users/litebox/.cargo/bin:/usr/local/opt/openssl/bin:/Users/litebox/.cargo/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin::/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Users/litebox/.cargo/bin:/bin:/opt/X11/bin:/sbin:/usr/bin:/usr/local/bin:/usr/local/opt/openssl/bin:/usr/local/opt/sqlite/bin:/usr/local/share/dotnet:/usr/sbin:
+
+Yarn version: 
+  1.13.0
+
+Node version: 
+  11.10.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/litebox/Code/Status/github-notifications/package.json: Unexpected string in JSON at position 101
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:1625:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:304:30)
+      at /usr/local/Cellar/yarn/1.13.0/libexec/lib/cli.js:315:13
+
+npm manifest: 
+  {
+    "name": "github-notifications",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT"
+    "prettier": {
+      "singleQuote": true,
+      "trailingComma": "none",
+      "bracketSpacing": true,
+      "semi": false,
+      "arrowParens": "avoid"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
