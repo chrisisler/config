@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# http://vim.wikia.com/wiki/Entering_special_characters
+
 # Error if any subcommand fails.
 set -eu
 
@@ -50,7 +52,7 @@ branchName() {
 }
 
 isPrivate() {
-  # Requires $1 to be: "autherName/repoName"
+  # Requires $1 to be: "authorName/repoName"
   # Usage: isPrivate facebook/react
 
   url="$1"
@@ -65,28 +67,15 @@ main() {
   [ ! -d .git ] && return 1
 
   local branchName="$(branchName)"
-
+  local repoName="$(basename "$(git rev-parse --show-toplevel)")"
   # local authorAndRepoName="$(git config --get remote.origin.url | sed -e "s/^.*://g")" # assumes git@github.com, not https
   # local isPrivate="$(isPrivate "$authorAndRepoName")"
-
   local porcelainStatus="$(git status --porcelain)"
   local added="$(addedChanges "$porcelainStatus")"
   local unadded="$(unaddedChanges "$porcelainStatus")"
-  if [[ "$added" != "" && "$unadded" != "" ]]; then
-    local changes="${added} |${unadded}"
-  else
-    local changes="${added}${unadded}"
-  fi
+  local changes="$added$unadded"
 
-  # http://vim.wikia.com/wiki/Entering_special_characters
-  # local gitInfo=" $branchName$changes"
-  local gitInfo="$branchName$changes"
-  # local gitInfo="[$branchName]$changes"
-  # local gitInfo="[$branchName$changes]"
-  # local gitInfo=" $isPrivate$branchName$changes"
-  # local gitInfo=" $branchName$changes"
-  # local gitInfo="$branchName$changes"
-  # local gitInfo="$branchName"
+  local gitInfo="$repoName:$branchName$changes"
   
   printf "$gitInfo"
 }

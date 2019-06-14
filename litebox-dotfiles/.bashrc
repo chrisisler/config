@@ -85,7 +85,7 @@ fi
 # lslaVar="ls -oFGHhA" # Can remove H
 # lslaVar="ls -AGF"
 # lslaVar="ls -AGFlh"
-lslaVar="exa --all --long --header --git --group-directories-first --colour-scale"
+lslaVar="exa --all --long --time=accessed --header --level=3 --git --git-ignore --group-directories-first --colour-scale"
 mainDir="${HOME}/Main"
 academicDir="${mainDir}/Uni"
 codeDir="${HOME}/Code"
@@ -94,6 +94,8 @@ codeDir="${HOME}/Code"
 # Aliases ######################################################################
 ################################################################################
 
+alias di="docker images $@"
+alias gp="git push $@"
 alias arc="$EDITOR $HOME/.config/alacritty/alacritty.yml"
 alias commits="git reflog | head - 20"
 alias mplay2='mplayer -loop 0 -really-quiet -lavdopts fast:threads=16 -ao NONE -vo caca "$1"'
@@ -112,14 +114,15 @@ alias mute='osascript -e "set Volume 0"'
 alias cat="bat"
 alias nodocker='killall -9 Docker'
 alias dockerd='open /Applications/Docker.app "$@"'
-alias docker-clean-images="docker images -a | grep \"<none>\" | awk '{ print \$3 }' | xargs docker rmi -f 2>/dev/null"
+alias docker-clean='docker images --quiet --filter "dangling=true" | xargs docker rmi'
+alias docker-force-clean="docker images -a | grep \"<none>\" | awk '{ print \$3 }' | xargs docker rmi -f 2>/dev/null"
 alias wifi="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport \"$@\""
 alias ll="exa --all --header --git --group-directories-first"
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias weeconf="${EDITOR} ~/.weechat/weechat.conf"
 alias irc="weechat"
 alias status="cd ${codeDir}/Status && ${lslaVar}"
-alias desk="cd ~/Desktop"
+alias desk="cd ~/Desktop && $lslaVar"
 alias back="cd -"
 alias discreet="$@ ; history -d $(history 1)"
 alias clean='killall -9 JavaUpdater iTunesHelper'
@@ -216,24 +219,56 @@ alias clock='watch -t -n1 "date +%T|figlet"'
 # Prompt #######################################################################
 ################################################################################
 
+
 dir="\w"
 time24h="\A"
 
-# ${orange}¤${reset} "
+# reset="\[\e[0m\]"
 
+txtblk='\e[0;30m' # Black - Regular
+txtred='\e[0;31m' # Red
+txtgrn='\e[0;32m' # Green
+txtylw='\e[0;33m' # Yellow
+txtblu='\e[0;34m' # Blue
+txtpur='\e[0;35m' # Purple
+txtcyn='\e[0;36m' # Cyan
+txtwht='\e[0;37m' # White
+bldblk='\e[1;30m' # Black - Bold
+bldred='\e[1;31m' # Red
+bldgrn='\e[1;32m' # Green
+bldylw='\e[1;33m' # Yellow
+bldblu='\e[1;34m' # Blue
+bldpur='\e[1;35m' # Purple
+bldcyn='\e[1;36m' # Cyan
+bldwht='\e[1;37m' # White
+undblk='\e[4;30m' # Black - Underline
+undred='\e[4;31m' # Red
+undgrn='\e[4;32m' # Green
+undylw='\e[4;33m' # Yellow
+undblu='\e[4;34m' # Blue
+undpur='\e[4;35m' # Purple
+undcyn='\e[4;36m' # Cyan
+undwht='\e[4;37m' # White
+bakblk='\e[40m'   # Black - Background
+bakred='\e[41m'   # Red
+bakgrn='\e[42m'   # Green
+bakylw='\e[43m'   # Yellow
+bakblu='\e[44m'   # Blue
+bakpur='\e[45m'   # Purple
+bakcyn='\e[46m'   # Cyan
+bakwht='\e[47m'   # White
+reset='\e[0m'    # Text Reset
+
+export PS1="\n[$txtblu$time24h$reset] $txtylw$dir$reset ${txtred}|$reset "
+
+# https://github.com/ryanoasis/powerline-extra-symbols
+# export PS1="\n${blueBg} ${dir} ${blue}${reset} "
+# export PS1="\n${color}${dir}${reset} "
+# export PS1="\n${blue}[${reset}${time24h}${blue}] ${cyan}${dir}${reset} "
+# export PS1="\n${time24h} ${cyan}${dir}${reset} "
+# export PS1="\n${red}${dir}${reset} ${orange}»»${reset} "
 # if [[ -z "$TMUX" ]]; then
 # fi
 
-color="\[\e[0;35m\]"
-reset="\[\e[0m\]"
-export PS1="\n${color}${dir}${reset} "
-# export PS1="\n${blueBg} ${dir} ${blue}${reset} "
-# export PS1="\n${blue}[${reset}${time24h}${blue}] ${cyan}${dir}${reset} "
-# export PS1="\n${time24h} ${cyan}${dir}${reset} "
-
-# https://github.com/ryanoasis/powerline-extra-symbols
-
-# save:
-# export PS1="\n${red}${dir}${reset} ${orange}»»${reset} "
-
-# exec fish
+# Show greeting.
+node ~/Code/Status/greeting/index.js

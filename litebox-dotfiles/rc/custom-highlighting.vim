@@ -1,4 +1,4 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Note: See :help cterm-colors for more information.
 " Note: See `:vert h highlight`
 " Note: See `:vert h :match`
@@ -27,21 +27,19 @@ set background=dark
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" 3 is golden/yellow, 4 is blue
 " highlight PmenuSel ctermfg=4 ctermbg=bg
 
 " make background of statusline transparent (same as background)
-highlight StatusLine ctermfg=fg ctermbg=bg
-highlight StatusLineNC ctermfg=15 ctermbg=bg
-highlight StatusLineTerm ctermfg=fg ctermbg=bg
-highlight StatusLineTermNC ctermfg=15 ctermbg=bg
+highlight StatusLine ctermfg=fg ctermbg=8 cterm=bold
+highlight StatusLineNC ctermfg=15 ctermbg=8
+highlight StatusLineTerm ctermfg=fg ctermbg=8 cterm=bold
+highlight StatusLineTermNC ctermfg=15 ctermbg=8
 
 " remove obnoxious highlighting from quickfix window
 highlight QuickFixLine ctermfg=fg ctermbg=bg
 
 highlight Comment cterm=italic
 
-" do not change the background color of the line numbers (flat ui)
 highlight LineNr ctermbg=bg
 " highlight CursorLineNr ctermbg=bg
 
@@ -49,7 +47,7 @@ highlight LineNr ctermbg=bg
 highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 
 " do not show split separators
-highlight VertSplit ctermfg=bg ctermbg=bg
+highlight VertSplit ctermfg=bg ctermbg=8
 
 highlight MatchParen ctermbg=bg ctermfg=red cterm=reverse
 " highlight MatchParen ctermfg=bg ctermbg=12
@@ -57,38 +55,15 @@ highlight MatchParen ctermbg=bg ctermfg=red cterm=reverse
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if &background == "dark"
-  if &filetype == "rust"
-    call HighlightRustOneDark()
-  endif
-
-  if &filetype == "racket"
-    call HighlightRacketOne()
-  endif
-
-  if &filetype == "java"
-    call HighlightJava()
-  endif
-
-  if &filetype == "javascript" || &filetype == "typescript" || &filetype == "javascript.jsx"
-    call HighlightJavaScriptOne()
-    " call HighlightJavaScriptSolarized()
-  endif
-
-  " if &filetype == "java"
-  "     highlight _FuncDefAndCall ctermfg=darkblue
-  "     call matchadd("_FuncDefAndCall", '\<\h\w*\>\ze(')
-
-  "     highlight javaConditional ctermfg=magenta cterm=italic
-  "     highlight javaExceptions ctermfg=magenta cterm=italic
-  "     highlight javaRepeat ctermfg=magenta cterm=italic
-  "     highlight javaOperator ctermfg=magenta cterm=italic
-  "     highlight Statement ctermfg=magenta cterm=italic
-  " endif
-elseif &background == "light"
-  if &filetype == "javascript" || &filetype == "typescript" || &filetype == "javascript.jsx"
-    call HighlightJavaScriptOne()
-  endif
+if &filetype == "javascript" || &filetype == "javascript.jsx"
+  call HighlightJavaScriptOne()
+  " call HighlightJavaScriptSolarized()
+elseif &filetype == "rust"
+  call HighlightRustOneDark()
+elseif &filetype == "racket"
+  call HighlightRacketOne()
+elseif &filetype == "java"
+  call HighlightJava()
 endif
 
 autocmd BufEnter,BufRead,BufNewFile,FileType *.rkt call HighlightRacketOne()
@@ -113,14 +88,23 @@ endfunction
 
 autocmd BufEnter,BufRead,BufNewFile,FileType *.js,javascript call HighlightJavaScriptOne()
 function! HighlightJavaScriptOne()
-  " source ~/.vim/rc/syntax-highlighting/default-dark-js.vim
-  source ~/.vim/rc/syntax-highlighting/one-javascript.vim
+  if &background == "dark"
+    source ~/.vim/rc/syntax-highlighting/one-javascript.vim
+  elseif &background == "light"
+    source ~/.vim/rc/syntax-highlighting/default-dark-js.vim
+  endif
 endfunction
 
-autocmd BufEnter,BufRead,BufNewFile,FileType *.ts,tsx call SetFT()
-function! SetFT()
-  set ft=javascript
+autocmd BufEnter,BufRead,BufNewFile,FileType *.ts,*.tsx,typescript call HighlightJavaScriptOneTS()
+function! HighlightJavaScriptOneTS()
+  set filetype=javascript.jsx.typescript
+  if &background == "dark"
+    source ~/.vim/rc/syntax-highlighting/one-javascript.vim
+  elseif &background == "light"
+    source ~/.vim/rc/syntax-highlighting/default-dark-js.vim
+  endif
 endfunction
+
 
 " function! HighlightJavaScriptSolarized()
 "   source ~/.vim/rc/syntax-highlighting/solarized-javascript.vim

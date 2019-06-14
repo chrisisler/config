@@ -9,11 +9,10 @@ highlight pythonRepeat ctermfg=magenta
 highlight pythonOperator ctermfg=magenta
 " def, class
 highlight pythonStatement ctermfg=magenta
-" raise
-highlight pythonException ctermfg=magenta cterm=underline
-call matchadd("pythonException", '\<return\>')
 
-highlight pythonException ctermfg=magenta cterm=underline
+highlight ControlFlow ctermfg=magenta cterm=underline
+call matchadd("ControlFlow", '\<return\>')
+call matchadd("ControlFlow", '\<raise\>')
 
 highlight FunctionSyntax ctermfg=darkblue
 call matchadd("FunctionSyntax", '\<\h\w*\>\ze(')
@@ -21,15 +20,13 @@ call matchadd("FunctionSyntax", '\<\h\w*\>\ze(')
 highlight NamedArgument ctermfg=red
 call matchadd("NamedArgument", '\<\h\w\+\>\ze=')
 
+" highlight Trinkets ctermfg=15
+" call matchadd("Trinkets", '[=:]')
 
-highlight Trinkets ctermfg=cyan
-call matchadd("Trinkets", '[=:]')
+highlight Bananas ctermfg=12
+call matchadd("Bananas", '[()]')
 
-" highlight Bananas ctermfg=12
-" call matchadd("Bananas", '[()]')
-
-" highlight Braces ctermfg=11
-" call matchadd("Braces", '[{}]')
-
+highlight Braces ctermfg=magenta
+call matchadd("Braces", '[{}]')
 
 highlight pythonBuiltin ctermfg=yellow

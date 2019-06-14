@@ -18,6 +18,8 @@ wifi() {
   if [[ "$qualityPercentage" -eq "100" ]]; then
     printf " $networkName"
     # printf " $networkName|$networkSpeed"
+  elif [[ -z "$qualityPercentage" ]]; then
+    exit 0
   else
     printf " $networkName|$qualityPercentage|$networkSpeed"
   fi

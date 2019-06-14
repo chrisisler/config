@@ -8,26 +8,21 @@ env:
 
 # Font configuration changes require restart of Alacritty client
 font:
+  size: 14.5
   use_thin_strokes: false
-  size: 16.0
   normal:
     style: Regular
-    # family: Menlo
-    family: Fira Mono for Powerline
+    family: Menlo
+  italic:
+    style: Italic
   bold:
-    # If the family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
-    style: Regular
-  #italic:
-    #family: monospace
-    #style: Italic
+    style: Bold Italic
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
     x: 1
-    y: 4
+    y: 5 # 
 
   # Glyph offset determines the locations of the glyphs within their cells with
   # the default being at the bottom. Increasing `x` moves the glyph to the right,
@@ -60,7 +55,7 @@ window:
   # by DPI and the specified value is always added at both opposing sides.
   padding:
     x: 14
-    y: 4
+    y: 3
 
   # Spread additional padding evenly around the terminal content.
   dynamic_padding: false
@@ -74,15 +69,15 @@ window:
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
-  decorations: full
+  decorations: none
 
   # When true, alacritty starts maximized.
-  start_maximized: false
+  start_maximized: true
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
-  history: 10000
+  history: 5000
 
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
@@ -95,7 +90,7 @@ scrolling:
   # to allow mouse scrolling for applications like `man`.
   #
   # Specifying `0` will disable faux scrolling.
-  faux_multiplier: 3
+  faux_multiplier: 0
 
   # Scroll to the bottom when new text is written to the terminal.
   auto_scroll: false
@@ -108,7 +103,6 @@ scrolling:
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
 tabspaces: 4
-
 
 # Display the time ifalse
 render_timer: false
@@ -129,9 +123,9 @@ colors:
   #
   # Colors which should be used to draw the terminal cursor. If these are unset,
   # the cursor color will be the inverse of the cell color.
-  #cursor:
-  #  text: '0x000000'
-  #  cursor: '0xffffff'
+  cursor:
+   text: '0x000000'
+   cursor: '0xffffff'
   
   # Selection colors
   #
@@ -221,7 +215,7 @@ mouse:
   triple_click: { threshold: 300 }
 
   # If this is `true`, the cursor is temporarily hidden when typing.
-  hide_when_typing: false
+  hide_when_typing: true
 
   url:
     # URL launcher

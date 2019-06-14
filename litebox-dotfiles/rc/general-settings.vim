@@ -27,15 +27,20 @@ set nolist                     " do not display eol signs ('$')
 set nojoinspaces               " prevents inserting 2 spaces when joining
 set splitright                 " put new vertically split windows to the right of current
 set splitbelow                 " put new split windows to bottom of current
-autocmd VimEnter * set laststatus=2 " force set 0 on start. display status line always?
 
 set shortmess+=c
 set showfulltag                " display more info when auto-completing
 set smartcase                  " smart (case-sensitive when you specify) search matching
 set modeline                   " i have no idea what this does tbh
 set modelines=5                " see above
-set formatoptions+=j           " delete comment character when Joining comments
-set formatoptions-=t           " stop vim  from auto-wrapping lines at a ruler
+" Wrapping options
+set formatoptions=tc " wrap text and comments using textwidth
+set formatoptions+=r " continue comments when pressing ENTER in I mode
+set formatoptions+=q " enable formatting of comments with gq
+set formatoptions+=n " detect lists for formatting
+set formatoptions+=b " auto-wrap in insert mode, and do not wrap old long lines
+set formatoptions+=j " delete comment character when Joining comments
+
 set backupdir=~/.vim/undodir
 set undodir=~/.vim/undodir        " where to save undo histories
 set directory=~/.vim/undodir
@@ -47,6 +52,7 @@ set ff=unix
 set fileformat=unix
 set ignorecase
 set incsearch
+set gdefault
 set noswapfile
 set virtualedit=block
 set encoding=utf-8
@@ -56,8 +62,8 @@ set encoding=utf-8
 set backupcopy=yes
 
 " http://vim.wikia.com/wiki/Automatic_word_wrapping
-" set wrap linebreak
-set nowrap                     " stop vim from auto-wrapping lines when there's not enough horizontal space http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
+set wrap linebreak
+" set nowrap                     " stop vim from auto-wrapping lines when there's not enough horizontal space http://vim.wikia.com/wiki/Word_wrap_without_line_breaks
 
 " https://robots.thoughtbot.com/vim-you-complete-me
 " set complete=.,b,u,]
@@ -66,13 +72,14 @@ set wildmenu                  " visual autocomplete
 set wildmode=list:longest 
 set wildignore=*.swp,*.bak,*.pyc,*.class,*/.git/*,.hg,.svn,*~,*.png,*.gif,*.jpg,*.settings,Thumbs.db,*.min.js
 set previewheight=8
-set completeopt=noinsert,noselect,menuone
+set completeopt=menuone,preview,noselect,noinsert
 set path+=**
 
 " Visual.
+set signcolumn=yes
 set noruler
 set number      " show line numbers on left?
-set nocursorline  " highlight current line?
+set cursorline  " highlight current line?
 set norelativenumber " show line numbers relative to current line number?
 
 set hlsearch    " search highlighting
@@ -83,10 +90,13 @@ set noshowmode  " do not show me which mode im in
 set timeout
 set timeoutlen=250
 set lazyredraw
-" set showcmd     " show me what command im typing as i type it (see `timeoutlen`)
+set gdefault
+set noshowcmd     " show me what command im typing as i type it (see `timeoutlen`)
 " set ttimeoutlen=50
 " set relativenumber
 
+set iskeyword+=- " add `-` to count as part of a text object
+set iskeyword+=$ " add `$` to count as part of a text object
 
 " Make :Q and :W work like :q and :w
 command! W w

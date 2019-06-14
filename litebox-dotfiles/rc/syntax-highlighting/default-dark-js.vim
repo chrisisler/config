@@ -83,6 +83,8 @@ highlight javascriptClassExtends ctermfg=magenta cterm=italic
 highlight javascriptReturn ctermfg=darkmagenta cterm=italic,underline
 " highlight javascriptImport ctermfg=magenta cterm=italic
 
+call matchadd("javascriptClassKeyword", '\<static\>\ze\s\+' . identifier)
+
 highlight javascriptAwaitFuncKeyword ctermfg=3 cterm=italic
 call matchadd("Type", '\<async\>\ze\s\+')
 

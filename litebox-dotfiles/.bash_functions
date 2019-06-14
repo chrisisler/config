@@ -1,6 +1,15 @@
+# GIVE ME MUSIC NOW
+m() {
+  if [[ -z ${TMUX+x} ]]; then
+    pandora
+  else
+    tmus -c pandora
+  fi
+}
+
 restart_camera() {
-  # sudo killall VDCAssistant
-  printf "TODO\n"
+  sudo killall VDCAssistant
+  # printf "TODO\n"
 }
 
 # (Jess Frazelle) Make a temporary directory and enter it
@@ -37,7 +46,9 @@ tre() {
 	tree -aC -I '.git' --dirsfirst "$@" | less -FRNX
 }
 
+# [Generated Comment] # Usage: 
 repo() {
+  sed -i '' 's/# [Generated Comment] # Usage: '
   # https://stackoverflow.com/questions/2423777/is-it-possible-to-create-a-remote-repo-on-github-from-the-cli-without-opening-br/10325316#10325316
 
   # Import token and verify it exists.
@@ -163,8 +174,9 @@ gh() {
   if [[ "$branchName" = "master" ]]; then
     open $gitUrl
   else
-    echo Going to $gitUrl/tree/"$(urlencode $branchname)"
-    open $gitUrl/tree/"$(urlencode $branchname)"
+    # echo Going to $gitUrl/tree/"$(urlencode $branchname)"
+    # open $gitUrl/tree/"$(urlencode $branchname)"
+    open $gitUrl
   fi
 }
 

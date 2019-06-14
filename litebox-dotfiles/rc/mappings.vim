@@ -30,11 +30,22 @@ vnoremap p p=
 nnoremap <silent> ] :silent bn<CR>
 nnoremap <silent> } :silent bp<CR>
 
+" Remove other ]* mappings so that ] is faster.
+try
+  unmap <buffer> ]%
+  unmap <buffer> ]"
+  unmap <buffer> ]]
+  unmap <buffer> [[
+  unmap <buffer> []
+  unmap <buffer> ][
+  unmap <buffer> [%
+  unmap <buffer> ["
+catch /:E31:/
+  " skip.
+endtry
+
 " Next buffer.
 nnoremap <silent> [ <C-w>w
-
-" pressing enter key when auto-complete (pop-up) menu is open will press enter
-" inoremap <expr><CR> pumvisible()? "\3" : "\<CR>" 
 
 vnoremap 3 5
 
@@ -116,6 +127,9 @@ nnoremap <Leader>u :let g:ale_open_list=
 " Cool new thing: http://mlsamuelson.com/content/vim-search-word-under-cursor
 nnoremap <Leader>[ [I
 
+" Open alacrittyrc quickly.
+nnoremap <Leader>s<CR> :e ~/.config/alacritty/alacritty.yml<CR>
+
 " Open ~/.vimrc quickly.
 nnoremap <Leader>v<CR> :e ~/.vimrc<CR>
 
@@ -153,8 +167,8 @@ nnoremap <silent> <Leader>r :set cc=
 nnoremap <silent> <Leader>w :lclose<CR>:cclose<CR>:pclose<CR>
 
 " Mappings for saving and sourcing .vimrc.
-nnoremap <silent> <Leader>5<CR> :w<CR>:so %<CR>
 nnoremap <silent> <Leader>4<CR> :so ~/.vimrc<CR>
+" nnoremap <silent> <Leader>5<CR> :w<CR>:so %<CR>
 
 " Copy the currently hovered word and console.log it on the next line.
 nnoremap <Leader>cl "xyiwoconsole.log(<ESC>"xpA)<ESC>
@@ -182,9 +196,15 @@ nnoremap <Leader>t4 :set shiftwidth=4<CR>:set tabstop=4<CR>
 " switch to last open buffer
 nnoremap <Leader><Leader> :b#<CR>
 
-nnoremap <Leader>z :NeoCompleteToggle<CR>
+if has('nvim')
+  nnoremap <Leader>z :call deoplete#toggle()<CR>
+else
+  nnoremap <Leader>z :NeoCompleteToggle<CR>
+endif
 nnoremap <Leader>g :GitGutterToggle<CR>
 nnoremap <Leader>x :ALEToggle<CR>
+
+nnoremap <silent> <Leader>N :GitGutterNextHunk<CR>kj
 
 " Linter mappings
 nnoremap <silent> <Leader>p :ALEPreviousWrap<CR>kj
@@ -285,7 +305,10 @@ nnoremap <Leader>d<CR> :Dispatch
 " Javascript
 " nnoremap <Leader>js<CR> :w<CR>:AsyncRun node % 2>/dev/null<CR>:copen<CR>:wincmd k<CR><CR>
 " nnoremap <Leader>js<CR> :w<CR>:Dispatch! node %<CR>:cw<CR>:wincmd k<CR>
-nnoremap <Leader>js<CR> :w<CR>:Dispatch node %<CR>
+nnoremap <silent> <Leader>js<CR> :w<CR>:Dispatch node %<CR>
+
+" Typescript
+nnoremap <silent> <Leader>ts<CR> :w<CR>:Dispatch! tsc --allowJs --target ES6 %<CR>:Dispatch node %:t:r.js<CR>
 
 " Racket
 nnoremap <Leader>rkt<CR> :w<CR>:Dispatch racket %<CR>
@@ -299,10 +322,8 @@ nnoremap <Leader>py3<CR> :w<CR>:Dispatch python3 %<CR>
 nnoremap <Leader>py2<CR> :w<CR>:Dispatch python2 %<CR>
 
 " Java
-nnoremap <Leader>j1<CR> :w<CR>:Dispatch javac %<CR>:copen<CR>
+nnoremap <Leader>j1<CR> :w<CR>:Dispatch javac %<CR>:Copen<CR>
 nnoremap <Leader>j2<CR> :w<CR>:Dispatch java %:t:r<CR>:copen<CR>
-" nnoremap <Leader>j1<CR> :w<CR>:AsyncRun javac %<CR>:copen<CR>:wincmd k<CR>
-" nnoremap <Leader>j2<CR> :w<CR>:AsyncRun java %:t:r<CR>:copen<CR>:wincmd k<CR>
 
 " C#
 " nnoremap <Leader>cs<CR> :w<CR>:AsyncRun csc /nologo /t:exe %<CR>:copen<CR>:wincmd k<CR>
@@ -319,4 +340,3 @@ nnoremap <Leader>j2<CR> :w<CR>:Dispatch java %:t:r<CR>:copen<CR>
 
 " C++
 " nnoremap <Leader>cpp :w<CR>:AsyncRun g++ % && ./a.out<CR>:copen<CR>:wincmd k<CR>
-"

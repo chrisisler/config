@@ -1,5 +1,12 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "
+" Install Plugin Manager
+" https://github.com/junegunn/vim-plug/wiki/tips#automatic-installation
+"
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"
 " Plugins
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -9,13 +16,14 @@ call plug#begin('~/.vim/plugged')
 
 " ----- Language -----
 Plug 'ekalinin/dockerfile.vim', { 'for': 'Dockerfile' }
-Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
+Plug 'wellle/tmux-complete.vim'
+" Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'othree/yajs.vim', { 'for': 'javascript.jsx' }
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript.jsx' }
 Plug 'mxw/vim-jsx', { 'for': 'javascript.jsx' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-Plug 'wlangstroth/vim-racket', { 'for': 'racket', 'commit': '365a2aff8fa1d08fc8ab4ab9b1cff27d87d86fbf' }
+" Plug 'wlangstroth/vim-racket', { 'for': 'racket', 'commit': '365a2aff8fa1d08fc8ab4ab9b1cff27d87d86fbf' }
 " Plug 'pangloss/vim-javascript'
 " Plug 'jparise/vim-graphql'
 " Plug 'posva/vim-vue'
@@ -24,8 +32,6 @@ Plug 'wlangstroth/vim-racket', { 'for': 'racket', 'commit': '365a2aff8fa1d08fc8a
 " Plug 'flowtype/vim-flow'
 " Plug 'fsharp/vim-fsharp'
 " Plug 'ElmCast/elm-vim'
-" Plug 'quramy/tsuquyomi'
-" Plug 'leafgarland/typescript-vim'
 " Plug 'mattn/emmet-vim'
 " Plug 'eagletmt/neco-ghc'
 " Plug 'neovimhaskell/haskell-vim'
@@ -37,10 +43,10 @@ Plug 'joshdick/onedark.vim'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'kshenoy/vim-signature'
 Plug 'airblade/vim-gitgutter'
-Plug 'majutsushi/tagbar'
-" Plug 'rakr/vim-one'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
+Plug 'andymass/vim-matchup'
 " Plug 'altercation/vim-colors-solarized'
-" Plug 'docunext/closetag.vim'
+Plug 'docunext/closetag.vim', { 'for': 'javascript.jsx.html' }
 
 
 " ----- Integrations -----
@@ -58,9 +64,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-dispatch'
 Plug 'rhysd/clever-f.vim'
 " Plug 'skywind3000/asyncrun.vim'
-" Plug 'jmcantrell/vim-diffchanges'
 " Plug 'easymotion/vim-easymotion'
-" Plug 'prettier/vim-prettier'
 
 
 " ----- Completion -----
@@ -69,12 +73,12 @@ Plug 'ervandew/supertab'
 Plug 'shougo/neocomplete.vim'
 " Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'sirver/ultisnips'
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript.jsx' }
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript.jsx', 'do': 'npm install' }
 
 
 " ----- Random -----
 Plug 'airblade/vim-rooter'
-Plug 'metakirby5/codi.vim', { 'for': 'javascript.jsx' }
+Plug 'metakirby5/codi.vim'
 Plug 'machakann/vim-highlightedyank'
 " Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'EinfachToll/DidYouMean'
@@ -85,19 +89,10 @@ Plug 'machakann/vim-highlightedyank'
 
 
 " A rainbow parenthesis plugin that finally works!
-Plug 'amdt/vim-niji', { 'for': ['javascript', 'racket'] }
-
-" if &filetype == "scheme"
-"   set filetype=racket
-" endif
+Plug 'amdt/vim-niji', { 'for': [] }
 
 " Niji breaks JavaScript
-let g:niji_matching_filetypes = ['racket', 'javascript']
-
-" ----- Broken plugins; these do NOT work -----
-" Plug 'junegunn/rainbow_parentheses.vim'
-" Plug 'luochen1990/rainbow'
-" Plug 'kien/rainbow_parentheses.vim'
+let g:niji_matching_filetypes = []
 
 
 call plug#end()
@@ -108,12 +103,14 @@ call plug#end()
 " Plugin Settings
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:tmuxcomplete#trigger = ''
+let g:dispatch_no_maps = 1
 
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
 
 
-let g:highlightedyank_highlight_duration = 500
+let g:highlightedyank_highlight_duration = 300
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tagbar
@@ -146,15 +143,6 @@ let g:tagbar_status_func = 'TagbarStatusFunc'
 
 " let g:minimap_highlight='Special'
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" java-complete2
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-autocmd FileType java setlocal omnifunc=javacomplete#Complete
-
-let g:JavaComplete_EnableDefaultMappings = 0 
-" let g:JavaComplete_LibsPath = "/Users/litebox/Main/Uni/Compilers/Project-2/j--/lib"
-" let g:JavaComplete_SourcesPath = "/Users/litebox/Main/Uni/Compilers/Project-2/j--/src/jminusminus"
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Goyo (distraction free)
@@ -162,13 +150,6 @@ let g:JavaComplete_EnableDefaultMappings = 0
 
 " let g:goyo_height=90
 " let g:goyo_width=80
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" rainbow (parenthesis)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" let g:rainbow#max_level = 16
-" let g:rainbow#pairs = [['(', ')'], ['{', '}']]
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -282,10 +263,13 @@ let g:gitgutter_map_keys=0
 " tern (js auto-completion)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:tern_map_keys=1
-" let g:tern#is_show_argument_hints_enabled=1
-let g:tern_show_argument_hints=1
+let g:tern_map_keys=0
+let g:tern_show_argument_hints="on_hold"
 let g:tern_show_signature_in_pum=1
+
+" Use tern_for_vim.
+let g:tern#command = ["tern"]
+let g:tern#arguments = ["--persistent", "--no-port-file"]
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -296,66 +280,62 @@ let g:UltiSnipsSnippetsDir="~/.vim/snippets"
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" emmet (html auto-completion)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" let g:user_emmet_mode='a'         " enable emmet in all vim modes
-" let g:user_emmet_install_global=0 " enable emmet for just the below types
-" " autocmd FileType html,css,js,jsx EmmetInstall
-" let g:user_emmet_leader_key='<C-u>' " remap the default emmet leader from <C-y> to <C-j>. Note: trailing comma still needed. See docs.
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ale
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" let g:ale_lint_on_text_changed='always'
-let g:ale_lint_on_text_changed='never'
-" let g:ale_lint_on_save = 0
-" let g:ale_lint_on_enter = 0
+" Milliseconds before requesting language completion after stopped typing
+let g:ale_completion_delay = 1000
+" LSP autocomplete
+let g:ale_completion_enabled = 1
+let g:ale_completion_max_suggestions = 24
 
 let g:ale_enabled=1
+
 let g:ale_sign_error='✕'
 let g:ale_sign_warning='--'
-let g:ale_set_signs=1
-let g:ale_lint_delay=2000
-let g:ale_fix_on_save=1
-let g:ale_open_list=0
-let g:ale_set_highlights=0
 let g:ale_sign_column_always=1
 
-let g:ale_fixers = {}
-let g:ale_fixers['javascript'] = ['prettier']
-let g:ale_fixers['rust'] = ['rustfmt']
+let g:ale_lint_delay=2000
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_text_changed='never'
+
+let g:ale_set_signs=1
+let g:ale_set_highlights=0
+" Auto-open preview window when cursor is hovering line with problems?
+let g:ale_cursor_detail=0
+let g:ale_open_list=0
+let g:ale_fix_on_save=1
 
 " let g:ale_rust_cargo_use_check = 1
 " let g:ale_rust_cargo_check_all_targets = 1
 
-
 " suppress warnings when browsing files ignored by `.eslintignore` file
 let g:ale_javascript_eslint_suppress_eslintignore=1
-" let g:ale_javascript_eslint_use_global=1
 
-" only use home config `~/.flowconfig` when ...? idk
-" let g:ale_javascript_flow_executable='/usr/local/bin/flow'
-" let g:ale_javascript_flow_use_home_config=1
-" let g:ale_javascript_flow_use_global=1
-
-" let g:ale_echo_msg_warning_str=''
-" let g:ale_echo_msg_error_str=''
-let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_echo_delay = 300
+let g:ale_echo_cursor = 1
+let g:ale_echo_msg_error_str='Error'
+let g:ale_echo_msg_warning_str='Warning'
+let g:ale_echo_msg_info_str='Info'
+let g:ale_echo_msg_format = '%severity% %code% [%linter%]: %s'
+let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_linters={
-\   'javascript': ['eslint', 'flow'],
-\   'java': ['javac'],
-\}
-" \   'cpp': ['g++'],
-" \   'rust': ['cargo', 'rls', 'rustc'],
+      \   'javascript': ['eslint', 'flow'],
+      \   'java': ['javac'],
+      \   'rust': ['cargo', 'rls', 'rustc'],
+      \   'python': ['pylint'],
+      \   'cpp': ['g++'],
+      \}
+
+let g:ale_fixers = {}
+let g:ale_fixers['javascript'] = ['prettier']
+" let g:ale_fixers['rust'] = ['rustfmt']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf (fuzzy finder (better than ctrl-p plugin)) - best plugin ever!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-let g:fzf_layout = { 'down': '~35%' }
+let g:fzf_layout = { 'down': '~40%' }
 
 " https://github.com/junegunn/fzf.vim
 " mappings for fzf plugin
@@ -379,15 +359,9 @@ nnoremap <C-m> :Maps<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" neocomplete (language-agnostic autocompleter)
+" Neocomplete (language-agnostic autocompleter)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" tab to select
-" inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
-
-" the neocomplete auto complete should NOT hijack my enter key when
-" autocomplete menu is displayed
-" inoremap <expr><Tab> (pumvisible()?(empty(v:completed_item)?"\<C-n>":"\<C-y>"):"\<Tab>")
 inoremap <expr><CR> (pumvisible()?(empty(v:completed_item)?"\<CR>\<CR>":"\<C-y>"):"\<CR>")
 
 " Enabled?
@@ -400,26 +374,12 @@ let g:neocomplete#enable_refresh_always=0
 let g:neocomplete#skip_auto_completion_time="0.3"
 let g:neocomplete#auto_complete_delay=100
 let g:neocomplete#enable_smart_case=1
-let g:neocomplete#max_list=12
+let g:neocomplete#max_list=16
 let g:neocomplete#sources#syntax#min_keyword_length=2
 let g:neocomplete#enable_auto_close_preview=0
-" Define dictionary.
-" let g:neocomplete#sources#dictionary#dictionaries = {
-"             \ 'default' : '',
-"             \ 'text' : '/usr/share/dict/connectives',
-"             \ 'javascript' : $HOME.'/Code/JS/Dictionary/all.txt',
-"             \ 'cpp' : $HOME.'/Code/Cpp/Dictionary/cpp-dictionary-keywords.txt'
-"             \ }
-" Define keyword.
 if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
-" let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" Enable heavy omni completion.
-" if !exists('g:neocomplete#sources#omni#input_patterns')
-"     let g:neocomplete#sources#omni#input_patterns = {}
-" endif
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

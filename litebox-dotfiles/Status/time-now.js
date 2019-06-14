@@ -10,8 +10,8 @@ const militaryHoursAndMinutes = () => getHours() + ':' + getMinutes()
 function main () {
   const currentTime
     = ''
-    + dayOfMonth()
-    // + ' ' + monthName()
+    + monthName()
+    + ' ' + dayOfMonth()
     + ' ' + weekday()
     + ' ' + militaryHoursAndMinutes()
   console.log(currentTime)
