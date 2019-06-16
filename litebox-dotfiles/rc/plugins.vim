@@ -103,12 +103,17 @@ call plug#end()
 " Plugin Settings
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let g:matchup_mappings_enabled = 0
+let g:matchup_text_obj_enabled = 0
+let g:matchup_motion_enabled = 0
+
 let g:tmuxcomplete#trigger = ''
+
 let g:dispatch_no_maps = 1
 
 let g:javascript_plugin_flow = 1
 let g:javascript_plugin_jsdoc = 1
-
 
 let g:highlightedyank_highlight_duration = 300
 
@@ -336,26 +341,6 @@ let g:ale_fixers['javascript'] = ['prettier']
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 let g:fzf_layout = { 'down': '~40%' }
-
-" https://github.com/junegunn/fzf.vim
-" mappings for fzf plugin
-nnoremap <C-p> :GFiles<CR>
-nnoremap <C-b> :Buffers<CR>
-nnoremap <C-h> :History<CR>
-nnoremap <C-c> :Commands<CR>
-
-" difficult to find good mappings for these (case-insensitive!):
-" <C-m>, <C-y(?)> are native aliases for <Enter>
-" <C-[> is a native alias for <ESC>
-" <C-l> is a native alias for screen refresh
-" <C-o> is a native alias for jumping to latest edited file && location
-" <C-v> is a native alias for visual-block mode
-" <C-z> is a native alias for background
-" <C-u> seems to be a no-op
-" <C-i> is a native alias for <Tab>
-nnoremap <C-i> :Files<CR>
-nnoremap <C-]> :Lines<CR>
-nnoremap <C-m> :Maps<CR>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

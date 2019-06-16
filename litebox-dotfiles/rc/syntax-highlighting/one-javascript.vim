@@ -39,8 +39,12 @@ call matchadd("javascriptReturn", '\<throw\>\ze\s\+')
 " object keys (not es6 key/val sorthand)
 highlight javaScriptObjectLabel ctermfg=darkmagenta
 
-highlight javascriptTypeHintOnly ctermfg=11
-call matchadd("javascriptTypeHintOnly", '\<enum\>\|\<interface\>\s\+\zs\<\u\w*\>\ze\s\+{')
+highlight javascriptTypeHintOnly ctermfg=3
+call matchadd("javascriptTypeHintOnly", '\(interface\|enum\|type\)\s\+\zs\<\u\w*\>\ze[a-zA-Z0-9$_.<>= ]*{')
+
+highlight GoldenType ctermfg=3
+call matchadd("GoldenType", 'as \zs\<\h\w*\>')
+call matchadd("GoldenType", '\<\h\w*\><[^/{]*\zs\<[a-zA-Z0-9$_]*\>\ze.*>')
 
 " highlight javascriptComma ctermfg=cyan
 " spread/rest operator
@@ -95,7 +99,7 @@ call matchadd("Magenta", '\<static\>\ze\s\+')
 call matchadd("Magenta", '\<delete\>\ze\s\+')
 call matchadd("Magenta", '\<get\>\ze\s\+')
 call matchadd("Magenta", '\<set\>\ze\s\+')
-call matchadd("Magenta", '\<type\>\ze\s\+')
+call matchadd("Magenta", '\<type\>\ze\s\+\w\+')
 call matchadd("Magenta", '\<yield\>\ze')
 call matchadd("Magenta", '\s\+=>\s*')
 
@@ -114,7 +118,7 @@ call matchadd("Red", '\(\<\h\w*\>\.\)\+\zs\<\h\w*\>')
 " call matchadd("Red", '[^.]\.\zs\<\h\w*\>')
 call matchadd("Red", '\<\h\w*\>\.\zs\<\h\w*\>')
 " For properties of objects retrieved by index.
-call matchadd("Red", ']\.\zs\<\h\w*\>')
+call matchadd("Red", '\(]\|)\)\.\zs\<\h\w*\>')
 
 
 " highlight Bananas ctermfg=blue
@@ -129,9 +133,9 @@ call matchadd("Red", ']\.\zs\<\h\w*\>')
 highlight FunctionSyntax ctermfg=darkblue
 
 " function call
-call matchadd("FunctionSyntax", '\<\h\w*\>\ze(')
+" call matchadd("FunctionSyntax", '\<\h\w*\>\ze(')
 " flow function support with generics
-" call matchadd("FunctionSyntax", '\<\h\w*\>\ze<.*>(')
+call matchadd("FunctionSyntax", '\<\h\w*\>\ze\(<.*>\)\?(')
 
 " function definition
 call matchadd("FunctionSyntax", '\<\w\+\>\s\+\zs\<\h\w*\>\ze\s\+=[^{.<>]\+=>') 

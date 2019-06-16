@@ -1,6 +1,12 @@
 " General.
 filetype plugin indent on      " automatically detect file types
-set nocompatible
+
+if has('nvim')
+  set nobackup
+else
+  set nocompatible
+  set ttyfast     " assume fast terminal
+endif
 
 " tab length
 set tabstop=2
@@ -79,11 +85,10 @@ set path+=**
 set signcolumn=yes
 set noruler
 set number      " show line numbers on left?
-set cursorline  " highlight current line?
+set nocursorline  " highlight current line?
 set norelativenumber " show line numbers relative to current line number?
 
 set hlsearch    " search highlighting
-set ttyfast     " assume fast terminal
 set showmatch " do not jump to matching brackets/parens when typing
 set matchtime=2
 set noshowmode  " do not show me which mode im in

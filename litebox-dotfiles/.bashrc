@@ -143,6 +143,7 @@ alias g="cd ${HOME}/Code/Git"
 alias tm="clear ; ps xc | awk '{ print \$1, \$5 }' | sed 1d | sort -fk 2 | column -t | column"
 alias gs="git status"
 alias bad="cd ~/Main/Bin/Bad && ${lslaVar}"
+alias badphoto="/Applications/Photos.app/Contents/MacOS/Photos ~/Main/Bin/Bad/Video/*.{webm,mp4,flv} &>/dev/null &"
 alias q="exit"
 alias vim="/usr/local/Cellar/vim/*/bin/vim $@"
 alias v="vim"
@@ -270,5 +271,11 @@ export PS1="\n[$txtblu$time24h$reset] $txtylw$dir$reset ${txtred}|$reset "
 # if [[ -z "$TMUX" ]]; then
 # fi
 
-# Show greeting.
-node ~/Code/Status/greeting/index.js
+# Show greeting info on non-tmux terminals
+if [[ -z "$TMUX" ]]; then
+  greeting() {
+    printf "H i" | figlet
+    node ~/Code/Status/greeting/index.js
+  }
+  greeting
+fi

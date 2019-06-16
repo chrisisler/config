@@ -30,9 +30,9 @@ set background=dark
 " highlight PmenuSel ctermfg=4 ctermbg=bg
 
 " make background of statusline transparent (same as background)
-highlight StatusLine ctermfg=fg ctermbg=8 cterm=bold
+highlight StatusLine ctermfg=fg ctermbg=8 cterm=italic,bold
 highlight StatusLineNC ctermfg=15 ctermbg=8
-highlight StatusLineTerm ctermfg=fg ctermbg=8 cterm=bold
+highlight StatusLineTerm ctermfg=fg ctermbg=8 cterm=italic,bold
 highlight StatusLineTermNC ctermfg=15 ctermbg=8
 
 " remove obnoxious highlighting from quickfix window
@@ -40,8 +40,8 @@ highlight QuickFixLine ctermfg=fg ctermbg=bg
 
 highlight Comment cterm=italic
 
-highlight LineNr ctermbg=bg
-" highlight CursorLineNr ctermbg=bg
+highlight LineNr ctermbg=NONE
+highlight CursorLineNr ctermbg=8
 
 " do not display ~ character for end of buffer (make text color = bg color)
 highlight EndOfBuffer ctermfg=bg ctermbg=NONE
@@ -49,9 +49,7 @@ highlight EndOfBuffer ctermfg=bg ctermbg=NONE
 " do not show split separators
 highlight VertSplit ctermfg=bg ctermbg=8
 
-highlight MatchParen ctermbg=bg ctermfg=red cterm=reverse
-" highlight MatchParen ctermfg=bg ctermbg=12
-" highlight MatchParen cterm=bold,underline ctermfg=3 ctermbg=bg
+hi MatchParen ctermfg=NONE ctermbg=NONE cterm=underline,bold
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 

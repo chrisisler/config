@@ -1,4 +1,5 @@
 const chalk = require('chalk')
+const command = require('execa')
 
 const fetchWeather = require('../weather/fetch-weather')
 
@@ -10,14 +11,17 @@ async function main () {
   const dayOfMonth = dayOfMonthPostfix(now.getDate())
   const monthName = monthNumberToName(now.getMonth())
 
-  // TODO
-  // https://www.wordsapi.com
-  // https://developer.wordnik.com
-  const wordOfTheDay = await Promise.resolve('foo')
-
-  console.log(chalk.italic.blue('Today is %s, the %s of %s'), fullDayName, dayOfMonth, monthName)
+  console.log(chalk.blue(`Today is ${chalk.bold(fullDayName)}, the ${chalk.bold(dayOfMonth)} of ${monthName}`))
   console.log(chalk.cyan(`The temperature is ${chalk.italic('%s')}`), temperature)
-  console.log(chalk.green(`Word of the day: ${chalk.italic('%s')}`), wordOfTheDay)
+  console.log()
+
+  const { fsName, diskUsage, diskPercent } = await disk()
+  console.log('OS:', chalk.magenta(`${chalk.italic(fsName)} => ${diskUsage} [${chalk.bold(diskPercent)}]`))
+
+  let { code, stdout: osInfo } = await command('uname', ['-snmr'])
+  if (code == 0) {
+    console.log('FS:', chalk.red(osInfo))
+  }
 }
 
 main()
@@ -55,4 +59,17 @@ function dayOfMonthPostfix (dayNumber) {
   else if (lastDayNumber === 2) return `${dayNumber}nd`
   else if (lastDayNumber === 3) return `${dayNumber}rd`
   return `${dayNumber}th`
+}
+
+async function disk () {
+  let { stdout: diskInfo } = await command.shell('df -kHl | grep /$')
+  let parts = diskInfo.split(/\s+/)
+  let fsName = parts[0]
+  let diskUsage = `${parts[2]} / ${parts[1]}`
+  let diskPercent = parts[4]
+  return {
+    fsName,
+    diskUsage,
+    diskPercent
+  }
 }

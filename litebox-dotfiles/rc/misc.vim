@@ -80,13 +80,15 @@ autocmd BufEnter * if (winnr("$") ==1 && exists("b:NERDTree") && b:NERDTree.isTa
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-au FileType qf setlocal linebreak wrap nonumber nocursorline colorcolumn= statusline=Info
-au FileType nerdtree setlocal nocursorline statusline=Explorer
+au FileType qf setlocal linebreak wrap nonumber nocursorline colorcolumn= statusline=\ Info
+au FileType nerdtree setlocal nocursorline statusline=\ Explorer
 
 
-" TODO
-" au BufRead,BufNewFile,BufEnter,FileType terminfo set statusline=Terminal
-" au BufRead,BufNewFile,BufEnter,FileType cterm setlocal statusline=Terminal
+if has('nvim')
+  au TermOpen * setlocal nonumber statusline=\ Terminal
+else
+  au TerminalOpen * setlocal nonumber statusline=\ Terminal
+endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

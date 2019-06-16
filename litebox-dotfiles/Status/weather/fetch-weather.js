@@ -47,6 +47,6 @@ module.exports = timeRestricted({ minutes }, async () => {
     } 
   } catch (error) {
     minutes = 1
-    return ` Err: ${error.message}`
+    return ` Err ${error.code}: ${error.message}`
   }
 })
