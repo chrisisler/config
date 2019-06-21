@@ -4,24 +4,20 @@
 # environment variables. Some entries may override variables
 # set by alacritty itself.
 env:
-  TERM: tmux-256color
+  TERM: xterm-256color
 
-# Font configuration changes require restart of Alacritty client
+# Font configuration (changes require restart)
 font:
-  use_thin_strokes: false
-  size: 16.0
   normal:
     style: Regular
-    # family: Menlo
-    family: Fira Mono for Powerline
+    family: Menlo
   bold:
-    # If the family is not specified, it will fall back to the
-    # value specified for the normal font.
-    #family: monospace
-    style: Regular
-  #italic:
-    #family: monospace
-    #style: Italic
+    style: Bold
+  italic:
+    style: Italic
+
+  # Point size
+  size: 11.0
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
@@ -36,26 +32,31 @@ font:
     x: 0
     y: 2
 
+  # Thin stroke font rendering (macOS only)
+  #
+  # Thin strokes are suitable for retina displays, but for non-retina screens
+  # it is recommended to set `use_thin_strokes` to `false`
+  #
+  # macOS >= 10.14.x:
+  #
+  # If the font quality on non-retina display looks bad then set
+  # `use_thin_strokes` to `true` and enable font smoothing by running the
+  # following command:
+  #   `defaults write -g CGFontRenderingFontSmoothingDisabled -bool NO`
+  #
+  # This is a global setting and will require a log out or restart to take
+  # effect.
+  use_thin_strokes: true
 
 window:
   # Window dimensions (changes require restart)
-  #
   # Specified in number of columns/lines, not pixels.
   # If both are `0`, this setting is ignored.
   dimensions:
     columns: 0
     lines: 0
 
-  # Window position (changes require restart)
-  #
-  # Specified in number of pixels.
-  # If the position is not set, the window manager will handle the placement.
-  #position:
-  #  x: 0
-  #  y: 0
-
   # Window padding (changes require restart)
-  #
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
   padding:
@@ -66,18 +67,25 @@ window:
   dynamic_padding: false
 
   # Window decorations
-  #
   # Values for `decorations`:
   #     - full: Borders and title bar
   #     - none: Neither borders nor title bar
-  #
   # Values for `decorations` (macOS only):
   #     - transparent: Title bar, transparent background and title bar buttons
   #     - buttonless: Title bar, transparent background, but no title bar buttons
   decorations: full
 
-  # When true, alacritty starts maximized.
-  start_maximized: false
+  # Startup Mode (changes require restart)
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: Windowed
+
+  # Window title
+  title: Alacritty
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -86,7 +94,7 @@ scrolling:
 
   # Number of lines the viewport will move for every line scrolled when
   # scrollback is enabled (history > 0).
-  multiplier: 1
+  multiplier: 3
 
   # Faux Scrolling
   #
@@ -107,42 +115,42 @@ scrolling:
 # Some applications, like Emacs, rely on knowing about the width of a tab.
 # To prevent unexpected behavior in these applications, it's also required to
 # change the `it` value in terminfo when altering this setting.
-tabspaces: 4
+tabspaces: 2
 
-
-# Display the time ifalse
-render_timer: false
-
-# Keep the log file after quitting Alacritty.
-persistent_logging: false
-
-# If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: false
 
-# Colors (One Dark Erxi v36)
+# Colors (Tomorrow Night Bright)
 colors:
   primary:
     background: '0x1a1d25'
     foreground: '0x8fa1a3'
 
+    # Bright and dim foreground colors
+    #
+    # The dimmed foreground color is calculated automatically if it is not present.
+    # If the bright foreground color is not set, or `draw_bold_text_with_bright_colors`
+    # is `false`, the normal foreground color will be used.
+    #dim_foreground: '0x9a9a9a'
+    #bright_foreground: '0xffffff'
+
+
   # Cursor colors
   #
   # Colors which should be used to draw the terminal cursor. If these are unset,
   # the cursor color will be the inverse of the cell color.
-  #cursor:
-  #  text: '0x000000'
-  #  cursor: '0xffffff'
-  
+  cursor:
+    text: '0x000000'
+    cursor: '0xffffff'
+
   # Selection colors
   #
-  # Colors which should be used to draw the selection area. If selection 
-  # background is unset, selection color will be the inverse of the cell colors. 
+  # Colors which should be used to draw the selection area. If selection
+  # background is unset, selection color will be the inverse of the cell colors.
   # If only text is unset the cell text color will remain the same.
   #selection:
   #  text: '0xeaeaea'
   #  background: '0x404040'
 
-  # One-Dark (v36)
   normal:
     black:   '0x1a1d25'
     red:     '0xff3658'
@@ -172,15 +180,6 @@ colors:
   #
   indexed_colors: []
 
-
-# Visual Bell
-#
-# Any time the BEL code is received, Alacritty "rings" the visual bell. Once
-# rung, the terminal background will be set to white and transition back to the
-# default background color. You can control the rate of this transition by
-# setting the `duration` property (represented in milliseconds). You can also
-# configure the transition function by setting the `animation` property.
-#
 # Specifying a `duration` of `0` will disable the visual bell.
 visual_bell:
   animation: EaseOutExpo
@@ -249,7 +248,7 @@ selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
   # When set to `true`, selected text will be copied to the primary clipboard.
-  save_to_clipboard: true
+  save_to_clipboard: false
 
 # Allow terminal applications to change Alacritty's window title.
 dynamic_title: true
@@ -276,13 +275,57 @@ live_config_reload: true
 # Entries in `shell.args` are passed unmodified as arguments to the shell.
 #
 # Default:
-#   - (Linux/macOS) /bin/bash --login
+#   - (macOS) /bin/bash --login
+#   - (Linux) user login shell
 #   - (Windows) powershell
-shell:
- program: /usr/local/bin/bash
+#shell:
+#  program: /bin/bash
+#  args:
+#    - --login
+
+# Startup directory
+#
+# Directory the shell is started in. If this is unset, or `None`, the working
+# directory of the parent process will be used.
+working_directory: None
+
+# Windows 10 ConPTY backend (Windows only)
+#
+# This will enable better color support and may resolve other issues,
+# however this API and its implementation is still young and so is
+# disabled by default, as stability may not be as good as the winpty
+# backend.
+#
+# Alacritty will fall back to the WinPTY automatically if the ConPTY
+# backend cannot be initialized.
+enable_experimental_conpty_backend: false
 
 # Send ESC (\x1b) before characters when alt is pressed.
 alt_send_esc: true
+
+debug:
+  # Display the time it takes to redraw each frame.
+  render_timer: false
+
+  # Keep the log file after quitting Alacritty.
+  persistent_logging: false
+
+  # Log level
+  #
+  # Values for `log_level`:
+  #   - None
+  #   - Error
+  #   - Warn
+  #   - Info
+  #   - Debug
+  #   - Trace
+  log_level: Warn
+
+  # Print all received window events.
+  print_events: false
+
+  # Record all characters and escape sequences as test data.
+  ref_test: false
 
 # Key bindings
 #
@@ -323,6 +366,7 @@ alt_send_esc: true
 # Values for `mods`:
 #   - Command
 #   - Control
+#   - Option
 #   - Super
 #   - Shift
 #   - Alt
@@ -357,7 +401,11 @@ alt_send_esc: true
 #   - Quit
 #   - ClearLogNotice
 #   - SpawnNewInstance
+#   - ToggleFullscreen
 #   - None
+#
+# Values for `action` (macOS only):
+#   - ToggleSimpleFullscreen: Enters fullscreen without occupying another space
 #
 # Values for `command`:
 #   The `command` field must be a map containing a `program` string and
@@ -372,18 +420,30 @@ alt_send_esc: true
 #   - ~AppKeypad
 #   - AppKeypad
 key_bindings:
+  # (Windows/Linux only)
+  #- { key: V,        mods: Control|Shift, action: Paste            }
+  #- { key: C,        mods: Control|Shift, action: Copy             }
+  #- { key: Insert,   mods: Shift,         action: PasteSelection   }
+  #- { key: Key0,     mods: Control,       action: ResetFontSize    }
+  #- { key: Equals,   mods: Control,       action: IncreaseFontSize }
+  #- { key: Add,      mods: Control,       action: IncreaseFontSize }
+  #- { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  #- { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  #- { key: Return,   mods: Alt,           action: ToggleFullscreen }
+
   # (macOS only)
-  #- { key: Key0,   mods: Command, action: ResetFontSize    }
-  #- { key: Equals, mods: Command, action: IncreaseFontSize }
-  #- { key: Add,    mods: Command, action: IncreaseFontSize }
-  #- { key: Minus,  mods: Command, action: DecreaseFontSize }
-  #- { key: K,      mods: Command, action: ClearHistory     }
-  #- { key: K,      mods: Command, chars: "\x0c"            }
-  #- { key: V,      mods: Command, action: Paste            }
-  #- { key: C,      mods: Command, action: Copy             }
-  #- { key: H,      mods: Command, action: Hide             }
-  #- { key: Q,      mods: Command, action: Quit             }
-  #- { key: W,      mods: Command, action: Quit             }
+  #- { key: Key0,   mods: Command,         action: ResetFontSize    }
+  #- { key: Equals, mods: Command,         action: IncreaseFontSize }
+  #- { key: Add,    mods: Command,         action: IncreaseFontSize }
+  #- { key: Minus,  mods: Command,         action: DecreaseFontSize }
+  #- { key: K,      mods: Command,         action: ClearHistory     }
+  #- { key: K,      mods: Command,         chars: "\x0c"            }
+  #- { key: V,      mods: Command,         action: Paste            }
+  #- { key: C,      mods: Command,         action: Copy             }
+  #- { key: H,      mods: Command,         action: Hide             }
+  #- { key: Q,      mods: Command,         action: Quit             }
+  #- { key: W,      mods: Command,         action: Quit             }
+  #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
 
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }
